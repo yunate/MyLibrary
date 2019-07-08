@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{989D3B94-74D2-41C7-9472-E071837FBC24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code_cvt">
+      <UniqueIdentifier>{caabe908-f56b-4297-bb9b-90879cb1370f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="command_line_arguments">
+      <UniqueIdentifier>{a14b3a7e-ae56-462a-be59-c5fbe41b9d5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="encrypt">
+      <UniqueIdentifier>{ed94c380-7464-4bf1-80a7-93bfb4623d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{29bcb6b6-00c4-4b3e-8d7b-9b5678bf558d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="limit_single_instance">
+      <UniqueIdentifier>{f2f55cae-b224-4c1c-8d56-97059d01fba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory_share">
+      <UniqueIdentifier>{59da021c-6b74-424d-975d-0698d1810c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="xml">
+      <UniqueIdentifier>{42feba54-e9c4-48d0-8962-756c65e2e3d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win_registry_key">
+      <UniqueIdentifier>{a7601c05-984e-4dd8-a102-ad529c94ab1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win_api_caller">
+      <UniqueIdentifier>{08aff71d-70e9-49f6-8036-b527f9e287ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="string_utils">
+      <UniqueIdentifier>{cb7647be-3428-4c98-8a3a-e41455cf5d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sqlite3">
+      <UniqueIdentifier>{cbeeb917-3547-4c41-abbe-dc9020eb71a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="service">
+      <UniqueIdentifier>{3dfa91d2-aa01-4672-8b3c-694ca74553ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource_util">
+      <UniqueIdentifier>{88614363-82ba-45a4-aa6e-012bfdb75a4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="init_file">
+      <UniqueIdentifier>{62cbbbdd-d5f3-4a95-b141-bffed39b6f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rand">
+      <UniqueIdentifier>{5e8c02ac-5030-45b1-a0ec-c54e29334fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file_utils">
+      <UniqueIdentifier>{8bfb9e76-0b96-472f-8b05-145729d02c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="guid">
+      <UniqueIdentifier>{6a4c27db-c282-4ea6-98af-be9287041761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dir_utils">
+      <UniqueIdentifier>{45fe370b-86c0-48f3-9990-e325de96d241}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\main_utils.cpp" />
+    <ClCompile Include="..\source\encrypt\aes.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\b64.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\crc32.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\hmac.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\md5.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\p224_ec.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\p256.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\p256_ec.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\p256_ecdsa.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\p256_prng.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\pbkdf2.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\rc4.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\sha.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\sha1.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\encrypt\sha256.c">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\json\cJSON.c">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\json\CJsonObject.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\xml\tinystr.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\xml\tinyxml.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\xml\tinyxmlerror.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\xml\tinyxmlparser.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\sqlite3\sqlite3.c">
+      <Filter>sqlite3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\service\service_utils.cpp">
+      <Filter>service</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\string_utils\string_utils_c.cpp">
+      <Filter>string_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\code_cvt\code_cvt.cpp">
+      <Filter>code_cvt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\command_line_arguments\command_line_arguments.cpp">
+      <Filter>command_line_arguments</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\init_file\init_file.cpp">
+      <Filter>init_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\memory_share\memory_share.cpp">
+      <Filter>memory_share</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\win_registry_key\win_registry_key.cpp">
+      <Filter>win_registry_key</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\sqlite3\sqlite_helper.cpp">
+      <Filter>sqlite3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\resource_util\resource_util.cpp">
+      <Filter>resource_util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\file_utils\file_utils.cpp">
+      <Filter>file_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\rand\rand.cpp">
+      <Filter>rand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\string_utils\string_utils_s.cpp">
+      <Filter>string_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\guid\guid.cpp">
+      <Filter>guid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\dir_utils\dir_utils.cpp">
+      <Filter>dir_utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\code_cvt\Test.h">
+      <Filter>code_cvt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\command_line_arguments\Test.h">
+      <Filter>command_line_arguments</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\aes.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\b64.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\crc32.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\hash-internal.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\hmac.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\md5.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\p224.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\p256.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\p256_ecdsa.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\p256_prng.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\pbkdf2.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\rc4.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\sha.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\sha1.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\sha256.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\encrypt\Test.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\init_file\Test.h">
+      <Filter>init_file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\json\cJSON.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\json\CJsonObject.hpp">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\json\Test.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\limit_single_instance\Test.h">
+      <Filter>limit_single_instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\memory_share\Test.h">
+      <Filter>memory_share</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\xml\Test.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\xml\tinystr.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\xml\tinyxml.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\win_registry_key\Test.h">
+      <Filter>win_registry_key</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\win_api_caller\Test.h">
+      <Filter>win_api_caller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\string_utils\Test.h">
+      <Filter>string_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\sqlite3\sqlite3.h">
+      <Filter>sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\sqlite3\Test.h">
+      <Filter>sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\service\service_utils.h">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\service\Test.h">
+      <Filter>service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\resource_util\Test.h">
+      <Filter>resource_util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\string_utils\string_utils_c.h">
+      <Filter>string_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\code_cvt\code_cvt.h">
+      <Filter>code_cvt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\command_line_arguments\command_line_arguments.h">
+      <Filter>command_line_arguments</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\init_file\init_file.h">
+      <Filter>init_file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\limit_single_instance\limit_single_instance.h">
+      <Filter>limit_single_instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\memory_share\memory_share.h">
+      <Filter>memory_share</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\win_registry_key\win_registry_key.h">
+      <Filter>win_registry_key</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\win_api_caller\win_api_caller.h">
+      <Filter>win_api_caller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\sqlite3\sqlite_helper.h">
+      <Filter>sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\resource_util\resource_uti.h">
+      <Filter>resource_util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\string_utils\string_utils_s.h">
+      <Filter>string_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\rand\rand.h">
+      <Filter>rand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\file_utils\file_utils.h">
+      <Filter>file_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\file_utils\test.h">
+      <Filter>file_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\guid\guid.h">
+      <Filter>guid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\dir_utils\dir_utils.h">
+      <Filter>dir_utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

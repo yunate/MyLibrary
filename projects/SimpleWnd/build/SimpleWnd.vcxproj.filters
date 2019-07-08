@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{89919EF9-FCCA-4069-A250-F5532D28FCC5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="c">
+      <UniqueIdentifier>{bf09e905-2cdf-4471-ab51-68c148def896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="h">
+      <UniqueIdentifier>{fac2f784-132e-4447-8d2a-6bc019eed8d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\c\App.cpp">
+      <Filter>c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\c\IRegistAdapt.cpp">
+      <Filter>c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\c\main_SimpleWnd.cpp">
+      <Filter>c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\c\RegistStyle.cpp">
+      <Filter>c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\c\SimpleWnd.cpp">
+      <Filter>c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\c\BaseWindow.cpp">
+      <Filter>c</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\h\App.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\h\CommonHead.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\h\IRegistAdapt.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\h\RegistStyle.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\h\SimpleWnd.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\h\BaseWindow.h">
+      <Filter>h</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

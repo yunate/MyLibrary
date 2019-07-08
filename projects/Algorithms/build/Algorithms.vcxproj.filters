@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{912460B9-8299-498A-A949-7CAF52D0C678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KMP">
+      <UniqueIdentifier>{0e1f18c4-1102-49e6-8e31-9fcf8ea80175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LowBit">
+      <UniqueIdentifier>{31d2e189-dd39-4b5b-a80d-b2af87170f83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\KMP\KMPStrCmp.cpp">
+      <Filter>KMP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\main_algorithms.cpp" />
+    <ClCompile Include="..\source\LowBit\LowBit.cpp">
+      <Filter>LowBit</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\KMP\KMPStrCmp.h">
+      <Filter>KMP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LowBit\LowBit.h">
+      <Filter>LowBit</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
