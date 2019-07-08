@@ -23,16 +23,16 @@ bool HandleUCS2FileByLine(const std::wstring& path, std::function<bool(const std
 @param [in] path 路径
 @param [in] header 文件头校验
 @param [in] headSize header的大小
-@param [in] callback 回调函数 返回即将要写入文件的内容，size 即将要写入文件的大小，请注意单双字节，双字节别忘了乘2
+@param [in] callback 回调函数 返回即将要写入文件的内容，size 即将要写入文件的大小，请注意单双字节，双字节别忘了乘2,hasNext标识是否有下一条
 @return 是否成功
 */
-bool WriteFileByBuff(const std::wstring& path, const unsigned char* header, const size_t headSize, std::function<const void* (size_t& size)> callback);
+bool WriteFileByBuff(const std::wstring& path, const unsigned char* header, const size_t headSize, std::function<const void* (size_t& size, bool& hasNext)> callback);
 
 /** 写文件 UCS-2 Little Endian 编码
 @param [in] path 路径
-@param [in] callback 回调函数 返回即将要写入文件的内容， size 即将要写入文件的大小，请注意单双字节，双字节别忘了乘2
+@param [in] callback 回调函数 返回即将要写入文件的内容， size 即将要写入文件的大小，请注意单双字节，双字节别忘了乘2,hasNext标识是否有下一条
 @return 是否成功
 */
-bool WriteUCS2FileByBuff(const std::wstring& path, std::function<const void* (size_t& size)> callback);
+bool WriteUCS2FileByBuff(const std::wstring& path, std::function<const void* (size_t& size, bool& hasNext)> callback);
 
 #endif //__FILE_UTILS_H_

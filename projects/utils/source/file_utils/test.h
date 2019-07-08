@@ -15,7 +15,7 @@ namespace utilstest
         buff.push_back(L"test\r\n");
         size_t i = 0;
 
-        WriteUCS2FileByBuff(L"F:\\TmpWorkSpace\\test\\1.txt", [&](size_t & size)
+        WriteUCS2FileByBuff(L"D:\\test\\1.txt", [&](size_t & size, bool& hasNext)
         {
             const void * rtn = NULL;
 
@@ -24,6 +24,7 @@ namespace utilstest
                 // wchar 别忘了乘2
                 size = buff[i].length() * 2; 
                 rtn = (const void *)buff[i].c_str();
+				hasNext = true;
                 ++i;
             }
 
@@ -34,7 +35,7 @@ namespace utilstest
     // 读文件
     static void Test_FileUtils1()
     {
-        HandleUCS2FileByLine(L"F:\\TmpWorkSpace\\test\\1.txt", [&](const std::wstring& line)
+        HandleUCS2FileByLine(L"D:\\test\\1.txt", [&](const std::wstring& line)
         {
             std::wcout << line.c_str() << L"\r\n";
             return true;

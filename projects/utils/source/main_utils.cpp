@@ -33,7 +33,8 @@ int main()
 
 //    utilstest::Test_WinApiCaller0();
 
-    utilstest::Test_FileUtils1();
+	utilstest::Test_FileUtils();
+	utilstest::Test_FileUtils1();
     ::system("pause");
     return 0;
 }

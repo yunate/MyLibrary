@@ -68,7 +68,7 @@ bool HandleUCS2FileByLine(const std::wstring & path, std::function<bool(const st
     return HandleFileByLineW(path, header, 2, callback);
 }
 
-bool WriteFileByBuff(const std::wstring & path, const unsigned char * header, const size_t headSize, std::function<const void* (size_t& size)> callback)
+bool WriteFileByBuff(const std::wstring & path, const unsigned char * header, const size_t headSize, std::function<const void* (size_t& size, bool& hasNext)> callback)
 {
     FILE* pFile = NULL;
     ::_wfopen_s(&pFile, path.c_str(), L"wb");
@@ -93,10 +93,12 @@ bool WriteFileByBuff(const std::wstring & path, const unsigned char * header, co
 
     const void* buff = NULL;
     size_t size = 0;
+	bool hasNext = false;
 
     while (true)
     {
-        buff = callback(size);
+		hasNext = false;
+        buff = callback(size, hasNext);
 
         if (buff == NULL)
         {
@@ -109,6 +111,11 @@ bool WriteFileByBuff(const std::wstring & path, const unsigned char * header, co
             pFile = NULL;
             return false;
         }
+
+		if (!hasNext)
+		{
+			break;
+		}
     }
 
     ::fclose(pFile);
@@ -116,7 +123,7 @@ bool WriteFileByBuff(const std::wstring & path, const unsigned char * header, co
     return true;
 }
 
-bool WriteUCS2FileByBuff(const std::wstring & path, std::function<const void*(size_t& size)> callback)
+bool WriteUCS2FileByBuff(const std::wstring & path, std::function<const void*(size_t& size, bool& hasNext)> callback)
 {
     unsigned char header[] = {0xff, 0xfe, '\0'};
     return WriteFileByBuff(path, header, 2, callback);
