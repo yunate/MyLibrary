@@ -53,16 +53,16 @@ CommandLineArguments::~CommandLineArguments()
 std::string CommandLineArguments::_W2A(const wchar_t* src)
 {
     char szBuf[1024];
-    int nRet = ::WideCharToMultiByte(CP_ACP, 0, src, wcslen(src), szBuf, 1024, NULL, NULL);
+    int nRet = ::WideCharToMultiByte(CP_ACP, 0, src, (int)::wcslen(src), szBuf, 1024, NULL, NULL);
     if (nRet > 0) return std::string(szBuf, nRet);
 
     if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
     {
-        int nRet = WideCharToMultiByte(CP_ACP, 0, src, wcslen(src), NULL, 0, NULL, NULL);
+        int nRet = ::WideCharToMultiByte(CP_ACP, 0, src, (int)::wcslen(src), NULL, 0, NULL, NULL);
         if (nRet > 0)
         {
             char *pBuf = new char[nRet];
-            WideCharToMultiByte(CP_ACP, 0, src, wcslen(src), pBuf, nRet, NULL, NULL);
+            ::WideCharToMultiByte(CP_ACP, 0, src, (int)::wcslen(src), pBuf, nRet, NULL, NULL);
             std::string strRet(pBuf, nRet);
             delete[]pBuf;
             return strRet;

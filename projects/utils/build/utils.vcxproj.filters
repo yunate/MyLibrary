@@ -58,6 +58,12 @@
     <Filter Include="dir_utils">
       <UniqueIdentifier>{45fe370b-86c0-48f3-9990-e325de96d241}</UniqueIdentifier>
     </Filter>
+    <Filter Include="singleton">
+      <UniqueIdentifier>{f2b8c514-ae90-408b-9877-7ee08c3a1a17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="timer_recorder">
+      <UniqueIdentifier>{1b601c19-bb0f-4bd0-9daa-dfea4e2a8fa7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -168,6 +174,9 @@
     </ClCompile>
     <ClCompile Include="..\source\dir_utils\dir_utils.cpp">
       <Filter>dir_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\timer_recorder\test.cpp">
+      <Filter>timer_recorder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +332,18 @@
     </ClInclude>
     <ClInclude Include="..\source\dir_utils\dir_utils.h">
       <Filter>dir_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\singleton\singleton.h">
+      <Filter>singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\singleton\test.h">
+      <Filter>singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\singleton\singleton1.h">
+      <Filter>singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\timer_recorder\timer_recorder.h">
+      <Filter>timer_recorder</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

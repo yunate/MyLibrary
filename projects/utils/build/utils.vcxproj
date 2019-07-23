@@ -51,6 +51,7 @@
     <ClCompile Include="..\source\sqlite3\sqlite_helper.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_c.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_s.cpp" />
+    <ClCompile Include="..\source\timer_recorder\test.cpp" />
     <ClCompile Include="..\source\win_registry_key\win_registry_key.cpp" />
     <ClCompile Include="..\source\xml\tinystr.cpp" />
     <ClCompile Include="..\source\xml\tinyxml.cpp" />
@@ -96,12 +97,16 @@
     <ClInclude Include="..\source\resource_util\Test.h" />
     <ClInclude Include="..\source\service\service_utils.h" />
     <ClInclude Include="..\source\service\Test.h" />
+    <ClInclude Include="..\source\singleton\singleton.h" />
+    <ClInclude Include="..\source\singleton\singleton1.h" />
+    <ClInclude Include="..\source\singleton\test.h" />
     <ClInclude Include="..\source\sqlite3\sqlite3.h" />
     <ClInclude Include="..\source\sqlite3\sqlite_helper.h" />
     <ClInclude Include="..\source\sqlite3\Test.h" />
     <ClInclude Include="..\source\string_utils\string_utils_c.h" />
     <ClInclude Include="..\source\string_utils\string_utils_s.h" />
     <ClInclude Include="..\source\string_utils\Test.h" />
+    <ClInclude Include="..\source\timer_recorder\timer_recorder.h" />
     <ClInclude Include="..\source\win_api_caller\Test.h" />
     <ClInclude Include="..\source\win_api_caller\win_api_caller.h" />
     <ClInclude Include="..\source\win_registry_key\Test.h" />

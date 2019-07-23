@@ -12,6 +12,7 @@
 #include "win_registry_key/Test.h"
 #include "win_api_caller/Test.h"
 #include "file_utils/test.h"
+#include "singleton/test.h"
 
 namespace utilstest {}
 
@@ -33,8 +34,8 @@ int main()
 
 //    utilstest::Test_WinApiCaller0();
 
-	utilstest::Test_FileUtils();
-	utilstest::Test_FileUtils1();
+	//utilstest::Test_FileUtils();
+	utilstest::Test_Singleton();
     ::system("pause");
     return 0;
 }

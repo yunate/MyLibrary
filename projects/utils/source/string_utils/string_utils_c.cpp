@@ -124,8 +124,8 @@ static int __strncmpi(const char *s1, const char *s2, size_t n)
 */
 static bool __strendof(const char* str, const char* find)
 {
-    int lenstr = strlen(str);
-    int lensub = strlen(find);
+    int lenstr = (int)::strlen(str);
+    int lensub = (int)::strlen(find);
 
     if (lenstr < lensub) 
     {
@@ -142,8 +142,8 @@ static bool __strendof(const char* str, const char* find)
 static bool __strendofi(const char* str, const char* find)
 {
     const u_char * ufind = (const u_char *)find;
-    int lenstr = strlen(str);
-    int lensub = strlen(find);
+    int lenstr = (int)::strlen(str);
+    int lensub = (int)::strlen(find);
 
     if (lenstr < lensub) 
     {
@@ -168,8 +168,8 @@ static bool __strendofi(const char* str, const char* find)
 */
 static bool __strbegof(const char* str, const char* find)
 {
-    int lenstr = strlen(str);
-    int lensub = strlen(find);
+    int lenstr = (int)::strlen(str);
+    int lensub = (int)::strlen(find);
 
     if (lenstr < lensub) 
     {
@@ -186,8 +186,8 @@ static bool __strbegofi(const char* str, const char* find)
 {
     const u_char * ustr = (const u_char *)str;
     const u_char * ufind = (const u_char *)find;
-    int lenstr = strlen(str);
-    int lensub = strlen(find);
+    int lenstr = (int)::strlen(str);
+    int lensub = (int)::strlen(find);
 
     if (lenstr < lensub) 
     {
