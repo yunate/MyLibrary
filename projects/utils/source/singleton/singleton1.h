@@ -3,6 +3,11 @@
 
 #include <mutex>
 
+template<class T>
+class SingletonWrapper1 : public T
+{
+};
+
 /** ÀÁººÄ£Ê½
 */
 template <class T>
@@ -17,7 +22,7 @@ public:
 
             if (s_pInstance == NULL)
             {
-                s_pInstance = new T();
+                s_pInstance = new SingletonWrapper1<T>();
             }
 
             UnLock();

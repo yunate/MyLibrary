@@ -1,6 +1,12 @@
 #ifndef __SIGLETON_CLASS_H_
 #define __SIGLETON_CLASS_H_
 
+template<class T>
+class SingletonWrapper : public T
+{
+};
+
+
 /** 饿汉模式
 */
 template <class T>
@@ -11,8 +17,8 @@ public:
     {
         // 为了能够在main函数前初始化s_pInstance
         s_pInstance;
-        static T instance;
-        return &instance;
+        static SingletonWrapper<T> instance;
+        return static_cast<T *>(&instance);
     }
 
 private:
