@@ -34,8 +34,10 @@ int main()
 
 //    utilstest::Test_WinApiCaller0();
 
-	//utilstest::Test_FileUtils();
-	utilstest::Test_Singleton();
+    //utilstest::Test_FileUtils();
+    utilstest::Test_FileUtilsUTF8();
+    utilstest::Test_FileUtilsUTF8Bom();
+	//utilstest::Test_Singleton();
     ::system("pause");
     return 0;
 }

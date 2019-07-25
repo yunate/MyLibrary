@@ -19,6 +19,29 @@ bool HandleFileByLineW(const std::wstring& path, const unsigned char* checker, c
 */
 bool HandleUCS2FileByLine(const std::wstring& path, std::function<bool(const std::wstring&line)> callback);
 
+/** 一行一行的读文件 , 每次读一个char
+@param [in] path 路径
+@param [in] checker 文件头校验
+@param [in] checkSize checker的大小
+@param [in] callback 回调
+@return 是否成功
+*/
+bool HandleFileByLine(const std::wstring& path, const unsigned char* checker, const size_t checkSize, std::function<bool(const std::string&line)> callback);
+
+/** 一行一行的读文件 UTF8 编码
+@param [in] path 路径
+@param [in] callback 回调
+@return 是否成功
+*/
+bool HandleUTF8FileByLine(const std::wstring& path, std::function<bool(const std::string&line)> callback);
+
+/** 一行一行的读文件 UTF8-Bom 编码
+@param [in] path 路径
+@param [in] callback 回调
+@return 是否成功
+*/
+bool HandleUTF8BomFileByLine(const std::wstring& path, std::function<bool(const std::string&line)> callback);
+
 /** 写文件
 @param [in] path 路径
 @param [in] header 文件头校验

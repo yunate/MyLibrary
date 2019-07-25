@@ -68,6 +68,79 @@ bool HandleUCS2FileByLine(const std::wstring & path, std::function<bool(const st
     return HandleFileByLineW(path, header, 2, callback);
 }
 
+bool HandleFileByLine(const std::wstring & path, const unsigned char * checker, const size_t checkSize, std::function<bool(const std::string&line)> callback)
+{
+    FILE* pFile = NULL;
+    ::_wfopen_s(&pFile, path.c_str(), L"rb");
+
+    if (pFile == NULL)
+    {
+        return false;
+    }
+
+    if (checker != NULL)
+    {
+        for (size_t i = 0; i < checkSize; ++i)
+        {
+            int c = ::fgetc(pFile);
+
+            if (c == EOF || c != checker[i])
+            {
+                ::fclose(pFile);
+                pFile = NULL;
+                return false;
+            }
+        }
+    }
+
+    int c = ::fgetc(pFile);
+    std::string line = "";
+
+    while (c != EOF)
+    {
+        if (c != '\r' && c != '\n')
+        {
+            line.append(1, c);
+            c = ::fgetc(pFile);
+        }
+        else
+        {
+            if (!callback(line))
+            {
+                break;
+            }
+
+            line = "";
+            c = ::fgetc(pFile);
+
+            if (c == '\r' || c == '\n')
+            {
+                c = ::fgetc(pFile);
+            }
+        }
+    }
+
+    if (line.length() > 0)
+    {
+        callback(line);
+    }
+
+    ::fclose(pFile);
+    pFile = NULL;
+    return true;
+}
+
+bool HandleUTF8FileByLine(const std::wstring & path, std::function<bool(const std::string&line)> callback)
+{
+    return HandleFileByLine(path, NULL, 0, callback);
+}
+
+bool HandleUTF8BomFileByLine(const std::wstring & path, std::function<bool(const std::string&line)> callback)
+{
+    unsigned char header[] = {0xef, 0xbb, 0xbf, '\0'};
+    return HandleFileByLine(path, header, 3, callback);
+}
+
 bool WriteFileByBuff(const std::wstring & path, const unsigned char * header, const size_t headSize, std::function<const void* (size_t& size, bool& hasNext)> callback)
 {
     FILE* pFile = NULL;

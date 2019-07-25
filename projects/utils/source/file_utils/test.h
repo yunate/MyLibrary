@@ -2,6 +2,7 @@
 
 #include "file_utils.h"
 #include <vector>
+#include "code_cvt/code_cvt.h"
 
 namespace utilstest
 {
@@ -38,6 +39,27 @@ namespace utilstest
         HandleUCS2FileByLine(L"D:\\test\\1.txt", [&](const std::wstring& line)
         {
             std::wcout << line.c_str() << L"\r\n";
+            return true;
+        });
+    }
+
+    // ¶ÁÎÄ¼þ
+    static void Test_FileUtilsUTF8()
+    {
+        HandleUTF8FileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8.txt", [&](const std::string& line)
+        {
+            std::wstring ss;
+            UTF8ToUTF16(line, ss);
+            return true;
+        });
+    }
+
+    static void Test_FileUtilsUTF8Bom()
+    {
+        HandleUTF8BomFileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8Bom.txt", [&](const std::string& line)
+        {
+            std::wstring ss;
+            UTF8ToUTF16(line, ss);
             return true;
         });
     }
