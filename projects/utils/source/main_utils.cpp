@@ -13,7 +13,7 @@
 #include "win_api_caller/Test.h"
 #include "file_utils/test.h"
 #include "singleton/test.h"
-#include "pinyin_ci_table/test.h"
+#include "pinyin_ci_table/test1.h"
 
 namespace utilstest {}
 
@@ -38,8 +38,8 @@ int main()
     //utilstest::Test_FileUtils();
     //utilstest::Test_FileUtilsUTF8();
     //utilstest::Test_FileUtilsUTF8Bom();
-	//utilstest::Test_Singleton();
-    utilstest::Test_StrToPinYin();
+    //utilstest::Test_Singleton();
+    //utilstest::Test_StrToPinYin();
     ::system("pause");
     return 0;
 }

@@ -190,7 +190,10 @@
     <ClCompile Include="..\source\pinyin_ci_table\CiToPinYin.cpp">
       <Filter>pinyin_ci_table</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\pinyin_ci_table\test.h">
+    <ClCompile Include="..\source\file_utils\big_file_utils.cpp">
+      <Filter>file_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pinyin_ci_table\test1.h">
       <Filter>pinyin_ci_table</Filter>
     </ClCompile>
   </ItemGroup>
@@ -368,6 +371,9 @@
     </ClInclude>
     <ClInclude Include="..\source\pinyin_ci_table\CiToPinYin.h">
       <Filter>pinyin_ci_table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\file_utils\big_file_utils.h">
+      <Filter>file_utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

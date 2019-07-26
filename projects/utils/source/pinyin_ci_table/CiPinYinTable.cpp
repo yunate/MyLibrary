@@ -9,7 +9,7 @@
 #include "CiPinYinTable.h"
 #include <tchar.h>
 
-extern const TCHAR* g_ci_pinyin_table[][2] =
+const TCHAR* g_ci_pinyin_table[][2] =
 { 
     {_T("ß¹"), _T("a")},
     {_T("°¢"), _T("a")},
@@ -31121,4 +31121,4 @@ template<typename T, unsigned int N>
 char(&array_size_fake_func(T(&)[N]))[N];
 
 #define MYARRAYSIZE(A) sizeof(array_size_fake_func(A))
-extern const unsigned int g_ci_pinyin_table_size = MYARRAYSIZE(g_ci_pinyin_table);
+const unsigned int g_ci_pinyin_table_size = MYARRAYSIZE(g_ci_pinyin_table);

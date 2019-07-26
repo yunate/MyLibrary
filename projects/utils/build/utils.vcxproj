@@ -37,6 +37,7 @@
     <ClCompile Include="..\source\encrypt\sha.c" />
     <ClCompile Include="..\source\encrypt\sha1.c" />
     <ClCompile Include="..\source\encrypt\sha256.c" />
+    <ClCompile Include="..\source\file_utils\big_file_utils.cpp" />
     <ClCompile Include="..\source\file_utils\file_utils.cpp" />
     <ClCompile Include="..\source\guid\guid.cpp" />
     <ClCompile Include="..\source\init_file\init_file.cpp" />
@@ -46,7 +47,7 @@
     <ClCompile Include="..\source\memory_share\memory_share.cpp" />
     <ClCompile Include="..\source\pinyin_ci_table\CiPinYinTable.cpp" />
     <ClCompile Include="..\source\pinyin_ci_table\CiToPinYin.cpp" />
-    <ClCompile Include="..\source\pinyin_ci_table\test.h" />
+    <ClCompile Include="..\source\pinyin_ci_table\test1.h" />
     <ClCompile Include="..\source\rand\rand.cpp" />
     <ClCompile Include="..\source\resource_util\resource_util.cpp" />
     <ClCompile Include="..\source\service\service_utils.cpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="..\source\encrypt\sha256.h" />
     <ClInclude Include="..\source\encrypt\Test.h" />
     <ClInclude Include="..\source\event\thread_event.h" />
+    <ClInclude Include="..\source\file_utils\big_file_utils.h" />
     <ClInclude Include="..\source\file_utils\file_utils.h" />
     <ClInclude Include="..\source\file_utils\test.h" />
     <ClInclude Include="..\source\guid\guid.h" />
