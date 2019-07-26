@@ -64,6 +64,12 @@
     <Filter Include="timer_recorder">
       <UniqueIdentifier>{1b601c19-bb0f-4bd0-9daa-dfea4e2a8fa7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="event">
+      <UniqueIdentifier>{f887a8dd-5f6a-4ed4-b38b-34a96f928207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pinyin_ci_table">
+      <UniqueIdentifier>{f913b98e-89d8-41e9-a415-d684cfaad4c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -177,6 +183,15 @@
     </ClCompile>
     <ClCompile Include="..\source\timer_recorder\test.cpp">
       <Filter>timer_recorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pinyin_ci_table\CiPinYinTable.cpp">
+      <Filter>pinyin_ci_table</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pinyin_ci_table\CiToPinYin.cpp">
+      <Filter>pinyin_ci_table</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pinyin_ci_table\test.h">
+      <Filter>pinyin_ci_table</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,6 +359,15 @@
     </ClInclude>
     <ClInclude Include="..\source\timer_recorder\timer_recorder.h">
       <Filter>timer_recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\event\thread_event.h">
+      <Filter>event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\pinyin_ci_table\CiPinYinTable.h">
+      <Filter>pinyin_ci_table</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\pinyin_ci_table\CiToPinYin.h">
+      <Filter>pinyin_ci_table</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
