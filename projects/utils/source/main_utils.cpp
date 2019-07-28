@@ -14,6 +14,8 @@
 #include "file_utils/test.h"
 #include "singleton/test.h"
 #include "pinyin_ci_table/test1.h"
+#include "cpu/test.h"
+#include "thread/producer_consumer/test2.h"
 
 namespace utilstest {}
 
@@ -40,6 +42,8 @@ int main()
     //utilstest::Test_FileUtilsUTF8Bom();
     //utilstest::Test_Singleton();
     //utilstest::Test_StrToPinYin();
+    // utilstest::Test_GetCpuCount();
+    utilstest::Test_ProducerConsumer();
     ::system("pause");
     return 0;
 }

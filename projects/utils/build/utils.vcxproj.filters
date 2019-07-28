@@ -70,6 +70,15 @@
     <Filter Include="pinyin_ci_table">
       <UniqueIdentifier>{f913b98e-89d8-41e9-a415-d684cfaad4c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cpu">
+      <UniqueIdentifier>{d9d3c227-1b3f-4dfe-a412-b8680756dd5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{209ef1a3-cbd7-4e23-8e6b-3f4a752ee223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\producer_consumer">
+      <UniqueIdentifier>{c9daba97-7055-40c3-970b-c73cc7dd1e91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -195,6 +204,12 @@
     </ClCompile>
     <ClCompile Include="..\source\pinyin_ci_table\test1.h">
       <Filter>pinyin_ci_table</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cpu\cpu_thread_count.cpp">
+      <Filter>cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\thread\producer_consumer\producer_consumer.cpp">
+      <Filter>thread\producer_consumer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,6 +389,27 @@
     </ClInclude>
     <ClInclude Include="..\source\file_utils\big_file_utils.h">
       <Filter>file_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\cpu\cpu_thread_count.h">
+      <Filter>cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\cpu\test.h">
+      <Filter>cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\producer_consumer\producer_consumer.h">
+      <Filter>thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\producer_consumer\IGoods.h">
+      <Filter>thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\producer_consumer\IConsume.h">
+      <Filter>thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\producer_consumer\IProducer.h">
+      <Filter>thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\producer_consumer\test2.h">
+      <Filter>thread\producer_consumer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
