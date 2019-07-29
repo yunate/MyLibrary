@@ -107,7 +107,7 @@ namespace codecvt
         return false;
     }
 
-    bool UTF8ToUTF16_Raw(const std::string & src, std::wstring & des)
+    bool UTF8ToUTF16_Multi(const std::string & src, std::wstring & des)
     {
         size_t destLen = 0;
         Utf8_To_Utf16(NULL, &destLen, src.c_str(), src.length());

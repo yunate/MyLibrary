@@ -21,11 +21,11 @@ namespace utilstest
 
         // תUTF-8
         std::string sResU8 = "";
-        UTF16ToUTF8(wsAnsiCode, sResU8);
+        UTF16ToUTF8_STD(wsAnsiCode, sResU8);
 
         // UTF-8 ת 16
         std::wstring wsRes16 = L"";
-        UTF8ToUTF16(sResU8, wsRes16);
+        UTF8ToUTF16_Multi(sResU8, wsRes16);
     }
 
 }

@@ -50,7 +50,7 @@ namespace utilstest
         HandleUTF8FileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8.txt", [&](const std::string& line)
         {
             std::wstring ss;
-            UTF8ToUTF16(line, ss);
+            UTF8ToUTF16_Multi(line, ss);
             return true;
         });
     }
@@ -60,7 +60,7 @@ namespace utilstest
         HandleUTF8BomFileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8Bom.txt", [&](const std::string& line)
         {
             std::wstring ss;
-            UTF8ToUTF16(line, ss);
+            UTF8ToUTF16_Multi(line, ss);
             return true;
         });
     }

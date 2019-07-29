@@ -25,7 +25,7 @@ namespace codecvt
     @param [in] sRes 结果，编码一般为Unicode
     @return 是否成功
     */
-    bool UTF8ToUTF16_Raw(const std::string  & sSrc, std::wstring & wsRes);
+    bool UTF8ToUTF16_Multi(const std::string  & sSrc, std::wstring & wsRes);
 
     /** 宽字符转ANSI（编码一般为UNICODE码）
     @param [in] wsSrc 源，编码一般为Unicode

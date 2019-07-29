@@ -98,7 +98,7 @@ namespace utilstest
                     return;
                 }
 
-                for (int i = 0; i < dLen; ++i)
+                for (unsigned int i = 0; i < dLen; ++i)
                 {
                     // 简单处理，异或一下，测试加密，这儿的读是不占电脑内存的
                     char* a = (char*)pFileBlock + i;
