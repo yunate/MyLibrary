@@ -1,6 +1,7 @@
 #pragma once
 
 #include "file_utils.h"
+#include "big_file_utils.h"
 #include <vector>
 #include "code_cvt/code_cvt.h"
 
@@ -60,6 +61,14 @@ namespace utilstest
         {
             std::wstring ss;
             UTF8ToUTF16(line, ss);
+            return true;
+        });
+    }
+
+    static void Test_BigFile()
+    {
+        HandleBigFileByLineW(L"C:\\Users\\yudh\\Desktop\\test\\2019-07-17.csv", NULL, 0, [&](const std::wstring& line)
+        {
             return true;
         });
     }

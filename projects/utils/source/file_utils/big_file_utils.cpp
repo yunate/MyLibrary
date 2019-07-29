@@ -47,13 +47,13 @@ bool HandleBigFileByLineW(const std::wstring & path, const unsigned char * check
 
     ::CloseHandle(hFile);
 
-    DWORD dFileBlock = 1024 * 1024 * 512;
+    DWORD dFileBlock = 1024 * 1024 * 5;
     DWORD dBegin = 0;
     DWORD dLen = 0;
 
     while (dBegin < dFileSize)
     {
-        if (dBegin + dFileBlock > dFileSize)
+        if (dBegin > dFileSize - dFileBlock)
         {
             dLen = dFileSize - dBegin;
         }
@@ -63,9 +63,15 @@ bool HandleBigFileByLineW(const std::wstring & path, const unsigned char * check
         }
 
         LPVOID pFileBlock = ::MapViewOfFile(hFileMap,
-                                            FILE_MAP_ALL_ACCESS,  // 注意，和createfile要一致
+                                            FILE_MAP_READ,  // 注意，和createfile要一致
                                             0,
                                             dBegin,     // 开始位置
+                                            dLen);     // 映射长度
+
+        LPVOID pFileBlock1 = ::MapViewOfFile(hFileMap,
+                                            FILE_MAP_READ,  // 注意，和createfile要一致
+                                            0,
+                                            dBegin + dLen,     // 开始位置
                                             dLen);     // 映射长度
 
         if (pFileBlock == NULL)

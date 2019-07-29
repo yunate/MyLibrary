@@ -5,7 +5,11 @@
 
 namespace codecvt
 {
-    bool UTF16ToUTF8(const std::wstring & wsSrc, std::string & sRes)
+    typedef unsigned char byte_t;
+    const byte_t kUtf8Limits[5] = {0xC0, 0xE0, 0xF0, 0xF8, 0xFC};
+    typedef unsigned __int32  uint32_t;
+
+    bool UTF16ToUTF8_STD(const std::wstring & wsSrc, std::string & sRes)
     {
         try
         {
@@ -20,7 +24,12 @@ namespace codecvt
         return true;
     }
 
-    bool UTF8ToUTF16(const std::string  & sSrc, std::wstring & wsRes)
+    bool UTF16ToUTF8_Raw(const std::wstring & wsSrc, std::string & sRes)
+    {
+        return false;
+    }
+
+    bool UTF8ToUTF16_STD(const std::string  & sSrc, std::wstring & wsRes)
     {
         try
         {
@@ -33,6 +42,85 @@ namespace codecvt
         }
 
         return true;
+    }
+
+    bool Utf8_To_Utf16(wchar_t *dest, size_t *destLen, const char *src, size_t srcLen)
+    {
+        size_t destPos = 0, srcPos = 0;
+        for (;;)
+        {
+            byte_t c;
+            unsigned numAdds;
+            if (srcPos == srcLen)
+            {
+                *destLen = destPos;
+                return true;
+            }
+            c = (byte_t)src[srcPos++];
+
+            if (c < 0x80)
+            {
+                if (dest)
+                    dest[destPos] = (wchar_t)c;
+                destPos++;
+                continue;
+            }
+            if (c < 0xC0)
+                break;
+            for (numAdds = 1; numAdds < 5; numAdds++)
+                if (c < kUtf8Limits[numAdds])
+                    break;
+            uint32_t value = (c - kUtf8Limits[numAdds - 1]);
+
+            do
+            {
+                byte_t c2;
+                if (srcPos == srcLen)
+                    break;
+                c2 = (byte_t)src[srcPos++];
+                if (c2 < 0x80 || c2 >= 0xC0)
+                    break;
+                value <<= 6;
+                value |= (c2 - 0x80);
+            } while (--numAdds);
+
+            if (value < 0x10000)
+            {
+                if (dest)
+                    dest[destPos] = (wchar_t)value;
+                destPos++;
+            }
+            else
+            {
+                value -= 0x10000;
+                if (value >= 0x100000)
+                    break;
+                if (dest)
+                {
+                    dest[destPos + 0] = (wchar_t)(0xD800 + (value >> 10));
+                    dest[destPos + 1] = (wchar_t)(0xDC00 + (value & 0x3FF));
+                }
+                destPos += 2;
+            }
+        }
+        *destLen = destPos;
+        return false;
+    }
+
+    bool UTF8ToUTF16_Raw(const std::string & src, std::wstring & des)
+    {
+        size_t destLen = 0;
+        Utf8_To_Utf16(NULL, &destLen, src.c_str(), src.length());
+
+        if (destLen == 0)
+        {
+            return false;
+        }
+
+        des.resize(destLen + 1);
+        des[destLen] = 0;
+        bool res = Utf8_To_Utf16((wchar_t *)des.c_str(), &destLen, src.c_str(), src.length());
+        return res;
     }
 
     bool UTF16ToANSI(const std::wstring & wsSrc, std::string & sRes)
