@@ -106,10 +106,6 @@ void PAndCModel::Start()
     // 资源清理
     m_consumerThreadVec.clear();
     ::CloseHandle(m_hSemaphore);
-    delete m_pProducer;
-    m_pProducer = NULL;
-    delete m_pConsumer;
-    m_pConsumer = NULL;
     delete m_pMutex;
     m_pMutex = NULL;
 }
