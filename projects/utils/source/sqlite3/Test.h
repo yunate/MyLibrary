@@ -20,8 +20,16 @@ namespace utilstest
         temp = "CREATE TABLE mytable (NAME TEXT NOT NULL, AGE INT NOT NULL);";
         help->ExecSQL(temp.c_str());
 
+        // 加上这个会很快
+        temp = "begin;";
+        help->ExecSQL(temp.c_str());
+
         temp = "insert into mytable values('等待', 25)";
         help->ExecSQL(temp.c_str());
+
+        temp = "commit;";
+        help->ExecSQL(temp.c_str());
+
         temp = "select * from mytable";
         SqlVec vec;
         help->RawQuery(temp.c_str(), vec);

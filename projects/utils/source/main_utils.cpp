@@ -28,7 +28,7 @@ int main()
 //     utilstest::Test_Json();
 //     utilstest::Test_xml0();
 
-//    utilstest::Test_codecvt0();
+    utilstest::Test_codecvt0();
 
 //    utilstest::Test_Initfile0();
 //    utilstest::Test_CommandLineArguments0();

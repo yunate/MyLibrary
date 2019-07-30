@@ -21,7 +21,7 @@ namespace utilstest
 
         // תUTF-8
         std::string sResU8 = "";
-        UTF16ToUTF8_STD(wsAnsiCode, sResU8);
+        UTF16ToUTF8_Multi(wsAnsiCode, sResU8);
 
         // UTF-8 ת 16
         std::wstring wsRes16 = L"";

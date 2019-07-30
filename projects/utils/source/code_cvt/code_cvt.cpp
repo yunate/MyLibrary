@@ -24,9 +24,114 @@ namespace codecvt
         return true;
     }
 
-    bool UTF16ToUTF8_Raw(const std::wstring & wsSrc, std::string & sRes)
+    bool Utf16_To_Utf8(char *dest, size_t *destLen, const wchar_t *src, size_t srcLen)
     {
-        return false;
+        *destLen = 0;
+
+        for (size_t i = 0; i < srcLen; ++i)
+        {
+            unsigned long unic = src[i];
+
+            if (unic <= 0x0000007F)
+            {
+                // * U-00000000 - U-0000007F:  0xxxxxxx
+                if (!dest)
+                {
+                    (*destLen) += 1;
+                    continue;
+                }
+
+                dest[(*destLen)++] = (unic & 0x7F);
+            }
+            else if (unic >= 0x00000080 && unic <= 0x000007FF)
+            {
+                // * U-00000080 - U-000007FF:  110xxxxx 10xxxxxx
+                if (!dest)
+                {
+                    (*destLen) += 2;
+                    continue;
+                }
+
+                dest[(*destLen)++] = ((unic >> 6) & 0x1F) | 0xC0;
+                dest[(*destLen)++] = (unic & 0x3F) | 0x80;
+            }
+            else if (unic >= 0x00000800 && unic <= 0x0000FFFF)
+            {
+                // * U-00000800 - U-0000FFFF:  1110xxxx 10xxxxxx 10xxxxxx
+                if (!dest)
+                {
+                    (*destLen) += 3;
+                    continue;
+                }
+
+                dest[(*destLen)++] = ((unic >> 12) & 0x0F) | 0xE0;
+                dest[(*destLen)++] = ((unic >> 6) & 0x3F) | 0x80;
+                dest[(*destLen)++] = (unic & 0x3F) | 0x80;
+            }
+            else if (unic >= 0x00010000 && unic <= 0x001FFFFF)
+            {
+                // * U-00010000 - U-001FFFFF:  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+                if (!dest)
+                {
+                    (*destLen) += 4;
+                    continue;
+                }
+
+                dest[(*destLen)++] = ((unic >> 18) & 0x07) | 0xF0;
+                dest[(*destLen)++] = ((unic >> 12) & 0x3F) | 0x80;
+                dest[(*destLen)++] = ((unic >> 6) & 0x3F) | 0x80;
+                dest[(*destLen)++] = (unic & 0x3F) | 0x80;
+            }
+            else if (unic >= 0x00200000 && unic <= 0x03FFFFFF)
+            {
+                // * U-00200000 - U-03FFFFFF:  111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+                if (!dest)
+                {
+                    (*destLen) += 5;
+                    continue;
+                }
+
+                dest[(*destLen)++] = ((unic >> 24) & 0x03) | 0xF8;
+                dest[(*destLen)++] = ((unic >> 18) & 0x3F) | 0x80;
+                dest[(*destLen)++] = ((unic >> 12) & 0x3F) | 0x80;
+                dest[(*destLen)++] = ((unic >> 6) & 0x3F) | 0x80;
+                dest[(*destLen)++] = (unic & 0x3F) | 0x80;
+            }
+            else if (unic >= 0x04000000 && unic <= 0x7FFFFFFF)
+            {
+                // * U-04000000 - U-7FFFFFFF:  1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+                if (!dest)
+                {
+                    (*destLen) += 6;
+                    continue;
+                }
+
+                dest[(*destLen)++] = ((unic >> 30) & 0x01) | 0xFC;
+                dest[(*destLen)++] = ((unic >> 24) & 0x3F) | 0x80;
+                dest[(*destLen)++] = ((unic >> 18) & 0x3F) | 0x80;
+                dest[(*destLen)++] = ((unic >> 12) & 0x3F) | 0x80;
+                dest[(*destLen)++] = ((unic >> 6) & 0x3F) | 0x80;
+                dest[(*destLen)++] = (unic & 0x3F) | 0x80;
+            }
+        }
+        
+        return (*destLen != 0);
+    }
+
+    bool UTF16ToUTF8_Multi(const std::wstring & src, std::string & des)
+    {
+        size_t destLen = 0;
+        Utf16_To_Utf8(NULL, &destLen, src.c_str(), src.length());
+
+        if (destLen == 0)
+        {
+            return false;
+        }
+
+        des.resize(destLen + 1);
+        des[destLen] = 0;
+        bool res = Utf16_To_Utf8((char *)des.c_str(), &destLen, src.c_str(), src.length());
+        return res;
     }
 
     bool UTF8ToUTF16_STD(const std::string  & sSrc, std::wstring & wsRes)

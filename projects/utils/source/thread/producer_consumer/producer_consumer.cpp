@@ -84,10 +84,7 @@ void PAndCModel::Start()
     for (auto it : m_producerThreadVec)
     {
         it->join();
-        delete it;
     }
-
-    m_producerThreadVec.clear();
 
     m_isProductEnd = true;
 
@@ -100,10 +97,21 @@ void PAndCModel::Start()
     for (auto it : m_consumerThreadVec)
     {
         it->join();
-        delete it;
     }
 
     // 资源清理
+    for (auto it : m_producerThreadVec)
+    {
+        delete it;
+    }
+
+    m_producerThreadVec.clear();
+
+    for (auto it : m_consumerThreadVec)
+    {
+        delete it;
+    }
+
     m_consumerThreadVec.clear();
     ::CloseHandle(m_hSemaphore);
     delete m_pMutex;
