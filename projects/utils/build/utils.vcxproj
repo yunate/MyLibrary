@@ -41,7 +41,6 @@
     <ClCompile Include="..\source\file_utils\big_file_utils.cpp" />
     <ClCompile Include="..\source\file_utils\file_utils.cpp" />
     <ClCompile Include="..\source\file_utils\file_utils_reader.cpp" />
-    <ClCompile Include="..\source\file_utils\file_utils_reader.h" />
     <ClCompile Include="..\source\file_utils\file_utils_writer.cpp" />
     <ClCompile Include="..\source\guid\guid.cpp" />
     <ClCompile Include="..\source\init_file\init_file.cpp" />
@@ -49,6 +48,8 @@
     <ClCompile Include="..\source\json\CJsonObject.cpp" />
     <ClCompile Include="..\source\main_utils.cpp" />
     <ClCompile Include="..\source\memory_share\memory_share.cpp" />
+    <ClCompile Include="..\source\pinyin_ci_table\CiPinYinTable.cpp" />
+    <ClCompile Include="..\source\pinyin_ci_table\CiToPinYin_.cpp" />
     <ClCompile Include="..\source\rand\rand.cpp" />
     <ClCompile Include="..\source\resource_util\resource_util.cpp" />
     <ClCompile Include="..\source\service\service_utils.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="..\source\event\thread_event.h" />
     <ClInclude Include="..\source\file_utils\big_file_utils.h" />
     <ClInclude Include="..\source\file_utils\file_utils.h" />
+    <ClInclude Include="..\source\file_utils\file_utils_reader.h" />
     <ClInclude Include="..\source\file_utils\file_utils_writer.h" />
     <ClInclude Include="..\source\file_utils\test.h" />
     <ClInclude Include="..\source\guid\guid.h" />
@@ -103,6 +105,9 @@
     <ClInclude Include="..\source\limit_single_instance\Test.h" />
     <ClInclude Include="..\source\memory_share\memory_share.h" />
     <ClInclude Include="..\source\memory_share\Test.h" />
+    <ClInclude Include="..\source\pinyin_ci_table\CiPinYinTable.h" />
+    <ClInclude Include="..\source\pinyin_ci_table\CiToPinYin.h" />
+    <ClInclude Include="..\source\pinyin_ci_table\test3.h" />
     <ClInclude Include="..\source\rand\rand.h" />
     <ClInclude Include="..\source\resource_util\resource_uti.h" />
     <ClInclude Include="..\source\resource_util\Test.h" />
