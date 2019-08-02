@@ -211,6 +211,15 @@
     <ClCompile Include="..\source\thread\producer_consumer\producer_consumer.cpp">
       <Filter>thread\producer_consumer</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\file_utils\file_utils_reader.h">
+      <Filter>file_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\file_utils\file_utils_reader.cpp">
+      <Filter>file_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\file_utils\file_utils_writer.cpp">
+      <Filter>file_utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\code_cvt\Test.h">
@@ -410,6 +419,9 @@
     </ClInclude>
     <ClInclude Include="..\source\thread\producer_consumer\test2.h">
       <Filter>thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\file_utils\file_utils_writer.h">
+      <Filter>file_utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

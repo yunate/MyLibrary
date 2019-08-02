@@ -40,6 +40,9 @@
     <ClCompile Include="..\source\encrypt\sha256.c" />
     <ClCompile Include="..\source\file_utils\big_file_utils.cpp" />
     <ClCompile Include="..\source\file_utils\file_utils.cpp" />
+    <ClCompile Include="..\source\file_utils\file_utils_reader.cpp" />
+    <ClCompile Include="..\source\file_utils\file_utils_reader.h" />
+    <ClCompile Include="..\source\file_utils\file_utils_writer.cpp" />
     <ClCompile Include="..\source\guid\guid.cpp" />
     <ClCompile Include="..\source\init_file\init_file.cpp" />
     <ClCompile Include="..\source\json\cJSON.c" />
@@ -91,6 +94,7 @@
     <ClInclude Include="..\source\event\thread_event.h" />
     <ClInclude Include="..\source\file_utils\big_file_utils.h" />
     <ClInclude Include="..\source\file_utils\file_utils.h" />
+    <ClInclude Include="..\source\file_utils\file_utils_writer.h" />
     <ClInclude Include="..\source\file_utils\test.h" />
     <ClInclude Include="..\source\guid\guid.h" />
     <ClInclude Include="..\source\init_file\init_file.h" />
