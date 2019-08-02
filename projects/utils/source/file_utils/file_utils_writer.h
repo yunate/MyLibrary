@@ -10,6 +10,9 @@ class FileWriter
 {
 public:
     /** 构造函数
+    @param [in] path 路径
+    @param [in] header 文件头检查
+    @param [in] 文件头大小
     */
     FileWriter(const std::wstring& path, const unsigned char * header, const size_t headSize);
 
@@ -27,7 +30,7 @@ public:
 
     /** 写wchar
     @param [in] buff 输入数组
-    @param [in] size 数组大小（不含）
+    @param [in] size 数组大小
     @return 是否成功
     */
     bool WriteBuffW(const wchar_t* buff, const size_t size);
@@ -46,7 +49,7 @@ protected:
 /** 创建一个UCS-2 Little Endian 编码的文件 使用WriteBuffW()
 @return FileReader指针，别忘了自己释放
 */
-inline FileWriter* CreateUCS2File(const std::wstring& path)
+inline FileWriter* CreateUCS2FileWriter(const std::wstring& path)
 {
     unsigned char header[] = {0xff, 0xfe, '\0'};
     FileWriter* pFileWriter = new (std::nothrow) FileWriter(path, header, 2);
@@ -61,12 +64,14 @@ inline FileWriter* CreateUCS2File(const std::wstring& path)
         delete pFileWriter;
         return NULL;
     }
+
+    return pFileWriter;
 }
 
 /** 创建一个UTF8 编码的文件 使用WriteBuffA()
 @return FileReader指针，别忘了自己释放
 */
-inline FileWriter* CreateUTF8File(const std::wstring& path)
+inline FileWriter* CreateUTF8FileWriter(const std::wstring& path)
 {
     FileWriter* pFileWriter = new (std::nothrow) FileWriter(path, NULL, 0);
 
@@ -80,12 +85,14 @@ inline FileWriter* CreateUTF8File(const std::wstring& path)
         delete pFileWriter;
         return NULL;
     }
+
+    return pFileWriter;
 }
 
 /** 创建一个UTF8 BOM 编码的文件 使用WriteBuffA()
 @return FileReader指针，别忘了自己释放
 */
-inline FileWriter* CreateUTF8BomFile(const std::wstring& path)
+inline FileWriter* CreateUTF8BomFileWriter(const std::wstring& path)
 {
     unsigned char header[] = {0xef, 0xbb, 0xbf, '\0'};
     FileWriter* pFileWriter = new (std::nothrow) FileWriter(path, header, 3);
@@ -100,6 +107,8 @@ inline FileWriter* CreateUTF8BomFile(const std::wstring& path)
         delete pFileWriter;
         return NULL;
     }
+
+    return pFileWriter;
 }
 
 #endif // __FILE_UTILS_WRITER_H_

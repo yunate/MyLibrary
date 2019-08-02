@@ -1,10 +1,11 @@
+
 #include "file_utils_reader.h"
 #include <tchar.h>
 
 FileReader::FileReader(const std::wstring & path, const unsigned char* checker, const size_t checkSize) :
     m_pFile(NULL)
 {
-    m_pFile = ::_wfopen(path.c_str(), _T("rb"));
+    ::_wfopen_s(&m_pFile, path.c_str(), _T("rb"));
 
     if (checker != NULL)
     {
@@ -26,7 +27,7 @@ FileReader::~FileReader()
 {
     if (m_pFile != NULL)
     {
-        delete m_pFile;
+        ::fclose(m_pFile);
         m_pFile = NULL;
     }
 }
@@ -44,6 +45,8 @@ bool FileReader::GetLineW(std::wstring & line)
             {
                 break;
             }
+
+            wc = ::fgetwc(m_pFile);
         }
         else
         {
@@ -68,6 +71,8 @@ bool FileReader::GetLineA(std::string & line)
             {
                 break;
             }
+
+            c = ::fgetc(m_pFile);
         }
         else
         {
@@ -78,3 +83,22 @@ bool FileReader::GetLineA(std::string & line)
 
     return line.length() > 0;
 }
+
+size_t FileReader::GetBuff(char * buff, const size_t & size)
+{
+    if (buff == NULL || size == 0)
+    {
+        return 0;
+    }
+
+    size_t pos = 0;
+    int c = ::fgetc(m_pFile);
+
+    while (c != EOF && pos != size)
+    {
+        buff[pos++] = c;
+    }
+
+    return pos;
+}
+

@@ -1,3 +1,4 @@
+
 #include "file_utils_writer.h"
 #include <tchar.h>
 
@@ -5,7 +6,7 @@
 FileWriter::FileWriter(const std::wstring & path, const unsigned char * header, const size_t headSize) :
     m_pFile(NULL)
 {
-    m_pFile = ::_wfopen(path.c_str(), _T("wb"));
+    ::_wfopen_s(&m_pFile, path.c_str(), _T("wb"));
 
     if (header != NULL)
     {
@@ -23,6 +24,11 @@ FileWriter::FileWriter(const std::wstring & path, const unsigned char * header, 
 
 FileWriter::~FileWriter()
 {
+    if (m_pFile != NULL)
+    {
+        ::fclose(m_pFile);
+        m_pFile = NULL;
+    }
 }
 
 bool FileWriter::WriteBuffW(const wchar_t * buff, const size_t size)

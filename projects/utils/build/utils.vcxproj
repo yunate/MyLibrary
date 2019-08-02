@@ -49,9 +49,6 @@
     <ClCompile Include="..\source\json\CJsonObject.cpp" />
     <ClCompile Include="..\source\main_utils.cpp" />
     <ClCompile Include="..\source\memory_share\memory_share.cpp" />
-    <ClCompile Include="..\source\pinyin_ci_table\CiPinYinTable.cpp" />
-    <ClCompile Include="..\source\pinyin_ci_table\CiToPinYin.cpp" />
-    <ClCompile Include="..\source\pinyin_ci_table\test1.h" />
     <ClCompile Include="..\source\rand\rand.cpp" />
     <ClCompile Include="..\source\resource_util\resource_util.cpp" />
     <ClCompile Include="..\source\service\service_utils.cpp" />
@@ -106,8 +103,6 @@
     <ClInclude Include="..\source\limit_single_instance\Test.h" />
     <ClInclude Include="..\source\memory_share\memory_share.h" />
     <ClInclude Include="..\source\memory_share\Test.h" />
-    <ClInclude Include="..\source\pinyin_ci_table\CiPinYinTable.h" />
-    <ClInclude Include="..\source\pinyin_ci_table\CiToPinYin.h" />
     <ClInclude Include="..\source\rand\rand.h" />
     <ClInclude Include="..\source\resource_util\resource_uti.h" />
     <ClInclude Include="..\source\resource_util\Test.h" />
@@ -140,7 +135,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D43B56CF-532B-48FD-9D9C-B4966EBD3241}</ProjectGuid>
     <RootNamespace>utils1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>Utils</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -148,27 +143,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

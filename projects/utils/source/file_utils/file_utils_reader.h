@@ -10,6 +10,9 @@ class FileReader
 {
 public:
     /** 构造函数
+    @param [in] path 路径
+    @param [in] checker 文件头检查
+    @param [in] 文件头大小
     */
     FileReader(const std::wstring& path, const unsigned char* checker, const size_t checkSize);
 
@@ -37,6 +40,13 @@ public:
     */
     bool GetLineA(std::string& line);
 
+    /** 获得size个数据，buff需要外部分配内存
+    @param [out] buff 输出数组
+    @param [in] size 大小
+    @return 实际获得的大小
+    */
+    size_t GetBuff(char* buff, const size_t& size);
+
 protected:
     FILE* m_pFile;
 };
@@ -59,6 +69,8 @@ inline FileReader* CreateUCS2FileReader(const std::wstring& path)
         delete pFileReader;
         return NULL;
     }
+
+    return pFileReader;
 }
 
 /** 创建一个UTF8 编码的文件 使用GetLineA()
@@ -78,6 +90,8 @@ inline FileReader* CreateUTF8FileReader(const std::wstring& path)
         delete pFileReader;
         return NULL;
     }
+
+    return pFileReader;
 }
 
 /** 创建一个UTF8 BOM 编码的文件 使用GetLineA()
@@ -98,6 +112,8 @@ inline FileReader* CreateUTF8BomFileReader(const std::wstring& path)
         delete pFileReader;
         return NULL;
     }
+
+    return pFileReader;
 }
 
 #endif // __FILE_UTILS_READER_H_

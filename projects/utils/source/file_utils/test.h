@@ -2,8 +2,10 @@
 
 #include "file_utils.h"
 #include "big_file_utils.h"
-#include <vector>
+#include "file_utils_reader.h"
+#include "file_utils_writer.h"
 #include "code_cvt/code_cvt.h"
+#include <vector>
 
 namespace utilstest
 {
@@ -71,5 +73,41 @@ namespace utilstest
         {
             return true;
         });
+    }
+
+    static void Test_file_utils_ex()
+    {
+        FileReader *pReader = CreateUCS2FileReader(L"D:\\test\\1.txt");
+
+        if (!pReader)
+        {
+            return;
+        }
+
+        std::wstring line = L"";
+        pReader->GetLineW(line);
+
+        while (line.length() > 0)
+        {
+            std::wcout << line.c_str() << L"\r\n";
+            pReader->GetLineW(line);
+        }
+
+        delete pReader;
+
+        FileWriter *pWrite = CreateUTF8FileWriter(L"D:\\test\\2.txt");
+
+        if (!pWrite)
+        {
+            return;
+        }
+
+        std::string line1 = "test\r\n";
+        pWrite->WriteBuffA(line1.c_str(), line1.size());
+        pWrite->WriteBuffA(line1.c_str(), line1.size());
+        pWrite->WriteBuffA(line1.c_str(), line1.size());
+        pWrite->WriteBuffA(line1.c_str(), line1.size());
+
+        delete pWrite;
     }
 }

@@ -13,7 +13,6 @@
 #include "win_api_caller/Test.h"
 #include "file_utils/test.h"
 #include "singleton/test.h"
-#include "pinyin_ci_table/test1.h"
 #include "cpu/test.h"
 #include "thread/producer_consumer/test2.h"
 
@@ -28,7 +27,7 @@ int main()
 //     utilstest::Test_Json();
 //     utilstest::Test_xml0();
 
-    utilstest::Test_codecvt0();
+//    utilstest::Test_codecvt0();
 
 //    utilstest::Test_Initfile0();
 //    utilstest::Test_CommandLineArguments0();
@@ -43,8 +42,8 @@ int main()
     //utilstest::Test_Singleton();
     //utilstest::Test_StrToPinYin();
     // utilstest::Test_GetCpuCount();
-    utilstest::Test_ProducerConsumer();
+    utilstest::Test_file_utils_ex();
     ::system("pause");
-    return 0;
+    return 1;
 }
 
