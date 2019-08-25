@@ -79,6 +79,9 @@
     <Filter Include="thread\producer_consumer">
       <UniqueIdentifier>{c9daba97-7055-40c3-970b-c73cc7dd1e91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="console">
+      <UniqueIdentifier>{3474fe50-8e10-4466-b94d-9bcf240a708a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -422,6 +425,12 @@
     </ClInclude>
     <ClInclude Include="..\source\file_utils\test.h">
       <Filter>file_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\console\color_print.h">
+      <Filter>console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\console\Test.h">
+      <Filter>console</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

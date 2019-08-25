@@ -15,6 +15,7 @@
 #include "singleton/test.h"
 #include "cpu/test.h"
 #include "thread/producer_consumer/test2.h"
+#include "console/test.h"
 
 namespace utilstest {}
 
@@ -42,7 +43,8 @@ int main()
     //utilstest::Test_Singleton();
     //utilstest::Test_StrToPinYin();
     // utilstest::Test_GetCpuCount();
-    utilstest::Test_file_utils_ex();
+    //utilstest::Test_file_utils_ex();
+    utilstest::Test_ColorPrint();
     ::system("pause");
     return 1;
 }
