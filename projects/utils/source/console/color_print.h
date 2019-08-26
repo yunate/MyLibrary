@@ -20,34 +20,28 @@ enum Color
     Black = 0,
 };
 
-static HANDLE s_std_output_handle = NULL;
-static CONSOLE_SCREEN_BUFFER_INFO s_info;
-static bool s_hasInit = false;
-
-#define ColorPrintf(foreColor, fmt, ...) \
+#define ColorPrintf(foreColor, fmt, ...)\
 do {\
-    if (!s_hasInit)\
+    HANDLE handle = ::GetStdHandle(STD_OUTPUT_HANDLE);\
+    CONSOLE_SCREEN_BUFFER_INFO info;\
+    if (handle != NULL && ::GetConsoleScreenBufferInfo(handle, &info))\
     {\
-        s_hasInit = true;\
-        ::GetConsoleScreenBufferInfo(s_std_output_handle, &s_info);\
-        s_std_output_handle = ::GetStdHandle(STD_OUTPUT_HANDLE); \
+        ::SetConsoleTextAttribute(handle, foreColor | Black);\
+        ::printf(fmt, __VA_ARGS__);\
+        ::SetConsoleTextAttribute(handle, info.wAttributes);\
     }\
-    ::SetConsoleTextAttribute(s_std_output_handle, foreColor | Black);\
-    ::printf(fmt, __VA_ARGS__);\
-    ::SetConsoleTextAttribute(s_std_output_handle, s_info.wAttributes);\
 }while (0)
 
-#define ColorPrintfW(foreColor, fmt, ...) \
+#define ColorPrintfW(foreColor, fmt, ...)\
 do {\
-    if (!s_hasInit)\
+    HANDLE handle = ::GetStdHandle(STD_OUTPUT_HANDLE);\
+    CONSOLE_SCREEN_BUFFER_INFO info;\
+    if (handle != NULL && ::GetConsoleScreenBufferInfo(handle, &info))\
     {\
-        s_hasInit = true;\
-        ::GetConsoleScreenBufferInfo(s_std_output_handle, &s_info);\
-        s_std_output_handle = ::GetStdHandle(STD_OUTPUT_HANDLE); \
+        ::SetConsoleTextAttribute(handle, foreColor | Black);\
+        ::wprintf(fmt, __VA_ARGS__);\
+        ::SetConsoleTextAttribute(handle, info.wAttributes);\
     }\
-    ::SetConsoleTextAttribute(s_std_output_handle, foreColor | Black);\
-    ::wprintf(fmt, __VA_ARGS__);\
-    ::SetConsoleTextAttribute(s_std_output_handle, s_info.wAttributes);\
 }while (0)
 
 #endif //__COLOR_PEINT_H_

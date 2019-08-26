@@ -15,6 +15,7 @@ namespace utilstest
         ColorPrintfW(Green, L"green\r\n");
         ColorPrintf(Red, "red\r\n");
         ColorPrintfW(White, L"red\r\n");
+        ColorPrintfW(Green, L"red\r\n");
     }
 }
 
