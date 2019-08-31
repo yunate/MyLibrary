@@ -5,6 +5,33 @@
 #include <string>
 #include <WINSOCK2.H>
 
+/** socket数据传输类型
+*/
+enum SocketType
+{
+    /** 字节流，比如TCP
+    */
+    SOCKET_STREAM = 1,
+
+    /** 离散数据，比如UDP
+    */
+    SOCKET_DGRAM = 2
+};
+
+/** 协议，目前只提供tcp，udp
+*/
+enum IpProtocolType
+{
+    /** TCP
+    */
+    IPPROTOCOL_TCP = 6,
+
+    /** UDP
+    */
+    IPPROTOCOL_UDP = 17
+};
+
+
 class SocketNode
 {
 public:
@@ -56,7 +83,6 @@ public:
     {
         m_ipAddress = ipAddress;
     }
-
 
     /** 获得端口，对于不同的socket有着不同的意义，
     @param [out] port 端口

@@ -4,27 +4,6 @@
 
 #include "SocketNode.h"
 
-/** socket数据传输类型
-*/
-enum SocketType
-{
-    /** 字节流，比如TCP
-    */
-    SOCKET_STREAM = 1,
-
-    /** 离散数据，比如UDP
-    */
-    SOCKET_DGRAM  = 2
-};
-
-/** 协议，目前只提供tcp，udp
-*/
-enum IpProtocolType
-{
-    IPPROTOCOL_TCP = 6,
-    IPPROTOCOL_UDP = 17
-};
-
 /** TODO:error_message
 */
 class SocketBase
@@ -38,7 +17,13 @@ public:
     */
     virtual ~SocketBase()
     {
+        UnInit();
     }
+
+    /** 不允许拷贝
+    */
+    SocketBase(const SocketBase&) = delete;
+    SocketBase& operator=(const SocketBase&) = delete;
 
 public:
     /** 初始化，不要放到构造函数里面
@@ -48,10 +33,10 @@ public:
     */
     virtual bool Init(SocketType type, IpProtocolType ipProto);
 
-    /** 清理资源，不要再析构中调用虚函数，切记，切记
+    /** 清理资源
     return 是否成功
     */
-    virtual bool UnInit();
+    bool UnInit();
 
     /** 发送消息 当msg大于大约 1K时候返回的值可能不等于msg的值（一次性发送不了）
         pToSocket::IsValidSocket返回false代表无连接的数据报[比如UDP]
@@ -70,6 +55,9 @@ public:
     virtual int RcvMsg(SocketNode& fromSocket, std::string & msg);
 
 public:
+    /** 获得m_socketNode
+    @return socket 数据信息
+    */
     inline SocketNode& GetSocketNode()
     {
         return m_socketNode;
