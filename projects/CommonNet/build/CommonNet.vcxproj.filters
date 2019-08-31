@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resources">
+      <UniqueIdentifier>{5B4A6366-3255-4C48-8FFA-FA1808041DFC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{5DB15078-C1BD-49C0-AB0F-824F60B1C6A4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp">
+      <UniqueIdentifier>{86fb5687-51c2-4eea-b906-f487211374e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="udp">
+      <UniqueIdentifier>{8b60b65c-4d36-49bc-809c-68d0c6cf1771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="http">
+      <UniqueIdentifier>{ede8fd9b-3185-48c0-a70d-c2b7424f48f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common_socket">
+      <UniqueIdentifier>{62eb1ee6-56cd-4731-b604-a4410b158bfa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\common_socket\SocketBase.cpp">
+      <Filter>common_socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\common_socket\SocketServer.cpp">
+      <Filter>common_socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\common_socket\SockeClient.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\common_socket\SocketBase.h">
+      <Filter>common_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\common_socket\SocketServer.h">
+      <Filter>common_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\common_socket\SockeClient.h">
+      <Filter>common_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\common_socket\SocketNode.h">
+      <Filter>common_socket</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
