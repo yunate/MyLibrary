@@ -22,6 +22,7 @@
     <ClCompile Include="..\source\common_socket\SockeClient.cpp" />
     <ClCompile Include="..\source\common_socket\SocketBase.cpp" />
     <ClCompile Include="..\source\common_socket\SocketServer.cpp" />
+    <ClCompile Include="..\source\common_socket\SocketUtils.cpp" />
     <ClCompile Include="..\source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +30,7 @@
     <ClInclude Include="..\source\common_socket\SocketBase.h" />
     <ClInclude Include="..\source\common_socket\SocketNode.h" />
     <ClInclude Include="..\source\common_socket\SocketServer.h" />
+    <ClInclude Include="..\source\common_socket\SocketUtils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

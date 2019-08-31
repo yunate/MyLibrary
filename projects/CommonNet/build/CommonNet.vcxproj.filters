@@ -29,6 +29,7 @@
       <Filter>common_socket</Filter>
     </ClCompile>
     <ClCompile Include="..\source\common_socket\SockeClient.cpp" />
+    <ClCompile Include="..\source\common_socket\SocketUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\common_socket\SocketBase.h">
@@ -41,6 +42,9 @@
       <Filter>common_socket</Filter>
     </ClInclude>
     <ClInclude Include="..\source\common_socket\SocketNode.h">
+      <Filter>common_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\common_socket\SocketUtils.h">
       <Filter>common_socket</Filter>
     </ClInclude>
   </ItemGroup>
