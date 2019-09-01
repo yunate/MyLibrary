@@ -123,6 +123,29 @@ public:
         m_port = pPockAddr->sin_port;
     }
 
+    /** 获得连接流的另一端信息，很显然类似UDP的链接不需要使用这个
+    @param [out] fromSocket 另一端信息
+    return 是否成功
+    */
+    bool GetPeerName(SocketBean& fromSocket)
+    {
+        if (!IsValidSocket())
+        {
+            return false;
+        }
+
+        SOCKADDR addr;
+        int size = sizeof(addr);
+
+        if (SOCKET_ERROR == ::getpeername(GetSocket(), &addr, &size))
+        {
+            return false;
+        }
+
+        fromSocket.SetSOCKADDR(addr);
+        return true;
+    }
+
 private:
     /** 套接字
     */

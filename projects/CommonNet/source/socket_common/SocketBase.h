@@ -58,12 +58,6 @@ public:
         return m_socketBean;
     }
 
-    /** 获得连接流的另一端信息，很显然类似UDP的链接不需要使用这个
-    @param [out] fromSocket 另一端信息
-    return 是否成功
-    */
-    bool GetPeerName(SocketBean& fromSocket);
-
 private:
     /** socket 数据信息
     */

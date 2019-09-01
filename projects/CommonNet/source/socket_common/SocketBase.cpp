@@ -20,22 +20,3 @@ bool SocketBase::UnInit()
 
     return false;
 }
-
-bool SocketBase::GetPeerName(SocketBean & fromSocket)
-{
-    if (!GetSocketBean().IsValidSocket())
-    {
-        return false;
-    }
-
-    SOCKADDR addr;
-    int size = 0;
-
-    if (SOCKET_ERROR == ::getpeername(GetSocketBean().GetSocket(), &addr, &size))
-    {
-        return false;
-    }
-
-    fromSocket.SetSOCKADDR(addr);
-    return true;
-}
