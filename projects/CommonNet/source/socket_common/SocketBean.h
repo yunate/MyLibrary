@@ -4,6 +4,7 @@
 
 #include <string>
 #include <WINSOCK2.H>
+#pragma comment(lib, "Ws2_32.lib")
 
 /** socket数据传输类型
 */
@@ -32,10 +33,10 @@ enum IpProtocolType
 };
 
 
-class SocketNode
+class SocketBean
 {
 public:
-    SocketNode() :
+    SocketBean() :
         m_socket(INVALID_SOCKET),
         m_ipAddress(""),
         m_port(0)

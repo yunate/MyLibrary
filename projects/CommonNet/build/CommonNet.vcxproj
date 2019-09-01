@@ -19,18 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\common_socket\SockeClient.cpp" />
-    <ClCompile Include="..\source\common_socket\SocketBase.cpp" />
-    <ClCompile Include="..\source\common_socket\SocketServer.cpp" />
-    <ClCompile Include="..\source\common_socket\SocketUtils.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\socket_common\SocketBase.cpp" />
+    <ClCompile Include="..\source\socket_common\SocketUtils.cpp" />
+    <ClCompile Include="..\source\socket_tcp\SocketTcpBase.cpp" />
+    <ClCompile Include="..\source\socket_tcp\SocketTcpClient.cpp" />
+    <ClCompile Include="..\source\socket_tcp\SocketTcpServer.cpp" />
+    <ClCompile Include="..\source\socket_udp\SocketUdpBase.cpp" />
+    <ClCompile Include="..\source\socket_udp\SocketUdpClient.cpp" />
+    <ClCompile Include="..\source\socket_udp\SocketUdpServer.cpp" />
+    <ClCompile Include="..\source\test\Test_Socket.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\common_socket\SockeClient.h" />
-    <ClInclude Include="..\source\common_socket\SocketBase.h" />
-    <ClInclude Include="..\source\common_socket\SocketNode.h" />
-    <ClInclude Include="..\source\common_socket\SocketServer.h" />
-    <ClInclude Include="..\source\common_socket\SocketUtils.h" />
+    <ClInclude Include="..\source\socket_common\SocketBase.h" />
+    <ClInclude Include="..\source\socket_common\SocketBean.h" />
+    <ClInclude Include="..\source\socket_common\SocketUtils.h" />
+    <ClInclude Include="..\source\socket_tcp\SocketTcpBase.h" />
+    <ClInclude Include="..\source\socket_tcp\SocketTcpClient.h" />
+    <ClInclude Include="..\source\socket_tcp\SocketTcpServer.h" />
+    <ClInclude Include="..\source\socket_udp\SocketUdpBase.h" />
+    <ClInclude Include="..\source\socket_udp\SocketUdpClient.h" />
+    <ClInclude Include="..\source\socket_udp\SocketUdpServer.h" />
+    <ClInclude Include="..\source\test\color_print.h" />
+    <ClInclude Include="..\source\test\Test_Socket.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -43,27 +54,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

@@ -7,45 +7,85 @@
     <Filter Include="vendor">
       <UniqueIdentifier>{5DB15078-C1BD-49C0-AB0F-824F60B1C6A4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tcp">
-      <UniqueIdentifier>{86fb5687-51c2-4eea-b906-f487211374e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="udp">
-      <UniqueIdentifier>{8b60b65c-4d36-49bc-809c-68d0c6cf1771}</UniqueIdentifier>
-    </Filter>
     <Filter Include="http">
       <UniqueIdentifier>{ede8fd9b-3185-48c0-a70d-c2b7424f48f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="common_socket">
+    <Filter Include="test">
+      <UniqueIdentifier>{57c99c69-8e08-4fb0-86a6-b39ff63a1b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="socket_tcp">
+      <UniqueIdentifier>{86fb5687-51c2-4eea-b906-f487211374e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="socket_common">
       <UniqueIdentifier>{62eb1ee6-56cd-4731-b604-a4410b158bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="socket_udp">
+      <UniqueIdentifier>{8b60b65c-4d36-49bc-809c-68d0c6cf1771}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\source\common_socket\SocketBase.cpp">
-      <Filter>common_socket</Filter>
+    <ClCompile Include="..\source\test\Test_Socket.cpp">
+      <Filter>test</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\common_socket\SocketServer.cpp">
-      <Filter>common_socket</Filter>
+    <ClCompile Include="..\source\socket_tcp\SocketTcpClient.cpp">
+      <Filter>socket_tcp</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\common_socket\SockeClient.cpp" />
-    <ClCompile Include="..\source\common_socket\SocketUtils.cpp" />
+    <ClCompile Include="..\source\socket_tcp\SocketTcpServer.cpp">
+      <Filter>socket_tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket_common\SocketBase.cpp">
+      <Filter>socket_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket_common\SocketUtils.cpp">
+      <Filter>socket_common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket_tcp\SocketTcpBase.cpp">
+      <Filter>socket_tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket_udp\SocketUdpBase.cpp">
+      <Filter>socket_udp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket_udp\SocketUdpClient.cpp">
+      <Filter>socket_udp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\socket_udp\SocketUdpServer.cpp">
+      <Filter>socket_udp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\common_socket\SocketBase.h">
-      <Filter>common_socket</Filter>
+    <ClInclude Include="..\source\test\Test_Socket.h">
+      <Filter>test</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\common_socket\SocketServer.h">
-      <Filter>common_socket</Filter>
+    <ClInclude Include="..\source\test\color_print.h">
+      <Filter>test</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\common_socket\SockeClient.h">
-      <Filter>common_socket</Filter>
+    <ClInclude Include="..\source\socket_tcp\SocketTcpClient.h">
+      <Filter>socket_tcp</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\common_socket\SocketNode.h">
-      <Filter>common_socket</Filter>
+    <ClInclude Include="..\source\socket_tcp\SocketTcpServer.h">
+      <Filter>socket_tcp</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\common_socket\SocketUtils.h">
-      <Filter>common_socket</Filter>
+    <ClInclude Include="..\source\socket_common\SocketBase.h">
+      <Filter>socket_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket_common\SocketBean.h">
+      <Filter>socket_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket_common\SocketUtils.h">
+      <Filter>socket_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket_tcp\SocketTcpBase.h">
+      <Filter>socket_tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket_udp\SocketUdpBase.h">
+      <Filter>socket_udp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket_udp\SocketUdpClient.h">
+      <Filter>socket_udp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\socket_udp\SocketUdpServer.h">
+      <Filter>socket_udp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
