@@ -18,11 +18,17 @@
     <ClInclude Include="..\source\DogGif\DogGifDef.h">
       <Filter>DogGif</Filter>
     </ClInclude>
+    <ClInclude Include="..\vendor\file_utils_reader.h">
+      <Filter>vendor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\DogGif\DogGif.cpp">
       <Filter>DogGif</Filter>
     </ClCompile>
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\vendor\file_utils_reader.cpp">
+      <Filter>vendor</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

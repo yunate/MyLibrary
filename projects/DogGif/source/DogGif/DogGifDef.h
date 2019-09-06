@@ -2,7 +2,7 @@
 #ifndef __DOGGIF_DEF_H_
 #define __DOGGIF_DEF_H_
 
-namespace DogGif
+namespace DogGifNSP
 {
     /**
     
@@ -11,6 +11,8 @@ namespace DogGif
 
 using u8 = unsigned char;
 using u16 = unsigned short;
+using u32 = unsigned long;
+#pragma pack(push, 1)
 
 /** 数据头
 47 49 46 38 39 61
@@ -32,7 +34,7 @@ struct GifHead
             signature[2] != 'F' ||
             version[0] != '8' ||
             (version[1] != '7' && version[1] != '9') ||
-            version[2] == 'a')
+            version[2] != 'a')
         {
             return false;
         }
@@ -57,7 +59,7 @@ struct GifLogicalScreenDescriptor
     u16 m_height;
 
     /** 颜色描述
-    f7 1 111 0 111
+       f7 1 111 0 111
         m 7 - 全局颜色列表标志(Global Color Table Flag)，当置位时表示有全局颜色列表，pixel值有意义.
         cr 6 5 4 - 颜色深度(Color ResoluTion)，cr+1确定图象的颜色深度.
         s 3 - 分类标志(Sort Flag)，如果置位表示全局颜色列表分类排列.
@@ -69,7 +71,7 @@ struct GifLogicalScreenDescriptor
     8b
         为背景颜色指向全局色表。背景颜色是指那些没有被图像覆盖的视屏部分的颜色。若全局色表标志位置为0，则该字段也被赋值0，并且被忽略。
     */
-    u8 m_bgClolr;
+    u8 m_bgColor;
 
     /** 像素宽高比
     00
@@ -78,13 +80,7 @@ struct GifLogicalScreenDescriptor
         该字段的取值范围从最宽的比值4：1到最高的比值1：4，递增的步幅为1/64。取值： 0 - 没有比值，1～255 - 用于计算的值。
     */
     u8 m_pixelTo;
-
-    /** 全局颜色表起始位置 第14位
-        全局颜色列表必须紧跟在逻辑屏幕标识符后面，每个颜色列表索引条目由三个字节组成，按R、G、B的顺序排列。
-    */
-    u8* m_pGlobalColorTable;
 };
-
 
 /** 扩展块
 */
@@ -96,7 +92,7 @@ struct ExtendBlock
 
     /** 0xf9 标记这是一个图形扩展块
     */
-    u8 m_GControlLabel;
+    u8 m_controlLabel;
 
     /** 块大小 固定4
     */
@@ -153,37 +149,8 @@ struct ImageDescriptor
         pixel 2 1 0 - 局部颜色列表大小(Size of Local Color Table)，pixel+1就为颜色列表的位数
     */
     u8 m_localColorFlag;
-
-    /** 局部颜色表起始位置
-    */
-    u8* m_pLocalColorTable;
 };
 
-/** 图像块
-*/
-struct ImageBlock
-{
-    /**  图象标识符
-    */
-    ImageDescriptor m_imageDescriptor;
-
-    /** 图像数据
-    */
-    u8 * m_pImageData;
-};
-
-/** 数据流
-*/
-struct GifDataStream
-{
-    /** 逻辑屏幕标识符(Logical Screen Descriptor)
-    */
-    GifLogicalScreenDescriptor m_logicalScreenDes;
-
-    /** 图像块
-    */
-    ImageBlock m_imageBlock;
-};
 
 struct GifTail
 {
@@ -192,6 +159,7 @@ struct GifTail
     u8 m_endFlag;
 };
 
+#pragma pack(pop)
 }
 
 #endif // __DOGGIF_DEF_H_
