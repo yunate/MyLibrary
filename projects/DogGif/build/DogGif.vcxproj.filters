@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="DogGif">
+      <UniqueIdentifier>{D52BA4A0-6D97-48C6-9F62-106702D10ACC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{FD8C2A41-D4E6-45BE-A0D7-A5C75B23976D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{C7A861E3-332B-40F1-BA19-9585FE0665FC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\DogGif\DogGif.h">
+      <Filter>DogGif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\DogGif\DogGifDef.h">
+      <Filter>DogGif</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\DogGif\DogGif.cpp">
+      <Filter>DogGif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\main.cpp" />
+  </ItemGroup>
+</Project>
