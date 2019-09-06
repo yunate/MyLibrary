@@ -105,6 +105,11 @@
     <ClInclude Include="..\source\json\Test.h" />
     <ClInclude Include="..\source\limit_single_instance\limit_single_instance.h" />
     <ClInclude Include="..\source\limit_single_instance\Test.h" />
+    <ClInclude Include="..\source\logic_executor\IExecutor.h" />
+    <ClInclude Include="..\source\logic_executor\LogicAndExecutor.h" />
+    <ClInclude Include="..\source\logic_executor\LogicNotExecutor.h" />
+    <ClInclude Include="..\source\logic_executor\LogicOrExecutor.h" />
+    <ClInclude Include="..\source\logic_executor\Test.h" />
     <ClInclude Include="..\source\memory_share\memory_share.h" />
     <ClInclude Include="..\source\memory_share\Test.h" />
     <ClInclude Include="..\source\pinyin_ci_table\CiPinYinTable.h" />

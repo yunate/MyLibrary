@@ -16,6 +16,7 @@
 #include "cpu/test.h"
 #include "thread/producer_consumer/test2.h"
 #include "console/test.h"
+#include "logic_executor/Test.h"
 
 namespace utilstest {}
 
@@ -44,7 +45,8 @@ int main()
     //utilstest::Test_StrToPinYin();
     // utilstest::Test_GetCpuCount();
     //utilstest::Test_file_utils_ex();
-    utilstest::Test_ColorPrint();
+    //utilstest::Test_ColorPrint();
+    utilstest::Test_Executor();
     ::system("pause");
     return 1;
 }

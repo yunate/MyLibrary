@@ -82,6 +82,9 @@
     <Filter Include="console">
       <UniqueIdentifier>{3474fe50-8e10-4466-b94d-9bcf240a708a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="logic_executor">
+      <UniqueIdentifier>{91fb4257-c984-49b9-a8c7-b9a1c4ea3af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -431,6 +434,21 @@
     </ClInclude>
     <ClInclude Include="..\source\console\Test.h">
       <Filter>console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\logic_executor\LogicAndExecutor.h">
+      <Filter>logic_executor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\logic_executor\IExecutor.h">
+      <Filter>logic_executor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\logic_executor\LogicOrExecutor.h">
+      <Filter>logic_executor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\logic_executor\LogicNotExecutor.h">
+      <Filter>logic_executor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\logic_executor\Test.h">
+      <Filter>logic_executor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
