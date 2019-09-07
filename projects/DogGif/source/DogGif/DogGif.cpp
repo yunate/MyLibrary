@@ -22,6 +22,7 @@ DogGif::~DogGif()
         delete m_pStringTable;
         m_pStringTable = NULL;
     }
+
 }
 
 bool DogGif::DogGif::Init(u8 * pBuff, u32 buffLen)
@@ -80,12 +81,12 @@ bool DogGif::GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen)
     return true;
 }
 
-u8 DogGif::GetWidth()
+u32 DogGif::GetWidth()
 {
     return m_gifGolInfo.m_width;
 }
 
-u8 DogGif::GetHeight()
+u32 DogGif::GetHeight()
 {
     return m_gifGolInfo.m_height;
 }
@@ -93,7 +94,13 @@ u8 DogGif::GetHeight()
 u32 DogGif::GetTimeDelay()
 {
     u32 delayTime = m_gifGolInfo.m_frameData[0]->m_delayTime * 10;
-    return delayTime == 0 ? 66 : delayTime;
+
+    if (delayTime == 0)
+    {
+        return 66;
+    }
+
+    return delayTime;
 }
 
 bool DogGif::HasInit()
@@ -184,23 +191,23 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
     DogGifFrame * pFrame = new DogGifFrame();
     u8 * pBuff = *ppBuff;
     bool isOk = false;
-    
+
     for (u32 i = 0; i < buffLen; ++i)
     {
+        if (*ppBuff + buffLen <= pBuff + 2)
+        {
+            isOk = false;
+            break;
+        }
+
         if (pBuff[0] == 0x21)
         {
-            if (*ppBuff + buffLen <= pBuff)
-            {
-                isOk = false;
-                break;
-            }
-
             if (pBuff[1] == 0xf9)
             {
                 ExtendBlock extend;
                 u8 extendSize = (u8)sizeof(ExtendBlock);
 
-                if (buffLen < extendSize)
+                if (*ppBuff + buffLen <= pBuff + extendSize)
                 {
                     isOk = false;
                     break;
@@ -215,6 +222,63 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
                 pFrame->m_tranColorIndex = extend.m_TranColorIndex;
                 continue;
             }
+            else if (pBuff[1] == 0xfe)
+            {
+                // 这种情况下一直找到0为止
+                pBuff += 2;
+
+                while (*ppBuff + buffLen > pBuff + 1)
+                {
+                    if (pBuff[0] == 0)
+                    {
+                        break;
+                    }
+
+                    ++pBuff;
+                }
+            }
+            else if (pBuff[1] == 0x01)
+            {
+                pBuff += 2;
+
+                if (*ppBuff + buffLen <= pBuff + 13)
+                {
+                    isOk = false;
+                    break;
+                }
+
+                // 然后一直找到0为止
+                while (*ppBuff + buffLen > pBuff + 1)
+                {
+                    if (pBuff[0] == 0)
+                    {
+                        break;
+                    }
+
+                    ++pBuff;
+                }
+            }
+            else if (pBuff[1] == 0xff)
+            {
+                pBuff += 2;
+
+                if (*ppBuff + buffLen <= pBuff + 12)
+                {
+                    isOk = false;
+                    break;
+                }
+
+                // 然后一直找到0为止
+                while (*ppBuff + buffLen > pBuff + 1)
+                {
+                    if (pBuff[0] == 0)
+                    {
+                        break;
+                    }
+
+                    ++pBuff;
+                }
+            }
         }
 
         if (pBuff[0] == 0x2c)
@@ -222,7 +286,7 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
             ImageDescriptor imgDes;
             u8 imgDesSize = (u8)sizeof(imgDes);
 
-            if (buffLen < imgDesSize)
+            if (*ppBuff + buffLen <= pBuff + imgDesSize)
             {
                 isOk = false;
                 break;
@@ -259,7 +323,7 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
                 pBuff += pFrame->m_LocalColorTableBit * 3;
             }
 
-            if (*ppBuff + buffLen <= pBuff + 1)
+            if (*ppBuff + buffLen <= pBuff + 2)
             {
                 isOk = false;
                 break;
@@ -312,7 +376,7 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
 
 bool DogGif::DecodeFrame(u32 index)
 {
-    u32 buffSize = m_gifGolInfo.m_height *m_gifGolInfo.m_width;
+    u32 buffSize = m_gifGolInfo.m_height * m_gifGolInfo.m_width;
 
     if (index >= m_gifGolInfo.m_frameData.size())
     {
@@ -355,9 +419,10 @@ bool DogGif::DecodeFrame(u32 index)
 
     if (pFrame->m_tranFlag == 1)
     {
-        colorTable[pFrame->m_tranColorIndex].m_r = 0;
-        colorTable[pFrame->m_tranColorIndex].m_g = 0;
-        colorTable[pFrame->m_tranColorIndex].m_b = 0;
+        colorTable[pFrame->m_tranColorIndex].m_a = 0;
+        colorTable[pFrame->m_tranColorIndex].m_r = 255;
+        colorTable[pFrame->m_tranColorIndex].m_g = 255;
+        colorTable[pFrame->m_tranColorIndex].m_b = 255;
     }
 
     if (index == 0)
@@ -377,9 +442,13 @@ bool DogGif::DecodeFrame(u32 index)
         if (pFrame->m_disposalMethod == 0 ||
             pFrame->m_disposalMethod == 3)
         {
+            int i = 0;
+            ++i;
         }
         else if (pFrame->m_disposalMethod == 1)
         {
+            int i = 0;
+            ++i;
             // ::memcpy(pOutBuff, &m_preFrameBit[0], buffSize * sizeof(DogGifColor));
         }
         else if (pFrame->m_disposalMethod == 2)
@@ -395,8 +464,8 @@ bool DogGif::DecodeFrame(u32 index)
         }
     }
 
-    u8 x = 0;
-    u8 y = 0;
+    u32 x = 0;
+    u32 y = 0;
     u8 interlacepass = 0;
     u32 frameDataIndex = 0;
     u8 decodeBuff[4096];

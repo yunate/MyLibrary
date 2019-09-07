@@ -65,7 +65,7 @@ public:
 
                 PAINTSTRUCT ps;
                 RECT backRect = { 0, 0, GetWidth(), GetHeight() };
-                InvalidateRect(GetWnd(), &backRect, FALSE);
+                ::InvalidateRect(GetWnd(), &backRect, FALSE);
                 HDC hdc = ::BeginPaint(hWnd, &ps);
                 HBRUSH backBrush = ::CreateSolidBrush(0xffffff);
                 ::FillRect(hdc, &backRect, backBrush);
@@ -79,7 +79,7 @@ public:
             }
         case WM_INITDIALOG:
             {
-                FileReader reader(L"D:\\workspaces\\C++_workspaces\\MyLibrary\\projects\\DogGif\\test\\1.gif", NULL, 0);
+                FileReader reader(L"D:\\workspaces\\C++_workspaces\\MyLibrary\\projects\\DogGif\\test\\4.gif", NULL, 0);
                 size_t fileSize = reader.GetFileSize();
                 u8* pBuff = new u8[fileSize];
                 reader.GetBuff((char*)pBuff, fileSize);
@@ -125,7 +125,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    l
     // 主逻辑
     {
         MyWnd myWnd;
-        myWnd.SetRect({ 200, 200, 700, 700 });
+        myWnd.SetRect({ 500, 200, 1500, 900 });
         myWnd.DoModel();
     }
 

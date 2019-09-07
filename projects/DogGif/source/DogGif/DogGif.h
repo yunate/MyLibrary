@@ -32,17 +32,17 @@ struct DogGifColor
 
     }
 
-    /** red
+    /** blue
     */
-    u8 m_r = 0;
+    u8 m_b = 0;
 
     /** green
     */
     u8 m_g = 0;
 
-    /** blue
+    /** red
     */
-    u8 m_b = 0;
+    u8 m_r = 0;
 
     /** a
     */
@@ -194,8 +194,8 @@ public:
 
     bool GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen);
 
-    u8 GetWidth();
-    u8 GetHeight();
+    u32 GetWidth();
+    u32 GetHeight();
     u32 GetTimeDelay();
     bool HasInit();
 private:
