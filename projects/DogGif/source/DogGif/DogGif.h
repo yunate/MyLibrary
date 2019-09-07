@@ -1,8 +1,15 @@
+/*********************************************************************
+//
+// https://www.jianshu.com/p/4fabac6b15b3
+// https://www.jianshu.com/p/62ad4f953660
+//
+**********************************************************************/
 
 #ifndef __DOGGIF_H_
 #define __DOGGIF_H_
 
 #include "DogGifDef.h"
+#include "StringTable.h"
 #include <string>
 #include <vector>
 
@@ -11,10 +18,11 @@ namespace DogGifNSP
 
 struct DogGifColor
 {
-    DogGifColor(u8 r, u8 g, u8 b):
+    DogGifColor(u8 r, u8 g, u8 b, u8 a):
         m_r(r),
         m_g(g),
-        m_b(b)
+        m_b(b),
+        m_a(a)
     {
 
     }
@@ -35,13 +43,25 @@ struct DogGifColor
     /** blue
     */
     u8 m_b = 0;
+
+    /** a
+    */
+    u8 m_a = 0xff;
 };
 
 struct DogGifFrame
 {
+    /** 0：不做任何处理。1：保留前一帧图像，在此基础上进行渲染。2：渲染前将图像置为背景色。3：将被下一帧覆盖的图像重置。
+    */
+    u8 m_disposalMethod;
+
     /** 用户输入标记
     */
-    u8 m_isNeedUserInput = 0;
+    u8 m_userInputFlag = 0;
+
+    /** 当该值为 1 时，后面的 m_tranColorIndex 指定的颜色将被当做透明色处理。为 0 则不做处理。
+    */
+    u8 m_tranFlag;
 
     /** 播放时延
     */
@@ -54,11 +74,11 @@ struct DogGifFrame
 
     /** x方向偏移量
     */
-    u16 m_xFix = 0;
+    u16 m_left = 0;
 
     /** y方向偏移量
     */
-    u16 m_yFix = 0;
+    u16 m_top = 0;
 
     /** 图像宽度
     */
@@ -87,6 +107,10 @@ struct DogGifFrame
     /** 局部色表
     */
     std::vector<DogGifColor> m_localColorTable;
+
+    /** 编码长度
+    */
+    u8 m_codeLen = 0;
 
     /** frame数据
     */
@@ -168,6 +192,12 @@ public:
 public:
     bool Init(u8 * pBuff, u32 buffLen);
 
+    bool GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen);
+
+    u8 GetWidth();
+    u8 GetHeight();
+    u32 GetTimeDelay();
+    bool HasInit();
 private:
     /** 读gif头
     @pram [in, out] ppBuff head的开始指针，读取过后自动向后移动响应位置
@@ -197,8 +227,19 @@ private:
     */
     DogGifFrame* ReadFrameData(u8** ppBuff, u32& buffLen);
 
+public:
+    bool DecodeFrame(u32 index);
+
 private:
+    std::vector<DogGifColor> m_preFrameBit;
+
     DogGifGolInfo m_gifGolInfo;
+
+    u32 m_nextFrame;
+
+    StringTable* m_pStringTable;
+
+    bool m_hasInit;
 };
 
 

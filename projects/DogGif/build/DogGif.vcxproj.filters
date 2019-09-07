@@ -10,6 +10,9 @@
     <Filter Include="vendor">
       <UniqueIdentifier>{C7A861E3-332B-40F1-BA19-9585FE0665FC}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\simple_wnd">
+      <UniqueIdentifier>{7d50f600-aae8-4924-a0f0-d99083dccbea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\DogGif\DogGif.h">
@@ -21,6 +24,30 @@
     <ClInclude Include="..\vendor\file_utils_reader.h">
       <Filter>vendor</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\DogGif\StringTable.h">
+      <Filter>DogGif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\file_utils_writer.h">
+      <Filter>vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\simple_wnd\App.h">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\simple_wnd\BaseWindow.h">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\simple_wnd\CommonHead.h">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\simple_wnd\IRegistAdapt.h">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\simple_wnd\RegistStyle.h">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\simple_wnd\SimpleWnd.h">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\DogGif\DogGif.cpp">
@@ -29,6 +56,25 @@
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\vendor\file_utils_reader.cpp">
       <Filter>vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\DogGif\StringTable.cpp" />
+    <ClCompile Include="..\vendor\file_utils_writer.cpp">
+      <Filter>vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\simple_wnd\App.cpp">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\simple_wnd\BaseWindow.cpp">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\simple_wnd\IRegistAdapt.cpp">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\simple_wnd\RegistStyle.cpp">
+      <Filter>vendor\simple_wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\simple_wnd\SimpleWnd.cpp">
+      <Filter>vendor\simple_wnd</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

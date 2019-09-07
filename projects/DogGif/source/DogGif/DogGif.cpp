@@ -1,25 +1,46 @@
 #include "DogGif.h"
+#include "StringTable.h"
+
 #include <memory.h>
 
 namespace DogGifNSP
 {
+#define GIF_INTERLACE_PASSES 4
+static int g_GifInterlaceOffset[GIF_INTERLACE_PASSES] = { 0, 4, 2, 1 };
+static int g_GifInterlaceIncrement[GIF_INTERLACE_PASSES] = { 8, 8, 4, 2 };
 
-DogGif::DogGif()
+DogGif::DogGif() :
+    m_nextFrame(0),
+    m_pStringTable(nullptr)
 {
 }
 
 DogGif::~DogGif()
 {
+    if (m_pStringTable != nullptr)
+    {
+        delete m_pStringTable;
+        m_pStringTable = NULL;
+    }
 }
 
 bool DogGif::DogGif::Init(u8 * pBuff, u32 buffLen)
 {
+    m_hasInit = false;
+
     if (pBuff == nullptr)
     {
         return false;
     }
 
     if (!ReadHead(&pBuff, buffLen))
+    {
+        return false;
+    }
+
+    m_pStringTable = new(std::nothrow)StringTable();
+
+    if (m_pStringTable == nullptr)
     {
         return false;
     }
@@ -34,12 +55,55 @@ bool DogGif::DogGif::Init(u8 * pBuff, u32 buffLen)
         return false;
     }
 
+    DogGifFrame* pFrame = ReadFrameData(&pBuff, buffLen);
+
+    while (pFrame != nullptr)
+    {
+        m_gifGolInfo.m_frameData.push_back(pFrame);
+        pFrame = ReadFrameData(&pBuff, buffLen);
+    }
+
+    if (buffLen != 1 || pBuff[0] != 0x3b)
+    {
+        return false;
+    }
+
+    m_hasInit = true;
     return true;
+}
+
+bool DogGif::GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen)
+{
+    buffLen = m_gifGolInfo.m_width * m_gifGolInfo.m_height;
+    DecodeFrame(m_nextFrame);
+    *ppBuff = &m_preFrameBit[0];
+    return true;
+}
+
+u8 DogGif::GetWidth()
+{
+    return m_gifGolInfo.m_width;
+}
+
+u8 DogGif::GetHeight()
+{
+    return m_gifGolInfo.m_height;
+}
+
+u32 DogGif::GetTimeDelay()
+{
+    u32 delayTime = m_gifGolInfo.m_frameData[0]->m_delayTime * 10;
+    return delayTime == 0 ? 66 : delayTime;
+}
+
+bool DogGif::HasInit()
+{
+    return m_hasInit;
 }
 
 bool DogGif::ReadHead(u8** ppBuff, u32& buffLen)
 {
-    // 不要去判读pBuff null 了
+    // 不要去判pBuff null 了
     u8* pBuff = *ppBuff;
     GifHead head;
     u8 headSize = sizeof(GifHead);
@@ -107,7 +171,7 @@ bool DogGif::ReadGolColorTable(u8 ** ppBuff, u32 & buffLen)
     {
         m_gifGolInfo.m_golColorTable[i].m_r = pBuff[i * 3];
         m_gifGolInfo.m_golColorTable[i].m_g = pBuff[i * 3 + 1];
-        m_gifGolInfo.m_golColorTable[i].m_b = pBuff[i * 3] + 2;
+        m_gifGolInfo.m_golColorTable[i].m_b = pBuff[i * 3 + 2];
     }
 
     *ppBuff += m_gifGolInfo.m_golColorTableBit * 3;
@@ -119,103 +183,117 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
 {
     DogGifFrame * pFrame = new DogGifFrame();
     u8 * pBuff = *ppBuff;
-    bool isOk = true;
-
-    if (m_gifGolInfo.m_gifHeadSignaturl[4] == '9')
+    bool isOk = false;
+    
+    for (u32 i = 0; i < buffLen; ++i)
     {
-        for (u32 i = 0; i < buffLen; ++i)
+        if (pBuff[0] == 0x21)
         {
-            if (pBuff[0] == 0x21)
+            if (*ppBuff + buffLen <= pBuff)
             {
-                if (*ppBuff + buffLen <= pBuff)
-                {
-                    isOk = false;
-                    break;
-                }
-
-                if (pBuff[1] == 0xf9)
-                {
-                    ExtendBlock extend;
-                    u8 extendSize = (u8)sizeof(ExtendBlock);
-
-                    if (buffLen < extendSize)
-                    {
-                        isOk = false;
-                        break;
-                    }
-
-                    ::memcpy(&extend, pBuff, extendSize);
-                    pBuff += extendSize;
-                    pFrame->m_isNeedUserInput = extend.m_userFlag;
-                    pFrame->m_delayTime = extend.m_delayTime;
-                    pFrame->m_tranColorIndex = extend.m_TranColorIndex;
-                }
-            }
-
-            if (pBuff[i] == 0x2c)
-            {
-                ImageDescriptor imgDes;
-                u8 imgDesSize = (u8)sizeof(imgDes);
-
-                if (buffLen < imgDesSize)
-                {
-                    isOk = false;
-                    break;
-                }
-
-                ::memcpy(&imgDes, pBuff, imgDesSize);
-                pBuff += imgDesSize;
-                pFrame->m_xFix = imgDes.m_xFix;
-                pFrame->m_yFix = imgDes.m_yFix;
-                pFrame->m_width = imgDes.m_width;
-                pFrame->m_height = imgDes.m_height;
-                pFrame->m_hasLocalColorTable = imgDes.m_localColorFlag >> 7;
-                pFrame->m_interlaceFlag = imgDes.m_localColorFlag >> 6;
-                pFrame->m_sortFlag = imgDes.m_localColorFlag >> 5;
-                pFrame->m_LocalColorTableBit = 2 << (imgDes.m_localColorFlag & 0x07 + 1);
-
-                if (pFrame->m_hasLocalColorTable)
-                {
-                    pFrame->m_localColorTable.resize(pFrame->m_LocalColorTableBit);
-
-                    for (size_t j = 0; j < pFrame->m_localColorTable.size(); ++j)
-                    {
-                        m_gifGolInfo.m_golColorTable[j].m_r = pBuff[j * 3];
-                        m_gifGolInfo.m_golColorTable[j].m_g = pBuff[j * 3 + 1];
-                        m_gifGolInfo.m_golColorTable[j].m_b = pBuff[j * 3] + 2;
-                    }
-
-                    pBuff += m_gifGolInfo.m_golColorTableBit * 3;
-                }
-
-                if (*ppBuff + buffLen <= pBuff)
-                {
-                    isOk = false;
-                    break;
-                }
-
-                u8* pTmp = pBuff;
-                u32 allSize = 1;
-                u8 blockSize = pBuff[0];
-                ++pBuff;
-
-                while (blockSize != 0)
-                {
-                    allSize += blockSize;
-                    pBuff += blockSize;
-
-                    if (*ppBuff + buffLen <= pBuff)
-                    {
-                        isOk = false;
-                        break;
-                    }
-                }
-
+                isOk = false;
                 break;
             }
 
-            ++pBuff;
+            if (pBuff[1] == 0xf9)
+            {
+                ExtendBlock extend;
+                u8 extendSize = (u8)sizeof(ExtendBlock);
+
+                if (buffLen < extendSize)
+                {
+                    isOk = false;
+                    break;
+                }
+
+                ::memcpy(&extend, pBuff, extendSize);
+                pBuff += extendSize;
+                pFrame->m_disposalMethod = (extend.m_userFlag >> 2) & 0x07;
+                pFrame->m_userInputFlag = (extend.m_userFlag >> 1) & 0x01;
+                pFrame->m_tranFlag = extend.m_userFlag & 0x01;
+                pFrame->m_delayTime = extend.m_delayTime;
+                pFrame->m_tranColorIndex = extend.m_TranColorIndex;
+                continue;
+            }
         }
+
+        if (pBuff[0] == 0x2c)
+        {
+            ImageDescriptor imgDes;
+            u8 imgDesSize = (u8)sizeof(imgDes);
+
+            if (buffLen < imgDesSize)
+            {
+                isOk = false;
+                break;
+            }
+
+            ::memcpy(&imgDes, pBuff, imgDesSize);
+            pBuff += imgDesSize;
+            pFrame->m_left = imgDes.m_left;
+            pFrame->m_top = imgDes.m_top;
+            pFrame->m_width = imgDes.m_width;
+            pFrame->m_height = imgDes.m_height;
+            pFrame->m_hasLocalColorTable = (imgDes.m_localColorFlag >> 7) & 0x01;
+            pFrame->m_interlaceFlag = (imgDes.m_localColorFlag >> 6) & 0x01;
+            pFrame->m_sortFlag = (imgDes.m_localColorFlag >> 5) & 0x01;
+            pFrame->m_LocalColorTableBit = 2 << ((imgDes.m_localColorFlag & 0x07));
+
+            if (pFrame->m_hasLocalColorTable)
+            {
+                if (*ppBuff + buffLen <= pBuff + pFrame->m_LocalColorTableBit * 3)
+                {
+                    isOk = false;
+                    break;
+                }
+
+                pFrame->m_localColorTable.resize(pFrame->m_LocalColorTableBit);
+
+                for (size_t j = 0; j < pFrame->m_LocalColorTableBit; ++j)
+                {
+                    pFrame->m_localColorTable[j].m_r = pBuff[j * 3];
+                    pFrame->m_localColorTable[j].m_g = pBuff[j * 3 + 1];
+                    pFrame->m_localColorTable[j].m_b = pBuff[j * 3 + 2];
+                }
+
+                pBuff += pFrame->m_LocalColorTableBit * 3;
+            }
+
+            if (*ppBuff + buffLen <= pBuff + 1)
+            {
+                isOk = false;
+                break;
+            }
+
+            pFrame->m_codeLen = pBuff[0];
+            ++pBuff;
+            u8* pTmp = pBuff;
+            u32 allSize = 0;
+            u8 blockSize = pBuff[0];
+
+            while (blockSize != 0)
+            {
+                allSize += blockSize + 1;
+                pBuff += blockSize + 1;
+
+                if (*ppBuff + buffLen <= pBuff)
+                {
+                    isOk = false;
+                    break;
+                }
+
+                blockSize = pBuff[0];
+            }
+
+            ++allSize;
+            ++pBuff;
+            pFrame->m_frameData.resize(allSize);
+            ::memcpy(&(pFrame->m_frameData[0]), pTmp, allSize);
+            isOk = true;
+            break;
+        }
+
+        ++pBuff;
     }
     
     if (!isOk)
@@ -223,8 +301,175 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
         delete pFrame;
         pFrame = nullptr;
     }
-
+    else
+    {
+        buffLen -= (pBuff - *ppBuff);
+        *ppBuff = pBuff;
+    }
+    
     return pFrame;
+}
+
+bool DogGif::DecodeFrame(u32 index)
+{
+    u32 buffSize = m_gifGolInfo.m_height *m_gifGolInfo.m_width;
+
+    if (index >= m_gifGolInfo.m_frameData.size())
+    {
+        return false;
+    }
+
+    DogGifFrame * pFrame = m_gifGolInfo.m_frameData[index];
+
+    if (pFrame->m_width + pFrame->m_left > m_gifGolInfo.m_width ||
+        pFrame->m_height + pFrame->m_top > m_gifGolInfo.m_height)
+    {
+        return false;
+    }
+
+    // 颜色填充
+    std::vector<DogGifColor> colorTable;
+    colorTable.resize(256);
+
+    if (pFrame->m_hasLocalColorTable)
+    {
+        ::memcpy((void*)&colorTable[0],
+            (void*)&pFrame->m_localColorTable[0],
+            pFrame->m_localColorTable.size() * sizeof(DogGifColor));
+    }
+    else if (m_gifGolInfo.m_hasGolColorTable)
+    {
+        ::memcpy((void*)&colorTable[0],
+            (void*)&m_gifGolInfo.m_golColorTable[0],
+            m_gifGolInfo.m_golColorTable.size() * sizeof(DogGifColor));
+    }
+    else
+    {
+        for (int i = 0; i < 256; i++)
+        {
+            colorTable[i].m_r = (u8)i;
+            colorTable[i].m_g = (u8)i;
+            colorTable[i].m_b = (u8)i;
+        }
+    }
+
+    if (pFrame->m_tranFlag == 1)
+    {
+        colorTable[pFrame->m_tranColorIndex].m_r = 0;
+        colorTable[pFrame->m_tranColorIndex].m_g = 0;
+        colorTable[pFrame->m_tranColorIndex].m_b = 0;
+    }
+
+    if (index == 0)
+    {
+        m_preFrameBit.resize(buffSize);
+        DogGifColor bgColor = colorTable[m_gifGolInfo.m_bgColorIndex];
+        
+        for (u32 i = 0; i < buffSize; ++i)
+        {
+            m_preFrameBit[i].m_r = bgColor.m_r;
+            m_preFrameBit[i].m_g = bgColor.m_g;
+            m_preFrameBit[i].m_b = bgColor.m_b;
+        }
+    }
+    else
+    {
+        if (pFrame->m_disposalMethod == 0 ||
+            pFrame->m_disposalMethod == 3)
+        {
+        }
+        else if (pFrame->m_disposalMethod == 1)
+        {
+            // ::memcpy(pOutBuff, &m_preFrameBit[0], buffSize * sizeof(DogGifColor));
+        }
+        else if (pFrame->m_disposalMethod == 2)
+        {
+            DogGifColor bgColor = colorTable[m_gifGolInfo.m_bgColorIndex];
+
+            for (u32 i = 0; i < buffSize; ++i)
+            {
+                m_preFrameBit[i].m_r = bgColor.m_r;
+                m_preFrameBit[i].m_g = bgColor.m_g;
+                m_preFrameBit[i].m_b = bgColor.m_b;
+            }
+        }
+    }
+
+    u8 x = 0;
+    u8 y = 0;
+    u8 interlacepass = 0;
+    u32 frameDataIndex = 0;
+    u8 decodeBuff[4096];
+    DogGifColor * scanline = &(m_preFrameBit)[m_gifGolInfo.m_width * (y + pFrame->m_top) + pFrame->m_left];
+
+    // LZW 解码
+    m_pStringTable->Initialize(pFrame->m_codeLen);
+
+    while (1)
+    {
+        if (frameDataIndex == pFrame->m_frameData.size())
+        {
+            break;
+        }
+
+        u8 blockSize = pFrame->m_frameData[frameDataIndex++];
+
+        if (blockSize == 0 ||
+            frameDataIndex + blockSize > pFrame->m_frameData.size())
+        {
+            break;
+        }
+
+        ::memcpy(m_pStringTable->FillInputBuffer(blockSize), (void*)&pFrame->m_frameData[frameDataIndex], blockSize);
+        frameDataIndex += blockSize;
+        int decodeSize = sizeof(decodeBuff);
+
+        while (m_pStringTable->Decompress(decodeBuff, &decodeSize))
+        {
+            for (int i = 0; i < decodeSize; i++) 
+            {
+                scanline[x++] = colorTable[(decodeBuff[i] & 255)];
+
+                if (x >= pFrame->m_width)
+                {
+                    if (pFrame->m_interlaceFlag) 
+                    {
+                        y += g_GifInterlaceIncrement[interlacepass];
+
+                        if (y >= pFrame->m_height &&
+                            ++interlacepass < GIF_INTERLACE_PASSES)
+                        {
+                            y = g_GifInterlaceOffset[interlacepass];
+                        }
+                    }
+                    else 
+                    {
+                        y++;
+                    }
+
+                    if (y >= pFrame->m_height)
+                    {
+                        m_pStringTable->Done();
+                        break;
+                    }
+
+                    x = 0;
+                    scanline = &(m_preFrameBit)[m_gifGolInfo.m_width * (y + pFrame->m_top) + pFrame->m_left];
+                }
+            }
+
+            decodeSize = sizeof(decodeBuff);
+        }
+    }
+
+    ++m_nextFrame;
+
+    if (m_nextFrame == m_gifGolInfo.m_frameData.size())
+    {
+        m_nextFrame = 0;
+    }
+
+    return true;
 }
 
 }
