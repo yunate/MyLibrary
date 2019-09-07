@@ -76,7 +76,12 @@ bool DogGif::DogGif::Init(u8 * pBuff, u32 buffLen)
 bool DogGif::GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen)
 {
     buffLen = m_gifGolInfo.m_width * m_gifGolInfo.m_height;
-    DecodeFrame(m_nextFrame);
+
+    if (!DecodeFrame(m_nextFrame))
+    {
+        return false;
+    }
+
     *ppBuff = &m_preFrameBit[0];
     return true;
 }
@@ -153,7 +158,16 @@ bool DogGif::ReadLsd(u8 ** ppBuff, u32 & buffLen)
     m_gifGolInfo.m_hasGolColorTable = (lsd.m_colorDes >> 7) & 0x01;
     m_gifGolInfo.m_colorDepth = (lsd.m_colorDes >> 4) & 0x07;
     m_gifGolInfo.m_isGolColorTableSorted = (lsd.m_colorDes >> 3) & 0x01;
-    m_gifGolInfo.m_golColorTableBit = 2 << ((lsd.m_colorDes & 0x07));
+
+    if (m_gifGolInfo.m_hasGolColorTable)
+    {
+        m_gifGolInfo.m_golColorTableBit = 2 << ((lsd.m_colorDes & 0x07));
+    }
+    else
+    {
+        m_gifGolInfo.m_golColorTableBit = 0;
+    }
+
     m_gifGolInfo.m_bgColorIndex = lsd.m_bgColor;
     m_gifGolInfo.m_pixelToWidthHeight = lsd.m_pixelTo;
     return true;
@@ -301,10 +315,12 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
             pFrame->m_hasLocalColorTable = (imgDes.m_localColorFlag >> 7) & 0x01;
             pFrame->m_interlaceFlag = (imgDes.m_localColorFlag >> 6) & 0x01;
             pFrame->m_sortFlag = (imgDes.m_localColorFlag >> 5) & 0x01;
-            pFrame->m_LocalColorTableBit = 2 << ((imgDes.m_localColorFlag & 0x07));
+            pFrame->m_LocalColorTableBit = 0;
 
             if (pFrame->m_hasLocalColorTable)
             {
+                pFrame->m_LocalColorTableBit = 2 << ((imgDes.m_localColorFlag & 0x07));
+
                 if (*ppBuff + buffLen <= pBuff + pFrame->m_LocalColorTableBit * 3)
                 {
                     isOk = false;
@@ -417,13 +433,13 @@ bool DogGif::DecodeFrame(u32 index)
         }
     }
 
-    if (pFrame->m_tranFlag == 1)
-    {
-        colorTable[pFrame->m_tranColorIndex].m_a = 0;
-        colorTable[pFrame->m_tranColorIndex].m_r = 255;
-        colorTable[pFrame->m_tranColorIndex].m_g = 255;
-        colorTable[pFrame->m_tranColorIndex].m_b = 255;
-    }
+//     if (pFrame->m_tranFlag == 1)
+//     {
+//         colorTable[pFrame->m_tranColorIndex].m_a = 0;
+//         colorTable[pFrame->m_tranColorIndex].m_r = 255;
+//         colorTable[pFrame->m_tranColorIndex].m_g = 255;
+//         colorTable[pFrame->m_tranColorIndex].m_b = 255;
+//     }
 
     if (index == 0)
     {
@@ -497,7 +513,15 @@ bool DogGif::DecodeFrame(u32 index)
         {
             for (int i = 0; i < decodeSize; i++) 
             {
-                scanline[x++] = colorTable[(decodeBuff[i] & 255)];
+                if (pFrame->m_tranFlag != 1 ||
+                    decodeBuff[i] != pFrame->m_tranColorIndex)
+                {
+                    scanline[x++] = colorTable[decodeBuff[i]];
+                }
+                else
+                {
+                    ++x;
+                }
 
                 if (x >= pFrame->m_width)
                 {

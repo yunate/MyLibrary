@@ -67,12 +67,9 @@ public:
                 RECT backRect = { 0, 0, GetWidth(), GetHeight() };
                 ::InvalidateRect(GetWnd(), &backRect, FALSE);
                 HDC hdc = ::BeginPaint(hWnd, &ps);
-                HBRUSH backBrush = ::CreateSolidBrush(0xffffff);
-                ::FillRect(hdc, &backRect, backBrush);
                 HBRUSH brush = ::CreatePatternBrush(m_hBitMap);
                 RECT rect = { 0, 0, (int)m_gif.GetWidth(), (int)m_gif.GetHeight() };
                 ::FillRect(hdc, &rect, brush);
-                ::DeleteObject(backBrush);
                 ::DeleteObject(brush);
                 ::EndPaint(hWnd, &ps);
                 break;
