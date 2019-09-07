@@ -183,7 +183,7 @@ bool DogGif::ReadGolColorTable(u8 ** ppBuff, u32 & buffLen)
     u8 * pBuff = *ppBuff;
     m_gifGolInfo.m_golColorTable.resize(m_gifGolInfo.m_golColorTableBit);
 
-    if (buffLen < m_gifGolInfo.m_golColorTableBit * 3)
+    if (buffLen < (u32)m_gifGolInfo.m_golColorTableBit * 3)
     {
         return false;
     }
@@ -383,7 +383,7 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
     }
     else
     {
-        buffLen -= (pBuff - *ppBuff);
+        buffLen -= (u32)(pBuff - *ppBuff);
         *ppBuff = pBuff;
     }
     
@@ -458,8 +458,7 @@ bool DogGif::DecodeFrame(u32 index)
         if (pFrame->m_disposalMethod == 0 ||
             pFrame->m_disposalMethod == 3)
         {
-            int i = 0;
-            ++i;
+            //TODO: 等于3的时候可能会还要保存在前面一张，这里我就不加了
         }
         else if (pFrame->m_disposalMethod == 1)
         {

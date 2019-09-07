@@ -76,11 +76,11 @@ public:
             }
         case WM_INITDIALOG:
             {
-                FileReader reader(L"D:\\workspaces\\C++_workspaces\\MyLibrary\\projects\\DogGif\\test\\4.gif", NULL, 0);
+                FileReader reader(L"D:\\workspaces\\C++_workspaces\\MyLibrary\\projects\\DogGif\\test\\2.gif", NULL, 0);
                 size_t fileSize = reader.GetFileSize();
                 u8* pBuff = new u8[fileSize];
-                reader.GetBuff((char*)pBuff, fileSize);
-                m_gif.Init(pBuff, fileSize);
+                reader.GetBuff((char*)pBuff, (u32)fileSize);
+                m_gif.Init(pBuff, (u32)fileSize);
                 delete[] pBuff;
                 break;
             }
@@ -130,8 +130,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    l
     return 0;
 }
 
-
-
 int main___()
 {
     FileReader reader(L"D:\\workspaces\\C++_workspaces\\MyLibrary\\projects\\DogGif\\test\\test.gif", NULL, 0);
@@ -139,7 +137,7 @@ int main___()
     u8* pBuff = new u8[fileSize];
     reader.GetBuff((char*)pBuff, fileSize);
     DogGif gif;
-    gif.Init(pBuff, fileSize);
+    gif.Init(pBuff, (u32)fileSize);
     DogGifColor* pbuff;
     u32 buffLen;
     gif.GetNextFrame(&pbuff, buffLen);
