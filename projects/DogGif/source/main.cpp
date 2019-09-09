@@ -12,9 +12,20 @@ class MyWnd :
 public:
     MyWnd()
     {
-        m_hBitMap = NULL;
         timer = false;
+        needDrawGif = false;
     }
+
+    ~MyWnd()
+    {
+        for (auto it : m_gifVec)
+        {
+            delete it;
+        }
+
+        m_gifVec.clear();
+    }
+
 
     /** 设置window的位置
     @param [in] rect 窗口位置
@@ -37,51 +48,84 @@ public:
         {
         case WM_PAINT:
             {
-                if (!m_gif.HasInit())
-                {
-                    return false;
-                }
-
-                if (!timer)
-                {
-                    timer = true;
-                    ::SetTimer(GetWnd(), 0xffee, m_gif.GetTimeDelay(), NULL);
-                }
-
-                if (m_hBitMap != NULL)
-                {
-                    ::DeleteObject(m_hBitMap);
-                    m_hBitMap = NULL;
-                }
-                DogGifColor* pBuffData;
-                u32 buffLen;
-                m_gif.GetNextFrame(&pBuffData, buffLen);
-
-                m_hBitMap = ::CreateBitmap((int)m_gif.GetWidth(),
-                    (int)m_gif.GetHeight(),
-                    1,
-                    32,
-                    pBuffData);
-
                 PAINTSTRUCT ps;
-                RECT backRect = { 0, 0, GetWidth(), GetHeight() };
-                ::InvalidateRect(GetWnd(), &backRect, FALSE);
                 HDC hdc = ::BeginPaint(hWnd, &ps);
-                HBRUSH brush = ::CreatePatternBrush(m_hBitMap);
-                RECT rect = { 0, 0, (int)m_gif.GetWidth(), (int)m_gif.GetHeight() };
-                ::FillRect(hdc, &rect, brush);
-                ::DeleteObject(brush);
+                int left = 0;
+                int top = 0;
+
+                for (int i = 0; i < 5; ++i)
+                {
+                    if (m_gifVec[i]->HasInit())
+                    {
+                        DogGifColor* pBuffData;
+                        u32 buffLen;
+
+                        if (!needDrawGif)
+                        {
+                            m_gifVec[i]->GetCurrentFrame(&pBuffData, buffLen);
+                        }
+                        else
+                        {
+                            m_gifVec[i]->GetNextFrame(&pBuffData, buffLen);
+                        }
+
+                        HBITMAP bitMap = ::CreateBitmap((int)m_gifVec[i]->GetWidth(),
+                            (int)m_gifVec[i]->GetHeight(),
+                                                        1,
+                                                        32,
+                                                        pBuffData);
+
+                        if (bitMap)
+                        {
+                            HBRUSH brush = ::CreatePatternBrush(bitMap);
+                            RECT rect = {left, top, left + (int)m_gifVec[i]->GetWidth(), top + (int)m_gifVec[i]->GetHeight()};
+
+                            if (left + (int)m_gifVec[i]->GetWidth() + (int)m_gifVec[i]->GetWidth() < GetWidth())
+                            {
+                                left += (int)m_gifVec[i]->GetWidth();
+                            }
+                            else
+                            {
+                                left = 0;
+                                top += (int)m_gifVec[i]->GetHeight();
+                            }
+
+                            ::FillRect(hdc, &rect, brush);
+                            ::DeleteObject(brush);
+                            ::DeleteObject(bitMap);
+                        }
+                    }
+                }
+
                 ::EndPaint(hWnd, &ps);
+                isHandle = true;
+                needDrawGif = false;
                 break;
             }
         case WM_INITDIALOG:
             {
-                FileReader reader(L"D:\\workspaces\\C++_workspaces\\MyLibrary\\projects\\DogGif\\test\\2.gif", NULL, 0);
-                size_t fileSize = reader.GetFileSize();
-                u8* pBuff = new u8[fileSize];
-                reader.GetBuff((char*)pBuff, (u32)fileSize);
-                m_gif.Init(pBuff, (u32)fileSize);
-                delete[] pBuff;
+                for (int i = 0; i < 5; ++i)
+                {
+                    m_gifVec.push_back(new DogGifNSP::DogGif);
+                    FileReader reader(L"test\\1.gif", NULL, 0);
+                    size_t fileSize = reader.GetFileSize();
+
+                    if (fileSize > 0)
+                    {
+                        u8* pBuff = new u8[fileSize];
+                        reader.GetBuff((char*)pBuff, (u32)fileSize);
+                        m_gifVec[i]->Init(pBuff, (u32)fileSize);
+                        delete[] pBuff;
+                    }
+                  
+                }
+               
+                if (!timer)
+                {
+                    timer = true;
+                    ::SetTimer(GetWnd(), 0xffee, m_gifVec[0]->GetTimeDelay(), NULL);
+                }
+
                 break;
             }
         case WM_TIMER:
@@ -89,9 +133,10 @@ public:
             {
             case 0xffee:
                 {
-                    ::SendMessage(GetWnd(), WM_PAINT, 0, 0);
-                    RECT backRect = { 0, 0, GetWidth(), GetHeight() };
-                    isHandle = true; 
+                    needDrawGif = true;
+                    RECT backRect = {0, 0, GetWidth(), GetHeight()};
+                    ::InvalidateRect(GetWnd(), &backRect, FALSE);
+                    isHandle = true;
                 }
             }
         }
@@ -105,12 +150,10 @@ public:
     }
 
 protected:
-    /** 图片缓存
-    */
-    HBITMAP m_hBitMap;
-
     DogGif m_gif;
+    std::vector<DogGif*> m_gifVec;
     bool timer;
+    bool needDrawGif;
 };
 
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmdLine, int       nCmdShow)

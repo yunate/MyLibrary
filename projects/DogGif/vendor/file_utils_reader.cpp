@@ -35,6 +35,11 @@ FileReader::~FileReader()
 
 bool FileReader::GetLineW(std::wstring & line)
 {
+    if (m_pFile == NULL)
+    {
+        return false;
+    }
+
     wint_t wc = ::fgetwc(m_pFile);
     line = L"";
 
@@ -61,6 +66,11 @@ bool FileReader::GetLineW(std::wstring & line)
 
 bool FileReader::GetLineA(std::string & line)
 {
+    if (m_pFile == NULL)
+    {
+        return false;
+    }
+
     int c = ::fgetc(m_pFile);
     line = "";
 
@@ -87,7 +97,7 @@ bool FileReader::GetLineA(std::string & line)
 
 size_t FileReader::GetBuff(char * buff, const size_t & size)
 {
-    if (buff == NULL || size == 0)
+    if (m_pFile == NULL || buff == NULL || size == 0)
     {
         return 0;
     }
@@ -106,6 +116,11 @@ size_t FileReader::GetBuff(char * buff, const size_t & size)
 
 size_t FileReader::GetFileSize()
 {
+    if (m_pFile == NULL)
+    {
+        return 0;
+    }
+
     long curPos = ::ftell(m_pFile);
     ::fseek(m_pFile, 0, SEEK_END);
     long size = ::ftell(m_pFile);

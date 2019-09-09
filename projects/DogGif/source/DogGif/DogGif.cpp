@@ -86,6 +86,12 @@ bool DogGif::GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen)
     return true;
 }
 
+bool DogGif::GetCurrentFrame(DogGifColor ** ppBuff, u32 & buffLen)
+{
+    *ppBuff = &m_preFrameBit[0];
+    return true;
+}
+
 u32 DogGif::GetWidth()
 {
     return m_gifGolInfo.m_width;

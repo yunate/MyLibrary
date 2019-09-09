@@ -16,6 +16,7 @@ namespace DogGifNSP
     {
         if (m_buffer != NULL) {
             delete[] m_buffer;
+            m_buffer = NULL;
         }
         if (m_strmap != NULL) {
             delete[] m_strmap;

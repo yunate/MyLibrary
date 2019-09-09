@@ -189,10 +189,18 @@ public:
     */
     ~DogGif();
 
+    DogGif& operator=(const DogGif&) = delete;
+
+    DogGif(const DogGif&) = delete;
+
+    DogGif(DogGif&&) = delete;
+
 public:
     bool Init(u8 * pBuff, u32 buffLen);
 
     bool GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen);
+
+    bool GetCurrentFrame(DogGifColor ** ppBuff, u32 & buffLen);
 
     u32 GetWidth();
     u32 GetHeight();
