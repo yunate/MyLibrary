@@ -15,8 +15,10 @@
 #include "singleton/test.h"
 #include "cpu/test.h"
 #include "thread/producer_consumer/test2.h"
+#include "thread/task/Test_taskQue.h"
 #include "console/test.h"
 #include "logic_executor/Test.h"
+
 
 namespace utilstest {}
 
@@ -46,7 +48,9 @@ int main()
     // utilstest::Test_GetCpuCount();
     //utilstest::Test_file_utils_ex();
     //utilstest::Test_ColorPrint();
-    utilstest::Test_Executor();
+    //utilstest::Test_Executor();
+    //utilstest::Test_taskQue();
+    utilstest::Test_taskQue1();
     ::system("pause");
     return 1;
 }

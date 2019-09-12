@@ -58,6 +58,7 @@
     <ClCompile Include="..\source\string_utils\string_utils_c.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_s.cpp" />
     <ClCompile Include="..\source\thread\producer_consumer\producer_consumer.cpp" />
+    <ClCompile Include="..\source\thread\task\SimpleTaskQueue.cpp" />
     <ClCompile Include="..\source\timer_recorder\test.cpp" />
     <ClCompile Include="..\source\win_registry_key\win_registry_key.cpp" />
     <ClCompile Include="..\source\xml\tinystr.cpp" />
@@ -134,6 +135,10 @@
     <ClInclude Include="..\source\thread\producer_consumer\IProducer.h" />
     <ClInclude Include="..\source\thread\producer_consumer\producer_consumer.h" />
     <ClInclude Include="..\source\thread\producer_consumer\test2.h" />
+    <ClInclude Include="..\source\thread\task\ISimpleTask.h" />
+    <ClInclude Include="..\source\thread\task\ITask.h" />
+    <ClInclude Include="..\source\thread\task\SimpleTaskQueue.h" />
+    <ClInclude Include="..\source\thread\task\Test_taskQue.h" />
     <ClInclude Include="..\source\timer_recorder\timer_recorder.h" />
     <ClInclude Include="..\source\win_api_caller\Test.h" />
     <ClInclude Include="..\source\win_api_caller\win_api_caller.h" />
@@ -147,7 +152,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D43B56CF-532B-48FD-9D9C-B4966EBD3241}</ProjectGuid>
     <RootNamespace>utils1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>Utils</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -155,27 +160,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

@@ -85,6 +85,9 @@
     <Filter Include="logic_executor">
       <UniqueIdentifier>{91fb4257-c984-49b9-a8c7-b9a1c4ea3af0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="thread\task">
+      <UniqueIdentifier>{9f9c1e16-04c0-48ac-bb17-be8d0b204a98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -219,6 +222,9 @@
     </ClCompile>
     <ClCompile Include="..\source\file_utils\file_utils_writer.cpp">
       <Filter>file_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\thread\task\SimpleTaskQueue.cpp">
+      <Filter>thread\task</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,6 +455,18 @@
     </ClInclude>
     <ClInclude Include="..\source\logic_executor\Test.h">
       <Filter>logic_executor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\task\SimpleTaskQueue.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\task\ITask.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\task\ISimpleTask.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\task\Test_taskQue.h">
+      <Filter>thread\task</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
