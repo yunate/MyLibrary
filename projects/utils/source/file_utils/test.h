@@ -17,29 +17,26 @@ namespace utilstest
         buff.push_back(L"test\r\n");
         buff.push_back(L"test\r\n");
         buff.push_back(L"test\r\n");
-        size_t i = 0;
 
-        WriteUCS2FileByBuff(L"D:\\test\\1.txt", [&](size_t & size, bool& hasNext)
+        WriteUCS2FileByBuff(L"D:\\test\\2.txt", [&buff](std::function<bool(void*, size_t)> callback)
         {
-            const void * rtn = NULL;
-
-            if (i < buff.size())
+            for (size_t i = 0; i < buff.size(); ++i)
             {
                 // wchar 别忘了乘2
-                size = buff[i].length() * 2; 
-                rtn = (const void *)buff[i].c_str();
-				hasNext = true;
-                ++i;
+                if (!callback((void *)buff[i].c_str(), buff[i].length() * 2))
+                {
+                    return false;
+                }
             }
 
-            return rtn;
+            return true;
         });
     }
    
     // 读文件
     static void Test_FileUtils1()
     {
-        HandleUCS2FileByLine(L"D:\\test\\1.txt", [&](const std::wstring& line)
+        ReadUCS2FileByLine(L"D:\\test\\1.txt", [&](const std::wstring& line)
         {
             std::wcout << line.c_str() << L"\r\n";
             return true;
@@ -49,7 +46,7 @@ namespace utilstest
     // 读文件
     static void Test_FileUtilsUTF8()
     {
-        HandleUTF8FileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8.txt", [&](const std::string& line)
+        ReadUTF8FileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8.txt", [&](const std::string& line)
         {
             std::wstring ss;
             UTF8ToUTF16_Multi(line, ss);
@@ -59,7 +56,7 @@ namespace utilstest
 
     static void Test_FileUtilsUTF8Bom()
     {
-        HandleUTF8BomFileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8Bom.txt", [&](const std::string& line)
+        ReadUTF8BomFileByLine(L"C:\\Users\\yudh\\Desktop\\test\\utf8Bom.txt", [&](const std::string& line)
         {
             std::wstring ss;
             UTF8ToUTF16_Multi(line, ss);
@@ -69,10 +66,10 @@ namespace utilstest
 
     static void Test_BigFile()
     {
-        HandleBigFileByLineW(L"C:\\Users\\yudh\\Desktop\\test\\2019-07-17.csv", NULL, 0, [&](const std::wstring& line)
-        {
-            return true;
-        });
+//         ReadBigFileByLineW(L"C:\\Users\\yudh\\Desktop\\test\\2019-07-17.csv", NULL, 0, [&](const std::wstring& line)
+//         {
+//             return true;
+//         });
     }
 
     static void Test_file_utils_ex()

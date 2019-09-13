@@ -10,14 +10,14 @@
 @param [in] callback 回调
 @return 是否成功
 */
-bool HandleFileByLineW(const std::wstring& path, const unsigned char* checker, const size_t checkSize, std::function<bool(const std::wstring&line)> callback);
+bool ReadFileByLineW(const std::wstring& path, const unsigned char* checker, const size_t checkSize, std::function<bool(const std::wstring&line)> callback);
 
 /** 一行一行的读文件 UCS-2 Little Endian 编码
 @param [in] path 路径
 @param [in] callback 回调
 @return 是否成功
 */
-bool HandleUCS2FileByLine(const std::wstring& path, std::function<bool(const std::wstring&line)> callback);
+bool ReadUCS2FileByLine(const std::wstring& path, std::function<bool(const std::wstring&line)> callback);
 
 /** 一行一行的读文件 , 每次读一个char
 @param [in] path 路径
@@ -26,36 +26,38 @@ bool HandleUCS2FileByLine(const std::wstring& path, std::function<bool(const std
 @param [in] callback 回调
 @return 是否成功
 */
-bool HandleFileByLine(const std::wstring& path, const unsigned char* checker, const size_t checkSize, std::function<bool(const std::string&line)> callback);
+bool ReadFileByLine(const std::wstring& path, const unsigned char* checker, const size_t checkSize, std::function<bool(const std::string&line)> callback);
 
 /** 一行一行的读文件 UTF8 编码
 @param [in] path 路径
 @param [in] callback 回调
 @return 是否成功
 */
-bool HandleUTF8FileByLine(const std::wstring& path, std::function<bool(const std::string&line)> callback);
+bool ReadUTF8FileByLine(const std::wstring& path, std::function<bool(const std::string&line)> callback);
 
 /** 一行一行的读文件 UTF8-Bom 编码
 @param [in] path 路径
 @param [in] callback 回调
 @return 是否成功
 */
-bool HandleUTF8BomFileByLine(const std::wstring& path, std::function<bool(const std::string&line)> callback);
+bool ReadUTF8BomFileByLine(const std::wstring& path, std::function<bool(const std::string&line)> callback);
 
 /** 写文件
 @param [in] path 路径
 @param [in] header 文件头校验
 @param [in] headSize header的大小
-@param [in] callback 回调函数 返回即将要写入文件的内容，size 即将要写入文件的大小，请注意单双字节，双字节别忘了乘2,hasNext标识是否有下一条
+@param [in] callback 回调函数 给调用者准备数据，准备好之后调用callback的callback
+            WriteUCS2FileByBuff(L"D:\\test\\2.txt", [&buff](std::function<bool(void*, size_t)> callback){return true});
 @return 是否成功
 */
-bool WriteFileByBuff(const std::wstring& path, const unsigned char* header, const size_t headSize, std::function<const void* (size_t& size, bool& hasNext)> callback);
+bool WriteFileByBuff(const std::wstring& path, const unsigned char* header, const size_t headSize, std::function<bool(std::function<bool(void*, size_t)>)> callback);
 
 /** 写文件 UCS-2 Little Endian 编码
 @param [in] path 路径
-@param [in] callback 回调函数 返回即将要写入文件的内容， size 即将要写入文件的大小，请注意单双字节，双字节别忘了乘2,hasNext标识是否有下一条
+@param [in] callback 回调函数 给调用者准备数据，准备好之后调用callback的callback
+            WriteUCS2FileByBuff(L"D:\\test\\2.txt", [&buff](std::function<bool(void*, size_t)> callback){return true});
 @return 是否成功
 */
-bool WriteUCS2FileByBuff(const std::wstring& path, std::function<const void* (size_t& size, bool& hasNext)> callback);
+bool WriteUCS2FileByBuff(const std::wstring& path, std::function<bool(std::function<bool(void*, size_t)>)> callback);
 
 #endif //__FILE_UTILS_H_

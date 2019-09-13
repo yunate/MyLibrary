@@ -47,6 +47,11 @@ public:
     */
     size_t GetBuff(char* buff, const size_t& size);
 
+    /** 获得文件大小
+    @return 文件大小
+    */
+    size_t GetFileSize();
+
 protected:
     FILE* m_pFile;
 };

@@ -40,7 +40,7 @@ int main()
 
 //    utilstest::Test_WinApiCaller0();
 
-    //utilstest::Test_FileUtils();
+    utilstest::Test_FileUtils();
     //utilstest::Test_FileUtilsUTF8();
     //utilstest::Test_FileUtilsUTF8Bom();
     //utilstest::Test_Singleton();
@@ -50,7 +50,7 @@ int main()
     //utilstest::Test_ColorPrint();
     //utilstest::Test_Executor();
     //utilstest::Test_taskQue();
-    utilstest::Test_taskQue1();
+    //utilstest::Test_taskQue1();
     ::system("pause");
     return 1;
 }

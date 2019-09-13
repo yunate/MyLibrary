@@ -19,53 +19,53 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\c\App.cpp" />
-    <ClCompile Include="..\source\c\IRegistAdapt.cpp" />
-    <ClCompile Include="..\source\c\main_SimpleWnd.cpp" />
-    <ClCompile Include="..\source\c\RegistStyle.cpp" />
-    <ClCompile Include="..\source\c\SimpleWnd.cpp" />
-    <ClCompile Include="..\source\c\BaseWindow.cpp" />
+    <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\SimpleWnd\App.cpp" />
+    <ClCompile Include="..\source\SimpleWnd\BaseWindow.cpp" />
+    <ClCompile Include="..\source\SimpleWnd\IRegistAdapt.cpp" />
+    <ClCompile Include="..\source\SimpleWnd\RegistStyle.cpp" />
+    <ClCompile Include="..\source\SimpleWnd\SimpleWnd.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\h\App.h" />
-    <ClInclude Include="..\source\h\CommonHead.h" />
-    <ClInclude Include="..\source\h\IRegistAdapt.h" />
-    <ClInclude Include="..\source\h\RegistStyle.h" />
-    <ClInclude Include="..\source\h\SimpleWnd.h" />
-    <ClInclude Include="..\source\h\BaseWindow.h" />
+    <ClInclude Include="..\source\SimpleWnd\App.h" />
+    <ClInclude Include="..\source\SimpleWnd\BaseWindow.h" />
+    <ClInclude Include="..\source\SimpleWnd\CommonHead.h" />
+    <ClInclude Include="..\source\SimpleWnd\IRegistAdapt.h" />
+    <ClInclude Include="..\source\SimpleWnd\RegistStyle.h" />
+    <ClInclude Include="..\source\SimpleWnd\SimpleWnd.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{2374E0B2-7CE4-46A7-8F6A-EE766496E1A6}</ProjectGuid>
+    <ProjectGuid>{E284A3B4-1595-4B6D-B20A-259D9C2F1CDF}</ProjectGuid>
     <RootNamespace>SimpleWnd1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -88,25 +88,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\h\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\h\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\h\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\h\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -128,7 +128,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -143,7 +142,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -160,7 +158,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -34,6 +34,11 @@ FileReader::~FileReader()
 
 bool FileReader::GetLineW(std::wstring & line)
 {
+    if (m_pFile == NULL)
+    {
+        return false;
+    }
+
     wint_t wc = ::fgetwc(m_pFile);
     line = L"";
 
@@ -60,6 +65,11 @@ bool FileReader::GetLineW(std::wstring & line)
 
 bool FileReader::GetLineA(std::string & line)
 {
+    if (m_pFile == NULL)
+    {
+        return false;
+    }
+
     int c = ::fgetc(m_pFile);
     line = "";
 

@@ -128,3 +128,17 @@ size_t FileReader::GetFileSize()
     return size;
 }
 
+size_t FileReader::GetFileSize()
+{
+    if (m_pFile == NULL)
+    {
+        return 0;
+    }
+
+    long curPos = ::ftell(m_pFile);
+    ::fseek(m_pFile, 0, SEEK_END);
+    long size = ::ftell(m_pFile);
+    ::fseek(m_pFile, 0, curPos);
+    return size;
+}
+
