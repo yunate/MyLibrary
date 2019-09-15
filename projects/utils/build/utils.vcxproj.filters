@@ -19,9 +19,6 @@
     <Filter Include="limit_single_instance">
       <UniqueIdentifier>{f2f55cae-b224-4c1c-8d56-97059d01fba2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="memory_share">
-      <UniqueIdentifier>{59da021c-6b74-424d-975d-0698d1810c19}</UniqueIdentifier>
-    </Filter>
     <Filter Include="xml">
       <UniqueIdentifier>{42feba54-e9c4-48d0-8962-756c65e2e3d1}</UniqueIdentifier>
     </Filter>
@@ -64,9 +61,6 @@
     <Filter Include="timer_recorder">
       <UniqueIdentifier>{1b601c19-bb0f-4bd0-9daa-dfea4e2a8fa7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="event">
-      <UniqueIdentifier>{f887a8dd-5f6a-4ed4-b38b-34a96f928207}</UniqueIdentifier>
-    </Filter>
     <Filter Include="pinyin_ci_table">
       <UniqueIdentifier>{f913b98e-89d8-41e9-a415-d684cfaad4c4}</UniqueIdentifier>
     </Filter>
@@ -87,6 +81,9 @@
     </Filter>
     <Filter Include="thread\task">
       <UniqueIdentifier>{9f9c1e16-04c0-48ac-bb17-be8d0b204a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="share_memory">
+      <UniqueIdentifier>{59da021c-6b74-424d-975d-0698d1810c19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +169,6 @@
     <ClCompile Include="..\source\init_file\init_file.cpp">
       <Filter>init_file</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\memory_share\memory_share.cpp">
-      <Filter>memory_share</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\win_registry_key\win_registry_key.cpp">
       <Filter>win_registry_key</Filter>
     </ClCompile>
@@ -225,6 +219,12 @@
     </ClCompile>
     <ClCompile Include="..\source\thread\task\SimpleTaskQueue.cpp">
       <Filter>thread\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\share_memory\ShareMemory.cpp">
+      <Filter>share_memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\share_memory\ShareMemortManager.cpp">
+      <Filter>share_memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,9 +297,6 @@
     <ClInclude Include="..\source\limit_single_instance\Test.h">
       <Filter>limit_single_instance</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\memory_share\Test.h">
-      <Filter>memory_share</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\xml\Test.h">
       <Filter>xml</Filter>
     </ClInclude>
@@ -348,9 +345,6 @@
     <ClInclude Include="..\source\limit_single_instance\limit_single_instance.h">
       <Filter>limit_single_instance</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\memory_share\memory_share.h">
-      <Filter>memory_share</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\win_registry_key\win_registry_key.h">
       <Filter>win_registry_key</Filter>
     </ClInclude>
@@ -386,9 +380,6 @@
     </ClInclude>
     <ClInclude Include="..\source\timer_recorder\timer_recorder.h">
       <Filter>timer_recorder</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\event\thread_event.h">
-      <Filter>event</Filter>
     </ClInclude>
     <ClInclude Include="..\source\cpu\cpu_thread_count.h">
       <Filter>cpu</Filter>
@@ -467,6 +458,15 @@
     </ClInclude>
     <ClInclude Include="..\source\thread\task\Test_taskQue.h">
       <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\share_memory\ShareMemory.h">
+      <Filter>share_memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\share_memory\Test.h">
+      <Filter>share_memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\share_memory\ShareMemortManager.h">
+      <Filter>share_memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

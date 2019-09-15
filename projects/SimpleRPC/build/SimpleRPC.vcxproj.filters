@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="SimpleRPC">
+      <UniqueIdentifier>{072560AA-3071-4BC0-98F1-848ABB9E780E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{AC5560F0-F0E1-4F56-AAF0-F206B428040F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{88DB4280-A02B-42DD-ABFC-B08F82C61D53}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\SimpleRPC\SimpleRPC.h">
+      <Filter>SimpleRPC</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\SimpleRPC\SimpleRPC.cpp">
+      <Filter>SimpleRPC</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

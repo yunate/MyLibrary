@@ -47,12 +47,13 @@
     <ClCompile Include="..\source\json\cJSON.c" />
     <ClCompile Include="..\source\json\CJsonObject.cpp" />
     <ClCompile Include="..\source\main_utils.cpp" />
-    <ClCompile Include="..\source\memory_share\memory_share.cpp" />
     <ClCompile Include="..\source\pinyin_ci_table\CiPinYinTable.cpp" />
     <ClCompile Include="..\source\pinyin_ci_table\CiToPinYin_.cpp" />
     <ClCompile Include="..\source\rand\rand.cpp" />
     <ClCompile Include="..\source\resource_util\resource_util.cpp" />
     <ClCompile Include="..\source\service\service_utils.cpp" />
+    <ClCompile Include="..\source\share_memory\ShareMemortManager.cpp" />
+    <ClCompile Include="..\source\share_memory\ShareMemory.cpp" />
     <ClCompile Include="..\source\sqlite3\sqlite3.c" />
     <ClCompile Include="..\source\sqlite3\sqlite_helper.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_c.cpp" />
@@ -92,7 +93,6 @@
     <ClInclude Include="..\source\encrypt\sha1.h" />
     <ClInclude Include="..\source\encrypt\sha256.h" />
     <ClInclude Include="..\source\encrypt\Test.h" />
-    <ClInclude Include="..\source\event\thread_event.h" />
     <ClInclude Include="..\source\file_utils\big_file_utils.h" />
     <ClInclude Include="..\source\file_utils\file_utils.h" />
     <ClInclude Include="..\source\file_utils\file_utils_reader.h" />
@@ -111,8 +111,6 @@
     <ClInclude Include="..\source\logic_executor\LogicNotExecutor.h" />
     <ClInclude Include="..\source\logic_executor\LogicOrExecutor.h" />
     <ClInclude Include="..\source\logic_executor\Test.h" />
-    <ClInclude Include="..\source\memory_share\memory_share.h" />
-    <ClInclude Include="..\source\memory_share\Test.h" />
     <ClInclude Include="..\source\pinyin_ci_table\CiPinYinTable.h" />
     <ClInclude Include="..\source\pinyin_ci_table\CiToPinYin.h" />
     <ClInclude Include="..\source\pinyin_ci_table\test3.h" />
@@ -121,6 +119,9 @@
     <ClInclude Include="..\source\resource_util\Test.h" />
     <ClInclude Include="..\source\service\service_utils.h" />
     <ClInclude Include="..\source\service\Test.h" />
+    <ClInclude Include="..\source\share_memory\ShareMemortManager.h" />
+    <ClInclude Include="..\source\share_memory\ShareMemory.h" />
+    <ClInclude Include="..\source\share_memory\Test.h" />
     <ClInclude Include="..\source\singleton\singleton.h" />
     <ClInclude Include="..\source\singleton\singleton1.h" />
     <ClInclude Include="..\source\singleton\test.h" />

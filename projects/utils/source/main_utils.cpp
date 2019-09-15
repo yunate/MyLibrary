@@ -3,7 +3,7 @@
 
 #include "string_utils/Test.h"
 #include "sqlite3/Test.h"
-#include "memory_share/Test.h"
+#include "share_memory/Test.h"
 #include "json/Test.h"
 #include "xml/Test.h"
 #include "code_cvt/Test.h"
@@ -26,7 +26,8 @@ int main()
 {
 //     utilstest::Test_stringutils0();
 //     utilstest::Test_stringutils1();
-//     utilstest::Test_MemoryShare0();
+utilstest::Test_MemoryShare0();
+//utilstest::Test_MemoryShare1();
 //     utilstest::Test_Sql0();
 //     utilstest::Test_Json();
 //     utilstest::Test_xml0();
@@ -40,7 +41,7 @@ int main()
 
 //    utilstest::Test_WinApiCaller0();
 
-    utilstest::Test_FileUtils();
+    //utilstest::Test_FileUtils();
     //utilstest::Test_FileUtilsUTF8();
     //utilstest::Test_FileUtilsUTF8Bom();
     //utilstest::Test_Singleton();
