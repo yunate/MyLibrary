@@ -12,7 +12,6 @@ SimpleTaskQueue::~SimpleTaskQueue()
     if (m_pThread != nullptr)
     {
         StopAll();
-        m_event.SetEvent();
         m_pThread->join();
         delete m_pThread;
         m_pThread = nullptr;
@@ -29,6 +28,7 @@ void SimpleTaskQueue::StopAll()
     m_mutex.lock();
     ClearAll();
     m_stop = true;
+    m_event.SetEvent();
     m_mutex.unlock();
 }
 
