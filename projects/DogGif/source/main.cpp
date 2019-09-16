@@ -4,8 +4,13 @@
 #include "file_utils_reader.h"
 #include "simple_wnd/App.h"
 #include "simple_wnd/SimpleWnd.h"
+#include <time.h>
 using namespace DogGifNSP;
+POINT g_mouse_point;
 
+RECT g_wnd_rect;
+
+bool g_is_move = false;
 class MyWnd :
     public SimpleWnd
 {
@@ -14,6 +19,7 @@ public:
     {
         timer = false;
         needDrawGif = false;
+        m_timeDelay = 0;
     }
 
     ~MyWnd()
@@ -46,8 +52,74 @@ public:
 
         switch (msg)
         {
+        case WM_LBUTTONDOWN:
+            {
+                if (!g_is_move)
+                {
+                    ::SetCapture(GetWnd());
+                    g_is_move = true;
+                    ::GetCursorPos(&g_mouse_point);
+                    ::GetWindowRect(GetWnd(), &g_wnd_rect);
+                    HWND wnd = ::FindWindow(L"maze", L"maze");
+
+                    if (wnd != NULL)
+                    {
+                        ::PostMessage(wnd, 0xffff, 0, 0);
+                    }
+                }
+
+                isHandle = true;
+                break;
+            }
+        case WM_LBUTTONUP:
+            {
+                ::ReleaseCapture();
+                g_is_move = false;
+                POINT pt;
+                isHandle = true;
+                HWND wnd = ::FindWindow(L"maze", L"maze");
+
+                if (wnd != NULL)
+                {
+                    ::PostMessage(wnd, 0xfffd, 0, 0);
+                }
+                break;
+            }
+        case WM_MOUSEMOVE:
+            {
+                if (g_is_move)
+                {
+                    POINT point;
+                    ::GetCursorPos(&point);
+                    int delX = (point.x - g_mouse_point.x);
+                    int delY = (point.y - g_mouse_point.y);;
+
+                    if (delY != 0 || delX != 0)
+                    {
+                        RECT rect(g_wnd_rect);
+                        rect.left += delX;
+                        rect.top += delY;
+                        rect.right += delX;
+                        rect.bottom += delY;
+                        ::MoveWindow(GetWnd(), rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, true);
+                        HWND wnd = ::FindWindow(L"maze", L"maze");
+
+                        if (wnd != NULL)
+                        {
+                            ::PostMessage(wnd, 0xfffe, 0, 0);
+                        }
+                    }
+                }
+                break;
+            }
         case WM_PAINT:
             {
+                if (::clock() - m_n64StartTime >= m_timeDelay)
+                {
+                    m_n64StartTime = ::clock();
+                    needDrawGif = true;
+                }
+
                 PAINTSTRUCT ps;
                 HDC hdc = ::BeginPaint(hWnd, &ps);
                 int left = 0;
@@ -120,10 +192,12 @@ public:
                   
                 }
                
+                m_timeDelay = m_gifVec[0]->GetTimeDelay();
+
                 if (!timer)
                 {
                     timer = true;
-                    ::SetTimer(GetWnd(), 0xffee, m_gifVec[0]->GetTimeDelay(), NULL);
+                    ::SetTimer(GetWnd(), 0xffee, m_timeDelay, NULL);
                 }
 
                 break;
@@ -154,6 +228,9 @@ protected:
     std::vector<DogGif*> m_gifVec;
     bool timer;
     bool needDrawGif;
+    __int64 m_n64StartTime;
+    int m_timeDelay;
+
 };
 
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR    lpCmdLine, int       nCmdShow)

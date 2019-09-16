@@ -12,6 +12,7 @@ SimpleTaskQueue::~SimpleTaskQueue()
     if (m_pThread != nullptr)
     {
         StopAll();
+        m_event.SetEvent();
         m_pThread->join();
         delete m_pThread;
         m_pThread = nullptr;
@@ -73,8 +74,17 @@ void SimpleTaskQueue::PushTask(const std::function<void()>& task)
 
 void SimpleTaskQueue::ThreadCallBack()
 {
-    while (!m_stop)
+    while (true)
     {
+        m_mutex.lock();
+        bool stop = m_stop;
+        m_mutex.unlock();
+
+        if (stop)
+        {
+            break;
+        }
+
         m_event.Wait();
 
         while (true)
