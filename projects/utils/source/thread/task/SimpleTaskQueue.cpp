@@ -94,6 +94,11 @@ void SimpleTaskQueue::ThreadCallBack()
 
                 m_currentTask = m_taskQue.front();
                 m_taskQue.pop();
+
+                if (m_currentTask == nullptr)
+                {
+                    continue;
+                }
             }
             
             // Ö´ÐÐÈÎÎñ
