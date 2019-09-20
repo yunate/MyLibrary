@@ -1,6 +1,5 @@
 
 #include "SimpleTaskQueue.h"
-#include <lock>
 
 SimpleTaskQueue::SimpleTaskQueue() :
     m_stop(false),
