@@ -1,5 +1,6 @@
 
 #include "SimpleTaskQueue.h"
+#include <lock>
 
 SimpleTaskQueue::SimpleTaskQueue() :
     m_stop(false),
@@ -25,46 +26,40 @@ void SimpleTaskQueue::Start()
 
 void SimpleTaskQueue::StopAll()
 {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     ClearAll();
     m_stop = true;
     m_event.SetEvent();
-    m_mutex.unlock();
 }
 
 void SimpleTaskQueue::StopCurrent()
 {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
     if (m_currentTask != nullptr)
     {
         m_currentTask->Stop();
     }
-
-    m_mutex.unlock();
 }
 
 void SimpleTaskQueue::ClearAll()
 {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     StopCurrent();
     ClearQueue();
-    m_mutex.unlock();
 }
 
 void SimpleTaskQueue::ClearQueue()
 {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     m_taskQue.swap(std::queue<std::shared_ptr<ITask> >());
-    m_mutex.unlock();
 }
 
 void SimpleTaskQueue::PushTask(const std::shared_ptr<ITask>& task)
 {
-    m_mutex.lock();
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     m_taskQue.push(task);
     m_event.SetEvent();
-    m_mutex.unlock();
 }
 
 void SimpleTaskQueue::PushTask(const std::function<void()>& task)
@@ -76,36 +71,42 @@ void SimpleTaskQueue::ThreadCallBack()
 {
     while (true)
     {
-        m_mutex.lock();
-        bool stop = m_stop;
-        m_mutex.unlock();
-
-        if (stop)
         {
-            break;
+            std::lock_guard<std::recursive_mutex> lock(m_mutex);
+
+            if (m_stop)
+            {
+                break;
+            }
         }
 
         m_event.Wait();
 
         while (true)
         {
-            m_mutex.lock();
-            bool isQueEmpty = m_taskQue.empty();
-            m_mutex.unlock();
-
-            if (isQueEmpty)
+            // 取出队首
             {
-                break;
-            }
+                std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
-            m_mutex.lock();
-            m_currentTask = m_taskQue.front();
-            m_taskQue.pop();
-            m_mutex.unlock();
+                if (m_taskQue.empty())
+                {
+                    break;
+                }
+
+                m_currentTask = m_taskQue.front();
+                m_taskQue.pop();
+            }
+            
+            // 执行任务
             m_currentTask->DoTask();
-            m_mutex.lock();
-            m_currentTask = nullptr;
-            m_mutex.unlock();
+
+            // 准备销毁
+            std::shared_ptr<ITask> tmp = m_currentTask;
+
+            {
+                std::lock_guard<std::recursive_mutex> lock(m_mutex);
+                m_currentTask = nullptr;
+            }
         }
     }
 }
