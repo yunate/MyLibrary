@@ -17,13 +17,13 @@ public:
     /** 构造函数
     @param [in] size 大小
     */
-    MemoryStream(s64 size);
+    MemoryStream(u32 size);
 
     /** 构造函数
     @param [in] pBuff 内存
     @param [in] size 大小
     */
-    MemoryStream(s8* pBuff, s64 size);
+    MemoryStream(s8* pBuff, u32 size);
 
     /** 构造函数
     @param [in] stream 流
@@ -70,7 +70,7 @@ public:
     /** 获得实际buff大小，区别于GetSize
     @return 所使用的内存
     */
-    s64 Capacity();
+    u32 Capacity();
 
     /** 清空数据
     */
@@ -95,26 +95,26 @@ protected:
     @param [in] newSize 新的大小
     @return 实际分配的大小
     */
-    s64 ReallocMemory(s64 newSize);
+    u32 ReallocMemory(u32 newSize);
 
     /** 重新计算即将分配的内存大小
     @param [in] newSize 用户输入
     @return 计算后的大小
     */
-    s64 CalNewSize(s64 newSize);
+    u32 CalNewSize(u32 newSize);
 
 protected:
     /** 当前位置
     */
-    s64 m_pos;
+    u32 m_pos;
 
     /** 实际使用的大小
     */
-    s64 m_size;
+    u32 m_size;
 
     /** 总大小
     */
-    s64 m_capacity;
+    u32 m_capacity;
 
     /** 缓存
     */

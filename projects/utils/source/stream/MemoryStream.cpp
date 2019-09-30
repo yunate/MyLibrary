@@ -12,7 +12,7 @@ MemoryStream::MemoryStream() :
 {
 }
 
-MemoryStream::MemoryStream(s64 size)
+MemoryStream::MemoryStream(u32 size)
 {
     m_pos = 0;
     m_size = 0;
@@ -25,7 +25,7 @@ MemoryStream::MemoryStream(s64 size)
     }
 }
 
-MemoryStream::MemoryStream(s8* pBuff, s64 size)
+MemoryStream::MemoryStream(s8* pBuff, u32 size)
 {
     m_pos = 0;
     m_size = 0;
@@ -79,13 +79,14 @@ MemoryStream & MemoryStream::operator=(const IDogStream& stream)
     m_pBuff = 0;
     MemoryStream& r = (MemoryStream&)(stream);
     s64 size = r.Size();
+    assert(size <= MAX_U32);
 
     if (ReSize(size) >= size)
     {
         s64 pos = r.Pos();
         r.ReadAllA((u8*)m_pBuff);
         r.Seek(pos, 0);
-        m_size = size;
+        m_size = (u32)size;
     }
 
     return *this;
@@ -107,8 +108,9 @@ s64 MemoryStream::Pos()
 
 s64 MemoryStream::Seek(s64 offset, s64 start)
 {
-    m_pos = start + offset;
-    assert(m_pos >= 0);
+    assert(offset <= MAX_U32 && start <= MAX_U32);
+    m_pos = (u32)start + (u32)offset;
+    assert(m_pos >= start);
 
     if (m_pos >= m_size)
     {
@@ -125,24 +127,24 @@ s64 MemoryStream::Size()
 
 s64 MemoryStream::ReSize(s64 newSize)
 {
-    assert(newSize >= 0);
+    assert(newSize >= 0 && newSize <= MAX_U32);
 
-    if (newSize > m_capacity)
+    if ((u32)newSize > m_capacity)
     {
-        if (ReallocMemory(newSize) >= newSize)
+        if (ReallocMemory((u32)newSize) >= (u32)newSize)
         {
-            m_size = newSize;
+            m_size = (u32)newSize;
         }
     }
     else
     {
-        m_size = newSize;
+        m_size = (u32)newSize;
     }
  
     return m_size;
 }
 
-s64 MemoryStream::Capacity()
+u32 MemoryStream::Capacity()
 {
     return m_capacity;
 }
@@ -161,12 +163,12 @@ s32 MemoryStream::Read(u8 * const buff, s32 count)
         return 0;
     }
 
-    s64 endPos = count + m_pos;
-    assert(endPos >= 0);
+    u32 endPos = count + m_pos;
+    assert(endPos >= m_pos);
 
     if (endPos > m_size)
     {
-        count = (s32)(m_size - m_pos);
+        count = (u32)(m_size - m_pos);
         endPos = m_size;
     }
 
@@ -177,8 +179,8 @@ s32 MemoryStream::Read(u8 * const buff, s32 count)
 
 s32 MemoryStream::Write(const u8 * const buff, s32 count)
 {
-    s64 endPos = count + m_pos;
-    assert(endPos >= 0);
+    u32 endPos = count + m_pos;
+    assert(endPos >= m_pos);
 
     if (endPos > m_size)
     {
@@ -193,12 +195,12 @@ s32 MemoryStream::Write(const u8 * const buff, s32 count)
     return count;
 }
 
-s64 MemoryStream::ReallocMemory(s64 newSize)
+u32 MemoryStream::ReallocMemory(u32 newSize)
 {
     assert(newSize >=0);
 
     // 计算新的大小
-    s64 calSize = (s64)CalNewSize(newSize);
+    u32 calSize = CalNewSize(newSize);
 
     if (calSize < newSize)
     {
@@ -223,7 +225,7 @@ s64 MemoryStream::ReallocMemory(s64 newSize)
     return m_capacity;
 }
 
-s64 MemoryStream::CalNewSize(s64 newSize)
+u32 MemoryStream::CalNewSize(u32 newSize)
 {
     if (newSize < m_capacity + m_capacity / 2)
     {
