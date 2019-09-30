@@ -10,16 +10,16 @@
 
 /** 这个是单例
 */
-class ShareMemortManager
+class ShareMemoryManager
 {
 protected:
-    ShareMemortManager();
-    ~ShareMemortManager();
+    ShareMemoryManager();
+    ~ShareMemoryManager();
 
     // 不允许拷贝
-    ShareMemortManager(const ShareMemortManager&) = delete;
-    ShareMemortManager(ShareMemortManager&&) = delete;
-    ShareMemortManager& operator=(const ShareMemortManager&) = delete;
+    ShareMemoryManager(const ShareMemoryManager&) = delete;
+    ShareMemoryManager(ShareMemoryManager&&) = delete;
+    ShareMemoryManager& operator=(const ShareMemoryManager&) = delete;
 
 public:
     /** 创建共享内存，如果已经存在则打开
@@ -49,5 +49,5 @@ private:
 };
 
 // 单例对象
-#define SHAREMEMORYMANAGER() (Singleton<ShareMemortManager>::GetInstance())
+#define SHAREMEMORYMANAGER() (Singleton<ShareMemoryManager>::GetInstance())
 #endif // __MEMORYSHARE_MANAGER_H_

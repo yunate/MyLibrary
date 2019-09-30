@@ -18,6 +18,7 @@
 #include "thread/task/Test_taskQue.h"
 #include "console/test.h"
 #include "logic_executor/Test.h"
+#include "stream/Test.h"
 
 
 namespace utilstest {}
@@ -26,7 +27,7 @@ int main()
 {
 //     utilstest::Test_stringutils0();
 //     utilstest::Test_stringutils1();
-utilstest::Test_MemoryShare0();
+// utilstest::Test_MemoryShare0();
 //utilstest::Test_MemoryShare1();
 //     utilstest::Test_Sql0();
 //     utilstest::Test_Json();
@@ -52,6 +53,8 @@ utilstest::Test_MemoryShare0();
     //utilstest::Test_Executor();
     //utilstest::Test_taskQue();
     //utilstest::Test_taskQue1();
+
+    utilstest::Test_MemoryStream();
     ::system("pause");
     return 1;
 }

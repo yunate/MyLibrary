@@ -85,6 +85,12 @@
     <Filter Include="share_memory">
       <UniqueIdentifier>{59da021c-6b74-424d-975d-0698d1810c19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="stream">
+      <UniqueIdentifier>{5ba99f07-ce73-47d7-b74f-f3fed5f3b22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="typedef">
+      <UniqueIdentifier>{7b123aac-9a06-44b5-832d-b955dd129022}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -223,7 +229,10 @@
     <ClCompile Include="..\source\share_memory\ShareMemory.cpp">
       <Filter>share_memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\share_memory\ShareMemortManager.cpp">
+    <ClCompile Include="..\source\stream\MemoryStream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\share_memory\ShareMemoryManager.cpp">
       <Filter>share_memory</Filter>
     </ClCompile>
   </ItemGroup>
@@ -465,7 +474,19 @@
     <ClInclude Include="..\source\share_memory\Test.h">
       <Filter>share_memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\share_memory\ShareMemortManager.h">
+    <ClInclude Include="..\source\stream\IDogStream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\typedef\TypeDef.h">
+      <Filter>typedef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\stream\MemoryStream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\stream\Test.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\share_memory\ShareMemoryManager.h">
       <Filter>share_memory</Filter>
     </ClInclude>
   </ItemGroup>

@@ -52,10 +52,11 @@
     <ClCompile Include="..\source\rand\rand.cpp" />
     <ClCompile Include="..\source\resource_util\resource_util.cpp" />
     <ClCompile Include="..\source\service\service_utils.cpp" />
-    <ClCompile Include="..\source\share_memory\ShareMemortManager.cpp" />
+    <ClCompile Include="..\source\share_memory\ShareMemoryManager.cpp" />
     <ClCompile Include="..\source\share_memory\ShareMemory.cpp" />
     <ClCompile Include="..\source\sqlite3\sqlite3.c" />
     <ClCompile Include="..\source\sqlite3\sqlite_helper.cpp" />
+    <ClCompile Include="..\source\stream\MemoryStream.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_c.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_s.cpp" />
     <ClCompile Include="..\source\thread\producer_consumer\producer_consumer.cpp" />
@@ -119,7 +120,7 @@
     <ClInclude Include="..\source\resource_util\Test.h" />
     <ClInclude Include="..\source\service\service_utils.h" />
     <ClInclude Include="..\source\service\Test.h" />
-    <ClInclude Include="..\source\share_memory\ShareMemortManager.h" />
+    <ClInclude Include="..\source\share_memory\ShareMemoryManager.h" />
     <ClInclude Include="..\source\share_memory\ShareMemory.h" />
     <ClInclude Include="..\source\share_memory\Test.h" />
     <ClInclude Include="..\source\singleton\singleton.h" />
@@ -128,6 +129,9 @@
     <ClInclude Include="..\source\sqlite3\sqlite3.h" />
     <ClInclude Include="..\source\sqlite3\sqlite_helper.h" />
     <ClInclude Include="..\source\sqlite3\Test.h" />
+    <ClInclude Include="..\source\stream\IDogStream.h" />
+    <ClInclude Include="..\source\stream\MemoryStream.h" />
+    <ClInclude Include="..\source\stream\Test.h" />
     <ClInclude Include="..\source\string_utils\string_utils_c.h" />
     <ClInclude Include="..\source\string_utils\string_utils_s.h" />
     <ClInclude Include="..\source\string_utils\Test.h" />
@@ -141,6 +145,7 @@
     <ClInclude Include="..\source\thread\task\SimpleTaskQueue.h" />
     <ClInclude Include="..\source\thread\task\Test_taskQue.h" />
     <ClInclude Include="..\source\timer_recorder\timer_recorder.h" />
+    <ClInclude Include="..\source\typedef\TypeDef.h" />
     <ClInclude Include="..\source\win_api_caller\Test.h" />
     <ClInclude Include="..\source\win_api_caller\win_api_caller.h" />
     <ClInclude Include="..\source\win_registry_key\Test.h" />

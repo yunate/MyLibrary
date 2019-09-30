@@ -1,6 +1,6 @@
 
 #include "ShareMemory.h"
-#include "ShareMemortManager.h"
+#include "ShareMemoryManager.h"
 
 ShareMemory::ShareMemory() :
     m_pMapViewOfFile(NULL),
@@ -59,6 +59,6 @@ void * ShareMemory::GetBuff(size_t offset /* = 0 */)
     }
 
     m_offset = offset;
-    m_pMapViewOfFile = ::MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, offset, 0);
+    m_pMapViewOfFile = ::MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, (DWORD)offset, 0);
     return m_pMapViewOfFile;
 }

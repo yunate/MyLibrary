@@ -1,10 +1,10 @@
-#include "ShareMemortManager.h"
+#include "ShareMemoryManager.h"
 
-ShareMemortManager::ShareMemortManager()
+ShareMemoryManager::ShareMemoryManager()
 {
 }
 
-ShareMemortManager::~ShareMemortManager()
+ShareMemoryManager::~ShareMemoryManager()
 {
     for (auto it : m_handleMap)
     {
@@ -14,7 +14,7 @@ ShareMemortManager::~ShareMemortManager()
     m_handleMap.clear();
 }
 
-HANDLE ShareMemortManager::Create(const std::wstring name, size_t size)
+HANDLE ShareMemoryManager::Create(const std::wstring name, size_t size)
 {
     HANDLE rtn = Open(name);
 
@@ -32,7 +32,7 @@ HANDLE ShareMemortManager::Create(const std::wstring name, size_t size)
                               NULL,
                               PAGE_READWRITE,
                               0,
-                              size,
+                              (DWORD)size,
                               (LPCWSTR)name.c_str());
 
     // 如果创建失败的话，尝试创建文件映射
@@ -60,7 +60,7 @@ HANDLE ShareMemortManager::Create(const std::wstring name, size_t size)
                                           NULL, 
                                           PAGE_READWRITE,
                                           0,
-                                          size,
+                                          (DWORD)size,
                                           (LPCWSTR)name.c_str());
                 ::CloseHandle(hFile);
             }
@@ -75,7 +75,7 @@ HANDLE ShareMemortManager::Create(const std::wstring name, size_t size)
     return rtn;
 }
 
-HANDLE ShareMemortManager::Open(const std::wstring name)
+HANDLE ShareMemoryManager::Open(const std::wstring name)
 {
     if (name.empty())
     {
@@ -99,7 +99,7 @@ HANDLE ShareMemortManager::Open(const std::wstring name)
     return rtn;
 }
 
-HANDLE ShareMemortManager::Find(const std::wstring name)
+HANDLE ShareMemoryManager::Find(const std::wstring name)
 {
     auto it = m_handleMap.find(name);
 
