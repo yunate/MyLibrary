@@ -5,7 +5,7 @@ namespace utilstest
 {
     void Test_MemoryStream()
     {
-        IDogStream * pDogStream = new MemoryStream(100);
+        MemoryStream * pDogStream = new MemoryStream(100);
         s8 buff[128] = {'a'};
         buff[127] = 0;
         pDogStream->Write((u8*)buff, 128);

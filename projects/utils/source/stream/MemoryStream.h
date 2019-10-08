@@ -35,10 +35,20 @@ public:
     */
     MemoryStream(const IDogStream& stream);
 
+    /** 构造函数
+    @param [in] stream 流
+    */
+    MemoryStream(const MemoryStream& stream);
+
     /** 复制运算符
     @param [in] stream 流
     */
     MemoryStream& operator=(const IDogStream& stream);
+
+    /** 复制运算符
+    @param [in] stream 流
+    */
+    MemoryStream& operator=(const MemoryStream& stream);
 
     /** 析构函数
     */

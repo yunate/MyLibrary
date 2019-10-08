@@ -48,6 +48,15 @@ MemoryStream::MemoryStream(const IDogStream& stream)
     *this = stream;
 }
 
+MemoryStream::MemoryStream(const MemoryStream & stream)
+{
+    m_pos = 0;
+    m_size = 0;
+    m_capacity = 0;
+    m_pBuff = 0;
+    *this = stream;
+}
+
 MemoryStream::MemoryStream(MemoryStream&& stream)
 {
     this->m_pBuff = stream.m_pBuff;
@@ -90,6 +99,11 @@ MemoryStream & MemoryStream::operator=(const IDogStream& stream)
     }
 
     return *this;
+}
+
+MemoryStream & MemoryStream::operator=(const MemoryStream & stream)
+{
+    return *this = *((IDogStream*)(&stream));
 }
 
 MemoryStream::~MemoryStream()
