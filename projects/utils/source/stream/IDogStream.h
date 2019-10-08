@@ -109,7 +109,7 @@ public:
     @param [int] start 开始位置(偏移)
     @return 读取的实际大小
     */
-    virtual s32 ReadW(const u16* buff, s32 count, s64 start = 0)
+    virtual s32 ReadW(u16* const buff, s32 count, s64 start = 0)
     {
         return Read((u8*)buff, count * 2) / 2;
     }

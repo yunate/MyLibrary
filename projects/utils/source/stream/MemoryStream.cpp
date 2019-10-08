@@ -25,7 +25,7 @@ MemoryStream::MemoryStream(u32 size)
     }
 }
 
-MemoryStream::MemoryStream(s8* pBuff, u32 size)
+MemoryStream::MemoryStream(const s8* const pBuff, u32 size)
 {
     m_pos = 0;
     m_size = 0;

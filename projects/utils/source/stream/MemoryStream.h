@@ -23,7 +23,7 @@ public:
     @param [in] pBuff 内存
     @param [in] size 大小
     */
-    MemoryStream(s8* pBuff, u32 size);
+    MemoryStream(const s8* const pBuff, u32 size);
 
     /** 构造函数
     @param [in] stream 流
