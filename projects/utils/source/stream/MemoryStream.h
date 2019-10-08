@@ -60,11 +60,11 @@ public:
     virtual s64 Pos();
 
     /** 设置当前位置
-    @param [int] offset 相对于 start的偏移
-    @param [int] start 开始位置
+    @param [int] offset 偏移
+    @param [int] origin 取如下值SEEK_CUR SEEK_END SEEK_SET
     @return 实际设置的位置
     */
-    virtual s64 Seek(s64 offset, s64 start);
+    virtual s64 Seek(s64 offset, int origin);
 
     /** 获得流的大小
     @return 流的大小

@@ -235,6 +235,9 @@
     <ClCompile Include="..\source\share_memory\ShareMemoryManager.cpp">
       <Filter>share_memory</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\stream\FileStream.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\code_cvt\Test.h">
@@ -488,6 +491,9 @@
     </ClInclude>
     <ClInclude Include="..\source\share_memory\ShareMemoryManager.h">
       <Filter>share_memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\stream\FileStream.h">
+      <Filter>stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

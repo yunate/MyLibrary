@@ -120,15 +120,38 @@ s64 MemoryStream::Pos()
     return m_pos;
 }
 
-s64 MemoryStream::Seek(s64 offset, s64 start)
+s64 MemoryStream::Seek(s64 offset, int origin)
 {
-    assert(offset <= MAX_U32 && start <= MAX_U32);
-    m_pos = (u32)start + (u32)offset;
-    assert(m_pos >= start);
+    assert(offset <= MAX_U32);
 
-    if (m_pos >= m_size)
+    switch (origin)
     {
-        m_pos = m_size - 1;
+    case SEEK_END:
+        {
+            m_pos = m_size - (u32)offset;
+            break;
+        }
+    case SEEK_SET:
+        {
+            m_pos = (u32)offset;
+            break;
+        }
+    default:
+        {
+            // SEEK_CUR ºÍÆäËû
+            m_pos += (u32)offset;
+            break;
+        }
+    }
+
+    if (m_pos > m_size)
+    {
+        m_pos = m_size;
+    }
+
+    if (m_pos < 0)
+    {
+        m_pos = 0;
     }
 
     return m_pos;
@@ -178,7 +201,7 @@ s32 MemoryStream::Read(u8 * const buff, s32 count)
     }
 
     u32 endPos = count + m_pos;
-    assert(endPos >= m_pos);
+    assert(endPos >= m_pos && buff != NULL);
 
     if (endPos > m_size)
     {
@@ -194,7 +217,7 @@ s32 MemoryStream::Read(u8 * const buff, s32 count)
 s32 MemoryStream::Write(const u8 * const buff, s32 count)
 {
     u32 endPos = count + m_pos;
-    assert(endPos >= m_pos);
+    assert(endPos >= m_pos && buff != NULL);
 
     if (endPos > m_size)
     {

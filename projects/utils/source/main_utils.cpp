@@ -54,7 +54,9 @@ int main()
     //utilstest::Test_taskQue();
     //utilstest::Test_taskQue1();
 
-    utilstest::Test_MemoryStream();
+   // utilstest::Test_MemoryStream();
+    utilstest::Test_FileStream();
+    
     ::system("pause");
     return 1;
 }

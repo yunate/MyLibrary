@@ -2,6 +2,8 @@
 #ifndef __IDOGSTREAM_H_
 #define __IDOGSTREAM_H_
 
+#include <stdio.h>
+
 /** 无符号8位
 */
 using u8 = unsigned char;
@@ -72,16 +74,31 @@ public:
     virtual s64 Pos() = 0;
 
     /** 设置当前位置
-    @param [int] offset 相对于 start的偏移
-    @param [int] start 开始位置
+    @param [int] offset 偏移
+    @param [int] origin 取如下值SEEK_CUR SEEK_END SEEK_SET
     @return 实际设置的位置
     */
-    virtual s64 Seek(s64 offset, s64 start) = 0;
+    virtual s64 Seek(s64 offset, int origin) = 0;
 
     /** 获得流的大小
     @return 流的大小
     */
-    virtual s64 Size() = 0;
+    virtual s64 Size()
+    {
+        s64 curPos = Pos();
+        s64 begin = Seek(0, SEEK_SET);
+        s64 end = Seek(0, SEEK_END);
+        Seek(curPos, SEEK_SET);
+
+        if (end >= begin && end != -1 && begin != -1)
+        {
+            return end - begin;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
     /** 设置流的大小
     @param [in] newSize 流的大小
@@ -131,7 +148,7 @@ public:
     */
     virtual s32 ReadAllA(u8* const buff)
     {
-        Seek(0, 0);
+        Seek(0, SEEK_SET);
         return Read(buff, (s32)Size());
     }
 

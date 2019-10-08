@@ -56,6 +56,7 @@
     <ClCompile Include="..\source\share_memory\ShareMemory.cpp" />
     <ClCompile Include="..\source\sqlite3\sqlite3.c" />
     <ClCompile Include="..\source\sqlite3\sqlite_helper.cpp" />
+    <ClCompile Include="..\source\stream\FileStream.cpp" />
     <ClCompile Include="..\source\stream\MemoryStream.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_c.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_s.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="..\source\sqlite3\sqlite3.h" />
     <ClInclude Include="..\source\sqlite3\sqlite_helper.h" />
     <ClInclude Include="..\source\sqlite3\Test.h" />
+    <ClInclude Include="..\source\stream\FileStream.h" />
     <ClInclude Include="..\source\stream\IDogStream.h" />
     <ClInclude Include="..\source\stream\MemoryStream.h" />
     <ClInclude Include="..\source\stream\Test.h" />

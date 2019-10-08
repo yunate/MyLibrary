@@ -1,5 +1,6 @@
 
 #include "MemoryStream.h"
+#include "FileStream.h"
 
 namespace utilstest
 {
@@ -17,6 +18,18 @@ namespace utilstest
         stream1.ReSize(1025);
         stream1.ReSize(0x40000000);
 
+        delete pDogStream;
+    }
+
+    void Test_FileStream()
+    {
+        IDogStream * pDogStream = new FileStream("C:\\Users\\yudh\\Desktop\\test1\\filestream.txt");
+        char buff[] = "hello file stream";
+        pDogStream->Write((u8*)buff, sizeof(buff));
+        pDogStream->Write((u8*)buff, sizeof(buff));
+        s64 size = pDogStream->Size();
+        char buff1[500] = {0};
+        pDogStream->ReadAllA((u8*)buff1);
         delete pDogStream;
     }
 }
