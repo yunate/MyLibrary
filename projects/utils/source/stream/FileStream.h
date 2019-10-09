@@ -11,7 +11,7 @@ class FileStream :
 public:
     /** 构造函数
     @param [in] path 路径
-    @param [in] mode 打开方式,默认为"a+b"
+    @param [in] mode 打开方式,mode == NULL 时候，默认为"a+b"
     */
     FileStream(const char* const path, const char* const mode = NULL);
 

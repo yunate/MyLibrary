@@ -75,11 +75,11 @@ s64 FileStream::ReSize(s64 newSize)
 s32 FileStream::Read(u8 * const buff, s32 count)
 {
     assert(m_hFile != NULL && buff != NULL);
-    return ::fread(buff, 1, count, m_hFile);
+    return (s32)::fread(buff, 1, count, m_hFile);
 }
 
 s32 FileStream::Write(const u8 * const buff, s32 count)
 {
     assert(m_hFile != NULL && buff != NULL);
-    return ::fwrite(buff, 1, count, m_hFile);
+    return (s32)::fwrite(buff, 1, count, m_hFile);
 }
