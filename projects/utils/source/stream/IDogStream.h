@@ -86,18 +86,9 @@ public:
     virtual s64 Size()
     {
         s64 curPos = Pos();
-        s64 begin = Seek(0, SEEK_SET);
         s64 end = Seek(0, SEEK_END);
         Seek(curPos, SEEK_SET);
-
-        if (end >= begin && end != -1 && begin != -1)
-        {
-            return end - begin;
-        }
-        else
-        {
-            return 0;
-        }
+        return end;
     }
 
     /** 设置流的大小
