@@ -10,7 +10,7 @@ namespace resourceutil
         do
         {
             DWORD dwWritten = 0;
-            if (!WriteFile(hFile, lpPos, dwRemain, &dwWritten, NULL))
+            if (!::WriteFile(hFile, lpPos, dwRemain, &dwWritten, NULL))
             {
                 return false;
             }
@@ -23,13 +23,13 @@ namespace resourceutil
 
     bool ReleaseResource(HMODULE hModule, unsigned int resourceId, const std::wstring& resourceType, const std::wstring& target)
     {
-        HRSRC hrc = FindResource(hModule, MAKEINTRESOURCE(resourceId), resourceType.c_str());
+        HRSRC hrc = ::FindResource(hModule, MAKEINTRESOURCE(resourceId), resourceType.c_str());
         if (hrc == NULL)
         {
             return false;
         }
 
-        HGLOBAL hGlobal = LoadResource(hModule, hrc);
+        HGLOBAL hGlobal = ::LoadResource(hModule, hrc);
         if (hGlobal == NULL)
         {
             return false;
@@ -38,7 +38,7 @@ namespace resourceutil
         DWORD dwSize = ::SizeofResource(hModule, hrc);
         LPVOID pData = ::LockResource(hGlobal);
 
-        HANDLE hFile = CreateFile(
+        HANDLE hFile = ::CreateFile(
             target.c_str(),
             GENERIC_WRITE,
             0,
@@ -53,7 +53,7 @@ namespace resourceutil
         }
 
         bool bRet = WriteToFile(hFile, (LPBYTE)pData, dwSize);
-        CloseHandle(hFile);
+        ::CloseHandle(hFile);
 
         return bRet;
     }
