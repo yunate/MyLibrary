@@ -137,6 +137,8 @@
     <ClInclude Include="..\source\string_utils\string_utils_c.h" />
     <ClInclude Include="..\source\string_utils\string_utils_s.h" />
     <ClInclude Include="..\source\string_utils\Test.h" />
+    <ClInclude Include="..\source\thread\LockFreeData.h" />
+    <ClInclude Include="..\source\thread\LockFreeQueue.h" />
     <ClInclude Include="..\source\thread\producer_consumer\IConsume.h" />
     <ClInclude Include="..\source\thread\producer_consumer\IGoods.h" />
     <ClInclude Include="..\source\thread\producer_consumer\IProducer.h" />
