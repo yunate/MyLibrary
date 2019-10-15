@@ -1,6 +1,6 @@
 #pragma once
 
-#include "singleton1.h"
+#include "singleton.h"
 #include <iostream>
 
 namespace utilstest
@@ -41,7 +41,7 @@ namespace utilstest
     void Test_Singleton()
     {
         std::cout << "Test_Singleton1()" << endl;
-        Singleton1<TestSingleton>::GetInstance()->Fun();
+        Singleton<TestSingleton>::GetInstance()->Fun();
         std::cout << "Test_Singleton2()" << endl;
         //Singleton<TestSingleton>::s_pInstance;
     }

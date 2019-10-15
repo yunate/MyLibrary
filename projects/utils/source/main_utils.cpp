@@ -17,15 +17,26 @@
 #include "thread/producer_consumer/test2.h"
 #include "thread/task/Test_taskQue.h"
 #include "console/test.h"
-#include "logic_executor/Test.h"
-#include "stream/Test.h"
+ #include "logic_executor/Test.h"
+ #include "stream/Test.h"
+ #include "thread/TestLockFree.h"
+
+// 内存泄露检测器
+// 没有64位的
+#ifdef _DEBUG
+#pragma comment(lib, "vld//release//vld.lib")
+#include "vld//head//vld.h"
+#include <crtdbg.h>
+#include <windows.h>
+#endif
 
 
 namespace utilstest {}
 
 int main()
 {
-//     utilstest::Test_stringutils0();
+    ::_CrtSetBreakAlloc(89);
+    //     utilstest::Test_stringutils0();
 //     utilstest::Test_stringutils1();
 // utilstest::Test_MemoryShare0();
 //utilstest::Test_MemoryShare1();
@@ -55,8 +66,8 @@ int main()
     //utilstest::Test_taskQue1();
 
    // utilstest::Test_MemoryStream();
-    utilstest::Test_FileStream();
-    
+    //utilstest::Test_FileStream();
+    utilstest::Test_LockFreeQue();
     ::system("pause");
     return 1;
 }

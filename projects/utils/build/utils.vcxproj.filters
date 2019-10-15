@@ -501,5 +501,8 @@
     <ClInclude Include="..\source\thread\LockFreeData.h">
       <Filter>thread</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\thread\TestLockFree.h">
+      <Filter>thread</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

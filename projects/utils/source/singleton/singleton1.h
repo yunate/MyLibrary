@@ -9,6 +9,7 @@ class SingletonWrapper1 : public T
 };
 
 /** 懒汉模式
+这个类有一定的问题，如果一定要使用懒汉模式，请自己考虑好内存问题
 */
 template <class T>
 class Singleton1
@@ -22,6 +23,7 @@ public:
 
             if (s_pInstance == NULL)
             {
+                // 堆上的内存，我们没有机会去释放它，它的析构函数执行不到，有泄漏的风险
                 s_pInstance = new SingletonWrapper1<T>();
             }
 

@@ -7,11 +7,16 @@
 #include <new>
 #include <atomic>
 
+/** 安全的push
+*/
+//#define LOCKFREE_QUEUE_SAFEPUSH
+
 /** 无锁队列
 */
 template<class ty>
 class LockFreeQueue
 {
+    using tyData = LockFreeData<ty>;
 public:
     /** 构造/析构函数
     */
@@ -21,7 +26,7 @@ public:
         m_tail(nullptr)
     {
         // 构造的时候不会有线程安全问题
-        m_head = new(std::nothrow) LockFreeData();
+        m_head = new(std::nothrow) tyData();
         m_tail = m_head;
     }
 
@@ -32,7 +37,7 @@ public:
 
         while (m_head != nullptr)
         {
-            ILockFreeData* pTmp = m_head;
+            tyData* pTmp = m_head;
             m_head = m_head->m_pNext;
             delete pTmp;
         }
@@ -43,7 +48,6 @@ public:
     @param [out] data数据
     @return 失败返回NULL，否则返回队首，这个是一份复制
     */
-    template<class ty>
     bool Pop(ty& out)
     {
         if (m_head == nullptr)
@@ -51,7 +55,7 @@ public:
             return false;
         }
 
-        LockFreeData* p = nullptr;
+        tyData* p = nullptr;
 
         do
         {
@@ -62,49 +66,57 @@ public:
                 return false;
             }
 
-        } while (m_head.compare_exchange_strong(p, p->m_pNext));
+        } while (!__sync_bool_compare_and_swap(m_head, p, p->m_pNext));
 
         --m_size;
         out = p->m_pNext->m_val;
         delete p;
+        return true;
     }
 
     /** 压入对尾
     @param [in] data数据
     @return 是否成功
     */
-    template<class ty>
     bool Push(const ty& data)
     {
-        LockFreeData* q = new(std::nothrow) LockFreeData(data);
+        if (m_tail == nullptr)
+        {
+            return false;
+        }
+
+        tyData* q = new(std::nothrow) tyData(data);
 
         if (q == nullptr)
         {
             return false;
         }
 
-        LockFreeData* p = m_tail;
-        LockFreeData* rawTail = p;
+        tyData* p = m_tail;
+#ifdef LOCKFREE_QUEUE_SAFEPUSH
         int i = 0;
-
+#endif
         do
         {
-            if (i == 2)
+#ifdef LOCKFREE_QUEUE_SAFEPUSH
+            if (i == 3 && p->m_pNext != nullptr)
             {
-                while (p->next != nullptr)
-                {
-                    p = p->next;
-                }
+                p = p->m_pNext;
+                m_tail = p;
             }
             else
             {
-                ++i;
                 p = m_tail;
+                ++i;
             }
-        } while (p->m_pNext.compare_exchange_strong(nullptr, q));
+#else
+            p = m_tail;
+#endif // LOCKFREE_QUEUE_SAFEPUSH
+        } while (!__sync_bool_compare_and_swap(p->m_pNext, nullptr, q));
         
-        m_tail.compare_exchange_strong(i == 2 ? rawTail : p, q);
+        __sync_bool_compare_and_swap(m_tail, p, q);
         ++m_size;
+        return true;
     }
 
     /** 获得大小
@@ -121,11 +133,11 @@ protected:
 
     /** 队列头部，这个只是标记头部，不保存数据
     */
-    LockFreeData* m_head;
+    tyData* m_head;
 
     /** 队列尾部
     */
-    LockFreeData* m_tail;
+    tyData* m_tail;
 };
 
 #endif //__LOCKFREE_QUEUE_H_
