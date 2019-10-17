@@ -495,13 +495,16 @@
     <ClInclude Include="..\source\stream\FileStream.h">
       <Filter>stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\thread\LockFreeQueue.h">
-      <Filter>thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\thread\LockFreeData.h">
-      <Filter>thread</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\thread\TestLockFree.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\spin_mutex.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\lockfree_queue.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\lockfree_data.h">
       <Filter>thread</Filter>
     </ClInclude>
   </ItemGroup>

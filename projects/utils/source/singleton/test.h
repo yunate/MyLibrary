@@ -12,7 +12,7 @@ namespace utilstest
         TestSingleton() :
             m_ii(0)
         {
-            std::cout << "TestSingleton()" << endl;
+            //std::cout << "TestSingleton()" << endl;
         }
 
         TestSingleton(const TestSingleton&)

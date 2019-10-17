@@ -23,19 +23,19 @@
 
 // 内存泄露检测器
 // 没有64位的
-#ifdef _DEBUG
-#pragma comment(lib, "vld//release//vld.lib")
-#include "vld//head//vld.h"
-#include <crtdbg.h>
-#include <windows.h>
-#endif
+// #ifdef _DEBUG
+// #pragma comment(lib, "vld//release//vld.lib")
+// #include "vld//head//vld.h"
+// #include <crtdbg.h>
+// #include <windows.h>
+// #endif
 
 
 namespace utilstest {}
 
 int main()
 {
-    ::_CrtSetBreakAlloc(89);
+    //::_CrtSetBreakAlloc(89);
     //     utilstest::Test_stringutils0();
 //     utilstest::Test_stringutils1();
 // utilstest::Test_MemoryShare0();
@@ -67,7 +67,7 @@ int main()
 
    // utilstest::Test_MemoryStream();
     //utilstest::Test_FileStream();
-    utilstest::Test_LockFreeQue();
+    utilstest::TestSpeed();
     ::system("pause");
     return 1;
 }
