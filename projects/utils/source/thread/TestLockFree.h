@@ -17,12 +17,15 @@ namespace utilstest
         {
             que1.push(i);
         }
-
-        lockfree::lockfree_queue<int> que2(que1);
+        
+        lockfree::lockfree_queue<int> que2(que1); // 拷贝构造
         lockfree::lockfree_queue<int> que3;
-        que3 = que1;
-        lockfree::lockfree_queue<int> que4;
-        que4 = std::move(que1);
+        que3 = que1; // 拷贝运算符
+        lockfree::lockfree_queue<int>&& que4 = std::move(que1); // 就像引用一样
+        lockfree::lockfree_queue<int> que5;
+        que5 = que4; // 拷贝运算符
+        lockfree::lockfree_queue<int> que6 = que4; // 拷贝构造
+        lockfree::lockfree_queue<int> que7 = std::move(que1); // 右值拷贝
     }
 
     void Test_NormalQue(int tdCount, int taskCount)
