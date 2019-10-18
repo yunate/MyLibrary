@@ -23,12 +23,12 @@
 
 // 内存泄露检测器
 // 没有64位的
-// #ifdef _DEBUG
-// #pragma comment(lib, "vld//release//vld.lib")
-// #include "vld//head//vld.h"
-// #include <crtdbg.h>
-// #include <windows.h>
-// #endif
+#ifdef _DEBUG
+#pragma comment(lib, "vld//release//vld.lib")
+#include "vld//head//vld.h"
+#include <crtdbg.h>
+#include <windows.h>
+#endif
 
 
 namespace utilstest {}

@@ -40,6 +40,53 @@ public:
         }
     }
 
+    lockfree_queue(const lockfree_queue& r)
+    {
+        // 构造的时候不会有线程安全问题
+        ty_data* pSrc = r.m_head;
+        ty_data* pDes = new(std::nothrow) ty_data();
+        m_head = pDes;
+
+        while (pSrc != nullptr && pDes != nullptr)
+        {
+            pDes->m_val = pSrc->m_val;
+            pSrc = pSrc->m_pNext;
+
+            if (pSrc != nullptr)
+            {
+                pDes->m_pNext = new(std::nothrow) ty_data();
+                pDes = pDes->m_pNext;
+                ++m_size;
+            }
+        }
+
+        m_tail = pDes;
+    }
+
+    lockfree_queue(lockfree_queue&& r)
+    {
+        m_head = r.m_head;
+        r.m_head = nullptr;
+        m_tail = r.m_tail;
+        r.m_tail = nullptr; 
+        m_size = r.m_size;
+        r.m_size = 0;
+    }
+
+    lockfree_queue& operator=(const lockfree_queue& r)
+    {
+        lockfree_queue tmp(r);
+        swap(tmp);
+        return *this;
+    }
+
+    void swap(lockfree_queue& r)
+    {
+        std::swap(m_head, r.m_head);
+        std::swap(m_tail, r.m_tail);
+        std::swap(m_size, r.m_size);
+    }
+
 public:
     /** 弹出队首
     @param [out] data数据

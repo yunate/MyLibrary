@@ -9,6 +9,22 @@
 
 namespace utilstest
 {
+    void TestCpy()
+    {
+        lockfree::lockfree_queue<int> que1;
+
+        for (int i = 0; i < 10; ++i)
+        {
+            que1.push(i);
+        }
+
+        lockfree::lockfree_queue<int> que2(que1);
+        lockfree::lockfree_queue<int> que3;
+        que3 = que1;
+        lockfree::lockfree_queue<int> que4;
+        que4 = std::move(que1);
+    }
+
     void Test_NormalQue(int tdCount, int taskCount)
     {
         std::queue<int> que;
@@ -207,8 +223,9 @@ namespace utilstest
 
     void TestSpeed()
     {
-        int tdCount = 4;
-        int taskCount = 40000;
+        TestCpy();
+        int tdCount = 2;
+        int taskCount = 20000;
 
         {
             TimerRecorder timer;
@@ -228,5 +245,6 @@ namespace utilstest
             printf("Test_NormalQue__:\t%lld\r\n", timer.GetTimePass());
         }
     }
+
 }
 
