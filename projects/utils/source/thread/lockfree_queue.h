@@ -60,7 +60,7 @@ public:
         m_tail = pDes;
     }
 
-    lockfree_queue(lockfree_queue&& r)
+    lockfree_queue(lockfree_queue&& r) noexcept
     {
         m_head = r.m_head;
         r.m_head = nullptr;
