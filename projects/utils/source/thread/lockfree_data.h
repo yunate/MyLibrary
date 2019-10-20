@@ -20,6 +20,7 @@ public:
     /** ¹¹Ôìº¯Êý
     */
     lockfree_data() :
+        m_val(ty()),
         m_pNext(NULL)
     {
 
