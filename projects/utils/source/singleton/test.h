@@ -5,23 +5,20 @@
 
 namespace utilstest
 {
+   
+
     // 有没有更加简单的方法，不用去修改TestSingleton的构造函数的属性的？
     class TestSingleton
     {
     protected:
-        TestSingleton() :
-            m_ii(0)
+        TestSingleton() :m_ii(0)
         {
             //std::cout << "TestSingleton()" << endl;
         }
 
-        TestSingleton(const TestSingleton&)
-        {
-        }
+        TestSingleton(const TestSingleton&) = delete;
 
-        TestSingleton& operator=(const TestSingleton&)
-        {
-        }
+        TestSingleton& operator=(const TestSingleton&) = delete;
 
     public:
         ~TestSingleton()
@@ -35,7 +32,7 @@ namespace utilstest
         }
 
     private:
-        int m_ii;
+        int m_ii = 0;
     };
 
     void Test_Singleton()

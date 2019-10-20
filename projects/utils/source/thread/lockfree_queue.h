@@ -16,10 +16,7 @@ class lockfree_queue
 public:
     /** 构造/析构函数
     */
-    lockfree_queue() :
-        m_size(0),
-        m_head(nullptr),
-        m_tail(nullptr)
+    lockfree_queue()
     {
         // 构造的时候不会有线程安全问题
         m_head = new(std::nothrow) ty_data();
@@ -142,15 +139,15 @@ public:
 protected:
     /** 容器的大小
     */
-    int m_size;
+    int m_size = 0;
 
     /** 队列头部，这个只是标记头部，不保存数据
     */
-    ty_data* m_head;
+    ty_data* m_head = nullptr;
 
     /** 队列尾部
     */
-    ty_data* m_tail;
+    ty_data* m_tail = nullptr;
 
     /** 自旋锁
     */

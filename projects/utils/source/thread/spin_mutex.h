@@ -12,7 +12,6 @@ public:
     */
     spin_mutex()
     {
-
     }
 
     ~spin_mutex()
@@ -41,6 +40,6 @@ public:
 private:
     /** ×ÔÐýËø±ê¼Ç
     */
-    std::atomic_flag m_flag;
+    std::atomic_flag m_flag = ATOMIC_FLAG_INIT;
 };
 }
