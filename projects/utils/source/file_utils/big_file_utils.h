@@ -1,6 +1,8 @@
 
 #ifndef __BIG_FILE_UTILS_H_
 #define __BIG_FILE_UTILS_H_
+
+#include <string>
 #include <functional>
 
 /** 一行一行的读文件 , 每次读一个wchar

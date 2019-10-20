@@ -5,9 +5,9 @@
 зЊзд https://github.com/Bwar/CJsonObject
 ***/
 
-#include <map>
 #include <list>
-
+#include <map>
+#include <string>
 
 #ifdef __cplusplus
 extern "C" 

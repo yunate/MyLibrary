@@ -1,6 +1,8 @@
 // Utils.cpp : 定义控制台应用程序的入口点。
 //
 
+#include <string>
+
 #include "string_utils/Test.h"
 #include "sqlite3/Test.h"
 #include "share_memory/Test.h"
