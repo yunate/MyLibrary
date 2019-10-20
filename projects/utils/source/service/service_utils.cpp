@@ -27,14 +27,14 @@ struct scoped_service {
 };
 
 struct scoped_timer {
-    scoped_timer() : start_(GetTickCount()) {
+    scoped_timer() : start_(GetTickCount64()) {
 
     }
 
-    DWORD GetMilliseconds() {
-        return GetTickCount() - start_;
+    ULONGLONG GetMilliseconds() {
+        return GetTickCount64() - start_;
     }
-    DWORD start_;
+    ULONGLONG start_;
 };
 
 HRESULT ScmDatabase::EnumerateServices(

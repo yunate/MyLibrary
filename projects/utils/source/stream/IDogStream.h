@@ -114,10 +114,9 @@ public:
     /** 读取流 (会改变pos)
     @param [out] buff 输出buff，内存需要自己管理
     @param [in] count 读取的大小
-    @param [int] start 开始位置(偏移)
     @return 读取的实际大小
     */
-    virtual s32 ReadW(u16* const buff, s32 count, s64 start = 0)
+    virtual s32 ReadW(u16* const buff, s32 count)
     {
         return Read((u8*)buff, count * 2) / 2;
     }
@@ -125,10 +124,9 @@ public:
     /** 写入流 (会改变pos)
     @param [in] buff 写入buff，内存需要自己管理
     @param [in] count 写入的大小
-    @param [int] start 开始位置(偏移)
     @return 写入的实际大小
     */
-    virtual s32 WriteW(const u16* const buff, s32 count, s64 start = 0)
+    virtual s32 WriteW(const u16* const buff, s32 count)
     {
         return Write((const u8*)buff, count * 2) / 2;
     }

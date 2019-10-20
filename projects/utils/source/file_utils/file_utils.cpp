@@ -100,7 +100,7 @@ bool ReadFileByLine(const std::wstring & path, const unsigned char * checker, co
     {
         if (c != '\r' && c != '\n')
         {
-            line.append(1, c);
+            line.append(1, (char)c);
             c = ::fgetc(pFile);
         }
         else

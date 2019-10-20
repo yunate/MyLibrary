@@ -9,5 +9,6 @@ namespace utilstest
     static void Test_GetCpuCount()
     {
         unsigned int cpuThreadCOunt = Singleton<CpuCoreThreadCount>::GetInstance()->GetCount();
+        cpuThreadCOunt;
     }
 }

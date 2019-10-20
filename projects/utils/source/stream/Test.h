@@ -27,7 +27,7 @@ namespace utilstest
         char buff[] = "hello file stream";
         pDogStream->Write((u8*)buff, sizeof(buff));
         pDogStream->Write((u8*)buff, sizeof(buff));
-        s64 size = pDogStream->Size();
+        s64 size = pDogStream->Size(); size;
         char buff1[500] = {0};
         pDogStream->ReadAllA((u8*)buff1);
         delete pDogStream;

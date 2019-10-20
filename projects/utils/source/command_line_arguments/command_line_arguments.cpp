@@ -58,7 +58,7 @@ std::string CommandLineArguments::_W2A(const wchar_t* src)
 
     if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
     {
-        int nRet = ::WideCharToMultiByte(CP_ACP, 0, src, (int)::wcslen(src), NULL, 0, NULL, NULL);
+        nRet = ::WideCharToMultiByte(CP_ACP, 0, src, (int)::wcslen(src), NULL, 0, NULL, NULL);
         if (nRet > 0)
         {
             char *pBuf = new char[nRet];

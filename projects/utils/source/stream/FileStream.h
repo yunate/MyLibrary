@@ -18,7 +18,7 @@ public:
     /** 移动构造构造函数
     @param [in] stream 流
     */
-    FileStream(FileStream&& stream);
+    FileStream(FileStream&& stream) noexcept;
 
     /** 析构函数
     */

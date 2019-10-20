@@ -31,7 +31,7 @@ FileStream::FileStream(const char * const path, const char* const mode) :
     assert(m_hFile != NULL);
 }
 
-FileStream::FileStream(FileStream && stream)
+FileStream::FileStream(FileStream && stream) noexcept
 {
     m_pPath = stream.m_pPath;
     m_hFile = stream.m_hFile;
@@ -69,6 +69,7 @@ s64 FileStream::Seek(s64 offset, int origin)
 
 s64 FileStream::ReSize(s64 newSize)
 {
+    newSize;
     return -1;
 }
 

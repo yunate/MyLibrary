@@ -98,7 +98,6 @@ static int __strncmpi(const char *s1, const char *s2, size_t n)
 {
     if (n != 0) 
     {
-        const u_char *cm = kAsciiLowerCase;
         const u_char *us1 = (const u_char *)s1;
         const u_char *us2 = (const u_char *)s2;
 
@@ -132,7 +131,6 @@ static bool __strendof(const char* str, const char* find)
         return false;
     }
 
-    const char* pos = (str + lenstr - lensub);
     return memcmp(str + lenstr - lensub, find, lensub) == 0;
 }
 

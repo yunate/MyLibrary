@@ -11,6 +11,7 @@ namespace utilstest
     public:
         virtual inline bool Execute(void* pData)
         {
+            pData;
             return true;
         }
     };

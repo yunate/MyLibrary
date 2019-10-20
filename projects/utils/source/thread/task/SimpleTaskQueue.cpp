@@ -51,7 +51,8 @@ void SimpleTaskQueue::ClearAll()
 void SimpleTaskQueue::ClearQueue()
 {
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
-    m_taskQue.swap(std::queue<std::shared_ptr<ITask> >());
+    std::queue<std::shared_ptr<ITask> > tmp = std::queue<std::shared_ptr<ITask> >();
+    m_taskQue.swap(tmp);
 }
 
 void SimpleTaskQueue::PushTask(const std::shared_ptr<ITask>& task)
