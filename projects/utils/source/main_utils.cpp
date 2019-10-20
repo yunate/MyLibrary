@@ -1,8 +1,6 @@
 // Utils.cpp : 定义控制台应用程序的入口点。
 //
 
-#include <string>
-
 #include "string_utils/Test.h"
 #include "sqlite3/Test.h"
 #include "share_memory/Test.h"
@@ -26,18 +24,20 @@
 // 内存泄露检测器
 // 没有64位的
 #ifdef _DEBUG
+#ifndef _WIN64 
 #pragma comment(lib, "vld//release//vld.lib")
 #include "vld//head//vld.h"
 #include <crtdbg.h>
 #include <windows.h>
+//::_CrtSetBreakAlloc(89);
+#endif
 #endif
 
 
 namespace utilstest {}
 
 int main()
-{//1
-    //::_CrtSetBreakAlloc(89);
+{
     //     utilstest::Test_stringutils0();
 //     utilstest::Test_stringutils1();
 // utilstest::Test_MemoryShare0();
