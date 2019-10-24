@@ -48,7 +48,7 @@ int main()
 
 //    utilstest::Test_codecvt0();
 
-//    utilstest::Test_Initfile0();
+    utilstest::Test_Initfile0();
 //    utilstest::Test_CommandLineArguments0();
 //    utilstest::Test_WinRegistryKey1();
 //    utilstest::Test_WinRegistryKey0();
@@ -69,7 +69,7 @@ int main()
 
    // utilstest::Test_MemoryStream();
     //utilstest::Test_FileStream();
-    utilstest::TestSpeed();
+    //utilstest::TestSpeed();
     ::system("pause");
     return 1;
 }

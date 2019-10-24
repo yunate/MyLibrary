@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DogGif", "projects\DogGif\b
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleWnd", "projects\SimpleWnd\build\SimpleWnd.vcxproj", "{E284A3B4-1595-4B6D-B20A-259D9C2F1CDF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Log", "projects\Log\build\Log.vcxproj", "{A0D4B869-7A37-40BD-9F07-63374309EA0A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogDog", "projects\LogDog\build\LogDog.vcxproj", "{A0D4B869-7A37-40BD-9F07-63374309EA0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

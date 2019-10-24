@@ -153,7 +153,9 @@
     <ClInclude Include="..\source\thread\task\Test_taskQue.h" />
     <ClInclude Include="..\source\thread\TestLockFree.h" />
     <ClInclude Include="..\source\timer_recorder\timer_recorder.h" />
-    <ClInclude Include="..\source\typedef\TypeDef.h" />
+    <ClInclude Include="..\source\typedef\DogBuff.h" />
+    <ClInclude Include="..\source\typedef\DogString.h" />
+    <ClInclude Include="..\source\typedef\DogInterger.h" />
     <ClInclude Include="..\source\win_api_caller\Test.h" />
     <ClInclude Include="..\source\win_api_caller\win_api_caller.h" />
     <ClInclude Include="..\source\win_registry_key\Test.h" />

@@ -483,9 +483,6 @@
     <ClInclude Include="..\source\stream\IDogStream.h">
       <Filter>stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\typedef\TypeDef.h">
-      <Filter>typedef</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\stream\MemoryStream.h">
       <Filter>stream</Filter>
     </ClInclude>
@@ -515,6 +512,15 @@
     </ClInclude>
     <ClInclude Include="..\source\noncopyable\test_nocopyable.h">
       <Filter>nocopyable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\typedef\DogString.h">
+      <Filter>typedef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\typedef\DogBuff.h">
+      <Filter>typedef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\typedef\DogInterger.h">
+      <Filter>typedef</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
