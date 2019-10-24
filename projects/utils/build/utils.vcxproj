@@ -113,6 +113,8 @@
     <ClInclude Include="..\source\logic_executor\LogicNotExecutor.h" />
     <ClInclude Include="..\source\logic_executor\LogicOrExecutor.h" />
     <ClInclude Include="..\source\logic_executor\Test.h" />
+    <ClInclude Include="..\source\noncopyable\noncopyable.h" />
+    <ClInclude Include="..\source\noncopyable\test_nocopyable.h" />
     <ClInclude Include="..\source\pinyin_ci_table\CiPinYinTable.h" />
     <ClInclude Include="..\source\pinyin_ci_table\CiToPinYin.h" />
     <ClInclude Include="..\source\pinyin_ci_table\test3.h" />

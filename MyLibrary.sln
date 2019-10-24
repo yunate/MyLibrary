@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "projects\utils\build\utils.vcxproj", "{D43B56CF-532B-48FD-9D9C-B4966EBD3241}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DogGif", "projects\DogGif\build\DogGif.vcxproj", "{8BB66A98-C70A-426D-ABFB-F817E08AF96C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleWnd", "projects\SimpleWnd\build\SimpleWnd.vcxproj", "{E284A3B4-1595-4B6D-B20A-259D9C2F1CDF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Log", "projects\Log\build\Log.vcxproj", "{A0D4B869-7A37-40BD-9F07-63374309EA0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{E284A3B4-1595-4B6D-B20A-259D9C2F1CDF}.Release|x64.Build.0 = Release|x64
 		{E284A3B4-1595-4B6D-B20A-259D9C2F1CDF}.Release|x86.ActiveCfg = Release|Win32
 		{E284A3B4-1595-4B6D-B20A-259D9C2F1CDF}.Release|x86.Build.0 = Release|Win32
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Debug|x64.ActiveCfg = Debug|x64
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Debug|x64.Build.0 = Debug|x64
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Debug|x86.ActiveCfg = Debug|Win32
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Debug|x86.Build.0 = Debug|Win32
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Release|x64.ActiveCfg = Release|x64
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Release|x64.Build.0 = Release|x64
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Release|x86.ActiveCfg = Release|Win32
+		{A0D4B869-7A37-40BD-9F07-63374309EA0A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

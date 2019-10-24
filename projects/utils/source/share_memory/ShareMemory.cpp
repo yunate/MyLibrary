@@ -25,7 +25,7 @@ bool ShareMemory::Create(const std::wstring name, size_t size)
         return true;
     }
 
-    m_hMap = SHAREMEMORYMANAGER()->Create(name, size);
+    m_hMap = SHAREMEMORYMANAGER().Create(name, size);
     return m_hMap != NULL;
 }
 
@@ -36,7 +36,7 @@ bool ShareMemory::Open(const std::wstring name)
         return true;
     }
 
-    m_hMap = SHAREMEMORYMANAGER()->Open(name);
+    m_hMap = SHAREMEMORYMANAGER().Open(name);
     return m_hMap != NULL;
 }
 

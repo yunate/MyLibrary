@@ -8,7 +8,7 @@ namespace utilstest
     static void Test_StrToPinYin()
     {
         std::vector<std::wstring> out;
-        Singleton<CiToPinYin>::GetInstance()->GetStrPinYin(L"行和说", out);
+        Singleton<CiToPinYin>::GetInstance().GetStrPinYin(L"行和说", out);
     }
    
 }

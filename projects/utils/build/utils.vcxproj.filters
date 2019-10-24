@@ -91,6 +91,9 @@
     <Filter Include="typedef">
       <UniqueIdentifier>{7b123aac-9a06-44b5-832d-b955dd129022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nocopyable">
+      <UniqueIdentifier>{cb59ea2f-84d1-466f-9eae-0389e6f3fb81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -506,6 +509,12 @@
     </ClInclude>
     <ClInclude Include="..\source\thread\lockfree_data.h">
       <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\noncopyable\noncopyable.h">
+      <Filter>nocopyable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\noncopyable\test_nocopyable.h">
+      <Filter>nocopyable</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

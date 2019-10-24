@@ -26,7 +26,7 @@ PAndCModel::PAndCModel(IProducer* pProducer, IConsumer* pConsumer) :
     m_maxProducerCount(AUTO_THREAD_COUNT)
 {
     m_maxThreadCount = 
-        Singleton<CpuCoreThreadCount>::GetInstance()->GetCount();
+        Singleton<CpuCoreThreadCount>::GetInstance().GetCount();
 
     // 如果获取失败了或者支持的线程只有1个，那么最大线程保持两个（生产者消费者各一个）
     if (m_maxThreadCount < 2)

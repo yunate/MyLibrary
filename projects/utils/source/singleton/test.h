@@ -38,7 +38,7 @@ namespace utilstest
     void Test_Singleton()
     {
         std::cout << "Test_Singleton1()" << endl;
-        Singleton<TestSingleton>::GetInstance()->Fun();
+        Singleton<TestSingleton>::GetInstance().Fun();
         std::cout << "Test_Singleton2()" << endl;
         //Singleton<TestSingleton>::s_pInstance;
     }

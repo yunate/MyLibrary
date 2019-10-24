@@ -13,12 +13,12 @@ template <class T>
 class Singleton
 {
 public:
-    static T* GetInstance()
+    static T& GetInstance()
     {
         // 为了能够在main函数前初始化s_pInstance
         s_pInstance;
         static SingletonWrapper<T> instance;
-        return static_cast<T *>(&instance);
+        return *static_cast<T *>(&instance);
     }
 
 private:
@@ -40,10 +40,10 @@ private:
 
     /** 强制饿汉模式，这种写法主要是为了防止初始化依赖问题
     */
-    static T& s_pInstance;
+    static T* s_pInstance;
 };
 
 template<class T>
-T& Singleton<T>::s_pInstance = *Singleton<T>::GetInstance();
+T* Singleton<T>::s_pInstance = &Singleton<T>::GetInstance();
 
 #endif // __SIGLETON_CLASS_H_
