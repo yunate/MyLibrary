@@ -7,19 +7,55 @@
     <Filter Include="LogDog">
       <UniqueIdentifier>{E87B9CB9-7773-43BC-BA72-3C09236E3EF7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\init_file">
+      <UniqueIdentifier>{c719bf38-7b53-46ca-bbc5-538ac00571b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\task">
+      <UniqueIdentifier>{1f59499e-9984-42c7-a3e7-40a7224b38f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogDog\Export">
+      <UniqueIdentifier>{6f4a930e-2693-4fb2-bb65-4ffcbbe93939}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\LogDog\LogDogConfig.cpp">
       <Filter>LogDog</Filter>
     </ClCompile>
+    <ClCompile Include="..\vendor\init_file\init_file.cpp">
+      <Filter>vendor\init_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp">
+      <Filter>vendor\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LogDog\LogDog.cpp">
+      <Filter>LogDog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\LogDog\LogDogDef.h">
-      <Filter>LogDog</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\LogDog\LogDogConfig.h">
       <Filter>LogDog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\init_file\init_file.h">
+      <Filter>vendor\init_file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\task\ISimpleTask.h">
+      <Filter>vendor\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\task\ITask.h">
+      <Filter>vendor\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\task\SimpleTaskQueue.h">
+      <Filter>vendor\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\LogDog.h">
+      <Filter>LogDog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\Export\ILogDog.h">
+      <Filter>LogDog\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\Export\LogDogDef.h">
+      <Filter>LogDog\Export</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

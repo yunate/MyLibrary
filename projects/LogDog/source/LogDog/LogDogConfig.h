@@ -2,11 +2,13 @@
 #ifndef _LOGCONFIG_H_
 #define _LOGCONFIG_H_
 
-#include "LogDogDef.h"
+#include "Export/LogDogDef.h"
+#include "noncopyable.h"
 
 /** 日志的配置文件
 */
-class LogDogConfig
+class LogDogConfig :
+    public NonCopyable
 {
 public:
     /** 构造函数
@@ -19,15 +21,15 @@ public:
     */
     LogDogConfig(const std::wstring& path, const std::wstring& name);
 
-    LogDogConfig(const LogDogConfig&) = delete;
-    LogDogConfig& operator=(const LogDogConfig&) = delete;
-
 public:
     /** 初始化
     @param [in] path 配置文件路径
     */
     void ReLoad(const std::wstring& path, const std::wstring& name);
 
+    /* 分析配置文件是否有错误
+    @return 错误码 返回LDC_NO_ERROR表示成功
+    */
     inline LogDogConfigErrorCode GetErrorCode()
     {
         return m_errorCode;
