@@ -13,9 +13,6 @@
     <Filter Include="vendor\task">
       <UniqueIdentifier>{1f59499e-9984-42c7-a3e7-40a7224b38f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LogDog\Export">
-      <UniqueIdentifier>{6f4a930e-2693-4fb2-bb65-4ffcbbe93939}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
@@ -25,14 +22,11 @@
     <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp">
       <Filter>vendor\task</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\LogDog\LogDogImpl.cpp">
+    <ClCompile Include="..\source\LogDog\LogImpl.cpp">
       <Filter>LogDog</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\LogDog\LogDogConfigImpl.cpp">
+    <ClCompile Include="..\source\LogDog\LogDogConfig.cpp">
       <Filter>LogDog</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\LogDog\Export\LogImpl.cpp">
-      <Filter>LogDog\Export</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,17 +42,20 @@
     <ClInclude Include="..\vendor\task\SimpleTaskQueue.h">
       <Filter>vendor\task</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\LogDog\Export\ILogDog.h">
-      <Filter>LogDog\Export</Filter>
+    <ClInclude Include="..\source\LogDog\LogDog.h">
+      <Filter>LogDog</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\LogDog\Export\LogDogDef.h">
-      <Filter>LogDog\Export</Filter>
+    <ClInclude Include="..\source\LogDog\LogDogDef.h">
+      <Filter>LogDog</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\LogDog\Export\LogImpl.h">
-      <Filter>LogDog\Export</Filter>
+    <ClInclude Include="..\source\LogDog\LogImpl.h">
+      <Filter>LogDog</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\LogDog\Export\LogDog.h">
-      <Filter>LogDog\Export</Filter>
+    <ClInclude Include="..\source\LogDog\LogDogConfig.h">
+      <Filter>LogDog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\ILog.h">
+      <Filter>LogDog</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,18 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\LogDog\Export\LogImpl.cpp" />
-    <ClCompile Include="..\source\LogDog\LogDogImpl.cpp" />
-    <ClCompile Include="..\source\LogDog\LogDogConfigImpl.cpp" />
+    <ClCompile Include="..\source\LogDog\LogDogConfig.cpp" />
+    <ClCompile Include="..\source\LogDog\LogImpl.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\vendor\init_file\init_file.cpp" />
     <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\LogDog\Export\ILogDog.h" />
-    <ClInclude Include="..\source\LogDog\Export\LogDog.h" />
-    <ClInclude Include="..\source\LogDog\Export\LogDogDef.h" />
-    <ClInclude Include="..\source\LogDog\Export\LogImpl.h" />
+    <ClInclude Include="..\source\LogDog\ILog.h" />
+    <ClInclude Include="..\source\LogDog\LogDog.h" />
+    <ClInclude Include="..\source\LogDog\LogDogConfig.h" />
+    <ClInclude Include="..\source\LogDog\LogDogDef.h" />
+    <ClInclude Include="..\source\LogDog\LogImpl.h" />
     <ClInclude Include="..\vendor\init_file\init_file.h" />
     <ClInclude Include="..\vendor\task\ISimpleTask.h" />
     <ClInclude Include="..\vendor\task\ITask.h" />
