@@ -19,17 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\LogDog\LogDog.cpp" />
-    <ClCompile Include="..\source\LogDog\LogDogConfig.cpp" />
+    <ClCompile Include="..\source\LogDog\Export\LogImpl.cpp" />
+    <ClCompile Include="..\source\LogDog\LogDogImpl.cpp" />
+    <ClCompile Include="..\source\LogDog\LogDogConfigImpl.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\vendor\init_file\init_file.cpp" />
     <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\LogDog\Export\ILogDog.h" />
+    <ClInclude Include="..\source\LogDog\Export\LogDog.h" />
     <ClInclude Include="..\source\LogDog\Export\LogDogDef.h" />
-    <ClInclude Include="..\source\LogDog\LogDog.h" />
-    <ClInclude Include="..\source\LogDog\LogDogConfig.h" />
+    <ClInclude Include="..\source\LogDog\Export\LogImpl.h" />
     <ClInclude Include="..\vendor\init_file\init_file.h" />
     <ClInclude Include="..\vendor\task\ISimpleTask.h" />
     <ClInclude Include="..\vendor\task\ITask.h" />
@@ -39,7 +40,6 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{A0D4B869-7A37-40BD-9F07-63374309EA0A}</ProjectGuid>
     <RootNamespace>Log1</RootNamespace>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
     <ProjectName>LogDog</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -47,27 +47,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">

@@ -2,7 +2,7 @@
 #ifndef __LOGDOGDEF_H_
 #define __LOGDOGDEF_H_
 
-#include <string>
+#include "typedef/DogString.h"
 
 /** 日志等级
 */
@@ -45,11 +45,11 @@ struct LogDogConfigEntry
 {
     /** 配置文件路径
     */
-    std::wstring m_path;
+    DogString m_path;
 
     /** 日志名称，如果需要写文件的话，它是文件的上一层目录名称
     */
-    std::wstring m_name;
+    DogString m_name;
 
     /** 日志等级
     */

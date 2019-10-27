@@ -19,23 +19,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\source\LogDog\LogDogConfig.cpp">
-      <Filter>LogDog</Filter>
-    </ClCompile>
     <ClCompile Include="..\vendor\init_file\init_file.cpp">
       <Filter>vendor\init_file</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp">
       <Filter>vendor\task</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\LogDog\LogDog.cpp">
+    <ClCompile Include="..\source\LogDog\LogDogImpl.cpp">
       <Filter>LogDog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LogDog\LogDogConfigImpl.cpp">
+      <Filter>LogDog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LogDog\Export\LogImpl.cpp">
+      <Filter>LogDog\Export</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\LogDog\LogDogConfig.h">
-      <Filter>LogDog</Filter>
-    </ClInclude>
     <ClInclude Include="..\vendor\init_file\init_file.h">
       <Filter>vendor\init_file</Filter>
     </ClInclude>
@@ -48,13 +48,16 @@
     <ClInclude Include="..\vendor\task\SimpleTaskQueue.h">
       <Filter>vendor\task</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\LogDog\LogDog.h">
-      <Filter>LogDog</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\LogDog\Export\ILogDog.h">
       <Filter>LogDog\Export</Filter>
     </ClInclude>
     <ClInclude Include="..\source\LogDog\Export\LogDogDef.h">
+      <Filter>LogDog\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\Export\LogImpl.h">
+      <Filter>LogDog\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\Export\LogDog.h">
       <Filter>LogDog\Export</Filter>
     </ClInclude>
   </ItemGroup>
