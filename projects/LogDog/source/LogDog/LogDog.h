@@ -15,12 +15,6 @@
 #include <unordered_map>
 #include <thread>
 
-/** className 类要提供一个静态的std::shared_ptr<ILog> Create(...)函数,并且这个函数不能有重载,LOG调用的时候的参数要严格相同
-不能有隐式强制转换发生，比如char* 转换为 std::string
-*/
-#define LOG_BIND(logType, className)\
-{Singleton<LogDog>::GetInstance().Bind((int)logType, (void*)className::Create);}
-
 /** 日志对象管理类，用户可以根据需求重新改写
 */
 class LogDog :
@@ -84,6 +78,11 @@ public:
         m_spLogQue.swap(std::shared_ptr<SimpleTaskQueue>());
     }
 
+    inline std::shared_ptr <LogDogConfig>& GetConfig()
+    {
+        return m_spConfig;
+    }
+
 private:
     /** 配置文件
     */
@@ -98,21 +97,17 @@ private:
     std::unordered_map<int, void*> m_logCreators;
 };
 
-
 /** 初始化
 @param [in] path 配置文件路径
 @param [in] name 配置文件中对应的secsion
 */
-void LOG_INIT(const DogString& path, const DogString& name)
+inline void LOG_INIT(const DogString& path, const DogString& name)
 {
     if (!Singleton<LogDog>::GetInstance().Init(path, name))
     {
         return;
     }
 
-    LOG_BIND(LOGTYPE::LOGTYPE_SIMPLE_LOG, SimpleLog);
-
-    // 这个方法是一般的加入日志的方法，当然我们提供简便的LOG函数
     {
         // 将日志线程的优先级降低
         std::shared_ptr<ILog> log(new (std::nothrow)DecreasePriority());
@@ -126,32 +121,57 @@ void LOG_INIT(const DogString& path, const DogString& name)
 
 /** 反初始化
 */
-void LOG_UNINIT()
+inline void LOG_UNINIT()
 {
     Singleton<LogDog>::GetInstance().UnInit();
 }
 
-/** 提供简便的LOG函数
-@param [in] type 参考LOGTYPE
-@param [in] __Args Create函数的参数，要和声明严格相同，不能有隐式强制转换发生，比如char* 转换为 std::string
+/** 简单日志
+@param [in] level 日志等级
+@param [in] logStr 日志具体内容
 */
-template <class ..._Types>
-void LOG(int type, _Types... _Args)
+inline void SIMPLE_LOG(LogDogConfigLevel level, const DogString& logStr)
 {
-    void* creator = Singleton<LogDog>::GetInstance().GetCreator(type);
+    // 将日志线程的优先级降低
+    std::shared_ptr<ISimpleLog> log(new (std::nothrow)SimpleLog(logStr));
 
-    if (creator == NULL)
+    if (log == NULL)
     {
         return;
     }
 
-    std::shared_ptr<ILog> log = (((std::shared_ptr<ILog>(*)(_Types...))creator)(_Args...));
-
-    if (log != NULL)
-    {
-        Singleton<LogDog>::GetInstance().Push(log);
-    }
+    log->Init(level, Singleton<LogDog>::GetInstance().GetConfig());
+    Singleton<LogDog>::GetInstance().Push(log);
 }
+
+/** 调试信息
+*/
+#define LOG_DEBUG(logStr) SIMPLE_LOG(LogDogConfigLevel::LDC_LEVEL_6, logStr)
+
+/** 普通信息
+*/
+#define LOG_INFO(logStr) SIMPLE_LOG(LogDogConfigLevel::LDC_LEVEL_5, logStr)
+
+/** 警告
+*/
+#define LOG_WARNING(logStr) SIMPLE_LOG(LogDogConfigLevel::LDC_LEVEL_4, logStr)
+
+/** assert 比如判空/分母为0
+*/
+#define LOG_ASSERT(logStr) SIMPLE_LOG(LogDogConfigLevel::LDC_LEVEL_3, logStr)
+
+/** 严重的错误，比如资源不足了等
+*/
+#define LOG_SERIOUS_ERROR(logStr) SIMPLE_LOG(LogDogConfigLevel::LDC_LEVEL_2, logStr)
+
+/** 极其严重的错误，我不知道和崩溃有啥区别o_0
+*/
+#define LOG_VERY_SERIOUS_ERROR(logStr) SIMPLE_LOG(LogDogConfigLevel::LDC_LEVEL_1, logStr)
+
+/** 程序崩溃错误，崩溃了为什么能够打日志？其实我也不知道
+@note try catch中的崩溃上报
+*/
+#define LOG_CRASH(logStr) SIMPLE_LOG(LogDogConfigLevel::LDC_LEVEL_0, logStr)
 
 #endif
 

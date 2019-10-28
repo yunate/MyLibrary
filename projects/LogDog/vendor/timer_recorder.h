@@ -9,7 +9,7 @@ class TimerRecorder
 public:
     TimerRecorder()
     {
-        m_n64StartTime = clock();
+        m_n64StartTime = ::clock();
     }
 
     ~TimerRecorder()
@@ -23,11 +23,11 @@ public:
 
     __int64 GetTimePass()
     {
-        return clock() - m_n64StartTime;
+        return ::clock() - m_n64StartTime;
     }
 
 private:
-    __int64		m_n64StartTime;
+    __int64 m_n64StartTime;
 };
 
 #endif //__TIMER_RECORDER_H_

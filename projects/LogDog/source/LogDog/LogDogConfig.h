@@ -3,6 +3,7 @@
 #define _LOGDOGCONFIG_H__
 
 #include "LogDogDef.h"
+#include "timer_recorder.h"
 
 /** 日志的配置文件
 */
@@ -16,10 +17,10 @@ public:
     LogDogConfig(const DogString& path, const DogString& name);
 
 public:
-    /** 初始化
-    @param [in] path 配置文件路径
+    /** 尝试重新加载
+    @note 会有时间间隔，如果平凡的加载会被拒绝
     */
-    void ReLoad(const DogString& path, const DogString& name);
+    void TryReload();
 
     /* 分析配置文件是否有错误
     @return 错误码 返回LDC_NO_ERROR表示成功
@@ -32,6 +33,11 @@ public:
     LogDogConfigEntry& GetLogDogConfigEntry();
 
 private:
+    /** 初始化
+    */
+    void ReLoad();
+
+private:
     /** 错误码
     */
     LogDogConfigErrorCode m_errorCode = LogDogConfigErrorCode::LDC_NO_ERROR;
@@ -39,6 +45,10 @@ private:
     /** 当前数据条目
     */
     LogDogConfigEntry m_configEntry;
+
+    /** 计时器
+    */
+    TimerRecorder m_timer;
 };
 
 #endif

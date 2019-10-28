@@ -28,6 +28,9 @@
     <ClCompile Include="..\source\LogDog\LogDogConfig.cpp">
       <Filter>LogDog</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\LogDog\LogExecutor.cpp">
+      <Filter>LogDog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\vendor\init_file\init_file.h">
@@ -55,6 +58,9 @@
       <Filter>LogDog</Filter>
     </ClInclude>
     <ClInclude Include="..\source\LogDog\ILog.h">
+      <Filter>LogDog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\LogExecutor.h">
       <Filter>LogDog</Filter>
     </ClInclude>
   </ItemGroup>

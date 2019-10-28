@@ -35,5 +35,4 @@ public:
     };
 };
 
-
 #endif //__ILOG_H_

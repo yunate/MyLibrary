@@ -3,18 +3,51 @@
 #include "LogDogDef.h"
 #include "init_file/init_file.h"
 
+// 失败状态下每10s会尝试加载
+#define FAILURE_TIME_PASS 10000
+
+// 成功的状态每3min会尝试加载
+#define CUCCESS_TIME_PASS 160000
 
 LogDogConfig::LogDogConfig(const DogString& path, const DogString& name)
 {
-    ReLoad(path, name);
-}
-
-void LogDogConfig::ReLoad(const DogString& path, const DogString& name)
-{
-    m_errorCode = LogDogConfigErrorCode::LDC_NO_ERROR;
     m_configEntry.m_path = path;
     m_configEntry.m_name = name;
-    IniFile* iniFile = IniFile::CreateObj(path, true);
+    ReLoad();
+}
+
+void LogDogConfig::TryReload()
+{
+    bool needReload = false;
+
+    if (m_errorCode != LogDogConfigErrorCode::LDC_NO_ERROR)
+    {
+        // 失败状态下每10s会尝试加载
+        if (m_timer.GetTimePass() > FAILURE_TIME_PASS)
+        {
+            needReload = true;
+        }
+    }
+    else
+    {
+        // 成功的状态每3min会尝试加载
+        if (m_timer.GetTimePass() > CUCCESS_TIME_PASS)
+        {
+            needReload = true;
+        }
+    }
+
+    if (needReload)
+    {
+        ReLoad();
+    }
+}
+
+void LogDogConfig::ReLoad()
+{
+    m_timer.ReSet();
+    m_errorCode = LogDogConfigErrorCode::LDC_NO_ERROR;
+    IniFile* iniFile = IniFile::CreateObj(m_configEntry.m_path, true);
 
     if (iniFile == NULL)
     {
@@ -27,7 +60,7 @@ void LogDogConfig::ReLoad(const DogString& path, const DogString& name)
 
     for (size_t i = 0; i < names.size(); ++i)
     {
-        if (names[i] == name)
+        if (names[i] == m_configEntry.m_name)
         {
             hasName = true;
             break;
@@ -42,7 +75,7 @@ void LogDogConfig::ReLoad(const DogString& path, const DogString& name)
         return;
     }
 
-    std::vector<DogString> levels = iniFile->Get(name.c_str(), _DogT("level"));
+    std::vector<DogString> levels = iniFile->Get(m_configEntry.m_name.c_str(), _DogT("level"));
 
     if (levels.size() > 0 && levels[0].size() > 0)
     {
@@ -54,7 +87,7 @@ void LogDogConfig::ReLoad(const DogString& path, const DogString& name)
         }
     }
 
-    std::vector<DogString> dump = iniFile->Get(name.c_str(), _DogT("dump_to_file"));
+    std::vector<DogString> dump = iniFile->Get(m_configEntry.m_name.c_str(), _DogT("dump_to_file"));
 
     if (dump.size() > 0 && dump[0].size() > 0)
     {
@@ -65,6 +98,20 @@ void LogDogConfig::ReLoad(const DogString& path, const DogString& name)
         else
         {
             m_configEntry.m_isNeedDmpToFile = false;
+        }
+    }
+
+    std::vector<DogString> upload = iniFile->Get(m_configEntry.m_name.c_str(), _DogT("upload"));
+
+    if (upload.size() > 0 && upload[0].size() > 0)
+    {
+        if (upload[0] == _DogT("true") || upload[0][0] != _DogT('0'))
+        {
+            m_configEntry.m_isNeedUpload = true;
+        }
+        else
+        {
+            m_configEntry.m_isNeedUpload = false;
         }
     }
 

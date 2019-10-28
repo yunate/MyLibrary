@@ -58,6 +58,10 @@ struct LogDogConfigEntry
     /** 是否需要写入文件
     */
     bool m_isNeedDmpToFile = false;
+
+    /** 是否需要上传
+    */
+    bool m_isNeedUpload = false;
 };
 
 /** 解析配置文件的错误码
