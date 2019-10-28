@@ -51,7 +51,7 @@ void ISimpleLog::Log()
     if (configEntry.m_isNeedDmpToFile)
     {
         DogString path = configEntry.m_path;
-        path += _DogT("\\");
+        path += _DogT("\\log\\");
         path += configEntry.m_name;
         DumpToFileExecutor fileExecutor(path);
         fileExecutor.Executor(logFormated);

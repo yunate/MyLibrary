@@ -522,5 +522,8 @@
     <ClInclude Include="..\source\typedef\DogInterger.h">
       <Filter>typedef</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\dir_utils\Test_DirUtils.h">
+      <Filter>dir_utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -33,6 +33,12 @@ public:
     virtual bool Executor(const DogString& logStr);
 
 private:
+    /** 获取日志文件路径，如果不存在则创建
+    @return 日志文件路径
+    */
+    DogString GetAndCreateLogFile();
+
+private:
     /** 目标文件夹路径
     */
     DogString m_path;

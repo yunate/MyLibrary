@@ -23,6 +23,7 @@
     <ClCompile Include="..\source\LogDog\LogExecutor.cpp" />
     <ClCompile Include="..\source\LogDog\LogImpl.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\vendor\dir_utils\dir_utils.cpp" />
     <ClCompile Include="..\vendor\init_file\init_file.cpp" />
     <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp" />
   </ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="..\source\LogDog\LogDogDef.h" />
     <ClInclude Include="..\source\LogDog\LogExecutor.h" />
     <ClInclude Include="..\source\LogDog\LogImpl.h" />
+    <ClInclude Include="..\vendor\dir_utils\dir_utils.h" />
     <ClInclude Include="..\vendor\init_file\init_file.h" />
     <ClInclude Include="..\vendor\task\ISimpleTask.h" />
     <ClInclude Include="..\vendor\task\ITask.h" />

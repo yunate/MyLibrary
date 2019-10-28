@@ -79,6 +79,7 @@
     <ClInclude Include="..\source\cpu\cpu_thread_count.h" />
     <ClInclude Include="..\source\cpu\test.h" />
     <ClInclude Include="..\source\dir_utils\dir_utils.h" />
+    <ClInclude Include="..\source\dir_utils\Test_DirUtils.h" />
     <ClInclude Include="..\source\encrypt\aes.h" />
     <ClInclude Include="..\source\encrypt\b64.h" />
     <ClInclude Include="..\source\encrypt\crc32.h" />
