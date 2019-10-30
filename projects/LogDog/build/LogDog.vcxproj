@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\LogDog\private\LogDog.cpp" />
     <ClCompile Include="..\source\LogDog\private\LogDogConfig.cpp" />
     <ClCompile Include="..\source\LogDog\private\LogExecutorImpl.cpp" />
     <ClCompile Include="..\source\LogDog\private\LogImpl.cpp" />

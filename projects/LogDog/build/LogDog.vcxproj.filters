@@ -46,6 +46,9 @@
     <ClCompile Include="..\source\LogDog\private\LogExecutorImpl.cpp">
       <Filter>LogDog\private</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\LogDog\private\LogDog.cpp">
+      <Filter>LogDog\private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\vendor\init_file\init_file.h">

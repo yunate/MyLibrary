@@ -54,7 +54,9 @@ public:
     @param [in] level 日志等会
     @param [in] logStr 日志具体内容
     */
-    ISimpleLog()
+    ISimpleLog(LogDogConfigLevel level, const DogString& logStr):
+        m_level(level),
+        m_logStr(logStr)
     {
 
     }
@@ -67,22 +69,14 @@ public:
     */
     virtual void Log();
 
-    /** 初始化
-    @param [in] level 日志等级
-    @param [in] config 日志配置
+    /** 添加一个执行器
     */
-    inline void Init(LogDogConfigLevel level, const std::shared_ptr <LogDogConfig>& config)
-    {
-        m_level = level;
-        m_spConfig = config;
-    }
-
     inline void PushExecutor(const std::shared_ptr<ILogExecutor>& executor)
     {
         m_executors.push_back(executor);
     }
 
-private:
+protected:
     /** 格式化日志字符串
     @param [out] outLogStr 输出字符串
     @return 是否成功
@@ -90,9 +84,9 @@ private:
     virtual bool MakeLogStr(DogString& outLogStr) = 0;
 
 protected:
-    /** 配置文件
+    /** 日志内容
     */
-    std::shared_ptr <LogDogConfig> m_spConfig;
+    DogString m_logStr;
 
     /** 日志等级
     */
@@ -110,10 +104,11 @@ class SimpleLog :
 {
 public:
     /** 构造函数
+    @param [in] level 日志等会
     @param [in] logStr 日志具体内容
     */
-    SimpleLog(const DogString& logStr) :
-        m_logStr(logStr)
+    SimpleLog(LogDogConfigLevel level, const DogString& logStr) :
+        ISimpleLog(level, logStr)
     {
 
     }
@@ -125,17 +120,12 @@ public:
 
     }
 
-private:
+protected:
     /** 格式化日志字符串
     @param [out] outLogStr 输出字符串
     @return 是否成功
     */
     virtual bool MakeLogStr(DogString& outLogStr);
-
-private:
-    /** 日志内容
-    */
-    DogString m_logStr;
 };
 
 #endif //__ILOG_H_
