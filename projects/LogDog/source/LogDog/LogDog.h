@@ -35,6 +35,7 @@ public:
     {
         // 初始化任务队列
         m_spLogQue.reset(new(std::nothrow) SimpleTaskQueue());
+        m_spLogQue->Start();
 
         // 初始化配置文件
         m_spConfig.reset(new(std::nothrow)LogDogConfig(path, name));
@@ -48,26 +49,6 @@ public:
         {
             m_spLogQue->PushTask(log);
         }
-    }
-
-    inline void Bind(int type, void* creator)
-    {
-        if (creator != NULL)
-        {
-            m_logCreators[type] = creator;
-        }
-    }
-
-    inline void* GetCreator(int type)
-    {
-        auto it = m_logCreators.find(type);
-
-        if (it != m_logCreators.end())
-        {
-            return (it->second);
-        }
-
-        return NULL;
     }
 
     /** 释放资源，其实这个函数并不是很重要，因为单例在程序退出的时候会自己释放的，
@@ -91,10 +72,6 @@ private:
     /** 日志任务队列
     */
     std::shared_ptr<SimpleTaskQueue> m_spLogQue;
-
-    /** 日志实体创造者
-    */
-    std::unordered_map<int, void*> m_logCreators;
 };
 
 /** 初始化
@@ -141,6 +118,8 @@ inline void SIMPLE_LOG(LogDogConfigLevel level, const DogString& logStr)
     }
 
     log->Init(level, Singleton<LogDog>::GetInstance().GetConfig());
+    log->PushExecutor(std::make_shared<DumpToFileExecutor>());
+    log->PushExecutor(std::make_shared<UpLoadExecutor>());
     Singleton<LogDog>::GetInstance().Push(log);
 }
 

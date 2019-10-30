@@ -25,6 +25,7 @@
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\vendor\dir_utils\dir_utils.cpp" />
     <ClCompile Include="..\vendor\init_file\init_file.cpp" />
+    <ClCompile Include="..\vendor\stream\FileStream.cpp" />
     <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +37,8 @@
     <ClInclude Include="..\source\LogDog\LogImpl.h" />
     <ClInclude Include="..\vendor\dir_utils\dir_utils.h" />
     <ClInclude Include="..\vendor\init_file\init_file.h" />
+    <ClInclude Include="..\vendor\stream\FileStream.h" />
+    <ClInclude Include="..\vendor\stream\IDogStream.h" />
     <ClInclude Include="..\vendor\task\ISimpleTask.h" />
     <ClInclude Include="..\vendor\task\ITask.h" />
     <ClInclude Include="..\vendor\task\SimpleTaskQueue.h" />

@@ -3,10 +3,10 @@
 #include "LogDogDef.h"
 #include "init_file/init_file.h"
 
-// 失败状态下每10s会尝试加载
+// 文件不存在状态下每10s会尝试加载
 #define FAILURE_TIME_PASS 10000
 
-// 成功的状态每3min会尝试加载
+// 文件存在状态每3min会尝试加载
 #define CUCCESS_TIME_PASS 160000
 
 LogDogConfig::LogDogConfig(const DogString& path, const DogString& name)
@@ -20,9 +20,9 @@ void LogDogConfig::TryReload()
 {
     bool needReload = false;
 
-    if (m_errorCode != LogDogConfigErrorCode::LDC_NO_ERROR)
+    if (m_errorCode == LogDogConfigErrorCode::LDC_NO_CONFIG_FILE)
     {
-        // 失败状态下每10s会尝试加载
+        // 文件不存在状态下每10s会尝试加载
         if (m_timer.GetTimePass() > FAILURE_TIME_PASS)
         {
             needReload = true;
@@ -30,7 +30,7 @@ void LogDogConfig::TryReload()
     }
     else
     {
-        // 成功的状态每3min会尝试加载
+        // 文件存在状态每3min会尝试加载
         if (m_timer.GetTimePass() > CUCCESS_TIME_PASS)
         {
             needReload = true;
@@ -47,7 +47,7 @@ void LogDogConfig::ReLoad()
 {
     m_timer.ReSet();
     m_errorCode = LogDogConfigErrorCode::LDC_NO_ERROR;
-    IniFile* iniFile = IniFile::CreateObj(m_configEntry.m_path, true);
+    IniFile* iniFile = IniFile::CreateObj(m_configEntry.m_path);
 
     if (iniFile == NULL)
     {

@@ -3,6 +3,7 @@
 #include "LogExecutor.h"
 
 #include <windows.h>
+#include <assert.h>
 
 //////////////////////////////////////////////////////////////////////////
 ///DecreasePriority{
@@ -47,21 +48,10 @@ void ISimpleLog::Log()
         return;
     }
 
-    // 需要写文件
-    if (configEntry.m_isNeedDmpToFile)
+    for (auto it : m_executors)
     {
-        DogString path = configEntry.m_path;
-        path += _DogT("\\log\\");
-        path += configEntry.m_name;
-        DumpToFileExecutor fileExecutor(path);
-        fileExecutor.Executor(logFormated);
-    }
-
-    // 需要上传
-    if (configEntry.m_isNeedUpload)
-    {
-        UpLoadExecutor uploadExecutor;
-        uploadExecutor.Executor(logFormated);
+        assert(it != NULL);
+        it->Executor(logFormated, m_spConfig);
     }
 }
 ///SimpleLog}
@@ -84,6 +74,8 @@ SimpleLog::~SimpleLog()
 
 bool SimpleLog::MakeLogStr(DogString& outLogStr)
 {
+    outLogStr = m_logStr;
+
     // 不要对m_spConfig判空，因为约定了判空操作在调用前
     LogDogConfigEntry& configEntry = m_spConfig->GetLogDogConfigEntry();
     

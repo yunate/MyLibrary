@@ -16,6 +16,9 @@
     <Filter Include="vendor\dir_utils">
       <UniqueIdentifier>{c1f810d3-2f9a-4324-ba8a-81cb0a62b7b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\stream">
+      <UniqueIdentifier>{0dd743de-f8c9-4002-935a-fc55e7424f3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
@@ -36,6 +39,9 @@
     </ClCompile>
     <ClCompile Include="..\vendor\dir_utils\dir_utils.cpp">
       <Filter>vendor\dir_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\stream\FileStream.cpp">
+      <Filter>vendor\stream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +77,12 @@
     </ClInclude>
     <ClInclude Include="..\vendor\dir_utils\dir_utils.h">
       <Filter>vendor\dir_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\stream\FileStream.h">
+      <Filter>vendor\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\stream\IDogStream.h">
+      <Filter>vendor\stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

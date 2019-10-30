@@ -23,7 +23,7 @@ namespace utilstest
 
     void Test_FileStream()
     {
-        IDogStream * pDogStream = new FileStream("C:\\Users\\yudh\\Desktop\\test1\\filestream.txt");
+        IDogStream * pDogStream = new FileStream(_DogT("C:\\Users\\yudh\\Desktop\\test1\\filestream.txt"));
         char buff[] = "hello file stream";
         pDogStream->Write((u8*)buff, sizeof(buff));
         pDogStream->Write((u8*)buff, sizeof(buff));

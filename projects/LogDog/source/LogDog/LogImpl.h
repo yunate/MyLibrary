@@ -4,7 +4,9 @@
 
 #include "ILog.h"
 #include "LogDogConfig.h"
-#include "LogDogDef.h"
+#include "LogExecutor.h"
+
+#include <vector>
 #include <memory>
 
 /** 降低线程的优先级,这个是一个特殊的日志
@@ -56,6 +58,11 @@ public:
         m_spConfig = config;
     }
 
+    inline void PushExecutor(const std::shared_ptr<ILogExecutor>& executor)
+    {
+        m_executors.push_back(executor);
+    }
+
 private:
     /** 格式化日志字符串
     @param [out] outLogStr 输出字符串
@@ -72,6 +79,9 @@ protected:
     */
     LogDogConfigLevel m_level = LogDogConfigLevel::LDC_LEVEL_5;
 
+    /** 后续执行器
+    */
+    std::vector<std::shared_ptr<ILogExecutor> > m_executors;
 };
 
 class SimpleLog :

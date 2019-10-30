@@ -7,12 +7,12 @@
 using DogStringA = std::string;
 using DogStringW = std::wstring;
 using DogCharA = char;
-using DogCharw = wchar_t;
+using DogCharW = wchar_t;
 
 #ifdef _UNICODE
     #define _DogT(x) L ## x
     using DogString = DogStringW;
-    using DogChar = DogCharw;
+    using DogChar = DogCharW;
 #else
     #define _DogT
     using DogString = DogStringA;

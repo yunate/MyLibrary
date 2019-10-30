@@ -18,7 +18,7 @@ public:
 
 public:
     /** 尝试重新加载
-    @note 会有时间间隔，如果平凡的加载会被拒绝
+    @note 会有时间间隔，如果频繁的加载会被拒绝
     */
     void TryReload();
 
