@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\LogDog\LogDogConfig.cpp" />
-    <ClCompile Include="..\source\LogDog\LogExecutor.cpp" />
-    <ClCompile Include="..\source\LogDog\LogImpl.cpp" />
+    <ClCompile Include="..\source\LogDog\private\LogDogConfig.cpp" />
+    <ClCompile Include="..\source\LogDog\private\LogExecutorImpl.cpp" />
+    <ClCompile Include="..\source\LogDog\private\LogImpl.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\vendor\dir_utils\dir_utils.cpp" />
     <ClCompile Include="..\vendor\init_file\init_file.cpp" />
@@ -30,11 +30,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\LogDog\ILog.h" />
+    <ClInclude Include="..\source\LogDog\ILogExecutor.h" />
     <ClInclude Include="..\source\LogDog\LogDog.h" />
     <ClInclude Include="..\source\LogDog\LogDogConfig.h" />
     <ClInclude Include="..\source\LogDog\LogDogDef.h" />
-    <ClInclude Include="..\source\LogDog\LogExecutor.h" />
-    <ClInclude Include="..\source\LogDog\LogImpl.h" />
     <ClInclude Include="..\vendor\dir_utils\dir_utils.h" />
     <ClInclude Include="..\vendor\init_file\init_file.h" />
     <ClInclude Include="..\vendor\stream\FileStream.h" />

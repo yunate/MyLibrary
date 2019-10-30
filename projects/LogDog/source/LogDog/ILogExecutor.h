@@ -5,10 +5,6 @@
 #include "typedef/DogString.h"
 #include "LogDogConfig.h"
 
-/** 日志文件单个最大大小 5M
-*/
-const int g_file_size = 5242880;
-
 class ILogExecutor
 {
 public:
@@ -24,7 +20,7 @@ public:
     virtual bool Executor(const DogString& logStr, const std::shared_ptr <LogDogConfig>& config) = 0;
 };
 
-/** 写到文件
+/** 提供一个写到文件的处理器
 */
 class DumpToFileExecutor :
     public ILogExecutor
@@ -64,7 +60,7 @@ private:
     bool StrInc(DogChar* buff, int len);
 };
 
-/** 传到网络
+/** 提供一个传到网络的处理器
 */
 class UpLoadExecutor :
     public ILogExecutor
@@ -77,4 +73,5 @@ public:
     */
     virtual bool Executor(const DogString& logStr, const std::shared_ptr <LogDogConfig>& config);
 };
+
 #endif //__LOG_EXECUTOR_H_

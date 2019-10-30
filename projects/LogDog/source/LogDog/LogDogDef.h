@@ -76,7 +76,7 @@ enum class LogDogConfigErrorCode
     */
     LDC_NO_CONFIG_FILE,
 
-    /** 配置文件中没有找到响应的名字
+    /** 配置文件中没有找到对应的名字
     */
     LDC_NO_MATCH_NAME
 };

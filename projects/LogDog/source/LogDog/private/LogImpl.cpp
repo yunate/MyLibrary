@@ -1,22 +1,5 @@
 
-#include "LogImpl.h"
-#include "LogExecutor.h"
-
-#include <windows.h>
-#include <assert.h>
-
-//////////////////////////////////////////////////////////////////////////
-///DecreasePriority{
-void DecreasePriority::Log()
-{
-    ::SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
-}
-///DecreasePriority}
-//////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////
-///SimpleLog{
+#include "../ILog.h"
 
 void ISimpleLog::Log()
 {
@@ -54,31 +37,14 @@ void ISimpleLog::Log()
         it->Executor(logFormated, m_spConfig);
     }
 }
-///SimpleLog}
-//////////////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////////////
-///SimpleLog{
-
-SimpleLog::SimpleLog(const DogString& logStr) :
-    m_logStr(logStr)
-{
-
-}
-
-SimpleLog::~SimpleLog()
-{
-
-}
-
-bool SimpleLog::MakeLogStr(DogString& outLogStr)
+bool SimpleLog::MakeLogStr(DogString & outLogStr)
 {
     outLogStr = m_logStr;
 
     // 不要对m_spConfig判空，因为约定了判空操作在调用前
     LogDogConfigEntry& configEntry = m_spConfig->GetLogDogConfigEntry();
-    
+
     switch (configEntry.m_level)
     {
     case LogDogConfigLevel::LDC_LEVEL_0:
@@ -101,6 +67,3 @@ bool SimpleLog::MakeLogStr(DogString& outLogStr)
 
     return true;
 }
-///SimpleLog}
-//////////////////////////////////////////////////////////////////////////
-

@@ -19,6 +19,9 @@
     <Filter Include="vendor\stream">
       <UniqueIdentifier>{0dd743de-f8c9-4002-935a-fc55e7424f3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LogDog\private">
+      <UniqueIdentifier>{e9f66c33-5149-4ab4-abfe-85d0e657c171}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
@@ -28,20 +31,20 @@
     <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp">
       <Filter>vendor\task</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\LogDog\LogImpl.cpp">
-      <Filter>LogDog</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\LogDog\LogDogConfig.cpp">
-      <Filter>LogDog</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\LogDog\LogExecutor.cpp">
-      <Filter>LogDog</Filter>
-    </ClCompile>
     <ClCompile Include="..\vendor\dir_utils\dir_utils.cpp">
       <Filter>vendor\dir_utils</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\stream\FileStream.cpp">
       <Filter>vendor\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LogDog\private\LogDogConfig.cpp">
+      <Filter>LogDog\private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LogDog\private\LogImpl.cpp">
+      <Filter>LogDog\private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LogDog\private\LogExecutorImpl.cpp">
+      <Filter>LogDog\private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,16 +66,10 @@
     <ClInclude Include="..\source\LogDog\LogDogDef.h">
       <Filter>LogDog</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\LogDog\LogImpl.h">
-      <Filter>LogDog</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\LogDog\LogDogConfig.h">
       <Filter>LogDog</Filter>
     </ClInclude>
     <ClInclude Include="..\source\LogDog\ILog.h">
-      <Filter>LogDog</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\LogDog\LogExecutor.h">
       <Filter>LogDog</Filter>
     </ClInclude>
     <ClInclude Include="..\vendor\dir_utils\dir_utils.h">
@@ -83,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="..\vendor\stream\IDogStream.h">
       <Filter>vendor\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\LogDog\ILogExecutor.h">
+      <Filter>LogDog</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

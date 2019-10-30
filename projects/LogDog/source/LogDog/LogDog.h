@@ -6,7 +6,7 @@
 #ifndef _LOGDOG_H__
 #define _LOGDOG_H__
 
-#include "LogImpl.h"
+#include "ILog.h"
 #include "LogDogConfig.h"
 
 #include "singleton.h"
@@ -72,6 +72,21 @@ private:
     /** 日志任务队列
     */
     std::shared_ptr<SimpleTaskQueue> m_spLogQue;
+};
+
+/** 降低线程的优先级,这个是一个特殊的日志
+*/
+#include <windows.h>
+class DecreasePriority :
+    public ILog
+{
+public:
+    /** 日志
+    */
+    virtual void Log()
+    {
+        ::SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
+    }
 };
 
 /** 初始化

@@ -1,6 +1,6 @@
 
+#include "../ILogExecutor.h"
 #include "dir_utils/dir_utils.h"
-#include "LogExecutor.h"
 #include "stream/FileStream.h"
 
 #include <tchar.h>
@@ -9,6 +9,10 @@
 
 //////////////////////////////////////////////////////////////////////////
 ///DumpToFileExecutor{
+/** 日志文件单个最大大小 5M
+*/
+const int g_file_size = 5242880;
+
 DumpToFileExecutor::DumpToFileExecutor()
 {
 }

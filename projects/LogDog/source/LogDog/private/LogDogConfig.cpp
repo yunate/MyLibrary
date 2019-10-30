@@ -1,6 +1,6 @@
 
-#include "LogDogConfig.h"
-#include "LogDogDef.h"
+#include "../LogDogConfig.h"
+#include "../LogDogDef.h"
 #include "init_file/init_file.h"
 
 // 文件不存在状态下每10s会尝试加载
