@@ -1,5 +1,5 @@
 
-#include "LogDog/LogDog.h"
+#include "LogDog/LogDogDef.h"
 #include <windows.h>
 
 #include <memory>

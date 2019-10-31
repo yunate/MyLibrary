@@ -44,6 +44,13 @@ enum class LogDogConfigLevel
 /** 初始化
 @param [in] path 配置文件路径
 @param [in] name 配置文件中对应的secsion
+@eg:
+///////////////////////////////test.ini///////////////////////////////////////////
+//                              [测试]                                           //
+//                              level=4                                         //
+//                              dump_to_file=true                               //
+//                              upload=1                                        //
+///////////////////////////////test.ini///////////////////////////////////////////
 */
 void LOG_INIT(const DogString& path, const DogString& name);
 
