@@ -1,5 +1,7 @@
 
 #include "../ILogExecutor.h"
+#include "../LogDog.h"
+
 #include "dir_utils/dir_utils.h"
 #include "stream/FileStream.h"
 
@@ -17,17 +19,17 @@ DumpToFileExecutor::DumpToFileExecutor()
 {
 }
 
-bool DumpToFileExecutor::Executor(const DogString& logStr, const std::shared_ptr <LogDogConfig>& config)
+bool DumpToFileExecutor::Executor(const DogString& logStr)
 {
-    const LogDogConfigEntry& configEntry = config->GetLogDogConfigEntry();
+    std::shared_ptr<LogDogConfig> spConfig = Singleton<LogDog>::GetInstance().GetConfig();
 
     // 需要写文件
-    if (!configEntry.m_isNeedDmpToFile)
+    if (!spConfig->GetBool(_DogT("dump_to_file")))
     {
         return false;
     }
 
-    DogString baseDirBath = configEntry.m_path;
+    DogString baseDirBath = spConfig->GetConfigPath();
 
     // 去掉文件名
     for (size_t i = baseDirBath.length() - 1; i >= 0; --i)
@@ -43,7 +45,7 @@ bool DumpToFileExecutor::Executor(const DogString& logStr, const std::shared_ptr
     }
 
     baseDirBath += _DogT("\\log\\");
-    baseDirBath += configEntry.m_name;
+    baseDirBath += spConfig->GetConfigName();
     baseDirBath += _DogT("\\");
     DogString path = GetAndCreateLogFile(logStr.length(), baseDirBath);
     FileStream fileStream(path.c_str());
@@ -185,14 +187,13 @@ bool DumpToFileExecutor::StrInc(DogChar * buff, int len)
 
 //////////////////////////////////////////////////////////////////////////
 ///UpLoadExecutor{
-bool UpLoadExecutor::Executor(const DogString & logStr, const std::shared_ptr <LogDogConfig>& config)
+bool UpLoadExecutor::Executor(const DogString & logStr)
 {
-    const LogDogConfigEntry& configEntry = config->GetLogDogConfigEntry();
+    std::shared_ptr<LogDogConfig> spConfig = Singleton<LogDog>::GetInstance().GetConfig();
 
     // 需要上传
-    if (configEntry.m_isNeedUpload)
+    if (!spConfig->GetBool(_DogT("upload")))
     {
-        UpLoadExecutor uploadExecutor;
     }
 
     return false;

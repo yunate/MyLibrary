@@ -7,12 +7,15 @@
 #define __ILOG_H_
 
 #include "ILogExecutor.h"
-#include "task/ISimpleTask.h"
 #include "noncopyable.h"
+#include "LogDogDef.h"
+
+#include "task/ISimpleTask.h"
 
 #include <assert.h>
 #include <memory>
 #include <vector>
+
 
 /** 日志实体
 */
@@ -21,16 +24,13 @@ class ILog :
     public NonCopyable
 {
 public:
-    ILog()
-    {
-    }
+    ILog();
+
+    virtual ~ILog();
 
     /** 执行任务
     */
-    virtual void DoTask()
-    {
-        Log();
-    }
+    virtual void DoTask();
 
     /** 日志任务
     */
@@ -54,33 +54,20 @@ public:
     @param [in] level 日志等会
     @param [in] logStr 日志具体内容
     */
-    ISimpleLog()
-    {
+    ISimpleLog(LogDogConfigLevel level, const DogString& logStr);
 
-    }
-
-    virtual ~ISimpleLog()
-    {
-    }
+    /** 析构函数
+    */
+    virtual ~ISimpleLog();
 
     /** 日志
     */
     virtual void Log();
 
-    /** 初始化
-    @param [in] level 日志等级
-    @param [in] config 日志配置
+    /** 添加一个执行器
+    @param [in] executor 执行器
     */
-    inline void Init(LogDogConfigLevel level, const std::shared_ptr <LogDogConfig>& config)
-    {
-        m_level = level;
-        m_spConfig = config;
-    }
-
-    inline void PushExecutor(const std::shared_ptr<ILogExecutor>& executor)
-    {
-        m_executors.push_back(executor);
-    }
+    void PushExecutor(const std::shared_ptr<ILogExecutor>& executor);
 
 private:
     /** 格式化日志字符串
@@ -90,13 +77,13 @@ private:
     virtual bool MakeLogStr(DogString& outLogStr) = 0;
 
 protected:
-    /** 配置文件
-    */
-    std::shared_ptr <LogDogConfig> m_spConfig;
-
     /** 日志等级
     */
     LogDogConfigLevel m_level = LogDogConfigLevel::LDC_LEVEL_5;
+
+    /** 日志内容
+    */
+    DogString m_logStr;
 
     /** 后续执行器
     */
@@ -112,18 +99,11 @@ public:
     /** 构造函数
     @param [in] logStr 日志具体内容
     */
-    SimpleLog(const DogString& logStr) :
-        m_logStr(logStr)
-    {
-
-    }
+    SimpleLog(LogDogConfigLevel level, const DogString& logStr);
 
     /** 析构函数
     */
-    ~SimpleLog()
-    {
-
-    }
+    ~SimpleLog();
 
 private:
     /** 格式化日志字符串
@@ -131,11 +111,6 @@ private:
     @return 是否成功
     */
     virtual bool MakeLogStr(DogString& outLogStr);
-
-private:
-    /** 日志内容
-    */
-    DogString m_logStr;
 };
 
 #endif //__ILOG_H_
