@@ -41,7 +41,6 @@ void LOG_UNINIT()
 
 void SIMPLE_LOG(LogDogConfigLevel level, const DogString & logStr)
 {
-    // 将日志线程的优先级降低
     std::shared_ptr<ISimpleLog> log(new (std::nothrow)SimpleLog(level, logStr));
 
     if (log == NULL)
