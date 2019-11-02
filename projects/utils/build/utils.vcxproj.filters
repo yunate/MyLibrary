@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="vendor">
-      <UniqueIdentifier>{989D3B94-74D2-41C7-9472-E071837FBC24}</UniqueIdentifier>
-    </Filter>
     <Filter Include="code_cvt">
       <UniqueIdentifier>{caabe908-f56b-4297-bb9b-90879cb1370f}</UniqueIdentifier>
     </Filter>

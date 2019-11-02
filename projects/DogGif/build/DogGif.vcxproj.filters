@@ -57,7 +57,6 @@
     <ClCompile Include="..\vendor\file_utils_reader.cpp">
       <Filter>vendor</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\DogGif\StringTable.cpp" />
     <ClCompile Include="..\vendor\file_utils_writer.cpp">
       <Filter>vendor</Filter>
     </ClCompile>
@@ -75,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="..\vendor\simple_wnd\SimpleWnd.cpp">
       <Filter>vendor\simple_wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\DogGif\StringTable.cpp">
+      <Filter>DogGif</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
