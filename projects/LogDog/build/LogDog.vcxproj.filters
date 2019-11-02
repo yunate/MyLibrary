@@ -22,6 +22,9 @@
     <Filter Include="LogDog\private">
       <UniqueIdentifier>{e9f66c33-5149-4ab4-abfe-85d0e657c171}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\code_cvt">
+      <UniqueIdentifier>{caaf329b-9782-468a-8934-22214461ea43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
@@ -48,6 +51,9 @@
     </ClCompile>
     <ClCompile Include="..\source\LogDog\private\LogDog.cpp">
       <Filter>LogDog\private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\code_cvt\code_cvt.cpp">
+      <Filter>vendor\code_cvt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="..\source\LogDog\ILogExecutor.h">
       <Filter>LogDog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\code_cvt\code_cvt.h">
+      <Filter>vendor\code_cvt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

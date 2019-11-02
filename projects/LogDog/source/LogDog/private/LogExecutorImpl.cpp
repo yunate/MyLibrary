@@ -2,6 +2,7 @@
 #include "../ILogExecutor.h"
 #include "../LogDog.h"
 
+#include "code_cvt/code_cvt.h"
 #include "dir_utils/dir_utils.h"
 #include "stream/FileStream.h"
 
@@ -32,7 +33,7 @@ bool DumpToFileExecutor::Executor(const DogString& logStr)
     DogString baseDirBath = spConfig->GetConfigPath();
 
     // 去掉文件名
-    for (size_t i = baseDirBath.length() - 1; i >= 0; --i)
+    for (int i = (int)baseDirBath.length() - 1; i >= 0; --i)
     {
         if (baseDirBath[i] == _DogT('\\') || baseDirBath[i] == _DogT('/'))
         {
@@ -49,7 +50,18 @@ bool DumpToFileExecutor::Executor(const DogString& logStr)
     baseDirBath += _DogT("\\");
     DogString path = GetAndCreateLogFile(logStr.length(), baseDirBath);
     FileStream fileStream(path.c_str());
-    fileStream.WriteW((const u16*)logStr.c_str(), logStr.length());
+
+    // 转换为utf-8编码
+    DogStringA utf8Log;
+#ifdef _UNICODE
+    codecvt::UTF16ToUTF8_STD(logStr, utf8Log);
+#else
+    DogStringW tmp;
+    codecvt::ANSIToUTF16(logStr, tmp);
+    codecvt::UTF16ToUTF8_STD(tmp, utf8Log);
+#endif // 
+
+    fileStream.Write((const u8*)utf8Log.c_str(), (s32)utf8Log.length());
     return true;
 }
 
@@ -61,16 +73,18 @@ DogString DumpToFileExecutor::GetAndCreateLogFile(size_t logLen, const DogString
     }
 
     // 获得程序模块名称
-    DogChar buff[_MAX_ENV] = {0};
+    std::vector<DogChar> buffVec;
+    buffVec.resize(_MAX_ENV, 0);
+    DogChar* buff = &buffVec[0];
 
-    if (::GetModuleFileName(0, buff, _MAX_ENV) == 0)
+    if (buff == NULL || ::GetModuleFileName(0, buff, _MAX_ENV) == 0)
     {
         return _DogT("");
     }
 
     int index = 0;
     DogChar tmp = buff[index];
-    DogChar* fileName = NULL;
+    DogChar* fileName = buff;
 
     while (tmp != 0)
     {
@@ -102,7 +116,7 @@ DogString DumpToFileExecutor::GetAndCreateLogFile(size_t logLen, const DogString
     }
 
     // 加上文件名称（小时-0）
-    DogChar hour[13] = {0};
+    DogChar hour[20] = {0};
     ::_stprintf_s(hour, _DogT("%02dh-%04d.log"), nowtime.tm_hour, 0);
     logPath += hour;
 
@@ -126,6 +140,13 @@ bool DumpToFileExecutor::CheckFileSizeAndCreate(size_t logLen, DogString& filePa
 
         if (fileStream.Size() + logLen < g_file_size)
         {
+//             // 文件是新建的话，加上文件头 0xff 0xfe 让他的编码变为 UCS-2 Little Endian
+//             if (fileStream.Size() == 0)
+//             {
+//                 unsigned char header[] = { 0xff, 0xfe};
+//                 fileStream.Write(header, 2);
+//             }
+            // 用utf-8编码，不然空间占用太大了
             break;
         }
 

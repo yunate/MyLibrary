@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <tchar.h>
 
-bool dir_uitls::IsDir(const std::wstring & path)
+bool dir_uitls::IsDir(const DogString & path)
 {
     DWORD ftyp = ::GetFileAttributes(path.c_str());
 
@@ -16,30 +16,30 @@ bool dir_uitls::IsDir(const std::wstring & path)
     return false;
 }
 
-bool dir_uitls::IsFileExist(const std::wstring& filePath)
+bool dir_uitls::IsFileExist(const DogString& filePath)
 {
     DWORD dwAttrib = ::GetFileAttributes(filePath.c_str());
     return (INVALID_FILE_ATTRIBUTES != dwAttrib) && (0 == (dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 }
 
-bool dir_uitls::IsDirExist(const std::wstring& dirPath)
+bool dir_uitls::IsDirExist(const DogString& dirPath)
 {
     DWORD dwAttrib = ::GetFileAttributes(dirPath.c_str());
     return (INVALID_FILE_ATTRIBUTES != dwAttrib) && (0 != (dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 }
 
-bool dir_uitls::IsPathExist(const std::wstring& path)
+bool dir_uitls::IsPathExist(const DogString& path)
 {
     DWORD dwAttrib = ::GetFileAttributes(path.c_str());
     return INVALID_FILE_ATTRIBUTES != dwAttrib;
 }
 
-bool dir_uitls::DeleteFile_(const std::wstring& dfilePath)
+bool dir_uitls::DeleteFile_(const DogString& dfilePath)
 {
     return (::DeleteFile(dfilePath.c_str()) == TRUE);
 }
 
-bool dir_uitls::DeleteDir(const std::wstring & dirPath)
+bool dir_uitls::DeleteDir(const DogString & dirPath)
 {
     if (!IsDirExist(dirPath))
     {
@@ -50,13 +50,13 @@ bool dir_uitls::DeleteDir(const std::wstring & dirPath)
     WIN32_FIND_DATA fileInfo;
     ::memset(&fileInfo, 0, sizeof(LPWIN32_FIND_DATA));
 
-    std::wstring wsTemp(dirPath);
+    DogString wsTemp(dirPath);
     if (_T('\\') != wsTemp[wsTemp.length() - 1] && _T('/') != wsTemp[wsTemp.length() - 1])
     {
         wsTemp.append(_T("\\"));
     }
 
-    std::wstring rootPath(wsTemp);
+    DogString rootPath(wsTemp);
     wsTemp.append(_T("*"));
     hFile = ::FindFirstFile(wsTemp.c_str(), &fileInfo);
 
@@ -68,13 +68,13 @@ bool dir_uitls::DeleteDir(const std::wstring & dirPath)
     do
     {
         //如果是当前目录或者是上级目录，就直接进入下一次循环  
-        if (wcscmp(fileInfo.cFileName, _T(".")) == 0 ||
-			wcscmp(fileInfo.cFileName, _T("..")) == 0)
+        if (_tcscmp(fileInfo.cFileName, _T(".")) == 0 ||
+            _tcscmp(fileInfo.cFileName, _T("..")) == 0)
         {
             continue;
         }
 
-        std::wstring subPath = rootPath + fileInfo.cFileName;
+        DogString subPath = rootPath + fileInfo.cFileName;
         if (IsDir(subPath))
         {
             if (!DeleteDir(subPath))
@@ -97,7 +97,7 @@ bool dir_uitls::DeleteDir(const std::wstring & dirPath)
     return true;
 }
 
-bool dir_uitls::CreateDir(const std::wstring& dirPath)
+bool dir_uitls::CreateDir(const DogString& dirPath)
 {
 	if (IsDirExist(dirPath))
 	{
@@ -107,7 +107,7 @@ bool dir_uitls::CreateDir(const std::wstring& dirPath)
     return ::CreateDirectory(dirPath.c_str(), NULL) == TRUE;
 }
 
-bool dir_uitls::CreateDirEx(const std::wstring& dirPath)
+bool dir_uitls::CreateDirEx(const DogString& dirPath)
 {
     if (dirPath.empty())
     {
@@ -119,7 +119,7 @@ bool dir_uitls::CreateDirEx(const std::wstring& dirPath)
         return true;
     }
 
-    std::wstring tmp = _T("");
+    DogString tmp = _T("");
     tmp.resize(dirPath.size(), 0);
 
     for (size_t i = 0; i < dirPath.length(); ++i)
@@ -146,7 +146,7 @@ bool dir_uitls::CreateDirEx(const std::wstring& dirPath)
     return true;
 }
 
-bool dir_uitls::CreateFile_(const std::wstring& filePath)
+bool dir_uitls::CreateFile_(const DogString& filePath)
 {
     DWORD dwDesiredAccess = GENERIC_READ | GENERIC_WRITE;
     DWORD dwShareMode = 0;

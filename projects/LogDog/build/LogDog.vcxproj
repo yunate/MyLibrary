@@ -24,6 +24,7 @@
     <ClCompile Include="..\source\LogDog\private\LogExecutorImpl.cpp" />
     <ClCompile Include="..\source\LogDog\private\LogImpl.cpp" />
     <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\vendor\code_cvt\code_cvt.cpp" />
     <ClCompile Include="..\vendor\dir_utils\dir_utils.cpp" />
     <ClCompile Include="..\vendor\init_file\init_file.cpp" />
     <ClCompile Include="..\vendor\stream\FileStream.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="..\source\LogDog\LogDog.h" />
     <ClInclude Include="..\source\LogDog\LogDogConfig.h" />
     <ClInclude Include="..\source\LogDog\LogDogDef.h" />
+    <ClInclude Include="..\vendor\code_cvt\code_cvt.h" />
     <ClInclude Include="..\vendor\dir_utils\dir_utils.h" />
     <ClInclude Include="..\vendor\init_file\init_file.h" />
     <ClInclude Include="..\vendor\stream\FileStream.h" />
@@ -54,27 +56,27 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
