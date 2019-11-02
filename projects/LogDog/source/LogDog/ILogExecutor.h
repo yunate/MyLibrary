@@ -14,10 +14,9 @@ public:
 
     /** 日志后续处理
     @param [in] logStr 日志字符串
-    @param [in] config 日志配置
     @return 是否成功
     */
-    virtual bool Executor(const DogString& logStr, const std::shared_ptr <LogDogConfig>& config) = 0;
+    virtual bool Executor(const DogString& logStr) = 0;
 };
 
 /** 提供一个写到文件的处理器
@@ -32,10 +31,9 @@ public:
 
     /** 日志后续处理
     @param [in] logStr 日志字符串
-    @param [in] config 日志配置
     @return 是否成功
     */
-    virtual bool Executor(const DogString& logStr, const std::shared_ptr <LogDogConfig>& config);
+    virtual bool Executor(const DogString& logStr);
 
 private:
     /** 获取日志文件路径，如果不存在则创建
@@ -68,10 +66,9 @@ class UpLoadExecutor :
 public:
     /** 日志后续处理
     @param [in] logStr 日志字符串
-    @param [in] config 日志配置
     @return 是否成功
     */
-    virtual bool Executor(const DogString& logStr, const std::shared_ptr <LogDogConfig>& config);
+    virtual bool Executor(const DogString& logStr);
 };
 
 #endif //__LOG_EXECUTOR_H_

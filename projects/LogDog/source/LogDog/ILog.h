@@ -7,12 +7,15 @@
 #define __ILOG_H_
 
 #include "ILogExecutor.h"
-#include "task/ISimpleTask.h"
 #include "noncopyable.h"
+#include "LogDogDef.h"
+
+#include "task/ISimpleTask.h"
 
 #include <assert.h>
 #include <memory>
 #include <vector>
+
 
 /** 日志实体
 */
@@ -21,16 +24,13 @@ class ILog :
     public NonCopyable
 {
 public:
-    ILog()
-    {
-    }
+    ILog();
+
+    virtual ~ILog();
 
     /** 执行任务
     */
-    virtual void DoTask()
-    {
-        Log();
-    }
+    virtual void DoTask();
 
     /** 日志任务
     */
@@ -54,29 +54,22 @@ public:
     @param [in] level 日志等会
     @param [in] logStr 日志具体内容
     */
-    ISimpleLog(LogDogConfigLevel level, const DogString& logStr):
-        m_level(level),
-        m_logStr(logStr)
-    {
+    ISimpleLog(LogDogConfigLevel level, const DogString& logStr);
 
-    }
-
-    virtual ~ISimpleLog()
-    {
-    }
+    /** 析构函数
+    */
+    virtual ~ISimpleLog();
 
     /** 日志
     */
     virtual void Log();
 
     /** 添加一个执行器
+    @param [in] executor 执行器
     */
-    inline void PushExecutor(const std::shared_ptr<ILogExecutor>& executor)
-    {
-        m_executors.push_back(executor);
-    }
+    void PushExecutor(const std::shared_ptr<ILogExecutor>& executor);
 
-protected:
+private:
     /** 格式化日志字符串
     @param [out] outLogStr 输出字符串
     @return 是否成功
@@ -84,13 +77,13 @@ protected:
     virtual bool MakeLogStr(DogString& outLogStr) = 0;
 
 protected:
-    /** 日志内容
-    */
-    DogString m_logStr;
-
     /** 日志等级
     */
     LogDogConfigLevel m_level = LogDogConfigLevel::LDC_LEVEL_5;
+
+    /** 日志内容
+    */
+    DogString m_logStr;
 
     /** 后续执行器
     */
@@ -104,23 +97,15 @@ class SimpleLog :
 {
 public:
     /** 构造函数
-    @param [in] level 日志等会
     @param [in] logStr 日志具体内容
     */
-    SimpleLog(LogDogConfigLevel level, const DogString& logStr) :
-        ISimpleLog(level, logStr)
-    {
-
-    }
+    SimpleLog(LogDogConfigLevel level, const DogString& logStr);
 
     /** 析构函数
     */
-    ~SimpleLog()
-    {
+    ~SimpleLog();
 
-    }
-
-protected:
+private:
     /** 格式化日志字符串
     @param [out] outLogStr 输出字符串
     @return 是否成功

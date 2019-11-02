@@ -1,25 +1,46 @@
 
 #include "../ILog.h"
+#include "../LogDog.h"
+#include "../LogDogDef.h"
+
+ILog::ILog()
+{
+}
+
+ILog::~ILog()
+{
+
+}
+
+void ILog::DoTask()
+{
+    Log();
+}
+
+ISimpleLog::ISimpleLog(LogDogConfigLevel level, const DogString& logStr) :
+    m_level(level),
+    m_logStr(logStr)
+{
+}
+
+ISimpleLog::~ISimpleLog()
+{
+}
 
 void ISimpleLog::Log()
 {
-    if (m_spConfig == NULL)
-    {
-        return;
-    }
+    std::shared_ptr<LogDogConfig> spConfig = Singleton<LogDog>::GetInstance().GetConfig();
 
     // 每次都要尝试重新加载
-    m_spConfig->TryReload();
+    spConfig->TryReload();
 
     // 如果配置文件加载失败的话
-    if (m_spConfig->GetErrorCode() != LogDogConfigErrorCode::LDC_NO_ERROR)
+    if (spConfig->GetErrorCode() != LogDogConfigErrorCode::LDC_NO_ERROR)
     {
         return;
     }
 
-    LogDogConfigEntry& configEntry = m_spConfig->GetLogDogConfigEntry();
-
-    if (configEntry.m_level < m_level)
+    if (spConfig->GetInt32(_DogT("level")) < (int)m_level)
     {
         return;
     }
@@ -34,18 +55,30 @@ void ISimpleLog::Log()
     for (auto it : m_executors)
     {
         assert(it != NULL);
-        it->Executor(logFormated, m_spConfig);
+        it->Executor(logFormated);
     }
+}
+
+void ISimpleLog::PushExecutor(const std::shared_ptr<ILogExecutor>& executor)
+{
+    m_executors.push_back(executor);
+}
+
+SimpleLog::SimpleLog(LogDogConfigLevel level, const DogString& logStr) :
+    ISimpleLog(level, logStr)
+{
+
+}
+
+SimpleLog::~SimpleLog()
+{
 }
 
 bool SimpleLog::MakeLogStr(DogString & outLogStr)
 {
     outLogStr = m_logStr;
 
-    // 不要对m_spConfig判空，因为约定了判空操作在调用前
-    LogDogConfigEntry& configEntry = m_spConfig->GetLogDogConfigEntry();
-
-    switch (configEntry.m_level)
+    switch (m_level)
     {
     case LogDogConfigLevel::LDC_LEVEL_0:
         break;

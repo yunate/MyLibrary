@@ -1,7 +1,10 @@
 
 #include "../LogDogConfig.h"
 #include "../LogDogDef.h"
+
 #include "init_file/init_file.h"
+
+#include <tchar.h>
 
 // 文件不存在状态下每10s会尝试加载
 #define FAILURE_TIME_PASS 10000
@@ -9,32 +12,39 @@
 // 文件存在状态每3min会尝试加载
 #define CUCCESS_TIME_PASS 160000
 
-LogDogConfig::LogDogConfig(const DogString& path, const DogString& name)
+LogDogConfig::LogDogConfig(const DogString& path, const DogString& name) :
+    m_path(path),
+    m_name(name)
 {
-    m_configEntry.m_path = path;
-    m_configEntry.m_name = name;
     ReLoad();
 }
 
-void LogDogConfig::TryReload()
+void LogDogConfig::TryReload(bool atonce/* = false*/)
 {
     bool needReload = false;
 
-    if (m_errorCode == LogDogConfigErrorCode::LDC_NO_CONFIG_FILE)
+    if (!atonce)
     {
-        // 文件不存在状态下每10s会尝试加载
-        if (m_timer.GetTimePass() > FAILURE_TIME_PASS)
+        if (m_errorCode == LogDogConfigErrorCode::LDC_NO_CONFIG_FILE)
         {
-            needReload = true;
+            // 文件不存在状态下每10s会尝试加载
+            if (m_timer.GetTimePass() > FAILURE_TIME_PASS)
+            {
+                needReload = true;
+            }
+        }
+        else
+        {
+            // 文件存在状态每3min会尝试加载
+            if (m_timer.GetTimePass() > CUCCESS_TIME_PASS)
+            {
+                needReload = true;
+            }
         }
     }
     else
     {
-        // 文件存在状态每3min会尝试加载
-        if (m_timer.GetTimePass() > CUCCESS_TIME_PASS)
-        {
-            needReload = true;
-        }
+        needReload = true;
     }
 
     if (needReload)
@@ -43,24 +53,81 @@ void LogDogConfig::TryReload()
     }
 }
 
+bool LogDogConfig::GetStrVal(const DogString & key, DogString& val)
+{
+    auto it = m_keyValue.find(key);
+
+    if (it == m_keyValue.end())
+    {
+        return false;
+    }
+
+    val = it->second;
+    return true;
+}
+
+bool LogDogConfig::GetBool(const DogString & key)
+{
+    DogString val;
+
+    // 不存在认为是假
+    if (!GetStrVal(key, val))
+    {
+        return false;
+    }
+
+    // '0' 认为是假
+    if (val.length() == 1 && val[0] == _DogT('0'))
+    {
+        return false;
+    }
+
+    // "FALSE" 认为是假
+    if (val.length() == 4 &&
+        ::toupper(0) == _DogT('F') &&
+        ::toupper(0) == _DogT('A') &&
+        ::toupper(0) == _DogT('L') &&
+        ::toupper(0) == _DogT('E'))
+    {
+        return false;
+    }
+
+    // 其他认为是true
+    return true;
+}
+
+int LogDogConfig::GetInt32(const DogString & key)
+{
+    DogString val;
+
+    // 不存在认为是假
+    if (!GetStrVal(key, val))
+    {
+        return 0;
+    }
+
+    return ::_tstoi(val.c_str());
+}
+
 void LogDogConfig::ReLoad()
 {
+    m_keyValue.clear();
     m_timer.ReSet();
     m_errorCode = LogDogConfigErrorCode::LDC_NO_ERROR;
-    IniFile* iniFile = IniFile::CreateObj(m_configEntry.m_path);
+    std::shared_ptr<IniFile> spIniFile(IniFile::CreateObj(m_path));
 
-    if (iniFile == NULL)
+    if (spIniFile == NULL)
     {
         m_errorCode = LogDogConfigErrorCode::LDC_NO_CONFIG_FILE;
         return;
     }
 
-    std::vector<DogString> names = iniFile->Get(NULL, NULL);
+    std::vector<DogString> names = spIniFile->Get(NULL, NULL);
     bool hasName = false;
 
     for (size_t i = 0; i < names.size(); ++i)
     {
-        if (names[i] == m_configEntry.m_name)
+        if (names[i] == m_name)
         {
             hasName = true;
             break;
@@ -70,53 +137,20 @@ void LogDogConfig::ReLoad()
     if (!hasName)
     {
         m_errorCode = LogDogConfigErrorCode::LDC_NO_MATCH_NAME;
-        delete iniFile;
-        iniFile = NULL;
         return;
     }
 
-    std::vector<DogString> levels = iniFile->Get(m_configEntry.m_name.c_str(), _DogT("level"));
+    std::vector<DogString> keys = spIniFile->Get(m_name.c_str(), NULL);
 
-    if (levels.size() > 0 && levels[0].size() > 0)
+    for (auto it : keys)
     {
-        int level = levels[0][0] - _DogT('0');
+        std::vector<DogString> vals = spIniFile->Get(m_name.c_str(), it.c_str());
 
-        if (level >= (int)LogDogConfigLevel::LDC_LEVEL_0 && level < (int)LogDogConfigLevel::LDC_LEVEL_END)
+        if (vals.size() == 1)
         {
-            m_configEntry.m_level = (LogDogConfigLevel)level;
+            m_keyValue[it] = vals[0];
         }
     }
-
-    std::vector<DogString> dump = iniFile->Get(m_configEntry.m_name.c_str(), _DogT("dump_to_file"));
-
-    if (dump.size() > 0 && dump[0].size() > 0)
-    {
-        if (dump[0] == _DogT("true") || dump[0][0] != _DogT('0'))
-        {
-            m_configEntry.m_isNeedDmpToFile = true;
-        }
-        else
-        {
-            m_configEntry.m_isNeedDmpToFile = false;
-        }
-    }
-
-    std::vector<DogString> upload = iniFile->Get(m_configEntry.m_name.c_str(), _DogT("upload"));
-
-    if (upload.size() > 0 && upload[0].size() > 0)
-    {
-        if (upload[0] == _DogT("true") || upload[0][0] != _DogT('0'))
-        {
-            m_configEntry.m_isNeedUpload = true;
-        }
-        else
-        {
-            m_configEntry.m_isNeedUpload = false;
-        }
-    }
-
-    delete iniFile;
-    iniFile = NULL;
 }
 
 /* 分析配置文件是否有错误
@@ -127,11 +161,13 @@ LogDogConfigErrorCode LogDogConfig::GetErrorCode()
     return m_errorCode;
 }
 
-/** 获得日志配置
-@return 日志配置
-*/
-LogDogConfigEntry& LogDogConfig::GetLogDogConfigEntry()
+DogString & LogDogConfig::GetConfigPath()
 {
-    return m_configEntry;
+    return m_path;
+}
+
+DogString & LogDogConfig::GetConfigName()
+{
+    return m_name;
 }
 
