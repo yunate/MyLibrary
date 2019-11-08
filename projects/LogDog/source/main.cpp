@@ -18,7 +18,7 @@ int main(int)
     LOG_SERIOUS_ERROR(_DogT("严重错误"));
     LOG_VERY_SERIOUS_ERROR(_DogT("非常严重错误"));
     LOG_CRASH(_DogT("挂了"));
-    
+
     while (1)
     {
         ::Sleep(10);

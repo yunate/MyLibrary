@@ -1,6 +1,4 @@
 #include "string_utils_c.h"
-#include <Shlwapi.h>
-#include <stdlib.h>
 #include <string.h>
 
 typedef unsigned char u_char;
