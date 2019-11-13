@@ -1,9 +1,7 @@
+
 #include "service_utils.h"
 
-#include <windows.h>
 #include <VersionHelpers.h>
-
-// #include <base/win/registry.h>
 
 typedef long uint32_t;
 typedef unsigned char uint8_t;

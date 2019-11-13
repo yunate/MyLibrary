@@ -1,7 +1,7 @@
 #ifndef __SERVICE_UTILS_H_
 #define __SERVICE_UTILS_H_
-#include <windows.h>
 
+#include <windows.h>
 /**
  *   omaha/base/service_util.h/cc
  *

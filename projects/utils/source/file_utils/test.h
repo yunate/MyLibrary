@@ -66,20 +66,21 @@ namespace utilstest
 
     static void Test_BigFile()
     {
-        FileWriter* fileWriter = CreateUTF8FileWriter(L"F:\\test\\7_1");
         BigFileMapper fileMapper;
-        fileMapper.MapFile(L"F:\\test\\7");
 
-        SPFileBlock spFileBlock = fileMapper.GetNextBlock();
-        assert(spFileBlock != NULL);
-
-        while (spFileBlock != NULL)
+        if (fileMapper.MapFile(L"F:\\TmpWorkSpace\\accuracy\\user\\src\\199.7z"))
         {
-            fileWriter->WriteBuffA(spFileBlock->GetBlockAddr(), spFileBlock->GetSize());
-            spFileBlock = fileMapper.GetNextBlock();
-        }
+            FileWriter* fileWriter = CreateUTF8FileWriter(L"F:\\TmpWorkSpace\\accuracy\\user\\src\\199.7z__");
+            SPFileBlock spFileBlock = fileMapper.GetNextBlock();
 
-        delete fileWriter;
+            while (spFileBlock != NULL)
+            {
+                fileWriter->WriteBuffA(spFileBlock->GetBlockAddr(), spFileBlock->GetSize());
+                spFileBlock = fileMapper.GetNextBlock(-1, 0);
+            }
+
+            delete fileWriter;
+        }
     }
 
     static void Test_file_utils_ex()
