@@ -71,7 +71,8 @@ int main()
    // utilstest::Test_MemoryStream();
     //utilstest::Test_FileStream();
     //utilstest::TestSpeed();
-    utilstest::Test_DirUtils();
+    //utilstest::Test_DirUtils();
+    utilstest::Test_BigFile();
     ::system("pause");
     return 1;
 }

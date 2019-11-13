@@ -66,10 +66,20 @@ namespace utilstest
 
     static void Test_BigFile()
     {
-//         ReadBigFileByLineW(L"C:\\Users\\yudh\\Desktop\\test\\2019-07-17.csv", NULL, 0, [&](const std::wstring& line)
-//         {
-//             return true;
-//         });
+        FileWriter* fileWriter = CreateUTF8FileWriter(L"F:\\test\\7_1");
+        BigFileMapper fileMapper;
+        fileMapper.MapFile(L"F:\\test\\7");
+
+        SPFileBlock spFileBlock = fileMapper.GetNextBlock();
+        assert(spFileBlock != NULL);
+
+        while (spFileBlock != NULL)
+        {
+            fileWriter->WriteBuffA(spFileBlock->GetBlockAddr(), spFileBlock->GetSize());
+            spFileBlock = fileMapper.GetNextBlock();
+        }
+
+        delete fileWriter;
     }
 
     static void Test_file_utils_ex()
