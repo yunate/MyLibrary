@@ -75,6 +75,7 @@
     <ClInclude Include="..\source\command_line_arguments\command_line_arguments.h" />
     <ClInclude Include="..\source\command_line_arguments\Test.h" />
     <ClInclude Include="..\source\console\color_print.h" />
+    <ClInclude Include="..\source\console\GetUserInput.h" />
     <ClInclude Include="..\source\console\Test.h" />
     <ClInclude Include="..\source\cpu\cpu_thread_count.h" />
     <ClInclude Include="..\source\cpu\test.h" />

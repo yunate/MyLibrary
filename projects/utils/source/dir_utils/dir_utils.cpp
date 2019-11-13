@@ -1,7 +1,8 @@
 #include "dir_utils.h"
 
-#include <Windows.h>
+#include <queue>
 #include <tchar.h>
+#include <Windows.h>
 
 bool dir_uitls::IsDir(const DogString & path)
 {
@@ -144,6 +145,87 @@ bool dir_uitls::CreateDirEx(const DogString& dirPath)
     }
 
     return true;
+}
+
+void dir_uitls::EnumDir(const DogString& dirPath, std::function<void(const DogString& path, bool isDir)> callBack)
+{
+    DogString rootPath = dirPath;
+
+    if (rootPath.length() < 2)
+    {
+        return;
+    }
+
+    if (rootPath[rootPath.length() - 1] != _DogT('/') &&
+        rootPath[rootPath.length() - 1] != _DogT('\\'))
+    {
+        rootPath.append(1, _DogT('\\'));
+    }
+
+    if (callBack == NULL || !IsDirExist(rootPath))
+    {
+        return;
+    }
+
+    // 枚举路径
+    std::queue<DogString> dirPathQue;
+    dirPathQue.push(rootPath);
+
+    while (!dirPathQue.empty())
+    {
+        std::wstring path = dirPathQue.front();
+        std::wstring pathRoot = dirPathQue.front();
+        dirPathQue.pop();
+        WIN32_FIND_DATA fileInfo;
+        ::memset(&fileInfo, 0, sizeof(LPWIN32_FIND_DATA));
+        path.append(L"*");
+        HANDLE hFile = NULL;
+        hFile = ::FindFirstFile(path.c_str(), &fileInfo);
+
+        if (INVALID_HANDLE_VALUE == hFile)
+        {
+            continue;
+        }
+
+        do
+        {
+            //如果是当前目录或者是上级目录，就直接进入下一次循环  
+            if (::wcscmp(fileInfo.cFileName, L".") == 0 ||
+                ::wcscmp(fileInfo.cFileName, L"..") == 0)
+            {
+                continue;
+            }
+
+            std::wstring subPath = pathRoot + fileInfo.cFileName;
+
+            if (IsDir(subPath))
+            {
+                subPath += L"\\";
+                dirPathQue.push(subPath);
+                callBack(subPath, true);
+            }
+            else
+            {
+                callBack(subPath, false);
+            }
+        } while (::FindNextFile(hFile, &fileInfo));
+
+        ::FindClose(hFile);
+    }
+}
+
+void dir_uitls::EnumDir(const DogString & dirPath, std::vector<DogString>& out, std::function<bool(const DogString&, bool)> filter)
+{
+    EnumDir(dirPath, [filter, &out](const DogString& path, bool isDir)
+    {
+        if (filter == NULL || filter(path, isDir))
+        {
+            out.push_back(path);
+            return;
+        }
+
+        return;
+    });
 }
 
 bool dir_uitls::CreateFile_(const DogString& filePath)

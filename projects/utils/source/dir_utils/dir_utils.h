@@ -4,6 +4,8 @@
 #include "typedef/DogString.h"
 
 #include <string>
+#include <vector>
+#include <functional>
 
 namespace dir_uitls
 {
@@ -51,6 +53,24 @@ namespace dir_uitls
     @param [in] dirPath 文件夹路径
     */
     bool CreateDirEx(const DogString& dirPath);
+
+    /** 枚举目录 广度优先
+    @param [in] dirPath 目录路径
+    @param [in] callBack 回调函数，对每一个路径进行处理
+                @param [in] path 路径
+                @param [in] isDir 是否是目录
+    */
+    void EnumDir(const DogString& dirPath, std::function<void(const DogString& path, bool isDir)> callBack);
+
+    /** 枚举目录 广度优先
+    @param [in] dirPath 目录路径
+    @param [in] out 输出路径vector
+    @param [in] filter 对每一path进行过滤，返回true这放到out结果中，否则丢掉。filter为空时候当作返回true
+                @param [in] path 路径
+                @param [in] isDir 是否是目录
+                @return true 将path放到out结果，false 丢掉
+    */
+    void EnumDir(const DogString& dirPath, std::vector<DogString>& out, std::function<bool(const DogString& path, bool isDir)> filter);
 }
 
 #endif // _FILE_AND_DIR_UTIL_H__

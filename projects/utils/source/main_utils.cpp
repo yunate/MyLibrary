@@ -72,7 +72,8 @@ int main()
     //utilstest::Test_FileStream();
     //utilstest::TestSpeed();
     //utilstest::Test_DirUtils();
-    utilstest::Test_BigFile();
+    //utilstest::Test_BigFile();
+    utilstest::Test_EnumDir();
     ::system("pause");
     return 1;
 }

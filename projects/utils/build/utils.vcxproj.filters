@@ -522,5 +522,8 @@
     <ClInclude Include="..\source\dir_utils\Test_DirUtils.h">
       <Filter>dir_utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\console\GetUserInput.h">
+      <Filter>console</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
