@@ -2,7 +2,7 @@
 
 SocketUdpServer::SocketUdpServer(const std::string& ip, unsigned short port)
 {
-    if (!Init(SOCKET_DGRAM, IPPROTOCOL_UDP))
+    if (!Init(SocketType::SOCKET_DGRAM, IpProtocolType::IPPROTOCOL_UDP))
     {
         return;
     }

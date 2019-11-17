@@ -27,8 +27,8 @@ public:
 
 protected:
     /** 初始化，不要放到构造函数里面
-    @parma [in] type socket数据传输类型
-    @parma [in] ipProto 协议
+    @param [in] type socket 数据传输类型
+    @param [in] ipProto 协议
     return 是否成功
     */
     virtual bool Init(SocketType type, IpProtocolType ipProto);

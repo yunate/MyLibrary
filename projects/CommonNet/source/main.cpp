@@ -4,12 +4,17 @@
 int main()
 {
     WSADATA wsaData = { 0 };
-    int iResult = 0;
-    iResult = ::WSAStartup(MAKEWORD(2, 2), &wsaData);
-    // Test_Tcp_Server();
-    // Test_Tcp_Client();
+    int iResult = ::WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-    Test_Udp_Server();
+    if (iResult)
+    {
+
+    }
+
+    // Test_Tcp_Server();
+    Test_Tcp_Client();
+
+    // Test_Udp_Server();
     // Test_Udp_Client();
     ::WSACleanup();
     ::system("pause");

@@ -13,7 +13,7 @@ SocketTcpServer::~SocketTcpServer()
 
 bool SocketTcpServer::Listen(unsigned int backlog)
 {
-    if (!Init(SOCKET_STREAM, IPPROTOCOL_TCP))
+    if (!Init(SocketType::SOCKET_STREAM, IpProtocolType::IPPROTOCOL_TCP))
     {
         return false;
     }
@@ -29,11 +29,11 @@ bool SocketTcpServer::Listen(unsigned int backlog)
     return (0 == ::listen(GetSocketBean().GetSocket(), backlog));
 }
 
-SocketTcpBase * SocketTcpServer::Accept()
+std::shared_ptr<SocketTcpBase> SocketTcpServer::Accept()
 {
     if (!GetSocketBean().IsValidSocket())
     {
-        return false;
+        return NULL;
     }
 
     SOCKADDR addr;
@@ -45,14 +45,14 @@ SocketTcpBase * SocketTcpServer::Accept()
         return NULL;
     }
 
-    SocketTcpBase* pClient = new (std::nothrow) SocketTcpBase();
+    std::shared_ptr<SocketTcpBase> spClient(new (std::nothrow) SocketTcpBase());
 
-    if (NULL == pClient)
+    if (NULL == spClient)
     {
         return NULL;
     }
 
-    pClient->GetSocketBean().SetSOCKADDR(addr);
-    pClient->GetSocketBean().SetSocket(clientSocket);
-    return pClient;
+    spClient->GetSocketBean().SetSOCKADDR(addr);
+    spClient->GetSocketBean().SetSocket(clientSocket);
+    return spClient;
 }

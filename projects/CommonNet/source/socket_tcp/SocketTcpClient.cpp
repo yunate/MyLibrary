@@ -12,7 +12,7 @@ SocketTcpClient::~SocketTcpClient()
 
 bool SocketTcpClient::Connect()
 {
-    if (!Init(SOCKET_STREAM, IPPROTOCOL_TCP))
+    if (!Init(SocketType::SOCKET_STREAM, IpProtocolType::IPPROTOCOL_TCP))
     {
         return false;
     }

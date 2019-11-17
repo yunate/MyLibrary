@@ -16,7 +16,8 @@
 
 BigFileMapper::BigFileMapper():
     m_hFileMap(NULL),
-    m_bginPos(0)
+    m_bginPos(0),
+    m_fileSize(0)
 {
 }
 

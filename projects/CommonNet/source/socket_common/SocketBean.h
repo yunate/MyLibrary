@@ -6,9 +6,9 @@
 #include <WINSOCK2.H>
 #pragma comment(lib, "Ws2_32.lib")
 
-/** socket数据传输类型
+/** socket 数据传输类型
 */
-enum SocketType
+enum class SocketType
 {
     /** 字节流，比如TCP
     */
@@ -21,7 +21,7 @@ enum SocketType
 
 /** 协议，目前只提供tcp，udp
 */
-enum IpProtocolType
+enum class IpProtocolType
 {
     /** TCP
     */
@@ -78,14 +78,14 @@ public:
     }
 
     /** 设置IP地址，仅仅是设置而已
-    @param [in] ipAddress ip地址
+    @param [in] ipAddress ip 地址
     */
     inline void SetIpAddress(const std::string& ipAddress)
     {
         m_ipAddress = ipAddress;
     }
 
-    /** 获得端口，对于不同的socket有着不同的意义，
+    /** 获得端口，对于不同的 socket 有着不同的意义，
     @param [out] port 端口
     */
     inline void GetPort(unsigned short & port) const

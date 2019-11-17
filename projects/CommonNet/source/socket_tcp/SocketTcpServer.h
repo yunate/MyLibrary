@@ -3,6 +3,7 @@
 #define __SOCKET_TCP_SERVER_H_
 
 #include "SocketTcpBase.h"
+#include <memory>
 
 class SocketTcpServer :
     public SocketTcpBase
@@ -26,10 +27,10 @@ public:
     */
     bool Listen(unsigned int backlog);
 
-    /** 接受连入的client，内部创建SocketBase，需要自己释放
-    @return 成功返回新的socket，失败返回NULL
+    /** 接受连入的client，内部创建SocketBase
+    @return 成功返回新的socket 的智能指针，失败返回NULL
     */
-    SocketTcpBase* Accept();
+    std::shared_ptr<SocketTcpBase> Accept();
 };
 
 #endif // __SOCKET_TCP_SERVER_H_

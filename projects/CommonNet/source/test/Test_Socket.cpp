@@ -23,12 +23,12 @@ void Test_Tcp_Server()
         return;
     }
 
-    SocketTcpBase* pClient = server.Accept();
+    std::shared_ptr<SocketTcpBase> spClient = server.Accept();
 
-    if (pClient != NULL)
+    if (spClient != NULL)
     {
         std::string msg;
-        pClient->RcvMsg(msg);
+        spClient->RcvMsg(msg);
         ColorPrintf(Green, msg.c_str());
         ::printf("\r\n");
     }

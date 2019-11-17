@@ -22,6 +22,9 @@
     <Filter Include="socket_udp">
       <UniqueIdentifier>{8b60b65c-4d36-49bc-809c-68d0c6cf1771}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ftp">
+      <UniqueIdentifier>{000cc745-e831-4570-8b80-5f1ae0959b76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />

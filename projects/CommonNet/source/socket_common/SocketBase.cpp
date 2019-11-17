@@ -7,7 +7,7 @@ SocketBase::SocketBase() :
 
 bool SocketBase::Init(SocketType type, IpProtocolType ipProto)
 {
-    GetSocketBean().SetSocket(::socket(PF_INET, type, ipProto));
+    GetSocketBean().SetSocket(::socket(PF_INET, (int)type, (int)ipProto));
     return GetSocketBean().IsValidSocket();
 }
 
