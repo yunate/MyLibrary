@@ -11,8 +11,8 @@ int main()
 
     }
 
-    // Test_Tcp_Server();
-    Test_Tcp_Client();
+    Test_Tcp_Server();
+    // Test_Tcp_Client();
 
     // Test_Udp_Server();
     // Test_Udp_Client();

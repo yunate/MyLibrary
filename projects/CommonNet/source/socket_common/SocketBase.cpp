@@ -1,7 +1,7 @@
 #include "SocketBase.h"
 
 SocketBase::SocketBase() :
-    m_buffSize(1025)
+    m_buffSize(1024)
 {
 }
 

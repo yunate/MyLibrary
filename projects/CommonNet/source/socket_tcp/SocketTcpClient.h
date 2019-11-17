@@ -9,6 +9,10 @@ class SocketTcpClient :
 {
 public:
     /** 构造函数
+    */
+    SocketTcpClient();
+
+    /** 构造函数
     @param [in] ip 服务器ip地址
     @param [in] port 服务器监听端口
     */
@@ -24,6 +28,12 @@ public:
     @return 是否成功
     */
     bool Connect();
+
+    /**
+    @param [in] ip 服务器ip地址
+    @param [in] port 服务器监听端口
+    */
+    bool Connect(const std::string& ip, unsigned short port);
 };
 
 #endif // __SOCKET_TCP_CLIENT_H_

@@ -70,7 +70,7 @@ public:
     }
 
     /** 获得IP地址，对于不同的socket有着不同的意义，
-    @param [out] ipAddress ip地址
+    @param [out] ipAddress ip 地址
     */
     inline void GetIpAddress(std::string& ipAddress) const
     {
@@ -88,9 +88,9 @@ public:
     /** 获得端口，对于不同的 socket 有着不同的意义，
     @param [out] port 端口
     */
-    inline void GetPort(unsigned short & port) const
+    inline short GetPort() const
     {
-        port = m_port;
+         return m_port;
     }
 
     /** 设置端口，仅仅是设置而已
@@ -151,7 +151,7 @@ private:
     */
     SOCKET m_socket;
 
-    /** ip地址，对于不同的socket有着不同的意义，
+    /** ip 地址，对于不同的socket有着不同的意义，
         比如服务器的socket这个字段没有实际意义
         比如客户端的socket这个字段表示他链接的服务器地址
     */

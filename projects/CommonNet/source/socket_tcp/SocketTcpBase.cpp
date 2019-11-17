@@ -8,7 +8,7 @@ SocketTcpBase::~SocketTcpBase()
 {
 }
 
-int SocketTcpBase::SendMsg(const std::string & msg)
+int SocketTcpBase::SendMsg(const std::string& msg)
 {
     if (GetSocketBean().IsValidSocket())
     {
@@ -25,19 +25,18 @@ int SocketTcpBase::RcvMsg(std::string & msg)
 
     if (NULL == pBuff)
     {
-        return SOCKET_ERROR;
+        return 0;
     }
 
-    ::memset(pBuff, 0, buffSize);
-    int rcvSize = SOCKET_ERROR;
+    int rcvSize = 0;
 
     if (GetSocketBean().IsValidSocket())
     {
+        ::memset(pBuff, 0, buffSize);
         rcvSize = ::recv(GetSocketBean().GetSocket(), pBuff, buffSize, 0);
 
-        if (SOCKET_ERROR != rcvSize)
+        if (0 != rcvSize)
         {
-            msg.reserve(rcvSize);
             msg.append(pBuff, rcvSize);
         }
     }
@@ -45,4 +44,35 @@ int SocketTcpBase::RcvMsg(std::string & msg)
     delete[]pBuff;
     pBuff = NULL;
     return rcvSize;
+}
+
+void SocketTcpBase::RcvMsg(std::function<bool(char* pBuff, unsigned int buffSize)> callBack)
+{
+    unsigned int buffSize = GetBuffSize();
+    char* pBuff = new (std::nothrow) char[buffSize];
+
+    if (NULL == pBuff)
+    {
+        return;
+    }
+
+    int rcvSize = 0;
+
+    if (GetSocketBean().IsValidSocket())
+    {
+        do
+        {
+            ::memset(pBuff, 0, buffSize);
+            rcvSize = ::recv(GetSocketBean().GetSocket(), pBuff, buffSize, 0);
+
+            if (0 == rcvSize)
+            {
+                break;
+            }
+
+        } while (callBack(pBuff, rcvSize));
+    }
+
+    delete[]pBuff;
+    pBuff = NULL;
 }

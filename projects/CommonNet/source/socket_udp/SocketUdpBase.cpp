@@ -41,7 +41,7 @@ int SocketUdpBase::RcvMsg(std::string & msg, std::string& ip, unsigned short& po
     SocketBean bean;
     bean.SetSOCKADDR(sockAddr);
     bean.GetIpAddress(ip);
-    bean.GetPort(port);
+    port = bean.GetPort();
     return rtn;
 }
 
@@ -52,11 +52,11 @@ int SocketUdpBase::RcvMsg(std::string & msg, SOCKADDR & sockAddr)
 
     if (NULL == pBuff)
     {
-        return SOCKET_ERROR;
+        return 0;
     }
 
     ::memset(pBuff, 0, buffSize);
-    int rcvSize = SOCKET_ERROR;
+    int rcvSize = 0;
 
     if (GetSocketBean().IsValidSocket())
     {
@@ -64,10 +64,9 @@ int SocketUdpBase::RcvMsg(std::string & msg, SOCKADDR & sockAddr)
         SOCKADDR socketAddr;
         rcvSize = ::recvfrom(GetSocketBean().GetSocket(), pBuff, buffSize, 0, &socketAddr, &size);
 
-        if (SOCKET_ERROR != rcvSize)
+        if (0 != rcvSize)
         {
             sockAddr = socketAddr;
-            msg.reserve(rcvSize);
             msg.append(pBuff, rcvSize);
         }
     }
@@ -76,3 +75,4 @@ int SocketUdpBase::RcvMsg(std::string & msg, SOCKADDR & sockAddr)
     pBuff = NULL;
     return rcvSize;
 }
+

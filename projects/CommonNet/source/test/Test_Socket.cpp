@@ -11,7 +11,29 @@ void Test_Tcp_Client()
         return;
     }
 
-    client.SendMsg("hello word");
+    client.SendMsg("hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word"
+                   "hello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello wordhello word");
 }
 
 void Test_Tcp_Server()
@@ -28,7 +50,13 @@ void Test_Tcp_Server()
     if (spClient != NULL)
     {
         std::string msg;
-        spClient->RcvMsg(msg);
+        // spClient->RcvMsg(msg);
+        spClient->RcvMsg([&msg](char* buff, unsigned int buffSize)
+                         {
+                             msg.append(buff, buffSize);
+                             // 如果想手动结束的话，返回false 
+                             return true; 
+                         });
         ColorPrintf(Green, msg.c_str());
         ::printf("\r\n");
     }

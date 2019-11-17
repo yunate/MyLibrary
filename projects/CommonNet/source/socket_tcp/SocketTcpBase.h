@@ -3,6 +3,7 @@
 #define __SOCKET_TCP_BASE_H_
 
 #include "socket_common/SocketBase.h"
+#include <functional>
 
 
 class SocketTcpBase :
@@ -24,11 +25,19 @@ public:
     */
     virtual int SendMsg(const std::string & msg);
 
-    /** 接收消息
+    /** 接收消息，接受GetBuffSize()个字符，这个缓冲大小可以设置
     @param [out] msg 收到的消息
-    @return 成功返回接受的个数，失败返回SOCKET_ERROR
+    @return 成功返回接受的个数，失败返回0
     */
-    virtual int RcvMsg(std::string & msg);
+    virtual int RcvMsg(std::string& msg);
+
+    /** 接收消息，一次性不能够全部接受完全
+    @param [out] callBack 回调函数
+                 @param pBuff 
+                 @param buffSize
+                 @return 如果为false时候，终止接受
+    */
+    virtual void RcvMsg(std::function<bool(char* pBuff, unsigned int buffSize)> callBack);
 };
 
 #endif // __SOCKET_TCP_BASE_H_

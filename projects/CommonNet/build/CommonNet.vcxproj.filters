@@ -25,6 +25,9 @@
     <Filter Include="ftp">
       <UniqueIdentifier>{000cc745-e831-4570-8b80-5f1ae0959b76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="http\socket_http">
+      <UniqueIdentifier>{f96c8e0b-ae7f-4540-aa37-74576bcd6f73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
@@ -54,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="..\source\socket_udp\SocketUdpServer.cpp">
       <Filter>socket_udp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\http\socket_http\SocketHttpClient.cpp">
+      <Filter>http\socket_http</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="..\source\socket_udp\SocketUdpServer.h">
       <Filter>socket_udp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\http\socket_http\SocketHttpClient.h">
+      <Filter>http\socket_http</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\http\socket_http\SocketHttpClient.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\socket_common\SocketBase.cpp" />
     <ClCompile Include="..\source\socket_common\SocketUtils.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="..\source\test\Test_Socket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\http\socket_http\SocketHttpClient.h" />
     <ClInclude Include="..\source\socket_common\SocketBase.h" />
     <ClInclude Include="..\source\socket_common\SocketBean.h" />
     <ClInclude Include="..\source\socket_common\SocketUtils.h" />
