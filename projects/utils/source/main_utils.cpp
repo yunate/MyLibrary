@@ -21,6 +21,7 @@
  #include "stream/Test.h"
  #include "thread/TestLockFree.h"
 #include "dir_utils/Test_DirUtils.h"
+#include "Net/Url/Test_Url.h"
 
 // 内存泄露检测器
 // 没有64位的
@@ -73,7 +74,8 @@ int main()
     //utilstest::TestSpeed();
     //utilstest::Test_DirUtils();
     //utilstest::Test_BigFile();
-    utilstest::Test_EnumDir();
+    //utilstest::Test_EnumDir();
+    utilstest::Test_DogUrl();
     ::system("pause");
     return 1;
 }

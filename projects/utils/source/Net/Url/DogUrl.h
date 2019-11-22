@@ -1,6 +1,6 @@
 
-#ifndef __URL_H_
-#define __URL_H_
+#ifndef __DOGURL_H_
+#define __DOGURL_H_
 
 #include "typedef/DogString.h"
 
@@ -230,4 +230,4 @@ struct DogUrl
     }
 };
 
-#endif //__URL_H_
+#endif //__DOGURL_H_

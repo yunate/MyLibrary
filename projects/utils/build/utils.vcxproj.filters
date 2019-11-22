@@ -91,6 +91,12 @@
     <Filter Include="nocopyable">
       <UniqueIdentifier>{cb59ea2f-84d1-466f-9eae-0389e6f3fb81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Net">
+      <UniqueIdentifier>{f5e0c8a9-1318-4955-afea-37b55837a9c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Url">
+      <UniqueIdentifier>{0992b6a7-b2db-4750-a050-cd0311420b22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -524,6 +530,12 @@
     </ClInclude>
     <ClInclude Include="..\source\console\GetUserInput.h">
       <Filter>console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Net\Url\Test_Url.h">
+      <Filter>Net\Url</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Net\Url\DogUrl.h">
+      <Filter>Net\Url</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

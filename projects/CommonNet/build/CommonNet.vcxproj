@@ -33,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\http\socket_http\SocketHttpClient.h" />
-    <ClInclude Include="..\source\http\Url.h" />
     <ClInclude Include="..\source\socket_common\SocketBase.h" />
     <ClInclude Include="..\source\socket_common\SocketBean.h" />
     <ClInclude Include="..\source\socket_common\SocketUtils.h" />
@@ -44,7 +43,6 @@
     <ClInclude Include="..\source\socket_udp\SocketUdpClient.h" />
     <ClInclude Include="..\source\socket_udp\SocketUdpServer.h" />
     <ClInclude Include="..\source\test\color_print.h" />
-    <ClInclude Include="..\source\test\TestUrl.h" />
     <ClInclude Include="..\source\test\Test_Socket.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
