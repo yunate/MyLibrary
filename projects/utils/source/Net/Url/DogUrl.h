@@ -184,9 +184,9 @@ struct DogUrl
             }
         }
 
-        // 找到扩展符号 “/ ? #”
         while (index < len)
         {
+            // 寻找下一个扩展符号
             size_t extendEndIndex = len - 1;
             for (size_t i = index; i < len; ++i)
             {
@@ -197,20 +197,20 @@ struct DogUrl
                 }
             }
 
-            // 如果上一个符号是 "/" ，找到扩展符号 “? #”
+            // 如果上一个符号是 "/"，重新寻找下一个扩展符号 “? #”
             if (url[index - 1] == '/')
             {
-                size_t pathEndIndex = len - 1;
+                extendEndIndex = len - 1;
                 for (size_t i = index; i < len; ++i)
                 {
                     if (url[i] == '?' || url[i] == '#')
                     {
-                        pathEndIndex = i - 1;
+                        extendEndIndex = i - 1;
                         break;
                     }
                 }
 
-                m_path = url.substr(index, pathEndIndex - index + 1);
+                m_path = url.substr(index, extendEndIndex - index + 1);
             }
 
             // 如果上一个符号是 "?" 那么填充m_query

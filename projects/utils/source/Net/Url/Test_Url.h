@@ -5,11 +5,11 @@ namespace utilstest
 {
     inline void Test_DogUrl()
     {
-        DogUrl url1("http://www.baidu.com/wget.apx/?name=ydh#anchor");
+        DogUrl url1("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
         DogUrl url11("http://www.baidu.com/wget.apx/#anchor");
-        DogUrl url2("http://www.baidu.com/wget.apx/?name=ydh#");
-        DogUrl url3("http://www.baidu.com/wget.apx/?name=ydh");
-        DogUrl url4("http://www.baidu.com/wget.apx/?");
+        DogUrl url2("http://www.baidu.com/wget.apx/dd?name=ydh#");
+        DogUrl url3("http://www.baidu.com/wget.apx/dd?name=ydh");
+        DogUrl url4("http://www.baidu.com/wget.apx/dd/cc?");
         DogUrl url5("http://www.baidu.com/wget.apx/");
         DogUrl url6("http://ydh:123@www.baidu.com/wget.apx");
         DogUrl url7("http://www.baidu.com:20/");
