@@ -132,37 +132,31 @@ struct DogUrl
                 {
                     userPswEndIndex = i - 1;
 
-                    // 长度为0
-                    if (userPswEndIndex < index)
+                    // 长度不为0
+                    if (userPswEndIndex >= index)
                     {
-                        ++index;
+                        // 寻找 “:”
+                        size_t userEndIndex = userPswEndIndex;
+                        for (size_t j = index; j <= userPswEndIndex; ++j)
+                        {
+                            if (url[j] == ':')
+                            {
+                                userEndIndex = j - 1;
+                                break;
+                            }
+                        }
+
+                        m_user = url.substr(index, userEndIndex - index + 1);
+
+                        if (userEndIndex < userPswEndIndex - 2)
+                        {
+                            m_password = url.substr(userEndIndex + 2, userPswEndIndex - userEndIndex - 1);
+                        }
                     }
 
+                    index = userPswEndIndex + 2;
                     break;
                 }
-            }
-
-            if (userPswEndIndex >= index)
-            {
-                // 寻找 “:”
-                size_t userEndIndex = userPswEndIndex;
-                for (size_t j = index; j <= userPswEndIndex; ++j)
-                {
-                    if (url[j] == ':')
-                    {
-                        userEndIndex = j - 1;
-                        break;
-                    }
-                }
-
-                m_user = url.substr(index, userEndIndex - index + 1);
-
-                if (userEndIndex < userPswEndIndex - 2)
-                {
-                    m_password = url.substr(userEndIndex + 2, userPswEndIndex - userEndIndex - 1);
-                }
-
-                index = userPswEndIndex + 2;
             }
         }
 
