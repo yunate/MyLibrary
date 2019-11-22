@@ -5,6 +5,7 @@
 #include "typedef/DogString.h"
 
 /** url
+“ª∞„“‘utf-8±‡¬Î
 scheme:[//[user[:password]@]host[:port]] [/path] [?query] [#fragment]
 */
 struct DogUrl
@@ -173,7 +174,8 @@ struct DogUrl
                 {
                     m_port = ::atoi(url.substr(hostEndIndex + 2, hostPortEndIndex - hostEndIndex - 1).c_str());
                 }
-                else
+
+                if (m_port == 0)
                 {
                     m_port = 80;
                 }
