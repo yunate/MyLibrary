@@ -8,7 +8,7 @@ SocketTcpBase::~SocketTcpBase()
 {
 }
 
-int SocketTcpBase::SendMsg(const std::string& msg)
+int SocketTcpBase::SendMsg(const DogStringA& msg)
 {
     if (GetSocketBean().IsValidSocket())
     {
@@ -18,7 +18,7 @@ int SocketTcpBase::SendMsg(const std::string& msg)
     return SOCKET_ERROR;
 }
 
-int SocketTcpBase::RcvMsg(std::string & msg)
+int SocketTcpBase::RcvMsg(DogStringA& msg)
 {
     unsigned int buffSize = GetBuffSize();
     char* pBuff = new (std::nothrow) char[buffSize];

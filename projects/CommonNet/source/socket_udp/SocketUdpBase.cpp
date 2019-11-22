@@ -8,7 +8,7 @@ SocketUdpBase::~SocketUdpBase()
 {
 }
 
-int SocketUdpBase::SendMsg(const std::string& ip, unsigned short port, const std::string & msg)
+int SocketUdpBase::SendMsg(const DogStringA& ip, unsigned short port, const DogStringA& msg)
 {
     SocketBean bean;
     bean.SetIpAddress(ip);
@@ -18,7 +18,7 @@ int SocketUdpBase::SendMsg(const std::string& ip, unsigned short port, const std
     return SendMsg(socketAddr, msg);
 }
 
-int SocketUdpBase::SendMsg(const SOCKADDR & sockAddr, const std::string & msg)
+int SocketUdpBase::SendMsg(const SOCKADDR & sockAddr, const DogStringA& msg)
 {
     if (GetSocketBean().IsValidSocket())
     {
@@ -28,7 +28,7 @@ int SocketUdpBase::SendMsg(const SOCKADDR & sockAddr, const std::string & msg)
     return SOCKET_ERROR;
 }
 
-int SocketUdpBase::RcvMsg(std::string & msg, std::string& ip, unsigned short& port)
+int SocketUdpBase::RcvMsg(DogStringA& msg, DogStringA& ip, unsigned short& port)
 {
     SOCKADDR sockAddr;
     int rtn = RcvMsg(msg, sockAddr);
@@ -45,7 +45,7 @@ int SocketUdpBase::RcvMsg(std::string & msg, std::string& ip, unsigned short& po
     return rtn;
 }
 
-int SocketUdpBase::RcvMsg(std::string & msg, SOCKADDR & sockAddr)
+int SocketUdpBase::RcvMsg(DogStringA& msg, SOCKADDR & sockAddr)
 {
     unsigned int buffSize = GetBuffSize();
     char* pBuff = new (std::nothrow) char[buffSize];

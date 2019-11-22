@@ -2,8 +2,9 @@
 #ifndef __SOCKET_NODE_H_
 #define __SOCKET_NODE_H_
 
-#include <string>
+#include "typedef/DogString.h"
 #include <WINSOCK2.H>
+
 #pragma comment(lib, "Ws2_32.lib")
 
 /** socket 数据传输类型
@@ -32,7 +33,8 @@ enum class IpProtocolType
     IPPROTOCOL_UDP = 17
 };
 
-
+/** socket 数据对象
+*/
 class SocketBean
 {
 public:
@@ -72,7 +74,7 @@ public:
     /** 获得IP地址，对于不同的socket有着不同的意义，
     @param [out] ipAddress ip 地址
     */
-    inline void GetIpAddress(std::string& ipAddress) const
+    inline void GetIpAddress(DogStringA& ipAddress) const
     {
         ipAddress = m_ipAddress;
     }
@@ -80,7 +82,7 @@ public:
     /** 设置IP地址，仅仅是设置而已
     @param [in] ipAddress ip 地址
     */
-    inline void SetIpAddress(const std::string& ipAddress)
+    inline void SetIpAddress(const DogStringA& ipAddress)
     {
         m_ipAddress = ipAddress;
     }
@@ -155,7 +157,7 @@ private:
         比如服务器的socket这个字段没有实际意义
         比如客户端的socket这个字段表示他链接的服务器地址
     */
-    std::string m_ipAddress;
+    DogStringA m_ipAddress;
 
     /** 端口
     */

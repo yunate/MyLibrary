@@ -23,13 +23,13 @@ public:
     @param [in] msg 希望发送的消息
     @return 成功返回发送的个数，失败返回SOCKET_ERROR
     */
-    virtual int SendMsg(const std::string & msg);
+    virtual int SendMsg(const DogStringA& msg);
 
     /** 接收消息，接受GetBuffSize()个字符，这个缓冲大小可以设置
     @param [out] msg 收到的消息
     @return 成功返回接受的个数，失败返回0
     */
-    virtual int RcvMsg(std::string& msg);
+    virtual int RcvMsg(DogStringA& msg);
 
     /** 接收消息，一次性不能够全部接受完全
     @param [out] callBack 回调函数

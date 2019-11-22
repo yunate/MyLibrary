@@ -7,7 +7,7 @@ SocketTcpClient::SocketTcpClient()
 {
 }
 
-SocketTcpClient::SocketTcpClient(const std::string& ip, unsigned short port)
+SocketTcpClient::SocketTcpClient(const DogStringA& ip, unsigned short port)
 {
     GetSocketBean().SetIpAddress(ip);
     GetSocketBean().SetPort(port);
@@ -32,7 +32,7 @@ bool SocketTcpClient::Connect()
     return (0 == ::connect(GetSocketBean().GetSocket(), &socketAddr, sizeof(socketAddr)));
 }
 
-bool SocketTcpClient::Connect(const std::string& ip, unsigned short port)
+bool SocketTcpClient::Connect(const DogStringA& ip, unsigned short port)
 {
     GetSocketBean().SetIpAddress(ip);
     GetSocketBean().SetPort(port);

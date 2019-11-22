@@ -39,11 +39,17 @@ protected:
     bool UnInit();
 
 public:
+    /** 获得buff的size
+    @return buff 的size
+    */
     inline unsigned int GetBuffSize()
     {
         return m_buffSize;
     }
 
+    /** 设置buff size
+    @param [in] buff size
+    */
     inline void SetBuffSize(unsigned int size)
     {
         m_buffSize = size;

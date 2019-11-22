@@ -24,28 +24,28 @@ public:
     @param [in] msg 希望发送的消息
     @return 成功返回发送的个数，失败返回SOCKET_ERROR
     */
-    virtual int SendMsg(const std::string& ip, unsigned short port, const std::string & msg);
+    virtual int SendMsg(const DogStringA& ip, unsigned short port, const DogStringA& msg);
 
     /** 发送消息 当msg大于大约 1K时候返回的值可能不等于msg的值（一次性发送不了）
     @param [in] sockAddr 目标sockAddr
     @param [in] msg 希望发送的消息
     @return 成功返回发送的个数，失败返回SOCKET_ERROR
     */
-    virtual int SendMsg(const SOCKADDR& sockAddr, const std::string & msg);
+    virtual int SendMsg(const SOCKADDR& sockAddr, const DogStringA& msg);
 
     /** 接收消息-如果消息超过缓存大小请循环接受
     @param [out] ip 目标ip
     @param [out] port 目标port
     @param [out] msg 收到的消息
     */
-    virtual int RcvMsg(std::string& msg, std::string& ip, unsigned short& port);
+    virtual int RcvMsg(DogStringA& msg, DogStringA& ip, unsigned short& port);
 
     /** 接收消息
     @param [out] sockAddr 目标sockAddr
     @param [out] msg 收到的消息
     @return 成功返回接受的个数，失败返回SOCKET_ERROR
     */
-    virtual int RcvMsg(std::string & msg, SOCKADDR& sockAddr);
+    virtual int RcvMsg(DogStringA& msg, SOCKADDR& sockAddr);
 
 //     /** 接收消息
 //     @param [out] callBack 回调函数

@@ -16,7 +16,7 @@ public:
     @param [in] ip 服务器ip地址
     @param [in] port 服务器监听端口
     */
-    SocketTcpClient(const std::string& ip, unsigned short port);
+    SocketTcpClient(const DogStringA& ip, unsigned short port);
 
     /** 析构函数
     */
@@ -33,7 +33,7 @@ public:
     @param [in] ip 服务器ip地址
     @param [in] port 服务器监听端口
     */
-    bool Connect(const std::string& ip, unsigned short port);
+    bool Connect(const DogStringA& ip, unsigned short port);
 };
 
 #endif // __SOCKET_TCP_CLIENT_H_

@@ -12,7 +12,7 @@ public:
     @param [in] ip 服务器监听ip地址 "0" 表示任意
     @param [in] port 服务器监听端口
     */
-    SocketUdpServer(const std::string& ip, unsigned short port);
+    SocketUdpServer(const DogStringA& ip, unsigned short port);
 
     /** 析构函数
     */

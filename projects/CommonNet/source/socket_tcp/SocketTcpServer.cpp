@@ -1,7 +1,7 @@
 
 #include "SocketTcpServer.h"
 
-SocketTcpServer::SocketTcpServer(const std::string & ip, unsigned short port)
+SocketTcpServer::SocketTcpServer(const DogStringA& ip, unsigned short port)
 {
     GetSocketBean().SetIpAddress(ip);
     GetSocketBean().SetPort(port);
