@@ -98,120 +98,119 @@ struct Url
             return;
         }
 
-        // [user[:password]@]host[:port] [/path] [?query] [#fragment]
-        // 寻找 “/”
+        // [user[:password]@]host[:port] 【[/path] [?query] [#fragment]】
+        // 找到扩展符号 “/ ? #”
         size_t hostPortEndIndex = len - 1;
         for (size_t i = index; i < len; ++i)
         {
-            if (url[i] == '/')
+            if (url[i] == '/' || url[i] == '?' || url[i] == '#')
             {
                 hostPortEndIndex = i - 1;
                 break;
             }
         }
 
-        size_t userPswEndIndex = index - 1;
-        for (size_t i = index; i <= hostPortEndIndex; ++i)
-        {
-            if (url[i] == '@')
-            {
-                userPswEndIndex = i - 1;
-                break;
-            }
-        }
-
         // 找到@符号，说明有用户名密码
-        if (userPswEndIndex >= index)
         {
-            // 寻找 “:”
-            size_t userEndIndex = userPswEndIndex;
-            for (size_t j = index; j <= userPswEndIndex; ++j)
+            size_t userPswEndIndex = index - 1;
+            for (size_t i = index; i <= hostPortEndIndex; ++i)
             {
-                if (url[j] == ':')
+                if (url[i] == '@')
                 {
-                    userEndIndex = j - 1;
+                    userPswEndIndex = i - 1;
                     break;
                 }
             }
 
-            m_user = url.substr(index, userEndIndex - index + 1);
-
-            if (userEndIndex < userPswEndIndex - 2)
+            if (userPswEndIndex >= index)
             {
-                m_password = url.substr(userEndIndex + 2, userPswEndIndex - userEndIndex - 1);
-            }
-
-            index = userPswEndIndex + 2;
-        }
-
-        if (index < hostPortEndIndex)
-        {
-            // 寻找 “:”
-            size_t hostEndIndex = hostPortEndIndex;
-            for (size_t j = index; j <= hostPortEndIndex; ++j)
-            {
-                if (url[j] == ':')
+                // 寻找 “:”
+                size_t userEndIndex = userPswEndIndex;
+                for (size_t j = index; j <= userPswEndIndex; ++j)
                 {
-                    hostEndIndex = j - 1;
-                    break;
+                    if (url[j] == ':')
+                    {
+                        userEndIndex = j - 1;
+                        break;
+                    }
                 }
-            }
 
-            m_host = url.substr(index, hostEndIndex - index + 1);
+                m_user = url.substr(index, userEndIndex - index + 1);
 
-            if (hostEndIndex < hostPortEndIndex - 2)
-            {
-                m_port = ::atoi(url.substr(hostEndIndex + 2, hostPortEndIndex - hostEndIndex - 1).c_str());
-            }
-            else
-            {
-                m_port = 80;
-            }
+                if (userEndIndex < userPswEndIndex - 2)
+                {
+                    m_password = url.substr(userEndIndex + 2, userPswEndIndex - userEndIndex - 1);
+                }
 
-            index = hostPortEndIndex + 2;
+                index = userPswEndIndex + 2;
+            }
         }
 
-        if (index >= len)
+        // host 端口
         {
-            return;
-        }
-
-        // 找到扩展符号 “? #”
-        size_t pathEndIndex = len - 1;
-        for (size_t i = index; i < len; ++i)
-        {
-            if (url[i] == '?' || url[i] == '#')
+            if (index < hostPortEndIndex)
             {
-                pathEndIndex = i - 1;
-                break;
+                // 寻找 “:”
+                size_t hostEndIndex = hostPortEndIndex;
+                for (size_t j = index; j <= hostPortEndIndex; ++j)
+                {
+                    if (url[j] == ':')
+                    {
+                        hostEndIndex = j - 1;
+                        break;
+                    }
+                }
+
+                m_host = url.substr(index, hostEndIndex - index + 1);
+
+                if (hostEndIndex < hostPortEndIndex - 2)
+                {
+                    m_port = ::atoi(url.substr(hostEndIndex + 2, hostPortEndIndex - hostEndIndex - 1).c_str());
+                }
+                else
+                {
+                    m_port = 80;
+                }
+
+                index = hostPortEndIndex + 2;
             }
         }
 
-        m_path = url.substr(index, pathEndIndex - index + 1);
-        index = pathEndIndex + 2;
-        if (index >= len)
-        {
-            return;
-        }
-
-        // 找到扩展符号 “? #”
+        // 找到扩展符号 “/ ? #”
         while (index < len)
         {
             size_t extendEndIndex = len - 1;
             for (size_t i = index; i < len; ++i)
             {
-                if (url[i] == '?' || url[i] == '#')
+                if (url[i] == '/' || url[i] == '?' || url[i] == '#')
                 {
                     extendEndIndex = i - 1;
                     break;
                 }
             }
 
+            // 如果上一个符号是 "/" ，找到扩展符号 “? #”
+            if (url[index - 1] == '/')
+            {
+                size_t pathEndIndex = len - 1;
+                for (size_t i = index; i < len; ++i)
+                {
+                    if (url[i] == '?' || url[i] == '#')
+                    {
+                        pathEndIndex = i - 1;
+                        break;
+                    }
+                }
+
+                m_path = url.substr(index, pathEndIndex - index + 1);
+            }
+
             // 如果上一个符号是 "?" 那么填充m_query
-            if (url[index - 1] == '?')
+            else if (url[index - 1] == '?')
             {
                 m_query = url.substr(index, extendEndIndex - index + 1);
             }
+
             // 如果上一个符号是 "#" 那么填充m_fragment
             else if (url[index - 1] == '#')
             {
