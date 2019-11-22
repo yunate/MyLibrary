@@ -195,6 +195,10 @@ struct DogUrl
 
                 index = hostPortEndIndex + 2;
             }
+            else
+            {
+                return;
+            }
         }
 
         while (index < len)

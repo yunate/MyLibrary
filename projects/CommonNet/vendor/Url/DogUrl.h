@@ -117,6 +117,12 @@ struct DogUrl
             }
         }
 
+        // 长度为0
+        if (hostPortEndIndex < index)
+        {
+            return;
+        }
+
         // 找到@符号，说明有用户名密码
         {
             size_t userPswEndIndex = index - 1;
@@ -125,37 +131,38 @@ struct DogUrl
                 if (url[i] == '@')
                 {
                     userPswEndIndex = i - 1;
+
+                    // 长度不为0
+                    if (userPswEndIndex >= index)
+                    {
+                        // 寻找 “:”
+                        size_t userEndIndex = userPswEndIndex;
+                        for (size_t j = index; j <= userPswEndIndex; ++j)
+                        {
+                            if (url[j] == ':')
+                            {
+                                userEndIndex = j - 1;
+                                break;
+                            }
+                        }
+
+                        m_user = url.substr(index, userEndIndex - index + 1);
+
+                        if (userEndIndex < userPswEndIndex - 2)
+                        {
+                            m_password = url.substr(userEndIndex + 2, userPswEndIndex - userEndIndex - 1);
+                        }
+                    }
+
+                    index = userPswEndIndex + 2;
                     break;
                 }
-            }
-
-            if (userPswEndIndex >= index)
-            {
-                // 寻找 “:”
-                size_t userEndIndex = userPswEndIndex;
-                for (size_t j = index; j <= userPswEndIndex; ++j)
-                {
-                    if (url[j] == ':')
-                    {
-                        userEndIndex = j - 1;
-                        break;
-                    }
-                }
-
-                m_user = url.substr(index, userEndIndex - index + 1);
-
-                if (userEndIndex < userPswEndIndex - 2)
-                {
-                    m_password = url.substr(userEndIndex + 2, userPswEndIndex - userEndIndex - 1);
-                }
-
-                index = userPswEndIndex + 2;
             }
         }
 
         // host 端口
         {
-            if (index < hostPortEndIndex)
+            if (index <= hostPortEndIndex)
             {
                 // 寻找 “:”
                 size_t hostEndIndex = hostPortEndIndex;
@@ -166,6 +173,12 @@ struct DogUrl
                         hostEndIndex = j - 1;
                         break;
                     }
+                }
+
+                // 长度为0
+                if (hostEndIndex < index)
+                {
+                    return;
                 }
 
                 m_host = url.substr(index, hostEndIndex - index + 1);
@@ -181,6 +194,10 @@ struct DogUrl
                 }
 
                 index = hostPortEndIndex + 2;
+            }
+            else
+            {
+                return;
             }
         }
 
