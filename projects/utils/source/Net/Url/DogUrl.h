@@ -14,30 +14,36 @@ struct DogUrl
     DogStringA m_scheme;
 
     /** 用户名称
+    @note: [可省略]
     */
     DogStringA m_user;
 
     /** 密码
+    @note: [可省略]
     */
     DogStringA m_password;
 
-    /** 服务器（通常为域名，有时为IP地址）
+    /** 服务器。通常为域名，有时为IP地址
     */
     DogStringA m_host;
 
-    /** 端口（以数字方式表示，若为HTTP的默认值“:80”可省略）
+    /** 端口。以数字方式表示,默认值“:80”
+    @note: [可省略]
     */
     unsigned int m_port = 0;
 
-    /** 路径（以“/”字符区别路径中的每一个目录名称）
+    /** 路径。以“/”字符区别路径中的每一个目录名称
+    @note: [可省略]
     */
     DogStringA m_path;
 
-    /** 查询。（GET模式的窗体参数，以“?”字符为起点，每个参数以“&”隔开，再以“=”分开参数名称与数据，通常以UTF8的URL编码，避开字符冲突的问题）
+    /** 查询。GET模式的窗体参数，以“?”字符为起点，每个参数以“&”隔开，再以“=”分开参数名称与数据，通常以UTF8的URL编码，避开字符冲突的问题
+    @note: [可省略]
     */
     DogStringA m_query;
 
     /** 片段。以“#”字符为起点
+    @note: [可省略]
     */
     DogStringA m_fragment;
 
@@ -49,7 +55,7 @@ struct DogUrl
     }
 
     /** 构造函数
-    @param [in] url 请求的url;"https://www.baidu.com/"
+    @param [in] url 请求的url;
     */
     DogUrl(const DogStringA& constUrl)
     {
@@ -57,7 +63,7 @@ struct DogUrl
     }
 
     /** 初始化
-    @param [in] url 请求的url;"https://www.baidu.com/"
+    @param [in] url 请求的url;
     */
     void Init(const DogStringA& constUrl)
     {
