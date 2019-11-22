@@ -11,7 +11,12 @@ namespace utilstest
         DogUrl url3("http://www.baidu.com/wget.apx/dd?name=ydh");
         DogUrl url4("http://www.baidu.com/wget.apx/dd/cc?");
         DogUrl url5("http://www.baidu.com/wget.apx/");
-        DogUrl url6("http://ydh:123@www.baidu.com/wget.apx");
+        DogUrl url6("http://ydh:123@w/wget.apx");
+        DogUrl url61("http:///wget.apx");
+        DogUrl url62("http://@/wget.apx");
+        DogUrl url63("http://:@/wget.apx");
+        DogUrl url64("http://:@:/wget.apx");
+        DogUrl url65("http://:/wget.apx");
         DogUrl url7("http://www.baidu.com:20/");
         DogUrl url8("http://www.baidu.com:20");
         DogUrl url81("http://www.baidu.com:");

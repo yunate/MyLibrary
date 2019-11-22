@@ -117,6 +117,12 @@ struct DogUrl
             }
         }
 
+        // 长度为0
+        if (hostPortEndIndex < index)
+        {
+            return;
+        }
+
         // 找到@符号，说明有用户名密码
         {
             size_t userPswEndIndex = index - 1;
@@ -125,6 +131,13 @@ struct DogUrl
                 if (url[i] == '@')
                 {
                     userPswEndIndex = i - 1;
+
+                    // 长度为0
+                    if (userPswEndIndex < index)
+                    {
+                        ++index;
+                    }
+
                     break;
                 }
             }
@@ -155,7 +168,7 @@ struct DogUrl
 
         // host 端口
         {
-            if (index < hostPortEndIndex)
+            if (index <= hostPortEndIndex)
             {
                 // 寻找 “:”
                 size_t hostEndIndex = hostPortEndIndex;
@@ -166,6 +179,12 @@ struct DogUrl
                         hostEndIndex = j - 1;
                         break;
                     }
+                }
+
+                // 长度为0
+                if (hostEndIndex < index)
+                {
+                    return;
                 }
 
                 m_host = url.substr(index, hostEndIndex - index + 1);
