@@ -1,27 +1,46 @@
+
 #pragma once
 #include "DogUrl.h"
+#include "console/color_print.h"
+#include <vector>
 
 namespace utilstest
 {
     inline void Test_DogUrl()
     {
-        DogUrl url1("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
-        DogUrl url11("http://www.baidu.com/wget.apx/#anchor");
-        DogUrl url2("http://www.baidu.com/wget.apx/dd?name=ydh#");
-        DogUrl url3("http://www.baidu.com/wget.apx/dd?name=ydh");
-        DogUrl url4("http://www.baidu.com/wget.apx/dd/cc?");
-        DogUrl url5("http://www.baidu.com/wget.apx/");
-        DogUrl url6("http://ydh:123@w/wget.apx");
-        DogUrl url61("http:///wget.apx");
-        DogUrl url62("http://@/wget.apx");
-        DogUrl url63("http://:@/wget.apx");
-        DogUrl url64("http://:@:/wget.apx");
-        DogUrl url65("http://:/wget.apx");
-        DogUrl url7("http://www.baidu.com:20/");
-        DogUrl url8("http://www.baidu.com:20");
-        DogUrl url81("http://www.baidu.com:");
-        DogUrl url82("http://www.baidu.com/");
-        DogUrl url9("http://");
-        DogUrl url10("http:/");
+        std::vector<std::string> urls;
+        urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
+        urls.push_back("http:\\\\www.baidu.com\\wget.apx/dd/?name=ydh#anchor");
+        urls.push_back("http://www.baidu.com/wget.apx/#anchor");
+        urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
+        urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
+        urls.push_back("http://www.baidu.com/wget.apx/dd?name=ydh#");
+        urls.push_back("http://www.baidu.com/wget.apx/dd?name=ydh");
+        urls.push_back("http://www.baidu.com/wget.apx/dd/cc?");
+        urls.push_back("http://www.baidu.com/wget.apx/");
+        urls.push_back("http://ydh:123@w/wget.apx");
+        urls.push_back("http:///wget.apx");
+        urls.push_back("http://@/wget.apx");
+        urls.push_back("http://:@/wget.apx");
+        urls.push_back("http://:@:/wget.apx");
+        urls.push_back("http://:/wget.apx");
+        urls.push_back("http://www.baidu.com:20/");
+        urls.push_back("http://www.baidu.com:20");
+        urls.push_back("http://www.baidu.com:");
+        urls.push_back("http://www.baidu.com/");
+        urls.push_back("http://");
+        urls.push_back("http:/");
+
+        for (auto& it : urls)
+        {
+            ColorPrintf(Gray, "\r\n");
+            ColorPrintf(Gray, it.c_str());
+            ColorPrintf(Gray, "\r\n");
+            DogUrl url(it);
+            ColorPrintf(Green, url.GetFormateUrl().c_str());
+            ColorPrintf(Green, "\r\n");
+        }
+
+        ::system("pause");
     }
 }

@@ -66,18 +66,8 @@ struct DogUrl
     /** 初始化
     @param [in] url 请求的url;
     */
-    void Init(const DogStringA& constUrl)
+    void Init(const DogStringA& url)
     {
-        // 将 \ 转换为 /
-        DogStringA url = constUrl;
-        for (size_t i = 0; i < url.length(); ++i)
-        {
-            if (url[i] == '\\')
-            {
-                url[i] = '/';
-            }
-        }
-
         size_t index = 0;
         size_t len = url.length();
 
@@ -97,20 +87,22 @@ struct DogUrl
             return;
         }
 
-        // 固定 //
+        // 固定 // 或者 \\ 
         if (index + 1 >= len ||
-            url[index++] != '/' ||
-            url[index++] != '/')
+            (url[index] != '/' && url[index] != '\\') ||
+            (url[index + 1] != '/' && url[index + 1] != '\\'))
         {
             return;
         }
 
+        index += 2;
+
         // [user[:password]@]host[:port] 【[/path] [?query] [#fragment]】
-        // 找到扩展符号 “/ ? #”
+        // 找到扩展符号 “/ \ ? #”
         size_t hostPortEndIndex = len - 1;
         for (size_t i = index; i < len; ++i)
         {
-            if (url[i] == '/' || url[i] == '?' || url[i] == '#')
+            if (url[i] == '/' || url[i] == '\\' || url[i] == '?' || url[i] == '#')
             {
                 hostPortEndIndex = i - 1;
                 break;
@@ -207,26 +199,16 @@ struct DogUrl
             size_t extendEndIndex = len - 1;
             for (size_t i = index; i < len; ++i)
             {
-                if (url[i] == '/' || url[i] == '?' || url[i] == '#')
+                if (url[i] == '?' || url[i] == '#')
                 {
                     extendEndIndex = i - 1;
                     break;
                 }
             }
 
-            // 如果上一个符号是 "/"，重新寻找下一个扩展符号 “? #”
-            if (url[index - 1] == '/')
+            // 如果上一个符号是 "/" 或者 "\\"，重新寻找下一个扩展符号 “? #”
+            if (url[index - 1] == '/' || url[index - 1] == '\\')
             {
-                extendEndIndex = len - 1;
-                for (size_t i = index; i < len; ++i)
-                {
-                    if (url[i] == '?' || url[i] == '#')
-                    {
-                        extendEndIndex = i - 1;
-                        break;
-                    }
-                }
-
                 m_path = url.substr(index, extendEndIndex - index + 1);
             }
 
@@ -252,6 +234,66 @@ struct DogUrl
     bool IsValid()
     {
         return !m_scheme.empty() && m_port != 0 && !m_host.empty();
+    }
+
+    /** 获得格式化后的URL
+    @note scheme:[//[user[:password]@]host[:port]] [/path] [?query] [#fragment]
+    @return 格式化后的URL
+    */
+    DogStringA GetFormateUrl()
+    {
+        DogStringA formatedUrl = "";
+
+        if (!IsValid())
+        {
+            return formatedUrl;
+        }
+
+        formatedUrl += m_scheme;
+        formatedUrl += "://";
+
+        if (m_user.length() != 0 || m_password.length() != 0)
+        {
+            formatedUrl += m_user;
+            formatedUrl += ":";
+            formatedUrl += m_password;
+            formatedUrl += "@";
+        }
+
+        formatedUrl += m_host;
+
+        if (!( (m_port == 80) &&
+               (m_scheme.length() >= 4) &&
+               (m_scheme[0] == 'h' || m_scheme[0] == 'H') &&
+               (m_scheme[1] == 't' || m_scheme[1] == 'T') &&
+               (m_scheme[2] == 't' || m_scheme[2] == 'T') &&
+               (m_scheme[3] == 'p' || m_scheme[3] == 'P') ))
+        {
+            formatedUrl += ":";
+            char portBuff[10] = {0};
+            ::_itoa_s(m_port, portBuff, 10);
+            formatedUrl += portBuff;
+        }
+
+        if (m_path.length() > 0)
+        {
+            formatedUrl += "/";
+            formatedUrl += m_path;
+        }
+
+        if (m_query.length() > 0)
+        {
+            formatedUrl += "?";
+            formatedUrl += m_query;
+        }
+
+        if (m_fragment.length() > 0)
+        {
+            formatedUrl += "#";
+            formatedUrl += m_fragment;
+        }
+
+        return formatedUrl;
     }
 };
 
