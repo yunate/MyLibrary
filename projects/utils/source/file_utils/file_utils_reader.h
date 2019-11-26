@@ -3,6 +3,7 @@
 #define __FILE_UTILS_READER_H_
 
 #include <string>
+#include <memory.h>
 
 /** 文件读取类，每次读取wchar
 */
@@ -56,10 +57,12 @@ protected:
     FILE* m_pFile;
 };
 
+using SPFileReader = std::shared_ptr<FileReader>;
+
 /** 创建一个UCS-2 Little Endian 编码的文件 使用GetLineW()
-@return FileReader指针，别忘了自己释放
+@return FileReader的shared_ptr
 */
-inline FileReader* CreateUCS2FileReader(const std::wstring& path)
+inline SPFileReader CreateUCS2FileReader(const std::wstring& path)
 {
     unsigned char header[] = {0xff, 0xfe, '\0'};
     FileReader* pFileReader = new (std::nothrow) FileReader(path, header, 2);
@@ -75,13 +78,13 @@ inline FileReader* CreateUCS2FileReader(const std::wstring& path)
         return NULL;
     }
 
-    return pFileReader;
+    return SPFileReader(pFileReader);
 }
 
 /** 创建一个UTF8 编码的文件 使用GetLineA()
-@return FileReader指针，别忘了自己释放
+@return FileReader的shared_ptr
 */
-inline FileReader* CreateUTF8FileReader(const std::wstring& path)
+inline SPFileReader CreateUTF8FileReader(const std::wstring& path)
 {
     FileReader* pFileReader = new (std::nothrow) FileReader(path, NULL, 0);
 
@@ -96,13 +99,13 @@ inline FileReader* CreateUTF8FileReader(const std::wstring& path)
         return NULL;
     }
 
-    return pFileReader;
+    return SPFileReader(pFileReader);
 }
 
 /** 创建一个UTF8 BOM 编码的文件 使用GetLineA()
-@return FileReader指针，别忘了自己释放
+@return FileReader的shared_ptr
 */
-inline FileReader* CreateUTF8BomFileReader(const std::wstring& path)
+inline SPFileReader CreateUTF8BomFileReader(const std::wstring& path)
 {
     unsigned char header[] = {0xef, 0xbb, 0xbf, '\0'};
     FileReader* pFileReader = new (std::nothrow) FileReader(path, header, 3);
@@ -118,7 +121,7 @@ inline FileReader* CreateUTF8BomFileReader(const std::wstring& path)
         return NULL;
     }
 
-    return pFileReader;
+    return SPFileReader(pFileReader);
 }
 
 #endif // __FILE_UTILS_READER_H_

@@ -70,7 +70,7 @@ namespace utilstest
 
         if (fileMapper.MapFile(L"F:\\TmpWorkSpace\\accuracy\\user\\src\\199.7z"))
         {
-            FileWriter* fileWriter = CreateUTF8FileWriter(L"F:\\TmpWorkSpace\\accuracy\\user\\src\\199.7z__");
+            SPFileWriter fileWriter = CreateUTF8FileWriter(L"F:\\TmpWorkSpace\\accuracy\\user\\src\\199.7z__");
             SPFileBlock spFileBlock = fileMapper.GetNextBlock();
 
             while (spFileBlock != NULL)
@@ -78,14 +78,12 @@ namespace utilstest
                 fileWriter->WriteBuffA(spFileBlock->GetBlockAddr(), spFileBlock->GetSize());
                 spFileBlock = fileMapper.GetNextBlock(-1, 0);
             }
-
-            delete fileWriter;
         }
     }
 
     static void Test_file_utils_ex()
     {
-        FileReader *pReader = CreateUCS2FileReader(L"D:\\test\\1.txt");
+        SPFileReader pReader = CreateUCS2FileReader(L"D:\\test\\1.txt");
 
         if (!pReader)
         {
@@ -101,9 +99,7 @@ namespace utilstest
             pReader->GetLineW(line);
         }
 
-        delete pReader;
-
-        FileWriter *pWrite = CreateUTF8FileWriter(L"D:\\test\\2.txt");
+        SPFileWriter pWrite = CreateUTF8FileWriter(L"D:\\test\\2.txt");
 
         if (!pWrite)
         {
@@ -115,7 +111,5 @@ namespace utilstest
         pWrite->WriteBuffA(line1.c_str(), line1.size());
         pWrite->WriteBuffA(line1.c_str(), line1.size());
         pWrite->WriteBuffA(line1.c_str(), line1.size());
-
-        delete pWrite;
     }
 }

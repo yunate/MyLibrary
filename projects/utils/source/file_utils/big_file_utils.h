@@ -93,7 +93,7 @@ public:
     */
     SPFileBlock GetNextBlock(int sizeRaw = g_file_block_default_size, char align = '\n');
 
-    /** 获得文件块的下一块
+    /** 获得文件块
     @param [in] beginPos 开始位置
     @param [in] size 指定大小（B），如果小于等于0或者大于1G的话使用默认大小，如果有末尾对齐（align != 0）返回的block大小可能要小于size
     @param [in] align size 指定的大小可能不在一个句子的尾巴，所以会向前找到第一个出现align（包括）的字符处,align == 0 说明不对齐，默认"\n"

@@ -3,6 +3,7 @@
 #define __FILE_UTILS_WRITER_H_
 
 #include <string>
+#include <memory.h>
 
 /** 文件读取类，每次读取wchar
 */
@@ -45,11 +46,12 @@ protected:
     FILE* m_pFile;
 };
 
+using SPFileWriter = std::shared_ptr<FileWriter>;
 
 /** 创建一个UCS-2 Little Endian 编码的文件 使用WriteBuffW()
-@return FileReader指针，别忘了自己释放
+@return FileReader的shared_ptr
 */
-inline FileWriter* CreateUCS2FileWriter(const std::wstring& path)
+inline SPFileWriter CreateUCS2FileWriter(const std::wstring& path)
 {
     unsigned char header[] = {0xff, 0xfe, '\0'};
     FileWriter* pFileWriter = new (std::nothrow) FileWriter(path, header, 2);
@@ -65,13 +67,13 @@ inline FileWriter* CreateUCS2FileWriter(const std::wstring& path)
         return NULL;
     }
 
-    return pFileWriter;
+    return SPFileWriter(pFileWriter);
 }
 
 /** 创建一个UTF8 编码的文件 使用WriteBuffA()
-@return FileReader指针，别忘了自己释放
+@return FileReader的shared_ptr
 */
-inline FileWriter* CreateUTF8FileWriter(const std::wstring& path)
+inline SPFileWriter CreateUTF8FileWriter(const std::wstring& path)
 {
     FileWriter* pFileWriter = new (std::nothrow) FileWriter(path, NULL, 0);
 
@@ -86,13 +88,13 @@ inline FileWriter* CreateUTF8FileWriter(const std::wstring& path)
         return NULL;
     }
 
-    return pFileWriter;
+    return SPFileWriter(pFileWriter);
 }
 
 /** 创建一个UTF8 BOM 编码的文件 使用WriteBuffA()
-@return FileReader指针，别忘了自己释放
+@return FileReader的shared_ptr
 */
-inline FileWriter* CreateUTF8BomFileWriter(const std::wstring& path)
+inline SPFileWriter CreateUTF8BomFileWriter(const std::wstring& path)
 {
     unsigned char header[] = {0xef, 0xbb, 0xbf, '\0'};
     FileWriter* pFileWriter = new (std::nothrow) FileWriter(path, header, 3);
@@ -108,7 +110,7 @@ inline FileWriter* CreateUTF8BomFileWriter(const std::wstring& path)
         return NULL;
     }
 
-    return pFileWriter;
+    return SPFileWriter(pFileWriter);
 }
 
 #endif // __FILE_UTILS_WRITER_H_
