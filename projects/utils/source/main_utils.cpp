@@ -17,9 +17,9 @@
 #include "thread/producer_consumer/test2.h"
 #include "thread/task/Test_taskQue.h"
 #include "console/test.h"
- #include "logic_executor/Test.h"
- #include "stream/Test.h"
- #include "thread/TestLockFree.h"
+#include "logic_executor/Test.h"
+#include "stream/Test.h"
+#include "thread/TestLockFree.h"
 #include "dir_utils/Test_DirUtils.h"
 #include "Net/Url/Test_Url.h"
 
@@ -36,46 +36,48 @@
 #endif
 
 
-namespace utilstest {}
+namespace utilstest
+{
+}
 
 int main()
 {
-    //     utilstest::Test_stringutils0();
-//     utilstest::Test_stringutils1();
-// utilstest::Test_MemoryShare0();
-//utilstest::Test_MemoryShare1();
-//     utilstest::Test_Sql0();
-//     utilstest::Test_Json();
-//     utilstest::Test_xml0();
-
-//    utilstest::Test_codecvt0();
-
-//    utilstest::Test_Initfile0();
-//    utilstest::Test_CommandLineArguments0();
-//    utilstest::Test_WinRegistryKey1();
-//    utilstest::Test_WinRegistryKey0();
-
-//    utilstest::Test_WinApiCaller0();
-
+    //utilstest::Test_stringutils0();
+    //utilstest::Test_stringutils1();
+    //utilstest::Test_MemoryShare0();
+    //utilstest::Test_MemoryShare1();
+    //utilstest::Test_Sql0();
+    //utilstest::Test_Json();
+    //utilstest::Test_xml0();
+    //utilstest::Test_codecvt0();
+    //utilstest::Test_Initfile0();
+    //utilstest::Test_CommandLineArguments0();
+    //utilstest::Test_WinRegistryKey1();
+    //utilstest::Test_WinRegistryKey0();
+    //utilstest::Test_WinApiCaller0();
     //utilstest::Test_FileUtils();
     //utilstest::Test_FileUtilsUTF8();
     //utilstest::Test_FileUtilsUTF8Bom();
     //utilstest::Test_Singleton();
     //utilstest::Test_StrToPinYin();
-    // utilstest::Test_GetCpuCount();
+    //utilstest::Test_GetCpuCount();
     //utilstest::Test_file_utils_ex();
     //utilstest::Test_ColorPrint();
     //utilstest::Test_Executor();
     //utilstest::Test_taskQue();
     //utilstest::Test_taskQue1();
-
-   // utilstest::Test_MemoryStream();
+    //utilstest::Test_MemoryStream();
     //utilstest::Test_FileStream();
     //utilstest::TestSpeed();
     //utilstest::Test_DirUtils();
     //utilstest::Test_BigFile();
     //utilstest::Test_EnumDir();
-    utilstest::Test_DogUrl();
+    //utilstest::Test_DogUrl();
+    //DogString ss = _DogTR(\\\\);
+    
+    DogString ss0 = LR"-#-(d)-#-";
+
+
     ::system("pause");
     return 1;
 }

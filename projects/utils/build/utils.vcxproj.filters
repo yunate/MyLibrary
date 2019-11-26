@@ -97,6 +97,9 @@
     <Filter Include="Net\Url">
       <UniqueIdentifier>{0992b6a7-b2db-4750-a050-cd0311420b22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Regex">
+      <UniqueIdentifier>{47348dda-7c8d-440a-b54c-1a1f63c64079}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -536,6 +539,9 @@
     </ClInclude>
     <ClInclude Include="..\source\Net\Url\DogUrl.h">
       <Filter>Net\Url</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\regex\DogRegex.h">
+      <Filter>Regex</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

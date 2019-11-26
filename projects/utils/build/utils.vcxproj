@@ -123,6 +123,7 @@
     <ClInclude Include="..\source\pinyin_ci_table\CiToPinYin.h" />
     <ClInclude Include="..\source\pinyin_ci_table\test3.h" />
     <ClInclude Include="..\source\rand\rand.h" />
+    <ClInclude Include="..\source\regex\DogRegex.h" />
     <ClInclude Include="..\source\resource_util\resource_uti.h" />
     <ClInclude Include="..\source\resource_util\Test.h" />
     <ClInclude Include="..\source\service\service_utils.h" />
