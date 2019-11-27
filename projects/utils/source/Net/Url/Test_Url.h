@@ -9,8 +9,8 @@ namespace utilstest
     inline void Test_DogUrl()
     {
         std::vector<std::string> urls;
+        urls.push_back("http:\\\\FF:123@www.baidu.com:80\\wget.apx/dd/?name=ydh#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
-        urls.push_back("http:\\\\www.baidu.com\\wget.apx/dd/?name=ydh#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
@@ -36,8 +36,15 @@ namespace utilstest
             ColorPrintf(Gray, "\r\n");
             ColorPrintf(Gray, it.c_str());
             ColorPrintf(Gray, "\r\n");
-            DogUrl url(it);
-            ColorPrintf(Green, url.GetFormateUrl().c_str());
+            DogUrl url;
+            ParseUrl(it, url);
+            ColorPrintf(Green, "norml:");
+            ColorPrintf(Green, url.GetFormatedUrl().c_str());
+
+            DogUrl urlEx;
+            ParseUrlRegex(it, urlEx);
+            ColorPrintf(Green, "\r\nregex:");
+            ColorPrintf(Green, urlEx.GetFormatedUrl().c_str());
             ColorPrintf(Green, "\r\n");
         }
 

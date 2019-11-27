@@ -72,12 +72,8 @@ int main()
     //utilstest::Test_DirUtils();
     //utilstest::Test_BigFile();
     //utilstest::Test_EnumDir();
-    //utilstest::Test_DogUrl();
-    //DogString ss = _DogTR(\\\\);
+    utilstest::Test_DogUrl();
     
-    DogString ss0 = LR"-#-(d)-#-";
-
-
     ::system("pause");
     return 1;
 }
