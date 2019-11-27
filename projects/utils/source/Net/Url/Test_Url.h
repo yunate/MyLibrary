@@ -11,6 +11,7 @@ namespace utilstest
         std::vector<std::string> urls;
         urls.push_back("http:\\\\FF:123@www.baidu.com:80\\wget.apx/dd/?name=ydh#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
+        urls.push_back("http://www.baidu.com#anchor?name=ydh/wget.apx/dd/");
         urls.push_back("http://www.baidu.com/wget.apx/#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");

@@ -257,16 +257,28 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
         size_t extendEndIndex = len - 1;
         for (size_t i = index; i < len; ++i)
         {
-            if (url[i] == '?' || url[i] == '#')
+            if (url[i] == '?' || url[i] == '#' || url[i] == '/' || url[i] == '\\')
             {
                 extendEndIndex = i - 1;
                 break;
             }
         }
 
-        // 如果上一个符号是 "/" 或者 "\\" 那么填充m_path
+        // 如果上一个符号是 "/" 或者 "\\" 那么填充填充m_path
         if (url[index - 1] == '/' || url[index - 1] == '\\')
         {
+            // 继续寻找直到 ? #
+            size_t i = extendEndIndex;
+            extendEndIndex = len - 1;
+            for (; i < len; ++i)
+            {
+                if (url[i] == '?' || url[i] == '#')
+                {
+                    extendEndIndex = i - 1;
+                    break;
+                }
+            }
+
             dogUrl.m_path = url.substr(index, extendEndIndex - index + 1);
         }
 
@@ -286,7 +298,8 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
     }
 }
 
-/** 正则表达式解析url
+/** 正则表达式解析url,和ParseUrl稍有不同ParseUrlRegex对[/path] [?query] [#fragment]的顺序严格要求
+scheme://[user[:password]@]host[:port] [/path] [?query] [#fragment]
 @note: 是否成功用dogUrl 的 IsValid 判断
 @param [in] url url原始字符串（一般以UTF-8编码）
 @param [out] dogUrl 输出
@@ -311,7 +324,7 @@ inline void ParseUrlRegex(const DogStringA& url, DogUrl& dogUrl)
     // [?query]
     parttenStr += R"__((?:[?]([^?#/\\]*))?)__";
 
-    //  [#fragment]
+    // [#fragment]
     parttenStr += R"__((?:[#]([^?#/\\]*))?)__";
 
     std::regex partten(parttenStr);
