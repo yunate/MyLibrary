@@ -77,8 +77,13 @@ struct DogUrl
         if (m_user.length() != 0 || m_password.length() != 0)
         {
             formatedUrl += m_user;
-            formatedUrl += ":";
-            formatedUrl += m_password;
+
+            if (m_password.length() != 0)
+            {
+                formatedUrl += ":";
+                formatedUrl += m_password;
+            }
+            
             formatedUrl += "@";
         }
 
@@ -99,7 +104,6 @@ struct DogUrl
 
         if (m_path.length() > 0)
         {
-            formatedUrl += "/";
             formatedUrl += m_path;
         }
 
@@ -153,12 +157,13 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
         return;
     }
 
-    index += 2;
+    // 指向 “/”
+    index += 1;
 
     // [user[:password]@]host[:port] 【[/path] [?query] [#fragment]】
     // 找到扩展符号 “/ \ ? #”
     size_t hostPortEndIndex = len - 1;
-    for (size_t i = index; i < len; ++i)
+    for (size_t i = index + 1; i < len; ++i)
     {
         if (url[i] == '/' || url[i] == '\\' || url[i] == '?' || url[i] == '#')
         {
@@ -168,26 +173,26 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
     }
 
     // 长度为0
-    if (hostPortEndIndex < index)
+    if (hostPortEndIndex <= index)
     {
         return;
     }
 
     // 找到@符号，说明有用户名密码
     {
-        size_t userPswEndIndex = index - 1;
-        for (size_t i = index; i <= hostPortEndIndex; ++i)
+        size_t userPswEndIndex = 0;
+        for (size_t i = index + 1; i <= hostPortEndIndex; ++i)
         {
             if (url[i] == '@')
             {
                 userPswEndIndex = i - 1;
 
                 // 长度不为0
-                if (userPswEndIndex >= index)
+                if (userPswEndIndex > index)
                 {
                     // 寻找 “:”
                     size_t userEndIndex = userPswEndIndex;
-                    for (size_t j = index; j <= userPswEndIndex; ++j)
+                    for (size_t j = index + 1; j <= userPswEndIndex; ++j)
                     {
                         if (url[j] == ':')
                         {
@@ -196,7 +201,7 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
                         }
                     }
 
-                    dogUrl.m_user = url.substr(index, userEndIndex - index + 1);
+                    dogUrl.m_user = url.substr(index + 1, userEndIndex - index);
 
                     if (userEndIndex < userPswEndIndex - 2)
                     {
@@ -204,7 +209,8 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
                     }
                 }
 
-                index = userPswEndIndex + 2;
+                // 指向 “@”
+                index = userPswEndIndex + 1;
                 break;
             }
         }
@@ -212,11 +218,11 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
 
     // host 端口
     {
-        if (index <= hostPortEndIndex)
+        if (index < hostPortEndIndex)
         {
             // 寻找 “:”
             size_t hostEndIndex = hostPortEndIndex;
-            for (size_t j = index; j <= hostPortEndIndex; ++j)
+            for (size_t j = index + 1; j <= hostPortEndIndex; ++j)
             {
                 if (url[j] == ':')
                 {
@@ -231,7 +237,7 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
                 return;
             }
 
-            dogUrl.m_host = url.substr(index, hostEndIndex - index + 1);
+            dogUrl.m_host = url.substr(index + 1, hostEndIndex - index);
 
             if (hostEndIndex < hostPortEndIndex - 2)
             {
@@ -243,7 +249,7 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
                 dogUrl.m_port = 80;
             }
 
-            index = hostPortEndIndex + 2;
+            index = hostPortEndIndex + 1;
         }
         else
         {
@@ -255,7 +261,7 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
     {
         // 寻找下一个扩展符号
         size_t extendEndIndex = len - 1;
-        for (size_t i = index; i < len; ++i)
+        for (size_t i = index + 1; i < len; ++i)
         {
             if (url[i] == '?' || url[i] == '#' || url[i] == '/' || url[i] == '\\')
             {
@@ -265,7 +271,7 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
         }
 
         // 如果上一个符号是 "/" 或者 "\\" 那么填充填充m_path
-        if (url[index - 1] == '/' || url[index - 1] == '\\')
+        if (url[index] == '/' || url[index] == '\\')
         {
             // 继续寻找直到 ? #
             size_t i = extendEndIndex;
@@ -280,21 +286,40 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
             }
 
             dogUrl.m_path = url.substr(index, extendEndIndex - index + 1);
+            size_t pathEndIndex = 0;
+
+            for (size_t i = 0; i < dogUrl.m_path.length(); ++i)
+            {
+                if (dogUrl.m_path[i] == '\\' || dogUrl.m_path[i] == '/')
+                {
+                    if (pathEndIndex == 0 || dogUrl.m_path[pathEndIndex - 1] != '/')
+                    {
+                        dogUrl.m_path[pathEndIndex++] = '/';
+                    }
+                }
+                else
+                {
+                    dogUrl.m_path[pathEndIndex++] = dogUrl.m_path[i];
+                }
+            }
+
+            dogUrl.m_path[pathEndIndex] = 0;
+            dogUrl.m_path = dogUrl.m_path.c_str();
         }
 
         // 如果上一个符号是 "?" 那么填充m_query
-        else if (url[index - 1] == '?')
+        else if (url[index] == '?')
         {
-            dogUrl.m_query = url.substr(index, extendEndIndex - index + 1);
+            dogUrl.m_query = url.substr(index + 1, extendEndIndex - index);
         }
 
         // 如果上一个符号是 "#" 那么填充m_fragment
-        else if (url[index - 1] == '#')
+        else if (url[index] == '#')
         {
-            dogUrl.m_fragment = url.substr(index, extendEndIndex - index + 1);
+            dogUrl.m_fragment = url.substr(index + 1, extendEndIndex - index);
         }
 
-        index = extendEndIndex + 2;
+        index = extendEndIndex + 1;
     }
 }
 
@@ -319,7 +344,7 @@ inline void ParseUrlRegex(const DogStringA& url, DogUrl& dogUrl)
     parttenStr += R"__(([^/\\#?:]*)(?::([0-9]{0,5}))?)__";
 
     // [/path]
-    parttenStr += R"__((?:[/\\]([^?#]*))?)__";
+    parttenStr += R"__((?:([/\\][^?#]*))?)__";
 
     // [?query]
     parttenStr += R"__((?:[?]([^?#/\\]*))?)__";
@@ -335,7 +360,6 @@ inline void ParseUrlRegex(const DogStringA& url, DogUrl& dogUrl)
         return;
     }
 
-    DogStringA ss = results.str();
     dogUrl.m_scheme = results[1];
     dogUrl.m_user = results[2];
     dogUrl.m_password = results[3];
@@ -344,6 +368,26 @@ inline void ParseUrlRegex(const DogStringA& url, DogUrl& dogUrl)
     dogUrl.m_path = results[6];
     dogUrl.m_query = results[7];
     dogUrl.m_fragment = results[8];
+
+    size_t pathEndIndex = 0;
+
+    for (size_t i = 0; i < dogUrl.m_path.length(); ++i)
+    {
+        if (dogUrl.m_path[i] == '\\' || dogUrl.m_path[i] == '/')
+        {
+            if (pathEndIndex == 0 || dogUrl.m_path[pathEndIndex - 1] != '/')
+            {
+                dogUrl.m_path[pathEndIndex++] = '/';
+            }
+        }
+        else
+        {
+            dogUrl.m_path[pathEndIndex++] = dogUrl.m_path[i];
+        }
+    }
+
+    dogUrl.m_path[pathEndIndex] = 0;
+    dogUrl.m_path = dogUrl.m_path.c_str();
 
     if (dogUrl.m_port == 0)
     {

@@ -12,3 +12,5 @@ void Test_Tcp_Server();
 void Test_Udp_Client();
 
 void Test_Udp_Server();
+
+void Test_Http_client();

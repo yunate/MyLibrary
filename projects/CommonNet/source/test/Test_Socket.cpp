@@ -1,6 +1,7 @@
 
 #include "Test_Socket.h"
 #include "color_print.h"
+#include "http/socket_http/SocketHttpClient.h"
 
 void Test_Tcp_Client()
 {
@@ -80,5 +81,11 @@ void Test_Udp_Server()
         ColorPrintf(Green, msg.c_str());
         ::printf("\r\n");
     }
+}
+
+void Test_Http_client()
+{
+    SocketHttpClient httpClient;
+    httpClient.Get("http://ip.tool.chinaz.com/");
 }
 

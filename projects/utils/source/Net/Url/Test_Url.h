@@ -9,7 +9,15 @@ namespace utilstest
     inline void Test_DogUrl()
     {
         std::vector<std::string> urls;
-        urls.push_back("http:\\\\FF:123@www.baidu.com:80\\wget.apx/dd/?name=ydh#anchor");
+        urls.push_back("http://www.baidu.com:20/");
+        urls.push_back("http://www.baidu.com:20/?#aa");
+        urls.push_back("http:\\\\FF:123@www.baidu.com:80\\wget.apx\\/dd\\/?name=ydh#anchor");
+        urls.push_back("http:\\\\:123@www.baidu.com:83\\wget.apx//dd/?name=ydh#anchor");
+        urls.push_back("http:\\\\FF:@www.baidu.com:82\\wget.apx\\\\dd/?name=ydh#anchor");
+        urls.push_back("http:\\\\FF@www.baidu.com:81\\wget.apx/dd\\\\?name=ydh#anchor");
+        urls.push_back("http:\\\\FF@www.baidu.com:\\wget.apx/dd//?name=ydh#anchor");
+        urls.push_back("http:\\\\FF@www.baidu.com\\wget.apx/dd/\\?name=ydh#anchor");
+        urls.push_back("http:\\\\FF@\\wget.apx/dd/?name=ydh#anchor");
         urls.push_back("http://www.baidu.com/wget.apx/dd/?name=ydh#anchor");
         urls.push_back("http://www.baidu.com#anchor?name=ydh/wget.apx/dd/");
         urls.push_back("http://www.baidu.com/wget.apx/#anchor");
@@ -29,6 +37,11 @@ namespace utilstest
         urls.push_back("http://www.baidu.com:20");
         urls.push_back("http://www.baidu.com:");
         urls.push_back("http://www.baidu.com/");
+        urls.push_back("http:///?#");
+        urls.push_back("http://w/?dada#");
+        urls.push_back("http://w/?dada#daada");
+        urls.push_back("http://w/#dada?daada");
+        urls.push_back("http://w/#dada#ab");
         urls.push_back("http://");
         urls.push_back("http:/");
 

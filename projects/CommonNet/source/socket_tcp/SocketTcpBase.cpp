@@ -65,7 +65,7 @@ void SocketTcpBase::RcvMsg(std::function<bool(char* pBuff, unsigned int buffSize
             ::memset(pBuff, 0, buffSize);
             rcvSize = ::recv(GetSocketBean().GetSocket(), pBuff, buffSize, 0);
 
-            if (0 == rcvSize)
+            if (0 >= rcvSize)
             {
                 break;
             }
