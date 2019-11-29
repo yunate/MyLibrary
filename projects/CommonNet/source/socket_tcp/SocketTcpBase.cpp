@@ -35,7 +35,7 @@ int SocketTcpBase::RcvMsg(DogStringA& msg)
         ::memset(pBuff, 0, buffSize);
         rcvSize = ::recv(GetSocketBean().GetSocket(), pBuff, buffSize, 0);
 
-        if (0 != rcvSize)
+        if (rcvSize > 0)
         {
             msg.append(pBuff, rcvSize);
         }
@@ -62,10 +62,10 @@ void SocketTcpBase::RcvMsg(std::function<bool(char* pBuff, unsigned int buffSize
     {
         do
         {
-            ::memset(pBuff, 0, buffSize);
+            ::memset(pBuff, 0, buffSize); 
             rcvSize = ::recv(GetSocketBean().GetSocket(), pBuff, buffSize, 0);
 
-            if (0 >= rcvSize)
+            if (rcvSize <= 0)
             {
                 break;
             }

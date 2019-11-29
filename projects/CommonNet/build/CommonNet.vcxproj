@@ -29,7 +29,9 @@
     <ClCompile Include="..\source\socket_udp\SocketUdpBase.cpp" />
     <ClCompile Include="..\source\socket_udp\SocketUdpClient.cpp" />
     <ClCompile Include="..\source\socket_udp\SocketUdpServer.cpp" />
-    <ClCompile Include="..\source\test\Test_Socket.cpp" />
+    <ClCompile Include="..\test\FileStream.cpp" />
+    <ClCompile Include="..\test\MemoryStream.cpp" />
+    <ClCompile Include="..\test\Test_Socket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\http\socket_http\SocketHttpClient.h" />
@@ -42,8 +44,11 @@
     <ClInclude Include="..\source\socket_udp\SocketUdpBase.h" />
     <ClInclude Include="..\source\socket_udp\SocketUdpClient.h" />
     <ClInclude Include="..\source\socket_udp\SocketUdpServer.h" />
-    <ClInclude Include="..\source\test\color_print.h" />
-    <ClInclude Include="..\source\test\Test_Socket.h" />
+    <ClInclude Include="..\test\color_print.h" />
+    <ClInclude Include="..\test\FileStream.h" />
+    <ClInclude Include="..\test\IDogStream.h" />
+    <ClInclude Include="..\test\MemoryStream.h" />
+    <ClInclude Include="..\test\Test_Socket.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

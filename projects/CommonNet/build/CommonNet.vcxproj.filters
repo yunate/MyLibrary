@@ -31,9 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\source\test\Test_Socket.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\socket_tcp\SocketTcpClient.cpp">
       <Filter>socket_tcp</Filter>
     </ClCompile>
@@ -61,14 +58,17 @@
     <ClCompile Include="..\source\http\socket_http\SocketHttpClient.cpp">
       <Filter>http\socket_http</Filter>
     </ClCompile>
+    <ClCompile Include="..\test\FileStream.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\MemoryStream.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\Test_Socket.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\test\Test_Socket.h">
-      <Filter>test</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\test\color_print.h">
-      <Filter>test</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\socket_tcp\SocketTcpClient.h">
       <Filter>socket_tcp</Filter>
     </ClInclude>
@@ -98,6 +98,21 @@
     </ClInclude>
     <ClInclude Include="..\source\http\socket_http\SocketHttpClient.h">
       <Filter>http\socket_http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\color_print.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\FileStream.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\IDogStream.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\MemoryStream.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\Test_Socket.h">
+      <Filter>test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

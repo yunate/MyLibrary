@@ -2,6 +2,8 @@
 #include "Test_Socket.h"
 #include "color_print.h"
 #include "http/socket_http/SocketHttpClient.h"
+#include "MemoryStream.h"
+#include "FileStream.h"
 
 void Test_Tcp_Client()
 {
@@ -85,7 +87,9 @@ void Test_Udp_Server()
 
 void Test_Http_client()
 {
+    SPDogStream spMemoryStream(new MemoryStream());
     SocketHttpClient httpClient;
+    httpClient.SetDownloadStream(spMemoryStream);
     httpClient.Get("http://ip.tool.chinaz.com/");
 }
 

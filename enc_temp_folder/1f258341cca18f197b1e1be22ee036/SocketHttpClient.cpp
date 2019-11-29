@@ -193,9 +193,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
                 }
                 else
                 {
-                    // 分析头部
-
-                    // 将余下的输出
+                    // 否则将余下的输出
                     rcvSize -= i;
                     ::memcpy(pBuff, pBuff + i, rcvSize);
                     ::memset(pBuff + rcvSize, 0, buffSize - rcvSize);

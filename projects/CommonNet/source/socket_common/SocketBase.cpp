@@ -15,7 +15,11 @@ bool SocketBase::UnInit()
 {
     if (GetSocketBean().IsValidSocket())
     {
-        return (SOCKET_ERROR != ::closesocket(GetSocketBean().GetSocket()));
+        if (SOCKET_ERROR != ::closesocket(GetSocketBean().GetSocket()))
+        {
+            GetSocketBean().SetSocket(INVALID_SOCKET);
+            return true;
+        }
     }
 
     return false;
