@@ -2,24 +2,31 @@
 #ifndef _SOCKET_HTTP_CLIENT_H__
 #define _SOCKET_HTTP_CLIENT_H__
 
-#include "socket_tcp/SocketTcpClient.h"
 #include "stream/IDogStream.h"
+#include "timer_recorder/timer_recorder.h"
 #include "typedef/DogInterger.h"
+#include "typedef/DogString.h"
+#include "Url/DogUrl.h"
 
 #include <functional>
 #include <memory>
 
 /** 进度回调函数
     @functional:
-        @param [in] handledSize 已经处理的总大小
-        @param [in] allSize 总大小
-        @return 返回false时候，结束过程进度
+    @param [in] handledSize 已经处理的总大小
+    @param [in] allSize 总大小
+    @return 返回false时候，结束过程进度
 */
 using  DogPercentCallBack = std::function<bool(const u64 handledSize, const u64 allSize)>;
 
 /** 流的智能指针
 */
 using SPDogStream = std::shared_ptr<IDogStream>;
+
+/** socket 封装类智能指针
+*/
+class SocketBase;
+using SPSocketClient = std::shared_ptr<SocketBase>;
 
 class SocketHttpClient
 {
@@ -48,10 +55,40 @@ public:
 private:
     /** 请求
     @param [in] urlStr
-    @param [method] 请求方法
+    @param [in] method 请求方法
     @return 是否成功,该函数不会去检查返回数据是否有效，是否完整，只要有数据返回，就为true
     */
     bool MakeRequest(const DogStringA& urlStr, const DogStringA& method);
+
+    /** 创建socket client
+    @param [in] urlStr
+    @param [in] method 请求方法
+    @param [out] url 如果成功的话返回的url
+    @return 创建的socket对象，失败的话为空
+    */
+    SPSocketClient MakeSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url);
+
+    /** 拼接请求头
+    @param [in] url
+    @param [method] method 请求方法
+    @param [out] strHttpHead输出
+    */
+    void MakeHead(const DogUrl& url, const DogStringA& method, DogStringA& strHttpHead);
+
+    /** 接受数据
+    @param [in] spClient tcp对象，它的有效性在外边判断，函数内部将会assert
+    @param [in] gTimer 全局超时
+    @param [out] head 接受的头部，主体在m_downLoadLoadStream中返回
+    @return 是否成功
+    */
+    bool Recv(SPSocketClient spClient, TimerRecorder& gTimer, DogStringA& head);
+
+    /** 发送body，目前只POST发送
+    @param [in] spClient tcp对象，它的有效性在外边判断，函数内部将会assert
+    @param [in] gTimer全局超时
+    @return 是否成功
+    */
+    bool SendBody(SPSocketClient spClient, TimerRecorder& gTimer);
 
 public:
     /** 设置下载进度回调
@@ -115,6 +152,5 @@ protected:
     */
     u32 m_dataTimeOut;
 };
-
 
 #endif // _SOCKET_HTTP_CLIENT_H__

@@ -1,9 +1,9 @@
 
 #include "SocketHttpClient.h"
 #include "socket_common/SocketUtils.h"
+#include "socket_tcp/SocketTcpClient.h"
 
-#include "timer_recorder/timer_recorder.h"
-#include "Url/DogUrl.h"
+#include <assert.h>
 
 /** 数据超时时间 (ms)
 */
@@ -24,20 +24,65 @@ bool SocketHttpClient::Get(const DogStringA& urlStr)
     return MakeRequest(urlStr, "GET");
 }
 
-bool SocketHttpClient::Post(const DogStringA& url)
+bool SocketHttpClient::Post(const DogStringA& urlStr)
 {
-    return false;
+    return MakeRequest(urlStr, "POST");
 }
 
 bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& method)
 {
+    // 超时记录
     TimerRecorder gTimer;
+
+    // 分析url并创建socket封装类
     DogUrl url;
+    SPSocketClient spClient = MakeSocketClient(urlStr, method, url);
+
+    if (spClient == NULL)
+    {
+        return false;
+    }
+
+    // 解决SSL?
+    DogCharA s = url.m_scheme[url.m_scheme.length() - 1];
+    bool isSafe = (s == 's' || s == 'S');
+
+    // 发送头部
+    DogStringA strHttpHead;
+    MakeHead(url, method, strHttpHead);
+    
+    if (::send(spClient->GetSocketBean().GetSocket(), strHttpHead.c_str(), (int)strHttpHead.length(), 0) 
+        != strHttpHead.length())
+    {
+        return false;
+    }
+
+    // 发送body
+    if (method == "POST" && m_upLoadStream != NULL)
+    {
+        if (!SendBody(spClient, gTimer))
+        {
+            return false;
+        }
+    }
+
+    // 接受
+    DogStringA responseHead;
+    if (!Recv(spClient, gTimer, responseHead))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+SPSocketClient SocketHttpClient::MakeSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url)
+{
     ParseUrl(urlStr, url);
 
     if (!url.IsValid())
     {
-        return false;
+        return NULL;
     }
 
     // 必须是http协议
@@ -47,7 +92,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
         (url.m_scheme[2] == 't' || url.m_scheme[2] == 'T') &&
         (url.m_scheme[3] == 'p' || url.m_scheme[3] == 'P'))
     {
-        return false;
+        return NULL;
     }
 
     DogCharA s = url.m_scheme[url.m_scheme.length() - 1];
@@ -58,24 +103,23 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
     SocketUtils::GetIpByHostName(url.m_host, ips);
     if (ips.size() == 0)
     {
-        return false;
+        return NULL;
     }
 
-    SocketTcpClient client(ips[0], url.m_port);
+    SocketTcpClient* pClient = new(std::nothrow) SocketTcpClient(ips[0], url.m_port);
 
-    if (!client.Connect())
+    if (pClient == NULL || !pClient->Connect())
     {
         return false;
     }
 
-    int iMode = 1;
-    if (SOCKET_ERROR == ::ioctlsocket(client.GetSocketBean().GetSocket(), FIONBIO, (u_long FAR*)&iMode))
-    {
-        return false;
-    }
+    return SPSocketClient(pClient);
+}
 
+void SocketHttpClient::MakeHead(const DogUrl& url, const DogStringA& method, DogStringA& strHttpHead)
+{
     // 拼接
-    DogStringA strHttpHead = method;
+    strHttpHead = method;
     strHttpHead.append(" ");
     strHttpHead.append(url.m_path);
 
@@ -105,17 +149,34 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
     strHttpHead.append("\r\n");
     strHttpHead.append("Connection: close\r\n");
     strHttpHead.append("Keep-Alive: timeout=5,max=500\r\n");
+
+    if (method == "POST" && m_upLoadStream != NULL)
+    {
+        char len[64] = {0};
+        ::sprintf_s(len, "%lld", m_upLoadStream->Size());
+        strHttpHead.append("Content-Type: */*\r\n");
+        strHttpHead.append("Content-Length: ");
+        strHttpHead.append(len);
+    }
+
     strHttpHead.append("\r\n\r\n");
-    
-    if (client.SendMsg(strHttpHead) != strHttpHead.length())
+}
+
+bool SocketHttpClient::Recv(SPSocketClient spClient, TimerRecorder& gTimer, DogStringA& head)
+{
+    // 接受
+    assert(spClient !=NULL && spClient->GetSocketBean().IsValidSocket());
+    SOCKET sock = spClient->GetSocketBean().GetSocket();
+
+    // 设置异步接受
+    int iMode = 1;
+    if (SOCKET_ERROR == ::ioctlsocket(sock, FIONBIO, (u_long FAR*)&iMode))
     {
         return false;
     }
 
-    std::string msg = "";
-    unsigned int buffSize = client.GetBuffSize();
+    unsigned int buffSize = spClient->GetBuffSize();
     u8* pBuff = new (std::nothrow) u8[buffSize];
-    SOCKET sock = client.GetSocketBean().GetSocket();
 
     if (NULL == pBuff)
     {
@@ -124,18 +185,22 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
 
     // 服务器响应了吗？当第一组数据到达的时候认为服务器响应了
     bool hasResponse = false;
+    bool success = true;
 
     // 返回数据头部已经全部接受完毕了吗？
     bool hasGetAllResponseHead = false;
 
-    // 记录上一次数据到来的时间
-    TimerRecorder dataTimer;
-
-    DogStringA responseHead;
-    responseHead.reserve(1024);
+    head.clear();
+    head.reserve(1024);
 
     // 已经接受的大小
     u64 hasGetSize = 0;
+
+    // 总大小
+    u64 allSize = 0;
+
+    // 记录上一次数据到来的时间
+    TimerRecorder dataTimer;
 
     while (true)
     {
@@ -143,6 +208,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
         {
             if (gTimer.GetTimePass() >= m_gTimeOut)
             {
+                success = false;
                 break;
             }
         }
@@ -151,6 +217,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
         {
             if (dataTimer.GetTimePass() >= m_dataTimeOut)
             {
+                success = false;
                 break;
             }
         }
@@ -164,7 +231,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
             hasResponse = true;
             dataTimer.ReSet();
 
-            // 接受头部,头部以 \r\n\r\n\r\n 结束
+            // 接受头部,头部以 \r\n\r\n 结束
             if (!hasGetAllResponseHead)
             {
                 int i = 0;
@@ -179,12 +246,12 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
                         {
                             hasGetAllResponseHead = true;
                             i += 4;
-                            responseHead.append("\r\n\r\n");
+                            head.append("\r\n\r\n");
                             break;
                         }
                     }
 
-                    responseHead.append(1, pBuff[i]);
+                    head.append(1, pBuff[i]);
                 }
 
                 if (!hasGetAllResponseHead || i >= rcvSize)
@@ -201,11 +268,11 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
                     ::memset(pBuff + rcvSize, 0, buffSize - rcvSize);
                 }
             }
-            
+
             hasGetSize += rcvSize;
             if (m_downLoadPercentCallBack)
             {
-                m_downLoadPercentCallBack(hasGetSize, 0);
+                m_downLoadPercentCallBack(hasGetSize, allSize);
             }
 
             if (m_downLoadLoadStream)
@@ -223,20 +290,76 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
             // 服务器还没有响应 ||
             // 缓冲区繁忙 WSAGetLastError 函数是本线程中的所有socket，所以不会有多线程问题
             // 我们先等着
-            if (!hasResponse || 
+            if (!hasResponse ||
                 ::WSAGetLastError() == WSAEWOULDBLOCK)
             {
                 ::Sleep(1);
                 continue;
             }
 
+            success = false;
             break;
         }
     }
 
-    delete[]pBuff;
+    delete pBuff;
     pBuff = NULL;
-    return true;
+    return success;
+}
+
+bool SocketHttpClient::SendBody(SPSocketClient spClient, TimerRecorder& gTimer)
+{
+    assert(spClient != NULL && spClient->GetSocketBean().IsValidSocket());
+    unsigned int buffSize = spClient->GetBuffSize();
+    u8* pBuff = new (std::nothrow) u8[buffSize];
+    SOCKET sock = spClient->GetSocketBean().GetSocket();
+
+    if (NULL == pBuff)
+    {
+        return false;
+    }
+
+    // 记录上一次数据到来的时间
+    TimerRecorder dataTimer;
+    bool success = true;
+
+    while (true)
+    {
+        if (m_gTimeOut > 0)
+        {
+            if (gTimer.GetTimePass() >= m_gTimeOut)
+            {
+                success = false;
+                break;
+            }
+        }
+
+        if (m_dataTimeOut > 0)
+        {
+            if (dataTimer.GetTimePass() >= m_dataTimeOut)
+            {
+                success = false;
+                break;
+            }
+        }
+
+        s32 readed = m_upLoadStream->Read(pBuff, buffSize);
+
+        if (readed == 0)
+        {
+            break;
+        }
+
+        if (::send(sock, (char*)pBuff, (int)readed, 0) != readed)
+        {
+            success = false;
+            break;
+        }
+
+        dataTimer.ReSet();
+    }
+
+    return success;
 }
 
 void SocketHttpClient::SetUploadPercentCallBack(const DogPercentCallBack& callback)
