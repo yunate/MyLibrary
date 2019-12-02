@@ -66,14 +66,14 @@ private:
     @param [out] url 如果成功的话返回的url
     @return 创建的socket对象，失败的话为空
     */
-    SPSocketClient MakeSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url);
+    SPSocketClient CreateSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url);
 
     /** 拼接请求头
     @param [in] url
     @param [method] method 请求方法
     @param [out] strHttpHead输出
     */
-    void MakeHead(const DogUrl& url, const DogStringA& method, DogStringA& strHttpHead);
+    void CreateHead(const DogUrl& url, const DogStringA& method, DogStringA& strHttpHead);
 
     /** 接受数据
     @param [in] spClient tcp对象，它的有效性在外边判断，函数内部将会assert
@@ -81,7 +81,7 @@ private:
     @param [out] head 接受的头部，主体在m_downLoadLoadStream中返回
     @return 是否成功
     */
-    bool Recv(SPSocketClient spClient, TimerRecorder& gTimer, DogStringA& head);
+    bool RecvResponse(SPSocketClient spClient, TimerRecorder& gTimer, DogStringA& head);
 
     /** 发送body，目前只POST发送
     @param [in] spClient tcp对象，它的有效性在外边判断，函数内部将会assert

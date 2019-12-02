@@ -36,7 +36,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
 
     // 分析url并创建socket封装类
     DogUrl url;
-    SPSocketClient spClient = MakeSocketClient(urlStr, method, url);
+    SPSocketClient spClient = CreateSocketClient(urlStr, method, url);
 
     if (spClient == NULL)
     {
@@ -49,8 +49,8 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
 
     // 发送头部
     DogStringA strHttpHead;
-    MakeHead(url, method, strHttpHead);
-    
+    CreateHead(url, method, strHttpHead);
+
     if (::send(spClient->GetSocketBean().GetSocket(), strHttpHead.c_str(), (int)strHttpHead.length(), 0) 
         != strHttpHead.length())
     {
@@ -68,7 +68,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
 
     // 接受
     DogStringA responseHead;
-    if (!Recv(spClient, gTimer, responseHead))
+    if (!RecvResponse(spClient, gTimer, responseHead))
     {
         return false;
     }
@@ -76,7 +76,7 @@ bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& m
     return true;
 }
 
-SPSocketClient SocketHttpClient::MakeSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url)
+SPSocketClient SocketHttpClient::CreateSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url)
 {
     ParseUrl(urlStr, url);
 
@@ -116,7 +116,7 @@ SPSocketClient SocketHttpClient::MakeSocketClient(const DogStringA& urlStr, cons
     return SPSocketClient(pClient);
 }
 
-void SocketHttpClient::MakeHead(const DogUrl& url, const DogStringA& method, DogStringA& strHttpHead)
+void SocketHttpClient::CreateHead(const DogUrl& url, const DogStringA& method, DogStringA& strHttpHead)
 {
     // 拼接
     strHttpHead = method;
@@ -162,7 +162,7 @@ void SocketHttpClient::MakeHead(const DogUrl& url, const DogStringA& method, Dog
     strHttpHead.append("\r\n\r\n");
 }
 
-bool SocketHttpClient::Recv(SPSocketClient spClient, TimerRecorder& gTimer, DogStringA& head)
+bool SocketHttpClient::RecvResponse(SPSocketClient spClient, TimerRecorder& gTimer, DogStringA& head)
 {
     // 接受
     assert(spClient !=NULL && spClient->GetSocketBean().IsValidSocket());
