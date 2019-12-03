@@ -32,11 +32,14 @@ namespace DogHttp
         // 设置超时时间
         httpClient->SetGTimeOut(15000);
         bool res = httpClient->MakeRequest();
-        if (res)
+        int statucCode = response->GetStatusCode();
+
+        if (res && statucCode >= 200 && statucCode <= 300)
         {
             s64 size = responseStream->Size();
             out.resize((size_t)size);
             responseStream->ReadAllA((u8*)out.c_str());
+            return true;
         }
         else
         {
@@ -46,9 +49,8 @@ namespace DogHttp
             responseStream->ReadAllA((u8*)body.c_str());
             out = response->GetRawHead();
             out += body;
+            return false;
         }
-
-        return res;
     }
 
     bool HttpPost(const DogStringA& url, const DogStringA& data, DogStringA& out)
@@ -88,11 +90,14 @@ namespace DogHttp
         httpClient->SetGTimeOut(15000);
 
         bool res = httpClient->MakeRequest();
-        if (res)
+        int statucCode = response->GetStatusCode();
+
+        if (res && statucCode >= 200 && statucCode <= 300)
         {
             s64 size = responseStream->Size();
             out.resize((size_t)size);
             responseStream->ReadAllA((u8*)out.c_str());
+            return true;
         }
         else
         {
@@ -102,8 +107,8 @@ namespace DogHttp
             responseStream->ReadAllA((u8*)body.c_str());
             out = response->GetRawHead();
             out += body;
+            return false;
         }
-        return true;
     }
 }
 
