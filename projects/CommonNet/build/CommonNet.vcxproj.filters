@@ -28,6 +28,9 @@
     <Filter Include="http\socket_http">
       <UniqueIdentifier>{f96c8e0b-ae7f-4540-aa37-74576bcd6f73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\stream">
+      <UniqueIdentifier>{c97298de-55a6-4f75-ba37-a40ff5a36b63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main.cpp" />
@@ -58,14 +61,17 @@
     <ClCompile Include="..\source\http\socket_http\SocketHttpClient.cpp">
       <Filter>http\socket_http</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\FileStream.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\MemoryStream.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
     <ClCompile Include="..\test\Test_Socket.cpp">
       <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\http\socket_http\HttpUtil.cpp">
+      <Filter>http\socket_http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\stream\FileStream.cpp">
+      <Filter>vendor\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\stream\MemoryStream.cpp">
+      <Filter>vendor\stream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,17 +108,32 @@
     <ClInclude Include="..\test\color_print.h">
       <Filter>test</Filter>
     </ClInclude>
-    <ClInclude Include="..\test\FileStream.h">
-      <Filter>test</Filter>
-    </ClInclude>
     <ClInclude Include="..\test\IDogStream.h">
-      <Filter>test</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\MemoryStream.h">
       <Filter>test</Filter>
     </ClInclude>
     <ClInclude Include="..\test\Test_Socket.h">
       <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\http\socket_http\HttpRequest.hpp">
+      <Filter>http\socket_http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\http\socket_http\HttpCommon.hpp">
+      <Filter>http\socket_http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\http\socket_http\HttpResponse.hpp">
+      <Filter>http\socket_http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\http\socket_http\HttpUtil.h">
+      <Filter>http\socket_http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\stream\FileStream.h">
+      <Filter>vendor\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\stream\IDogStream.h">
+      <Filter>vendor\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\stream\MemoryStream.h">
+      <Filter>vendor\stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

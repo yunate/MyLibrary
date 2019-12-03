@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\http\socket_http\HttpUtil.cpp" />
     <ClCompile Include="..\source\http\socket_http\SocketHttpClient.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\socket_common\SocketBase.cpp" />
@@ -29,11 +30,15 @@
     <ClCompile Include="..\source\socket_udp\SocketUdpBase.cpp" />
     <ClCompile Include="..\source\socket_udp\SocketUdpClient.cpp" />
     <ClCompile Include="..\source\socket_udp\SocketUdpServer.cpp" />
-    <ClCompile Include="..\test\FileStream.cpp" />
-    <ClCompile Include="..\test\MemoryStream.cpp" />
     <ClCompile Include="..\test\Test_Socket.cpp" />
+    <ClCompile Include="..\vendor\stream\FileStream.cpp" />
+    <ClCompile Include="..\vendor\stream\MemoryStream.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\http\socket_http\HttpCommon.hpp" />
+    <ClInclude Include="..\source\http\socket_http\HttpRequest.hpp" />
+    <ClInclude Include="..\source\http\socket_http\HttpResponse.hpp" />
+    <ClInclude Include="..\source\http\socket_http\HttpUtil.h" />
     <ClInclude Include="..\source\http\socket_http\SocketHttpClient.h" />
     <ClInclude Include="..\source\socket_common\SocketBase.h" />
     <ClInclude Include="..\source\socket_common\SocketBean.h" />
@@ -45,10 +50,11 @@
     <ClInclude Include="..\source\socket_udp\SocketUdpClient.h" />
     <ClInclude Include="..\source\socket_udp\SocketUdpServer.h" />
     <ClInclude Include="..\test\color_print.h" />
-    <ClInclude Include="..\test\FileStream.h" />
     <ClInclude Include="..\test\IDogStream.h" />
-    <ClInclude Include="..\test\MemoryStream.h" />
     <ClInclude Include="..\test\Test_Socket.h" />
+    <ClInclude Include="..\vendor\stream\FileStream.h" />
+    <ClInclude Include="..\vendor\stream\IDogStream.h" />
+    <ClInclude Include="..\vendor\stream\MemoryStream.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

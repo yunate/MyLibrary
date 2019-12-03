@@ -2,32 +2,19 @@
 #ifndef _SOCKET_HTTP_CLIENT_H__
 #define _SOCKET_HTTP_CLIENT_H__
 
+#include "HttpRequest.hpp"
+#include "HttpResponse.hpp"
 #include "noncopyable/noncopyable.h"
-#include "stream/IDogStream.h"
 #include "timer_recorder/timer_recorder.h"
-#include "typedef/DogInterger.h"
-#include "typedef/DogString.h"
-#include "Url/DogUrl.h"
-
-#include <functional>
-#include <memory>
-
-/** 进度回调函数
-    @functional:
-    @param [in] handledSize 已经处理的总大小
-    @param [in] allSize 总大小
-    @return 返回false时候，结束过程进度
-*/
-using  DogPercentCallBack = std::function<bool(const u64 handledSize, const u64 allSize)>;
-
-/** 流的智能指针
-*/
-using SPDogStream = std::shared_ptr<IDogStream>;
 
 /** socket 封装类智能指针
 */
 class SocketBase;
+class SocketHttpClient;
 using SPSocketClient = std::shared_ptr<SocketBase>;
+using SPRequest = std::shared_ptr<HttpRequest>;
+using SPResponse = std::shared_ptr<HttpResponse>;
+using SPHttpClient = std::shared_ptr<SocketHttpClient>;
 
 /** http类
 */
@@ -44,25 +31,22 @@ public:
     ~SocketHttpClient();
 
 public:
-    /** get 方法
-    @param [in] urlStr 
-    @return 是否成功
+    /** 设置请求
+    @param [in] request 请求
     */
-    bool Get(const DogStringA& urlStr);
+    void SetRequest(const SPRequest& request);
 
-    /** post 方法
-    @param [in] urlStr
-    @return 是否成功
+    /** 设置服务器回复
+    @param [in] response回复
     */
-    bool Post(const DogStringA& urlStr);
+    void SetResponse(const SPResponse& response);
 
-private:
-    /** 请求
-    @param [in] urlStr
-    @param [in] method 请求方法
+    /** 开始请求
     @return 是否成功,该函数不会去检查返回数据是否有效，是否完整，只要有数据返回，就为true
     */
-    bool MakeRequest(const DogStringA& urlStr, const DogStringA& method);
+    bool MakeRequest();
+
+private:
 
     /** 创建socket client
     @param [in] urlStr
@@ -72,49 +56,19 @@ private:
     */
     SPSocketClient CreateSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url);
 
-    /** 拼接请求头
-    @param [in] url
-    @param [method] method 请求方法
-    @param [out] strHttpHead输出
-    */
-    void CreateHead(const DogUrl& url, const DogStringA& method, DogStringA& strHttpHead);
-
     /** 接受数据
     @param [in] spClient tcp对象，它的有效性在外边判断，函数内部将会assert
-    @param [in] gTimer 全局超时
-    @param [out] head 接受的头部，主体在m_downLoadLoadStream中返回
     @return 是否成功
     */
-    bool RecvResponse(SPSocketClient spClient, TimerRecorder& gTimer, DogStringA& head);
+    bool RecvResponse(SPSocketClient spClient);
 
     /** 发送body，目前只POST发送
     @param [in] spClient tcp对象，它的有效性在外边判断，函数内部将会assert
-    @param [in] gTimer全局超时
     @return 是否成功
     */
-    bool SendBody(SPSocketClient spClient, TimerRecorder& gTimer);
+    bool SendBody(SPSocketClient spClient);
 
 public:
-    /** 设置下载进度回调
-    @param [in] callback: 上传进度回调
-    */
-    void SetUploadPercentCallBack(const DogPercentCallBack& callback);
-
-    /** 设置下载进度回调
-    @param [in] callback: 下载进度回调
-    */
-    void SetDownloadPercentCallBack(const DogPercentCallBack& callback);
-
-    /** 设置上传流
-    @param [in] stream: 上传流
-    */
-    void SetUploadStream(const SPDogStream& stream);
-
-    /** 设置下载流
-    @param [in] stream: 下载流
-    */
-    void SetDownloadStream(const SPDogStream& stream);
-
     /** 绝对超时时间，从进入函数开始，到退出函数的最长等待时间，这是一个绝对超时时间，如果你不希望接受的数据只接受一般就结束了，请设置为0
     @note: 默认0
     @note: 为0时候为永不超时
@@ -134,26 +88,22 @@ public:
     void Stop();
 
 protected:
-    /** 上传进度回调
+    /** 服务器回复
     */
-    DogPercentCallBack m_upLoadPercentCallBack;
+    SPResponse m_spReponse;
 
-    /** 下载进度回调
+    /** 请求
     */
-    DogPercentCallBack m_downLoadPercentCallBack;
-
-    /** 上传流
-    */
-    SPDogStream m_upLoadStream;
-
-    /** 下载流
-    */
-    SPDogStream m_downLoadLoadStream;
+    SPRequest m_spRequest;
 
     /** (ms) 绝对超时时间，从进入函数开始，到退出函数的最长等待时间，这是一个绝对超时时间，如果你不希望接受的数据只接受一般就结束了，请设置为0
     @note: 为0时候为永不超时
     */
     u32 m_gTimeOut;
+
+    /** 全局计时器
+    */
+    TimerRecorder m_gTimer;
 
     /** (ms) 数据超时时间，指的是上一次数据到下一次数据之间的最长等待时间
     @note: 显然它的优先级低于m_gTimeOut
