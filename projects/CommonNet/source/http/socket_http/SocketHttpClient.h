@@ -47,15 +47,6 @@ public:
     bool MakeRequest();
 
 private:
-
-    /** 创建socket client
-    @param [in] urlStr
-    @param [in] method 请求方法
-    @param [out] url 如果成功的话返回的url
-    @return 创建的socket对象，失败的话为空
-    */
-    SPSocketClient CreateSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url);
-
     /** 接受数据
     @param [in] spClient tcp对象，它的有效性在外边判断，函数内部将会assert
     @return 是否成功

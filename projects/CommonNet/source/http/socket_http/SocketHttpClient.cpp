@@ -92,46 +92,6 @@ bool SocketHttpClient::MakeRequest()
     return true;
 }
 
-SPSocketClient SocketHttpClient::CreateSocketClient(const DogStringA& urlStr, const DogStringA& method, DogUrl& url)
-{
-    ParseUrl(urlStr, url);
-
-    if (!url.IsValid())
-    {
-        return NULL;
-    }
-
-    // 必须是http协议
-    if (!(url.m_scheme.length() >= 4) &&
-        (url.m_scheme[0] == 'h' || url.m_scheme[0] == 'H') &&
-        (url.m_scheme[1] == 't' || url.m_scheme[1] == 'T') &&
-        (url.m_scheme[2] == 't' || url.m_scheme[2] == 'T') &&
-        (url.m_scheme[3] == 'p' || url.m_scheme[3] == 'P'))
-    {
-        return NULL;
-    }
-
-    DogCharA s = url.m_scheme[url.m_scheme.length() - 1];
-    bool isSafe = (s == 's' || s == 'S');
-
-    // 获得ip
-    std::vector<DogStringA> ips;
-    SocketUtils::GetIpByHostName(url.m_host, ips);
-    if (ips.size() == 0)
-    {
-        return NULL;
-    }
-
-    SocketTcpClient* pClient = new(std::nothrow) SocketTcpClient(ips[0], url.m_port);
-
-    if (pClient == NULL || !pClient->Connect())
-    {
-        return false;
-    }
-
-    return SPSocketClient(pClient);
-}
-
 bool SocketHttpClient::RecvResponse(SPSocketClient spClient)
 {
     // 接受
