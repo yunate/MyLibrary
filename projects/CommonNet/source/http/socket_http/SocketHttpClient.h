@@ -2,6 +2,7 @@
 #ifndef _SOCKET_HTTP_CLIENT_H__
 #define _SOCKET_HTTP_CLIENT_H__
 
+#include "noncopyable/noncopyable.h"
 #include "stream/IDogStream.h"
 #include "timer_recorder/timer_recorder.h"
 #include "typedef/DogInterger.h"
@@ -28,7 +29,10 @@ using SPDogStream = std::shared_ptr<IDogStream>;
 class SocketBase;
 using SPSocketClient = std::shared_ptr<SocketBase>;
 
-class SocketHttpClient
+/** http类
+*/
+class SocketHttpClient:
+    public NonCopyable
 {
 public:
     /** 构造函数
@@ -125,6 +129,10 @@ public:
     */
     void SetDataTimeOut(u32 timeOut);
 
+    /** 停止请求
+    */
+    void Stop();
+
 protected:
     /** 上传进度回调
     */
@@ -151,6 +159,10 @@ protected:
     @note: 显然它的优先级低于m_gTimeOut
     */
     u32 m_dataTimeOut;
+
+    /** 是否停止
+    */
+    bool m_stop;
 };
 
 #endif // _SOCKET_HTTP_CLIENT_H__

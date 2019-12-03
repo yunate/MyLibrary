@@ -196,9 +196,6 @@
     <ClCompile Include="..\source\rand\rand.cpp">
       <Filter>rand</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\string_utils\string_utils_s.cpp">
-      <Filter>string_utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\guid\guid.cpp">
       <Filter>guid</Filter>
     </ClCompile>

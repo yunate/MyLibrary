@@ -19,4 +19,9 @@ using DogCharW = wchar_t;
     using DogChar = DogCharA;
 #endif // __DOGSTRING_H_
 
+    /** string 对于 tc 的模板
+    */
+    template<class tc>
+    using DongStringT = std::basic_string<tc, std::char_traits<tc>, std::allocator<tc> >;
+
 #endif

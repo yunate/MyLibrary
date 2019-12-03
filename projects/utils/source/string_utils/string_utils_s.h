@@ -1,22 +1,8 @@
 #ifndef __STRING_UTILS_S_H_
 #define __STRING_UTILS_S_H_
 
-#include <string>
+#include "typedef/DogString.h"
 #include <vector>
-#include <tchar.h>
-
-// 用string 还是 wstring
-#define MULTI_CHAR
-
-#ifdef MULTI_CHAR
-#define TString std::string
-#define TChar char
-#define T(x)      x
-#else
-#define TString std::wstring
-#define TChar wchar_t
-#define T(x)      L ## x
-#endif // MULTI_CHAR
 
 /** std::string 字符串操作
 */
@@ -28,7 +14,67 @@ namespace stringutils_s
     @param [out] out 输出
     @return 是否成功
     */
-    bool StrSplit(const TString& raw, TChar& spliter, std::vector<TString>& out);
+    template <class tc>
+    bool StrSplit(const DongStringT<tc>& raw, tc spliter, std::vector<DongStringT<tc> >& out)
+    {
+        tc c = 0;
+        DongStringT<tc> line;
+
+        for (size_t i = 0; i < raw.length(); ++i)
+        {
+            c = raw[i];
+
+            if (c == spliter)
+            {
+                out.push_back(line);
+                line.clear();
+            }
+            else
+            {
+                line.append(1, c);
+            }
+        }
+
+        out.push_back(line);
+        return true;
+    }
+
+    /** 字符串迭代相关
+    */
+    template<class tc>
+    struct ParseResult
+    {
+    public:
+        /** 该次迭代结果
+        */
+        DongStringT<tc> value;
+
+        /** 下次开始位置
+        */
+        const tc* ch;
+    };
+
+    template<class tc, class F>
+    static inline ParseResult<tc> ParseUntil(const tc* str, F func)
+    {
+        ParseResult<tc> result{};
+        tc const* ch = str;
+        for (; *ch && !func(*ch); ++ch);
+        result.value = DongStringT<tc>(str, ch - str);
+        result.ch = ch;
+        return result;
+    }
+
+    template<class tc, class F>
+    static inline ParseResult<tc> ParseWhile(const tc* str, F func)
+    {
+        ParseResult<tc> result{};
+        tc const* ch = str;
+        for (; *ch && func(*ch); ++ch);
+        result.value = DongStringT<tc>(str, ch - str);
+        result.ch = ch;
+        return result;
+    }
 }
 
 #endif // __STRING_UTILS_S_H_

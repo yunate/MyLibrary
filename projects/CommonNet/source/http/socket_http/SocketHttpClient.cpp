@@ -11,7 +11,8 @@ static int DATA_TIME_OUT = 15000;
 
 SocketHttpClient::SocketHttpClient():
     m_gTimeOut(0),
-    m_dataTimeOut(DATA_TIME_OUT)
+    m_dataTimeOut(DATA_TIME_OUT),
+    m_stop(false)
 {
 }
 
@@ -31,6 +32,8 @@ bool SocketHttpClient::Post(const DogStringA& urlStr)
 
 bool SocketHttpClient::MakeRequest(const DogStringA& urlStr, const DogStringA& method)
 {
+    m_stop = false;
+
     // ³¬Ê±¼ÇÂ¼
     TimerRecorder gTimer;
 
@@ -204,6 +207,12 @@ bool SocketHttpClient::RecvResponse(SPSocketClient spClient, TimerRecorder& gTim
 
     while (true)
     {
+        if (m_stop)
+        {
+            success = false;
+            break;
+        }
+
         if (m_gTimeOut > 0)
         {
             if (gTimer.GetTimePass() >= m_gTimeOut)
@@ -325,6 +334,12 @@ bool SocketHttpClient::SendBody(SPSocketClient spClient, TimerRecorder& gTimer)
 
     while (true)
     {
+        if (m_stop)
+        {
+            success = false;
+            break;
+        }
+
         if (m_gTimeOut > 0)
         {
             if (gTimer.GetTimePass() >= m_gTimeOut)
@@ -390,4 +405,9 @@ void SocketHttpClient::SetGTimeOut(u32 timeOut)
 void SocketHttpClient::SetDataTimeOut(u32 timeOut)
 {
     m_dataTimeOut = timeOut;
+}
+
+void SocketHttpClient::Stop()
+{
+    m_stop = true;
 }

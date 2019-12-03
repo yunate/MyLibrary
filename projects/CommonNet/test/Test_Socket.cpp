@@ -90,6 +90,6 @@ void Test_Http_client()
     SPDogStream spMemoryStream(new MemoryStream());
     SocketHttpClient httpClient;
     httpClient.SetDownloadStream(spMemoryStream);
-    httpClient.Get("http://ip.tool.chinaz.com/");
+    httpClient.Get("http://stool.chinaz.com/same?s=ip.tool.chinaz.com&page=");
 }
 

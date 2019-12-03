@@ -72,7 +72,8 @@ int main()
     //utilstest::Test_DirUtils();
     //utilstest::Test_BigFile();
     //utilstest::Test_EnumDir();
-    utilstest::Test_DogUrl();
+    //utilstest::Test_DogUrl();
+    utilstest::Test_stringutils2();
     
     ::system("pause");
     return 1;
