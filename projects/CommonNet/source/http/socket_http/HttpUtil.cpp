@@ -17,18 +17,37 @@ namespace DogHttp
             return false;
         }
 
+        // 关闭长连接
         request->Set("Connection", "close");
+
+        // 设置请求
         httpClient->SetRequest(request);
 
+        // 设置输出流
         response->SetStream(responseStream);
+
+        // 设置回复
         httpClient->SetResponse(response);
 
+        // 设置超时时间
         httpClient->SetGTimeOut(15000);
         bool res = httpClient->MakeRequest();
+        if (res)
+        {
+            s64 size = responseStream->Size();
+            out.resize((size_t)size);
+            responseStream->ReadAllA((u8*)out.c_str());
+        }
+        else
+        {
+            DogStringA body;
+            s64 size = responseStream->Size();
+            body.resize((size_t)size);
+            responseStream->ReadAllA((u8*)body.c_str());
+            out = response->GetRawHead();
+            out += body;
+        }
 
-        s64 size = responseStream->Size();
-        out.resize((size_t)size);
-        responseStream->ReadAllA((u8*)out.c_str());
         return res;
     }
 
@@ -49,19 +68,41 @@ namespace DogHttp
             return false;
         }
 
+        // 设置输入流
         requestStream->Write((u8*)data.c_str(), data.length());
         request->SetStream(requestStream);
+
+        // 关闭长连接
         request->Set("Connection", " close");
+
+        // 设置请求
         httpClient->SetRequest(request);
 
+        // 设置输出流
         response->SetStream(responseStream);
+
+        // 设置回复
         httpClient->SetResponse(response);
 
+        // 设置超时时间
         httpClient->SetGTimeOut(15000);
+
         bool res = httpClient->MakeRequest();
-        s64 size = responseStream->Size();
-        out.resize((size_t)size);
-        responseStream->ReadAllA((u8*)out.c_str());
+        if (res)
+        {
+            s64 size = responseStream->Size();
+            out.resize((size_t)size);
+            responseStream->ReadAllA((u8*)out.c_str());
+        }
+        else
+        {
+            DogStringA body;
+            s64 size = responseStream->Size();
+            body.resize((size_t)size);
+            responseStream->ReadAllA((u8*)body.c_str());
+            out = response->GetRawHead();
+            out += body;
+        }
         return true;
     }
 }

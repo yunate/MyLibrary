@@ -240,6 +240,8 @@ bool SocketHttpClient::RecvResponse(SPSocketClient spClient)
                 else
                 {
                     // 分析头部
+                    m_spReponse->SetHead(head);
+                    allSize = m_spReponse->GetContentLength();
 
                     // 将余下的输出
                     rcvSize -= i;

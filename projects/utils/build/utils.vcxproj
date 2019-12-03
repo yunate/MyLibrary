@@ -141,7 +141,7 @@
     <ClInclude Include="..\source\stream\MemoryStream.h" />
     <ClInclude Include="..\source\stream\Test.h" />
     <ClInclude Include="..\source\string_utils\string_utils_c.h" />
-    <ClInclude Include="..\source\string_utils\string_utils_s.h" />
+    <ClInclude Include="..\source\string_utils\string_utils_s.hpp" />
     <ClInclude Include="..\source\string_utils\Test.h" />
     <ClInclude Include="..\source\thread\lockfree_data.h" />
     <ClInclude Include="..\source\thread\lockfree_queue.h" />

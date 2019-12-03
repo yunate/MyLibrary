@@ -375,9 +375,6 @@
     <ClInclude Include="..\source\resource_util\resource_uti.h">
       <Filter>resource_util</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\string_utils\string_utils_s.h">
-      <Filter>string_utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\rand\rand.h">
       <Filter>rand</Filter>
     </ClInclude>
@@ -539,6 +536,9 @@
     </ClInclude>
     <ClInclude Include="..\source\regex\DogRegex.h">
       <Filter>Regex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\string_utils\string_utils_s.hpp">
+      <Filter>string_utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

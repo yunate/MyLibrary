@@ -1,7 +1,7 @@
 #pragma once
 
 #include "string_utils_c.h"
-#include "string_utils_s.h"
+#include "string_utils_s.hpp"
 #include "typedef/DogString.h"
 
 namespace utilstest
@@ -22,16 +22,24 @@ namespace utilstest
 
     static void Test_stringutils2()
     {
-        DogString toSplit = _DogT("a|b|c|d");
+        DogString toSplit = _DogT("+=+aaa+=+bbb+=+ccc+=+ddd+=+");
         std::vector<DogString> out;
-        StrSplit(toSplit, _DogT('|'), out);
+        StrSplit(toSplit.c_str(), _DogT("+=+"), out);
 
-        DogStringA toSplitA = "a|b|c|d";
+        DogStringA toSplitA = "+=+aaa+=+bbb+=+ccc+=+ddd";
         std::vector<DogStringA> outA;
-        StrSplit(toSplitA, '|', outA);
+        StrSplit(toSplitA.c_str(), "+=+", outA);
 
-        DogStringW toSplitW = L"a|b|c|d";
+        DogStringW toSplitW = L"aaa+=+bbb+=+ccc+=+ddd";
         std::vector<DogStringW> outW;
-        StrSplit(toSplitW, L'|', outW);
+        StrSplit(toSplitW.c_str(), L"+=+", outW);
+
+        DogStringW toSplitW1 = L"++aaa+=+bbb+=+ccc+=+ddd";
+        std::vector<DogStringW> outW1;
+        StrSplit(toSplitW1.c_str(), L"+=+", outW1);
+
+        DogStringW toSplitW2 = L"aaa+=+bbb+=+ccc+=+ddd+";
+        std::vector<DogStringW> outW2;
+        StrSplit(toSplitW2.c_str(), L"+=+", outW2);
     }
 }
