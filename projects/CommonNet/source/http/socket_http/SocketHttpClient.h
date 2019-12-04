@@ -31,15 +31,15 @@ public:
     ~SocketHttpClient();
 
 public:
-    /** 设置请求
-    @param [in] request 请求
+    /** set/get 请求对象
     */
     void SetRequest(const SPRequest& request);
+    SPRequest& GetRequest();
 
-    /** 设置服务器回复
-    @param [in] response回复
+    /** set/get 服务器回复对象
     */
     void SetResponse(const SPResponse& response);
+    SPResponse& GetResponse();
 
     /** 开始请求
     @return 是否成功,该函数不会去检查返回数据是否有效，是否完整，只要有数据返回，就为true

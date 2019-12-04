@@ -32,7 +32,7 @@ FileStream::FileStream(const DogChar* const path, const DogChar* const mode/* = 
     assert(m_hFile != NULL);
 }
 
-FileStream::FileStream(FileStream && stream) noexcept
+FileStream::FileStream(FileStream&& stream) noexcept
 {
     m_pPath = stream.m_pPath;
     m_hFile = stream.m_hFile;

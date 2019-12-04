@@ -5,6 +5,15 @@
 #include "HttpCommon.hpp"
 #include "string_utils/string_utils_s.hpp"
 
+/** 头部接收完成回调
+@note: 我们提供一次你可以在真正的下载之前对head的检查机会，并允许你对response对象进行修改
+@functional:
+    @param [in] response 回复对象，此时对象中返回头部已经处理完毕
+    @reutrn 如果为false，将停止接受
+*/
+class HttpResponse;
+using HttpResponseAllHeadCB = std::function<bool(HttpResponse& response)>;
+
 /** 服务器回复，该类将回复体放到流里面，本身只对头部进行处理
 */
 class HttpResponse :
@@ -13,7 +22,9 @@ class HttpResponse :
 public:
 
     HttpResponse():
-        m_statusCode(0)
+        m_statusCode(0),
+        m_contentLength(0),
+        m_hasRcvAllHead(false)
     {
 
     }
@@ -37,7 +48,7 @@ public:
         std::vector<DogStringA> out;
         stringutils_s::StrSplit(line.c_str(), " ", out);
 
-        if (out.size() != 3)
+        if (out.size() < 3)
         {
             return;
         }
@@ -48,7 +59,6 @@ public:
             return;
         }
 
-        m_rawHead = line;
         beg = lf;
 
         while (1)
@@ -77,6 +87,12 @@ public:
             Set(DogStringA(line.c_str(), sp - line.c_str()), sp + 2);
         }
 
+        auto& it = m_keyVal.find("Content-Length");
+
+        if (it != m_keyVal.end())
+        {
+            m_contentLength = ::atoll(it->second.c_str());
+        }
     }
 
     /** 获得状态码
@@ -100,14 +116,85 @@ public:
     */
     inline s64 GetContentLength()
     {
-        auto& it = m_keyVal.find("Content-Length");
+        return m_contentLength;
+    }
 
-        if (it == m_keyVal.end())
+    /** 设置，当返回头部完全接受后的回调
+    @param [in] allHeadCallBack 回调函数
+    */
+    inline void SetAllHeadCallBack(const HttpResponseAllHeadCB& allHeadCallBack)
+    {
+        m_allHeadCallBack = allHeadCallBack;
+    }
+
+    /** 这是一个回调，每次接受下发的数据
+    @note 如果返回false就停止接受,注意不是停止整个请求
+    @param [in] pBuff 数据缓存
+    @param [in] buffSize
+    @return 如果返回false就停止接受
+    */
+    inline bool RcvBuff(u8* pBuff, u32 buffSize)
+    {
+        u32 rcvSize = buffSize;
+
+        // 接受头部,头部以 \r\n\r\n 结束
+        if (!m_hasRcvAllHead)
         {
-            return 0;
+            u32 i = 0;
+            for (; i < rcvSize; ++i)
+            {
+                if (pBuff[i] == '\r')
+                {
+                    if (i + 3 < rcvSize &&
+                        pBuff[i + 1] == '\n' &&
+                        pBuff[i + 2] == '\r' &&
+                        pBuff[i + 3] == '\n')
+                    {
+                        i += 4;
+                        m_rawHead.append("\r\n\r\n");
+                        SetHead(m_rawHead);
+                        m_hasRcvAllHead = true;
+
+                        // 对头部检查，并对response对象最后一次设置
+                        if (m_allHeadCallBack != NULL)
+                        {
+                            if (!m_allHeadCallBack(*this))
+                            {
+                                return false;
+                            }
+                        }
+
+                        break;
+                    }
+                }
+
+                m_rawHead.append(1, pBuff[i]);
+            }
+
+            if (!m_hasRcvAllHead || i >= rcvSize)
+            {
+                return true;
+            }
+            else
+            {
+                // 将余下的输出
+                rcvSize -= i;
+                ::memcpy(pBuff, pBuff + i, rcvSize);
+                ::memset(pBuff + rcvSize, 0, buffSize - rcvSize);
+            }
+        }
+ 
+        if (m_stream)
+        {
+            m_stream->Write(pBuff, rcvSize);
         }
 
-        return ::atoll(it->second.c_str());
+        if (m_percentCallBack)
+        {
+            m_percentCallBack(rcvSize, m_contentLength);
+        }
+
+        return true;
     }
 
 private:
@@ -118,6 +205,18 @@ private:
     /** 原始头部
     */
     DogStringA m_rawHead;
+
+    /** 头部接受结束了吗
+    */
+    bool m_hasRcvAllHead;
+
+    /** body 长度
+    */
+    s64 m_contentLength;
+
+    /** 当返回头部完全接受了的回调函数，允许你对真正下载之前做最后一次修改
+    */
+    HttpResponseAllHeadCB m_allHeadCallBack;
 };
 
 #endif //__HTTP_RESPONSE_H_

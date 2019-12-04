@@ -25,9 +25,19 @@ void SocketHttpClient::SetRequest(const SPRequest & request)
     m_spRequest = request;
 }
 
+SPRequest & SocketHttpClient::GetRequest()
+{
+    return m_spRequest;
+}
+
 void SocketHttpClient::SetResponse(const SPResponse& response)
 {
     m_spReponse = response;
+}
+
+SPResponse & SocketHttpClient::GetResponse()
+{
+    return m_spReponse;
 }
 
 bool SocketHttpClient::MakeRequest()
@@ -74,7 +84,7 @@ bool SocketHttpClient::MakeRequest()
     }
 
     // 发送body
-    if (m_spRequest->GetMethod() == HttpRequest::POST && m_spRequest->GetStream() != NULL)
+    if (m_spRequest->GetStream() != NULL)
     {
         if (!SendBody(spClient))
         {
@@ -120,20 +130,9 @@ bool SocketHttpClient::RecvResponse(SPSocketClient spClient)
     // 返回数据头部已经全部接受完毕了吗？
     bool hasGetAllResponseHead = false;
 
-    DogStringA head;
-    head.reserve(1024);
-
-    // 已经接受的大小
-    u64 hasGetSize = 0;
-
-    // 总大小
-    u64 allSize = 0;
-
     // 记录上一次数据到来的时间
     TimerRecorder dataTimer;
 
-    DogPercentCallBack& callback = m_spReponse->GetPercentCallBack();
-    SPDogStream& stream = m_spReponse->GetStream();
 
     while (true)
     {
@@ -168,58 +167,14 @@ bool SocketHttpClient::RecvResponse(SPSocketClient spClient)
         if (rcvSize > 0)
         {
             hasResponse = true;
+
+            if (!m_spReponse->RcvBuff(pBuff, rcvSize))
+            {
+                success = false;
+                break;
+            }
+
             dataTimer.ReSet();
-
-            // 接受头部,头部以 \r\n\r\n 结束
-            if (!hasGetAllResponseHead)
-            {
-                int i = 0;
-                for (; i < rcvSize; ++i)
-                {
-                    if (pBuff[i] == '\r')
-                    {
-                        if (i + 3 < rcvSize &&
-                            pBuff[i + 1] == '\n' &&
-                            pBuff[i + 2] == '\r' &&
-                            pBuff[i + 3] == '\n')
-                        {
-                            hasGetAllResponseHead = true;
-                            i += 4;
-                            head.append("\r\n\r\n");
-                            break;
-                        }
-                    }
-
-                    head.append(1, pBuff[i]);
-                }
-
-                if (!hasGetAllResponseHead || i >= rcvSize)
-                {
-                    continue;
-                }
-                else
-                {
-                    // 分析头部
-                    m_spReponse->SetHead(head);
-                    allSize = m_spReponse->GetContentLength();
-
-                    // 将余下的输出
-                    rcvSize -= i;
-                    ::memcpy(pBuff, pBuff + i, rcvSize);
-                    ::memset(pBuff + rcvSize, 0, buffSize - rcvSize);
-                }
-            }
-
-            hasGetSize += rcvSize;
-            if (callback)
-            {
-                callback(hasGetSize, allSize);
-            }
-
-            if (stream)
-            {
-                stream->Write(pBuff, rcvSize);
-            }
         }
         else if (rcvSize == 0)
         {

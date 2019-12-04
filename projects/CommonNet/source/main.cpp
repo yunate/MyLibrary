@@ -15,7 +15,8 @@ int main()
     // Test_Tcp_Client();
     // Test_Udp_Server();
     // Test_Udp_Client();
-    Test_Http_client();
+    // Test_Http_Get();
+    Test_Http_Download();
     ::WSACleanup();
     ::system("pause");
     return 1;

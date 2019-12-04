@@ -84,9 +84,47 @@ void Test_Udp_Server()
     }
 }
 
-void Test_Http_client()
+void Test_Http_Get()
 {
     DogStringA out;
-    DogHttp::HttpGet("http://stool.chinaz.com/same?s=ip.tool.chinaz.com&page=", out);
+    SPHttpClient httpGet = HttpUtils::CreateHttpGet("http://stool.chinaz.com/same?s=ip.tool.chinaz.com&page=");
+
+    if (httpGet == NULL)
+    {
+        return;
+    }
+
+    // 你可以将这个放到线程中去
+    bool res = httpGet->MakeRequest();
+
+    SPResponse response = httpGet->GetResponse();
+    SPDogStream responseStream = response->GetStream();
+    int statucCode = response->GetStatusCode();
+
+    if (res && statucCode >= 200 && statucCode <= 300)
+    {
+        s64 size = responseStream->Size();
+        out.resize((size_t)size);
+        responseStream->ReadAllA((u8*)out.c_str());
+    }
+    else
+    {
+        DogStringA body;
+        s64 size = responseStream->Size();
+        body.resize((size_t)size);
+        responseStream->ReadAllA((u8*)body.c_str());
+        out = response->GetRawHead();
+        out += body;
+    }
+}
+
+void Test_Http_Download()
+{
+    SPHttpClient httpDown = 
+        HttpUtils::CreateHttpDownload("",
+                                      _DogT("F:\\test\\down\\"));
+    bool res = httpDown->MakeRequest();
+    SPResponse response = httpDown->GetResponse();
+    int statucCode = response->GetStatusCode();
 }
 

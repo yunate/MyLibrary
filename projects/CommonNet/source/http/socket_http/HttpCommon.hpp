@@ -11,11 +11,10 @@
 
 /** 进度回调函数
     @functional:
-    @param [in] handledSize 已经处理的总大小
+    @param [in] currentSize 当前大小
     @param [in] allSize 总大小
-    @return 返回false时候，结束过程进度
 */
-using  DogPercentCallBack = std::function<bool(const u64 handledSize, const u64 allSize)>;
+using  DogPercentCallBack = std::function<void(const u64 currentSize, const u64 allSize)>;
 
 /** 流的智能指针
 */

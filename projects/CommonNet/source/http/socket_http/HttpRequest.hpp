@@ -106,7 +106,7 @@ public:
         headStr.append("Host: ");
         headStr.append(m_url.m_host);
 
-        if (m_method == POST && m_stream != NULL)
+        if (m_stream != NULL)
         {
             headStr.append("\r\n");
             Delete("Content-Length");

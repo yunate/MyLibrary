@@ -13,4 +13,6 @@ void Test_Udp_Client();
 
 void Test_Udp_Server();
 
-void Test_Http_client();
+void Test_Http_Get();
+
+void Test_Http_Download();

@@ -4,22 +4,35 @@
 
 #include "SocketHttpClient.h"
 
-namespace DogHttp
+namespace HttpUtils
 {
-    /** http Get请求
+    /** 创建httpGet请求对象，不直接在函数内请求主要是考虑到异步问题
     @param[in] url请求的url
     @param[out] out请求返回的结果（成功不包含返回头，不成功只返回请求头）
-    @return 是否成功，只有返回头为2XX才算成功
+    @return http Get请求对象
     */
-    bool HttpGet(const DogStringA& url, DogStringA& out);
+    SPHttpClient CreateHttpGet(const DogStringA& url);
 
-    /** http Post请求
+    /** 创建httpPost请求对象
     @param[in] url请求的url
     @param[in] data请求的body
-    @param[out] out请求返回的结果（成功不包含返回头，不成功只返回请求头）
-    @return 是否成功，只有返回头为2XX才算成功
+    @return httpPost请求对象
     */
-    bool HttpPost(const DogStringA& url, const DogStringA& data, DogStringA& out);
+    SPHttpClient CreateHttpPost(const DogStringA& url, const DogStringA& data);
+
+    /** 创建上传对象
+    @param[in] url请求的url
+    @param[in] filePath 文件路径，注意函数内部不会做filePath有效性检查，只会assert，请调用者保证filePath有效
+    @return httpUpload请求对象
+    */
+    SPHttpClient CreateHttpUpLoad(const DogStringA& url, const DogString& filePath);
+
+    /** 创建下载对象
+    @param[in] url请求的url
+    @param[in] filePath 文件路径，注意函数内部不会做filePath有效性检查，只会assert，请调用者保证filePath有效
+    @return httpDownload请求对象
+    */
+    SPHttpClient CreateHttpDownload(const DogStringA& url, const DogString& filePath);
 }
 
 #endif //__HTTP_UTILS_H_
