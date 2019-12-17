@@ -198,8 +198,18 @@ public:
 public:
     bool Init(u8 * pBuff, u32 buffLen);
 
+    /** 返回下一帧，线程不安全
+    @param [out] ppBuff 输出颜色数组，内存不要自己释放
+    @param [out] buffLen 数组长度
+    @reutrn 是否成功
+    */
     bool GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen);
 
+    /** 返回当前帧，线程不安全
+    @param [out] ppBuff 输出颜色数组，内存不要自己释放
+    @param [out] buffLen 数组长度
+    @reutrn 是否成功
+    */
     bool GetCurrentFrame(DogGifColor ** ppBuff, u32 & buffLen);
 
     u32 GetWidth();
