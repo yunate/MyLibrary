@@ -17,7 +17,18 @@ public:
     void Wait()
     {
         std::unique_lock<std::mutex> lck(m_mutex);
-        m_con.wait(lck);
+
+        if (!m_hasSignal)
+        {
+            // 不会死锁，考虑：
+            // 1、m_mutex.unlock();
+            // 2、wait()
+            // 3、m_mutex.lock();
+            // wait(lck) 相当于将1、2两步放到一个cpu周期内
+            m_con.wait(lck);
+        }
+
+        m_hasSignal = false;
     }
 
     /** 设置一个信号
@@ -25,6 +36,7 @@ public:
     void SetEvent()
     {
         std::unique_lock<std::mutex> lck(m_mutex);
+        m_hasSignal = true;
         m_con.notify_all();
     }
 
@@ -36,6 +48,11 @@ private:
     /** condition_variable
     */
     std::condition_variable m_con;
+
+    /** 是否有信号
+    @note 主要是为了先调用SetEvent()，然后调用wait的情况。考虑在Wait()前加上::Sleep(1000);
+    */
+    bool m_hasSignal = false;
 };
 
 /** 简单线程任务模型
