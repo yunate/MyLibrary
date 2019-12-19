@@ -12,4 +12,9 @@ using DogBuffW = std::vector<wchar_t>;
     using DogBuff = DogBuffA;
 #endif // MULTI_CHAR
 
+    /** DogBuffA 对于 tc 的模板
+    */
+    template<class tc>
+    using DogBuffT = std::vector<tc>;
+
 #endif
