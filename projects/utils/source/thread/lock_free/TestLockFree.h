@@ -227,7 +227,7 @@ namespace utilstest
     void TestSpeed()
     {
         TestCpy();
-        int tdCount = 2;
+        int tdCount = 16;
         int taskCount = 20000;
 
         {
@@ -245,7 +245,7 @@ namespace utilstest
         {
             TimerRecorder timer;
             Test_NormalQue1(tdCount, taskCount);
-            printf("Test_NormalQue__:\t%lld\r\n", timer.GetTimePass());
+            printf("Test_Spin_NormalQue:\t%lld\r\n", timer.GetTimePass());
         }
     }
 

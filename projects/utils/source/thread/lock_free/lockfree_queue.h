@@ -7,6 +7,7 @@
 namespace lockfree
 {
 /** 无锁队列
+@note 这个只能当作实例看了，它的效率并不比mutex高
 */
 template<class ty>
 class lockfree_queue
