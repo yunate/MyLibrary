@@ -19,7 +19,7 @@
 #include "console/test.h"
 #include "logic_executor/Test.h"
 #include "stream/Test.h"
-#include "thread/TestLockFree.h"
+#include "thread/lock_free/TestLockFree.h"
 #include "dir_utils/Test_DirUtils.h"
 #include "Net/Url/Test_Url.h"
 
@@ -65,7 +65,7 @@ int main()
     //utilstest::Test_ColorPrint();
     //utilstest::Test_Executor();
     //utilstest::Test_taskQue();
-    //utilstest::Test_taskQue1();
+    utilstest::Test_taskQue1();
     //utilstest::Test_MemoryStream();
     //utilstest::Test_FileStream();
     //utilstest::TestSpeed();

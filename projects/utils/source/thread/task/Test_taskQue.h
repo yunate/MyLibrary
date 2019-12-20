@@ -147,8 +147,6 @@ namespace utilstest
         SimpleTaskQueue simpleTaskQue;
         simpleTaskQue.Start();
 
-        ::Sleep(1000);
-
         bool ret = false;
         int t1 = 0;
         int t2 = 0;

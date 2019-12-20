@@ -100,6 +100,12 @@
     <Filter Include="Regex">
       <UniqueIdentifier>{47348dda-7c8d-440a-b54c-1a1f63c64079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="thread\lock_free">
+      <UniqueIdentifier>{d82b0633-bd96-4b65-80bc-850771cf8ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\mutex">
+      <UniqueIdentifier>{8f026e02-3d73-4350-a75f-323a8a2a6b37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -243,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="..\source\stream\FileStream.cpp">
       <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\thread\lock_free\LockFreeQueue.cpp">
+      <Filter>thread\lock_free</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -495,18 +504,6 @@
     <ClInclude Include="..\source\stream\FileStream.h">
       <Filter>stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\thread\TestLockFree.h">
-      <Filter>thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\thread\spin_mutex.h">
-      <Filter>thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\thread\lockfree_queue.h">
-      <Filter>thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\thread\lockfree_data.h">
-      <Filter>thread</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\noncopyable\noncopyable.h">
       <Filter>nocopyable</Filter>
     </ClInclude>
@@ -539,6 +536,21 @@
     </ClInclude>
     <ClInclude Include="..\source\string_utils\string_utils_s.hpp">
       <Filter>string_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\lock_free\lockfree_data.h">
+      <Filter>thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\lock_free\lockfree_queue.h">
+      <Filter>thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\lock_free\spin_mutex.h">
+      <Filter>thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\lock_free\TestLockFree.h">
+      <Filter>thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\mutex\Semaphore.h">
+      <Filter>thread\mutex</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

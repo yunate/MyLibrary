@@ -27,4 +27,8 @@
 #define SWAEX(l) SWA(l)
 #define LIBDIR SWAEX(DIH(PLAT, CON, LNK))
 
+
+
+
+
 #endif // __AUTO_LIB_H_

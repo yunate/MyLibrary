@@ -1,9 +1,12 @@
+
+#include "GolMacro.h"
+// ²»±àÒëµÄ×¢ÊÍµô
+// #define TEST_LOGDOG
+#ifdef TEST_LOGDOG
+
 #include "TestLogDog.h"
 #include "LogDog/LogDogDef.h"
-
 #include <windows.h>
-
-#include "AutoLib.h"
 #pragma comment(lib, LIBDIR "LogDog.lib")
 
 void LogDog()
@@ -27,3 +30,5 @@ void LogDog()
 
     LOG_UNINIT();
 }
+
+#endif // DEBUG
