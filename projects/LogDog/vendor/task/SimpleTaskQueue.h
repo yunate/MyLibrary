@@ -104,7 +104,7 @@ private:
 
     /** 线程事件
     */
-    SimpleEvent m_event;
+    SimpleEvent m_spEvent;
 
     /** 任务队列
     */

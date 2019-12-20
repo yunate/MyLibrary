@@ -29,7 +29,7 @@ void SimpleTaskQueue::StopAll()
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
     ClearAll();
     m_stop = true;
-    m_event.SetEvent();
+    m_spEvent.SetEvent();
 }
 
 void SimpleTaskQueue::StopCurrent()
@@ -60,7 +60,7 @@ void SimpleTaskQueue::PushTask(const std::shared_ptr<ITask>& task)
 {
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
     m_taskQue.push(task);
-    m_event.SetEvent();
+    m_spEvent.SetEvent();
 }
 
 void SimpleTaskQueue::PushTask(const std::function<void()>& task)
@@ -81,7 +81,7 @@ void SimpleTaskQueue::ThreadCallBack()
             }
         }
 
-        m_event.Wait();
+        m_spEvent.Wait();
 
         while (true)
         {

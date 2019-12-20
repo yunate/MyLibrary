@@ -78,7 +78,7 @@ private:
 
     /** 线程事件
     */
-    SimpleEvent m_event;
+    std::shared_ptr<SimpleEvent> m_spEvent;
 
     /** 任务队列
     */

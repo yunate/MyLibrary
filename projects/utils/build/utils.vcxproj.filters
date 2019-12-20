@@ -250,9 +250,6 @@
     <ClCompile Include="..\source\stream\FileStream.cpp">
       <Filter>stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\thread\lock_free\LockFreeQueue.cpp">
-      <Filter>thread\lock_free</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\code_cvt\Test.h">

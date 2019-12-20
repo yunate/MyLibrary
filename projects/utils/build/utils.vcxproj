@@ -75,7 +75,6 @@
     <ClCompile Include="..\source\stream\FileStream.cpp" />
     <ClCompile Include="..\source\stream\MemoryStream.cpp" />
     <ClCompile Include="..\source\string_utils\string_utils_c.cpp" />
-    <ClCompile Include="..\source\thread\lock_free\LockFreeQueue.cpp" />
     <ClCompile Include="..\source\thread\producer_consumer\producer_consumer.cpp" />
     <ClCompile Include="..\source\thread\task\SimpleTaskQueue.cpp" />
     <ClCompile Include="..\source\timer_recorder\test.cpp" />

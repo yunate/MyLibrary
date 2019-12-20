@@ -65,10 +65,10 @@ int main()
     //utilstest::Test_ColorPrint();
     //utilstest::Test_Executor();
     //utilstest::Test_taskQue();
-    utilstest::Test_taskQue1();
+    //utilstest::Test_taskQue1();
     //utilstest::Test_MemoryStream();
     //utilstest::Test_FileStream();
-    //utilstest::TestSpeed();
+    utilstest::TestSpeed();
     //utilstest::Test_DirUtils();
     //utilstest::Test_BigFile();
     //utilstest::Test_EnumDir();

@@ -2,6 +2,7 @@
 #include "SimpleTaskQueue.h"
 
 /** 简单事件
+@note 不提供析构函数，如果当该类析构的时候，但是还处于Wait() 状态，很不幸的告诉你发生未定义行为
 */
 class SimpleEvent :
     public NonCopyable
@@ -69,8 +70,9 @@ SimpleTaskQueue::~SimpleTaskQueue()
 
 bool SimpleTaskQueue::Start()
 {
+    m_spEvent.reset(new(std::nothrow) SimpleEvent());
     m_pThread = new (std::nothrow) std::thread(&SimpleTaskQueue::ThreadCallBack, this);
-    return m_pThread != NULL;
+    return (m_pThread != NULL) & (m_spEvent != NULL);
 }
 
 void SimpleTaskQueue::StopAll()
@@ -78,7 +80,7 @@ void SimpleTaskQueue::StopAll()
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
     ClearAll();
     m_stop = true;
-    m_event.SetEvent();
+    m_spEvent->SetEvent();
 }
 
 void SimpleTaskQueue::StopCurrent()
@@ -109,7 +111,7 @@ void SimpleTaskQueue::PushTask(const std::shared_ptr<ITask>& task)
 {
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
     m_taskQue.push(task);
-    m_event.SetEvent();
+    m_spEvent->SetEvent();
 }
 
 void SimpleTaskQueue::PushTask(const std::function<void()>& task)
@@ -130,7 +132,7 @@ void SimpleTaskQueue::ThreadCallBack()
             }
         }
 
-        m_event.Wait();
+        m_spEvent->Wait();
 
         // 将队列里的全部执行掉
         while (true)
