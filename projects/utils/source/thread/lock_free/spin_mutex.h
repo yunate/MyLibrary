@@ -12,7 +12,7 @@ namespace lockfree
 @note 这个只能当作试例看了，它的效率并不比mutex高
 @note 感觉无锁编程，如果用到循环控制的话，就是在扯淡了，因为mutex windows下实现也是循环控制，但是
 @note 它的汇编代码更少，
-@note 除非有的地方仅仅使用ACS才有效率的提升可能
+@note 除非有的地方仅仅使用CAS才有效率的提升可能
 */
 class spin_mutex
 {

@@ -68,12 +68,12 @@ int main()
     //utilstest::Test_taskQue1();
     //utilstest::Test_MemoryStream();
     //utilstest::Test_FileStream();
-    utilstest::TestSpeed();
+    //utilstest::TestSpeed();
     //utilstest::Test_DirUtils();
     //utilstest::Test_BigFile();
     //utilstest::Test_EnumDir();
     //utilstest::Test_DogUrl();
-    utilstest::Test_stringutils2();
+    //utilstest::Test_stringutils2();
     
     ::system("pause");
     return 1;

@@ -273,6 +273,8 @@ bool SocketHttpClient::SendBody(SPSocketClient spClient)
         dataTimer.ReSet();
     }
 
+    delete pBuff;
+    pBuff = NULL;
     return success;
 }
 
