@@ -62,6 +62,10 @@ public:
     */
     void PushTask(const std::function<void()>& task);
 
+    /** 获得当前队列中的数量，包含当前正在执行的，返回0说明队列空闲
+    @return 当前队列中的数量
+    */
+    size_t GetTaskCount();
 public:
     /** 线程回调
     */

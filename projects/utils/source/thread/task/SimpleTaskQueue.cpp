@@ -119,6 +119,12 @@ void SimpleTaskQueue::PushTask(const std::function<void()>& task)
     PushTask(std::shared_ptr<ITask>(new SimpleFunTask(task)));
 }
 
+size_t SimpleTaskQueue::GetTaskCount()
+{
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+    return m_taskQue.size() + (m_currentTask != nullptr ? 1 : 0);
+}
+
 void SimpleTaskQueue::ThreadCallBack()
 {
     while (true)
