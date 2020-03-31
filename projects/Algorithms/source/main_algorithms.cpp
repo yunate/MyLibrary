@@ -1,5 +1,7 @@
 #include "KMP/KMPStrCmp.h"
 
+#include "BinaryTree/BinaryTreeTraversal.h"
+
 
 // 内存泄露检测器
 // 没有64位的
@@ -20,6 +22,7 @@ int main()
         Test5();
         ++i;
     }
-    
+
+    TestBinaryTreeTraversal();
     return 1;
 }
