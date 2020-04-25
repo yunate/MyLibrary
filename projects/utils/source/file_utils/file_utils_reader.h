@@ -3,7 +3,7 @@
 #define __FILE_UTILS_READER_H_
 
 #include <string>
-#include <memory.h>
+#include <memory>
 
 /** 文件读取类，每次读取wchar
 */

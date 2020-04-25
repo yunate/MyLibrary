@@ -549,5 +549,8 @@
     <ClInclude Include="..\source\thread\mutex\Semaphore.h">
       <Filter>thread\mutex</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\thread\task\SimpleEvent.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

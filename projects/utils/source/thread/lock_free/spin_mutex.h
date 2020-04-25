@@ -40,7 +40,7 @@ public:
         // test_and_set 返回m_falg的设置前的值
         while (m_flag.test_and_set() != false)
         {
-            cpu_pause()
+           // cpu_pause()
         }
     }
 
