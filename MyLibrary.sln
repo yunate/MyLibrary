@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "projects\Test\build
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IPC", "projects\IPC\build\IPC.vcxproj", "{EE7B4C06-4E68-4246-9C90-A1A182C1D404}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite3_key", "projects\sqlite3_key\build\sqlite3_key.vcxproj", "{630374BB-279A-4CFC-A681-B95237C1FCB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_MDd|x64 = Debug_MDd|x64
@@ -147,6 +149,22 @@ Global
 		{EE7B4C06-4E68-4246-9C90-A1A182C1D404}.Release|x64.Build.0 = Release|x64
 		{EE7B4C06-4E68-4246-9C90-A1A182C1D404}.Release|x86.ActiveCfg = Release|Win32
 		{EE7B4C06-4E68-4246-9C90-A1A182C1D404}.Release|x86.Build.0 = Release|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug_MDd|x64.ActiveCfg = Debug|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug_MDd|x64.Build.0 = Debug|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug_MDd|x86.ActiveCfg = Debug|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug_MDd|x86.Build.0 = Debug|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug|x64.ActiveCfg = Debug|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug|x64.Build.0 = Debug|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug|x86.ActiveCfg = Debug|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Debug|x86.Build.0 = Debug|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release_MD|x64.ActiveCfg = Release|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release_MD|x64.Build.0 = Release|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release_MD|x86.ActiveCfg = Release|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release_MD|x86.Build.0 = Release|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release|x64.ActiveCfg = Release|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release|x64.Build.0 = Release|x64
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release|x86.ActiveCfg = Release|Win32
+		{630374BB-279A-4CFC-A681-B95237C1FCB9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

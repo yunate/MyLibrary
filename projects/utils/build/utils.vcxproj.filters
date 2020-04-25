@@ -106,6 +106,9 @@
     <Filter Include="thread\mutex">
       <UniqueIdentifier>{8f026e02-3d73-4350-a75f-323a8a2a6b37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sqlite_key">
+      <UniqueIdentifier>{f194dc64-0417-4dcf-8102-cb9387aaf6c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
