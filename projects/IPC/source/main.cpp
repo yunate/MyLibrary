@@ -38,7 +38,7 @@ public:
 public:
     void Run()
     {
-        std::shared_ptr<SimpleTaskQueue> taskq(new SimpleTaskQueue());
+        std::shared_ptr<SimpleTaskThread> taskq(new SimpleTaskThread());
         taskq->Start();
         std::shared_ptr<PipeListener<CLient> > spListen(new PipeListener<CLient>(this, taskq));
 
@@ -80,7 +80,7 @@ public:
 public:
     void Run()
     {
-        std::shared_ptr<SimpleTaskQueue> taskq(new SimpleTaskQueue());
+        std::shared_ptr<SimpleTaskThread> taskq(new SimpleTaskThread());
         taskq->Start();
 
         // 设置消息循环线程

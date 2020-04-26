@@ -274,14 +274,16 @@ inline void ParseUrl(const DogStringA& url, DogUrl& dogUrl)
         if (url[index] == '/' || url[index] == '\\')
         {
             // ºÃ–¯—∞’“÷±µΩ ? #
-            size_t i = extendEndIndex;
-            extendEndIndex = len - 1;
-            for (; i < len; ++i)
             {
-                if (url[i] == '?' || url[i] == '#')
+                size_t i = extendEndIndex;
+                extendEndIndex = len - 1;
+                for (; i < len; ++i)
                 {
-                    extendEndIndex = i - 1;
-                    break;
+                    if (url[i] == '?' || url[i] == '#')
+                    {
+                        extendEndIndex = i - 1;
+                        break;
+                    }
                 }
             }
 

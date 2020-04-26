@@ -1,7 +1,7 @@
 #ifndef GAMEHALLMAIN_IPC_IPC_THREAD_H_
 #define GAMEHALLMAIN_IPC_IPC_THREAD_H_ 1
 
-#include "thread/task/SimpleEvent.h"
+#include "thread/mutex/SimpleEvent.h"
 #include <string>
 #include <thread>
 

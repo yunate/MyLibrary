@@ -7,10 +7,10 @@
 #define __ILOG_H_
 
 #include "ILogExecutor.h"
-#include "noncopyable.h"
+#include "noncopyable/noncopyable.h"
 #include "LogDogDef.h"
 
-#include "task/ISimpleTask.h"
+#include "thread/task/ITask.h"
 
 #include <assert.h>
 #include <memory>

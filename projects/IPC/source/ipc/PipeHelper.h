@@ -7,7 +7,7 @@
 #include "msgdef/C2SMsgDef.h"
 #include "msgdef/S2CMsgDef.h"
 
-#include "thread/task/SimpleTaskQueue.h"
+#include "thread/task/SimpleTaskThread.h"
 #include <memory>
 
 class IPipeListener;
@@ -66,7 +66,7 @@ public:
     @return 是否成功
     */
     bool InitPipe(const std::shared_ptr<ipc::ChannelListener>& spListener,
-                  std::weak_ptr<SimpleTaskQueue> spPipeMsgLoop);
+                  std::weak_ptr<SimpleTaskThread> spPipeMsgLoop);
 
     /** 反初始化
     */
@@ -105,7 +105,7 @@ private:
 
     /** 消息循环
     */
-    std::weak_ptr<SimpleTaskQueue> m_spPipeMsgLoop;
+    std::weak_ptr<SimpleTaskThread> m_spPipeMsgLoop;
 };
 
 /** 服务器管道代理（初始化）

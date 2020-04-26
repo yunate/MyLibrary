@@ -1,60 +1,34 @@
 
-#ifndef __SIMPLE_TASK_QUEUE_H_
-#define __SIMPLE_TASK_QUEUE_H_
+#ifndef __SIMPLE_TASK_THREAD_H_
+#define __SIMPLE_TASK_THREAD_H_
 
-#include "ISimpleTask.h"
+#include "ITask.h"
+
+#include "noncopyable/noncopyable.h"
 
 #include <mutex>
 #include <memory>
 #include <queue>
 #include <thread>
 
-class SimpleEvent
-{
-public:
-    /** 等待一个信号
-    */
-    void Wait()
-    {
-        std::unique_lock<std::mutex> lck(m_mutex);
-        m_con.wait(lck);
-    }
-
-    /** 设置一个信号
-    */
-    void SetEvent()
-    {
-        std::unique_lock<std::mutex> lck(m_mutex);
-        m_con.notify_all();
-    }
-
-private:
-    /** 互斥量
-    */
-    std::mutex m_mutex;
-
-    /** condition_variable
-    */
-    std::condition_variable m_con;
-};
+/** 前置声明，简单事件，只SimpleTaskThread用
+*/
+class SimpleEvent;
 
 /** 简单线程任务模型
+@note 有点像生产者消费者模型，只是消费者只有一个
 */
-class SimpleTaskQueue
+class SimpleTaskThread :
+    public NonCopyable
 {
 public:
     /** 构造函数
     */
-    SimpleTaskQueue();
+    SimpleTaskThread();
 
     /** 析构函数
     */
-    ~SimpleTaskQueue();
-
-    // 不允许拷贝
-    SimpleTaskQueue(const SimpleTaskQueue&) = delete;
-    SimpleTaskQueue(SimpleTaskQueue&&) = delete;
-    SimpleTaskQueue& operator=(const SimpleTaskQueue&) = delete;
+    ~SimpleTaskThread();
 
 public:
     /** 开始循环
@@ -88,6 +62,10 @@ public:
     */
     void PushTask(const std::function<void()>& task);
 
+    /** 获得当前队列中的数量，包含当前正在执行的，返回0说明队列空闲
+    @return 当前队列中的数量
+    */
+    size_t GetTaskCount();
 public:
     /** 线程回调
     */
@@ -104,7 +82,7 @@ private:
 
     /** 线程事件
     */
-    SimpleEvent m_spEvent;
+    std::shared_ptr<SimpleEvent> m_spEvent;
 
     /** 任务队列
     */
@@ -119,7 +97,5 @@ private:
     std::shared_ptr<ITask> m_currentTask;
 };
 
-
-#endif // __SIMPLE_TASK_QUEUE_H_
-
+#endif // __SIMPLE_TASK_THREAD_H_
 

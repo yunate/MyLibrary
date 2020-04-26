@@ -35,6 +35,10 @@ SQLiteHelper::~SQLiteHelper()
 
 int callback(void*para, int nCount, char** pValue, char** pName)
 {
+    para;
+    nCount;
+    pValue;
+    pName;
     std:: string s = "";
 
 //     for (int i=0; i < nCount; i++)

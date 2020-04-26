@@ -40,11 +40,6 @@
     <ClCompile Include="..\source\LogDog\private\LogExecutorImpl.cpp" />
     <ClCompile Include="..\source\LogDog\private\LogImpl.cpp" />
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\vendor\code_cvt\code_cvt.cpp" />
-    <ClCompile Include="..\vendor\dir_utils\dir_utils.cpp" />
-    <ClCompile Include="..\vendor\init_file\init_file.cpp" />
-    <ClCompile Include="..\vendor\stream\FileStream.cpp" />
-    <ClCompile Include="..\vendor\task\SimpleTaskQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\LogDog\ILog.h" />
@@ -52,14 +47,6 @@
     <ClInclude Include="..\source\LogDog\LogDog.h" />
     <ClInclude Include="..\source\LogDog\LogDogConfig.h" />
     <ClInclude Include="..\source\LogDog\LogDogDef.h" />
-    <ClInclude Include="..\vendor\code_cvt\code_cvt.h" />
-    <ClInclude Include="..\vendor\dir_utils\dir_utils.h" />
-    <ClInclude Include="..\vendor\init_file\init_file.h" />
-    <ClInclude Include="..\vendor\stream\FileStream.h" />
-    <ClInclude Include="..\vendor\stream\IDogStream.h" />
-    <ClInclude Include="..\vendor\task\ISimpleTask.h" />
-    <ClInclude Include="..\vendor\task\ITask.h" />
-    <ClInclude Include="..\vendor\task\SimpleTaskQueue.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -73,53 +60,53 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_MDd|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_MD|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_MDd|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_MD|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -154,49 +141,49 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_MDd|Win32'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_MD|Win32'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_MDd|x64'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_MD|x64'">
     <OutDir>$(ProjectDir)..\bin\$(Configuration)\$(PlatForm)\</OutDir>
     <IntDir>$(OutDir)tmp\</IntDir>
-    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\source\;$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(SolutionDir)\projects\utils\source;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\vendor\;$(SolutionDir)common_vendor\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

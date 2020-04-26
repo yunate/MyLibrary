@@ -61,7 +61,7 @@ LogDog::LogDog()
 bool LogDog::Init(const DogString & path, const DogString & name)
 {
     // 初始化任务队列
-    m_spLogQue.reset(new(std::nothrow) SimpleTaskQueue());
+    m_spLogQue.reset(new(std::nothrow) SimpleTaskThread());
     m_spLogQue->Start();
 
     // 初始化配置文件
@@ -86,5 +86,5 @@ std::shared_ptr<LogDogConfig> LogDog::GetConfig()
 
 void LogDog::UnInit()
 {
-    m_spLogQue.swap(std::shared_ptr<SimpleTaskQueue>());
+    m_spLogQue.swap(std::shared_ptr<SimpleTaskThread>());
 }

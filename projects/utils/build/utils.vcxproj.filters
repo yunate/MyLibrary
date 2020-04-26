@@ -109,6 +109,9 @@
     <Filter Include="sqlite_key">
       <UniqueIdentifier>{f194dc64-0417-4dcf-8102-cb9387aaf6c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="thread\thread_manager">
+      <UniqueIdentifier>{ddb4b027-db5a-4ded-8725-7812a6983175}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\main_utils.cpp" />
@@ -238,9 +241,6 @@
     <ClCompile Include="..\source\file_utils\file_utils_writer.cpp">
       <Filter>file_utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\thread\task\SimpleTaskQueue.cpp">
-      <Filter>thread\task</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\share_memory\ShareMemory.cpp">
       <Filter>share_memory</Filter>
     </ClCompile>
@@ -252,6 +252,15 @@
     </ClCompile>
     <ClCompile Include="..\source\stream\FileStream.cpp">
       <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\thread\task\SimpleTaskThread.cpp">
+      <Filter>thread\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\thread\task\HeartBeatTaskThread.cpp">
+      <Filter>thread\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\thread\thread_manager\SimpleThreadManager.cpp">
+      <Filter>thread\thread_manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -471,13 +480,7 @@
     <ClInclude Include="..\source\logic_executor\Test.h">
       <Filter>logic_executor</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\thread\task\SimpleTaskQueue.h">
-      <Filter>thread\task</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\thread\task\ITask.h">
-      <Filter>thread\task</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\thread\task\ISimpleTask.h">
       <Filter>thread\task</Filter>
     </ClInclude>
     <ClInclude Include="..\source\thread\task\Test_taskQue.h">
@@ -552,8 +555,23 @@
     <ClInclude Include="..\source\thread\mutex\Semaphore.h">
       <Filter>thread\mutex</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\thread\task\SimpleEvent.h">
+    <ClInclude Include="..\source\thread\task\SimpleTaskThread.h">
       <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\task\SimpleFunctionTask.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\task\HeartBeatTaskThread.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\task\IHeartBeatTask.h">
+      <Filter>thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\mutex\SimpleEvent.h">
+      <Filter>thread\mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\thread\thread_manager\SimpleThreadManager.h">
+      <Filter>thread\thread_manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

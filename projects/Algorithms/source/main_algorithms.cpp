@@ -55,7 +55,7 @@ int findMinDifference(vector<string> timePoints) {
     return min;
 }
 
-int threeSumClosest(vector<int>& nums, int target) 
+void threeSumClosest(vector<int>& nums, int target) 
 {
     for (int i = 0; i < nums.size(); ++i)
     {

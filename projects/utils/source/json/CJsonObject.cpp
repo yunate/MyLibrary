@@ -1054,6 +1054,7 @@ bool CJsonObject::Add(const std::string& strKey, uint64 ullValue)
 
 bool CJsonObject::Add(const std::string& strKey, bool bValue, bool bValueAgain)
 {
+    bValueAgain;
     cJSON* pFocusData = NULL;
     if (m_pJsonData != NULL)
     {
@@ -1428,6 +1429,7 @@ bool CJsonObject::Replace(const std::string& strKey, uint64 ullValue)
 
 bool CJsonObject::Replace(const std::string& strKey, bool bValue, bool bValueAgain)
 {
+    bValueAgain;
     cJSON* pFocusData = NULL;
     if (m_pJsonData == NULL)
     {
@@ -2086,6 +2088,7 @@ bool CJsonObject::Add(uint64 ullValue)
 
 bool CJsonObject::Add(int iAnywhere, bool bValue)
 {
+    iAnywhere;
     cJSON* pFocusData = NULL;
     if (m_pJsonData != NULL)
     {
@@ -2475,6 +2478,7 @@ bool CJsonObject::AddAsFirst(uint64 ullValue)
 
 bool CJsonObject::AddAsFirst(int iAnywhere, bool bValue)
 {
+    iAnywhere;
     cJSON* pFocusData = NULL;
     if (m_pJsonData != NULL)
     {
@@ -2858,6 +2862,7 @@ bool CJsonObject::Replace(int iWhich, uint64 ullValue)
 
 bool CJsonObject::Replace(int iWhich, bool bValue, bool bValueAgain)
 {
+    bValueAgain;
     cJSON* pFocusData = NULL;
     if (m_pJsonData == NULL)
     {

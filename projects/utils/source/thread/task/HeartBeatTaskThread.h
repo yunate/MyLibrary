@@ -1,34 +1,31 @@
 
-#ifndef __SIMPLE_TASK_QUEUE_H_
-#define __SIMPLE_TASK_QUEUE_H_
+#ifndef __HEARTBEAD_TASK_THREAD_
+#define __HEARTBEAD_TASK_THREAD_ 1
 
-#include "ISimpleTask.h"
+#include "IHeartBeatTask.h"
 
 #include "noncopyable/noncopyable.h"
 
-#include <mutex>
-#include <memory>
-#include <queue>
+#include <list>
 #include <thread>
+#include <mutex>
 
-/** 前置声明，简单事件，只SimpleTaskQueue用
-*/
-class SimpleEvent;
+struct HeartBeatTaskWraper;
+using SPHeartBeatTaskWraper = std::shared_ptr<HeartBeatTaskWraper>;
 
-/** 简单线程任务模型
-@note 有点像生产者消费者模型，只是消费者只有一个
+/** 心跳线程任务模型
 */
-class SimpleTaskQueue :
+class HeartBeatTaskThread :
     public NonCopyable
 {
 public:
     /** 构造函数
     */
-    SimpleTaskQueue();
+    HeartBeatTaskThread();
 
     /** 析构函数
     */
-    ~SimpleTaskQueue();
+    ~HeartBeatTaskThread();
 
 public:
     /** 开始循环
@@ -55,17 +52,20 @@ public:
     /** 添加一个任务
     @param [in] task 任务
     */
-    void PushTask(const std::shared_ptr<ITask>& task);
+    void PushTask(const SPHeartBeatTask& task);
 
     /** 添加一个函数任务
     @param [in] task 任务
+    @param [in] timeOut 时间间隔
+    @param [in] times 执行次数，为-1代表执行无数次，默认为-1
     */
-    void PushTask(const std::function<void()>& task);
+    void PushTask(const std::function<bool()>& task, uint32_t timeOut, int32_t times = -1);
 
-    /** 获得当前队列中的数量，包含当前正在执行的，返回0说明队列空闲
+    /** 获得当前队列中的数量，包含当前正在执行的
     @return 当前队列中的数量
     */
     size_t GetTaskCount();
+
 public:
     /** 线程回调
     */
@@ -73,20 +73,16 @@ public:
 
 private:
     /** 线程
-    */
+     */
     std::thread* m_pThread;
 
     /** 互斥量
     */
     std::recursive_mutex m_mutex;
 
-    /** 线程事件
-    */
-    std::shared_ptr<SimpleEvent> m_spEvent;
-
     /** 任务队列
     */
-    std::queue<std::shared_ptr<ITask> > m_taskQue;
+    std::list<SPHeartBeatTaskWraper > m_taskList;
 
     /** 是否停止了
     */
@@ -94,10 +90,7 @@ private:
 
     /** 当前正在执行的
     */
-    std::shared_ptr<ITask> m_currentTask;
+    SPHeartBeatTaskWraper m_currentTask;
 };
 
-
-#endif // __SIMPLE_TASK_QUEUE_H_
-
-
+#endif // __HEARTBEAD_TASK_THREAD_

@@ -2,7 +2,7 @@
 #ifndef _LOGDOGCONFIG_H__
 #define _LOGDOGCONFIG_H__
 
-#include "timer_recorder.h"
+#include "timer_recorder/timer_recorder.h"
 
 #include "typedef/DogString.h"
 

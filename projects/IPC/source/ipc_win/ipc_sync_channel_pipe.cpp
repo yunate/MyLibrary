@@ -2,7 +2,7 @@
 
 #include "ipc_channel_pipe.h"
 #include "ipc_message.h"
-#include "thread/task/SimpleEvent.h"
+#include "thread/mutex/SimpleEvent.h"
 
 namespace ipc {
 

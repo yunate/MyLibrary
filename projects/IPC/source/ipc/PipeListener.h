@@ -4,7 +4,7 @@
 
 #include "ipc_win/ipc_channel_listener.h"
 #include "ipc_win/ipc_message.h"
-#include "thread/task/SimpleTaskQueue.h"
+#include "thread/task/SimpleTaskThread.h"
 #include <assert.h>
 
 
@@ -44,7 +44,7 @@ class PipeListener : public ipc::ChannelListener
 {
 public:
     template<class T>
-    PipeListener(T* msgHandlerImpl, const std::weak_ptr<SimpleTaskQueue>& spMsgLoop) :
+    PipeListener(T* msgHandlerImpl, const std::weak_ptr<SimpleTaskThread>& spMsgLoop) :
         m_pMsgHandlerImpl(msgHandlerImpl),
         m_spPipeMsgLoop(spMsgLoop)
     {
@@ -56,7 +56,7 @@ public:
     */
     virtual ~PipeListener()
     {
-        std::shared_ptr<SimpleTaskQueue> msgLoop = m_spPipeMsgLoop.lock();
+        std::shared_ptr<SimpleTaskThread> msgLoop = m_spPipeMsgLoop.lock();
 
         if (msgLoop != nullptr)
         {
@@ -78,7 +78,7 @@ public:
             return false;
         }
 
-        std::shared_ptr<SimpleTaskQueue> msgLoop = m_spPipeMsgLoop.lock();
+        std::shared_ptr<SimpleTaskThread> msgLoop = m_spPipeMsgLoop.lock();
         if (msgLoop == nullptr)
         {
             return false;
@@ -105,7 +105,7 @@ public:
 protected:
     /** 管道消息循环
     */
-    std::weak_ptr<SimpleTaskQueue> m_spPipeMsgLoop;
+    std::weak_ptr<SimpleTaskThread> m_spPipeMsgLoop;
 
     /** 真正的处理消息的实现，他的生命周期必须比m_spPipeMsgLoop长，也就是说比this长
     */

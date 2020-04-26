@@ -9,8 +9,8 @@
 #include "ILog.h"
 #include "LogDogConfig.h"
 
-#include "singleton.h"
-#include "task/SimpleTaskQueue.h"
+#include "singleton/singleton.h"
+#include "thread/task/SimpleTaskThread.h"
 #include <functional>
 #include <unordered_map>
 #include <thread>
@@ -50,7 +50,7 @@ public:
 private:
     /** 日志任务队列
     */
-    std::shared_ptr<SimpleTaskQueue> m_spLogQue;
+    std::shared_ptr<SimpleTaskThread> m_spLogQue;
 
     /** 日志配置
     */

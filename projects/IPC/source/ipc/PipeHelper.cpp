@@ -5,7 +5,7 @@
 #include "msgdef/S2CMsgDef.h"
 
 #include "guid/guid.h"
-#include "thread/task/SimpleEvent.h"
+#include "thread/mutex/SimpleEvent.h"
 #include <assert.h>
 
 //////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ ClientPipeHelper::~ClientPipeHelper()
 }
 
 bool ClientPipeHelper::InitPipe(const std::shared_ptr<ipc::ChannelListener>& spListener,
-                                  std::weak_ptr<SimpleTaskQueue> spPipeMsgLoop)
+                                  std::weak_ptr<SimpleTaskThread> spPipeMsgLoop)
 {
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
     assert(spListener != nullptr);
@@ -89,7 +89,7 @@ void ClientPipeHelper::Uninit()
 
 bool ClientPipeHelper::Regist()
 {
-    std::shared_ptr<SimpleTaskQueue> it = m_spPipeMsgLoop.lock();
+    std::shared_ptr<SimpleTaskThread> it = m_spPipeMsgLoop.lock();
 
     if (it == nullptr)
     {
