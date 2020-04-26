@@ -10,6 +10,9 @@
     <Filter Include="LowBit">
       <UniqueIdentifier>{31d2e189-dd39-4b5b-a80d-b2af87170f83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BinaryTree">
+      <UniqueIdentifier>{b52f2ec2-cab1-446b-99c6-809949fe3192}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\KMP\KMPStrCmp.cpp">
@@ -26,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="..\source\LowBit\LowBit.h">
       <Filter>LowBit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\BinaryTree\BinaryTreeTraversal.h">
+      <Filter>BinaryTree</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
