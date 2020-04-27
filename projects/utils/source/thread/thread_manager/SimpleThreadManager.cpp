@@ -34,7 +34,7 @@ void SimpleThreadManager::StopAll()
     if (m_spHeartBeatThreadTaskQueue != nullptr)
     {
         m_spHeartBeatThreadTaskQueue->StopAll();
-        m_spFastThreadTaskQueue.reset();
+        m_spHeartBeatThreadTaskQueue.reset();
     }
 }
 
