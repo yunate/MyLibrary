@@ -157,19 +157,14 @@ void HeartBeatTaskThread::ThreadCallBack()
             }
 
             tmpList.clear();
-
             m_taskList.swap(tmpList);
         }
 
         // 将队列里的全部执行掉
         auto it = tmpList.begin();
-        while (it != tmpList.end())
+        while (it != tmpList.end() && !m_stop)
         {
             auto tmpIt = it++;
-            if (tmpList.empty() || m_stop)
-            {
-                break;
-            }
 
             {
                 std::lock_guard<std::recursive_mutex> lock(m_mutex);
