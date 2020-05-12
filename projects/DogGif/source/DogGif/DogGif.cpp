@@ -6,8 +6,8 @@
 namespace DogGifNSP
 {
 #define GIF_INTERLACE_PASSES 4
-static int g_GifInterlaceOffset[GIF_INTERLACE_PASSES] = { 0, 4, 2, 1 };
-static int g_GifInterlaceIncrement[GIF_INTERLACE_PASSES] = { 8, 8, 4, 2 };
+static int g_GifInterlaceOffset[GIF_INTERLACE_PASSES] = {0, 4, 2, 1};
+static int g_GifInterlaceIncrement[GIF_INTERLACE_PASSES] = {8, 8, 4, 2};
 
 DogGif::DogGif() :
     m_curFrame(0xffffffff),
@@ -22,7 +22,6 @@ DogGif::~DogGif()
         delete m_pStringTable;
         m_pStringTable = NULL;
     }
-
 }
 
 bool DogGif::DogGif::Init(u8 * pBuff, u32 buffLen)
@@ -104,19 +103,24 @@ bool DogGif::GetCurrentFrame(DogGifColor ** ppBuff, u32 & buffLen)
     return true;
 }
 
-u32 DogGif::GetWidth()
+u32 DogGif::GetGolWidth()
 {
     return m_gifGolInfo.m_width;
 }
 
-u32 DogGif::GetHeight()
+u32 DogGif::GetGolHeight()
 {
     return m_gifGolInfo.m_height;
 }
 
 u32 DogGif::GetTimeDelay()
 {
-    u32 delayTime = m_gifGolInfo.m_frameData[0]->m_delayTime * 10;
+    u32 delayTime = 0;
+
+    if (m_gifGolInfo.m_frameData.size() > 0)
+    {
+        delayTime = m_gifGolInfo.m_frameData[0]->m_delayTime * 10;
+    }
 
     if (delayTime == 0)
     {
@@ -477,12 +481,11 @@ bool DogGif::DecodeFrame()
             pFrame->m_disposalMethod == 3)
         {
             //TODO: 等于3的时候可能会还要保存在前面一张，这里我就不加了
+            return true;
         }
         else if (pFrame->m_disposalMethod == 1)
         {
-            int i = 0;
-            ++i;
-            // ::memcpy(pOutBuff, &m_preFrameBit[0], buffSize * sizeof(DogGifColor));
+            // 
         }
         else if (pFrame->m_disposalMethod == 2)
         {

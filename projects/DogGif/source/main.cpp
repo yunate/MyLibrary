@@ -141,8 +141,8 @@ public:
                             m_gifVec[i]->GetNextFrame(&pBuffData, buffLen);
                         }
 
-                        HBITMAP bitMap = ::CreateBitmap((int)m_gifVec[i]->GetWidth(),
-                            (int)m_gifVec[i]->GetHeight(),
+                        HBITMAP bitMap = ::CreateBitmap((int)m_gifVec[i]->GetGolWidth(),
+                            (int)m_gifVec[i]->GetGolHeight(),
                                                         1,
                                                         32,
                                                         pBuffData);
@@ -150,16 +150,16 @@ public:
                         if (bitMap)
                         {
                             HBRUSH brush = ::CreatePatternBrush(bitMap);
-                            RECT rect = {left, top, left + (int)m_gifVec[i]->GetWidth(), top + (int)m_gifVec[i]->GetHeight()};
+                            RECT rect = {left, top, left + (int)m_gifVec[i]->GetGolWidth(), top + (int)m_gifVec[i]->GetGolHeight()};
 
-                            if (left + (int)m_gifVec[i]->GetWidth() + (int)m_gifVec[i]->GetWidth() < GetWidth())
+                            if (left + (int)m_gifVec[i]->GetGolWidth() + (int)m_gifVec[i]->GetGolWidth() < GetWidth())
                             {
-                                left += (int)m_gifVec[i]->GetWidth();
+                                left += (int)m_gifVec[i]->GetGolWidth();
                             }
                             else
                             {
                                 left = 0;
-                                top += (int)m_gifVec[i]->GetHeight();
+                                top += (int)m_gifVec[i]->GetGolHeight();
                             }
 
                             ::FillRect(hdc, &rect, brush);

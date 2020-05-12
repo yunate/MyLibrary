@@ -1,8 +1,7 @@
 /*********************************************************************
-//
+// 感谢参考博客：
 // https://www.jianshu.com/p/4fabac6b15b3
 // https://www.jianshu.com/p/62ad4f953660
-//
 **********************************************************************/
 
 #ifndef __DOGGIF_H_
@@ -11,172 +10,9 @@
 #include "DogGifDef.h"
 #include "StringTable.h"
 #include <string>
-#include <vector>
 
 namespace DogGifNSP
 {
-
-struct DogGifColor
-{
-    DogGifColor(u8 r, u8 g, u8 b, u8 a):
-        m_r(r),
-        m_g(g),
-        m_b(b),
-        m_a(a)
-    {
-
-    }
-
-    DogGifColor()
-    {
-
-    }
-
-    /** blue
-    */
-    u8 m_b = 0;
-
-    /** green
-    */
-    u8 m_g = 0;
-
-    /** red
-    */
-    u8 m_r = 0;
-
-    /** a
-    */
-    u8 m_a = 0xff;
-};
-
-struct DogGifFrame
-{
-    /** 0：不做任何处理。1：保留前一帧图像，在此基础上进行渲染。2：渲染前将图像置为背景色。3：将被下一帧覆盖的图像重置。
-    */
-    u8 m_disposalMethod;
-
-    /** 用户输入标记
-    */
-    u8 m_userInputFlag = 0;
-
-    /** 当该值为 1 时，后面的 m_tranColorIndex 指定的颜色将被当做透明色处理。为 0 则不做处理。
-    */
-    u8 m_tranFlag;
-
-    /** 播放时延
-    */
-    u16 m_delayTime = 0;
-
-    /** 透明色索引
-        置位表示使用透明颜色
-    */
-    u8 m_tranColorIndex = 0;
-
-    /** x方向偏移量
-    */
-    u16 m_left = 0;
-
-    /** y方向偏移量
-    */
-    u16 m_top = 0;
-
-    /** 图像宽度
-    */
-    u16 m_width = 0;
-
-    /** 图像高度
-    */
-    u16 m_height = 0;
-
-    /** 是否有局部颜色表
-    */
-    u8 m_hasLocalColorTable = 0;
-
-    /** 交织标志(Interlace Flag)，置位时图象数据使用交织方式排列，否则使用顺序排列。
-    */
-    u8 m_interlaceFlag = 0;
-
-    /** 分类标志(Sort Flag)，如果置位表示紧跟着的局部颜色列表分类排列.
-    */
-    u8 m_sortFlag = 0;
-
-    /** 局部颜色列表颜色个数
-    */
-    u16 m_LocalColorTableBit = 0;
-
-    /** 局部色表
-    */
-    std::vector<DogGifColor> m_localColorTable;
-
-    /** 编码长度
-    */
-    u8 m_codeLen = 0;
-
-    /** frame数据
-    */
-    std::vector<u8> m_frameData;
-};
-
-struct DogGifGolInfo
-{
-    /** gif标识 
-        GIF89a 或者 GIF87a
-    */
-    std::string m_gifHeadSignaturl = "";
-
-    /** 宽度
-    */
-    u16 m_width = 0;
-
-    /** 高度度
-    */
-    u16 m_height = 0;
-
-    /** 是否有全局颜色表
-    */
-    u8 m_hasGolColorTable = 0;
-
-    /** 颜色深度
-    */
-    u8 m_colorDepth = 0;
-
-    /** 全局颜色列表是否分类排列
-    */
-    u8 m_isGolColorTableSorted = 0;
-
-    /** 全局颜色列表颜色个数
-    */
-    u16 m_golColorTableBit = 0;
-
-    /** 背景色位置
-    */
-    u8 m_bgColorIndex;
-
-    /** 象素的高宽比
-        如果该字段的值为非0，则象素的高宽比由下面的公式计算：
-        高宽比 = (象素高宽比 + 15) / 64
-        该字段的取值范围从最宽的比值4：1到最高的比值1：4，递增的步幅为1/64。取值： 0 - 没有比值，1～255 - 用于计算的值。
-    */
-    u8 m_pixelToWidthHeight = 0;
-
-    /** 全局色表
-    */
-    std::vector<DogGifColor> m_golColorTable;
-
-    /** 每一帧数据
-    */
-    std::vector<DogGifFrame*> m_frameData;
-
-    ~DogGifGolInfo()
-    {
-        for (auto it : m_frameData)
-        {
-            delete it;
-        }
-
-        m_golColorTable.clear();
-    }
-};
 
 class DogGif
 {
@@ -189,16 +25,21 @@ public:
     */
     ~DogGif();
 
+    // 不允许拷贝
     DogGif& operator=(const DogGif&) = delete;
-
     DogGif(const DogGif&) = delete;
-
     DogGif(DogGif&&) = delete;
 
 public:
-    bool Init(u8 * pBuff, u32 buffLen);
+    /** 初始化
+    @note pBuff生命周期保证在Init函数执行期间有效即可
+    @param [in] pBuff 图片的二进制数据（文件中读出来的原始数据）
+    @paran [in] buffLen pBuff长度
+    @return 是否成功
+    */
+    bool Init(u8* pBuff, u32 buffLen);
 
-    /** 返回下一帧，线程不安全
+    /** 返回下一帧，线程不安全，如果成功内部帧index加一
     @param [out] ppBuff 输出颜色数组，内存不要自己释放
     @param [out] buffLen 数组长度
     @reutrn 是否成功
@@ -212,10 +53,26 @@ public:
     */
     bool GetCurrentFrame(DogGifColor ** ppBuff, u32 & buffLen);
 
-    u32 GetWidth();
-    u32 GetHeight();
+    /** 获得全局宽度
+    @return 全局宽度
+    */
+    u32 GetGolWidth();
+
+    /** 获得全局高度
+    @return 全局高度
+    */
+    u32 GetGolHeight();
+
+    /** 获得全局时间间隔，取第0帧的
+    @return 全局时间间隔
+    */
     u32 GetTimeDelay();
+
+    /** 是否初始化了
+    @return 是否初始化了
+    */
     bool HasInit();
+
 private:
     /** 读gif头
     @pram [in, out] ppBuff head的开始指针，读取过后自动向后移动响应位置
@@ -246,17 +103,31 @@ private:
     DogGifFrame* ReadFrameData(u8** ppBuff, u32& buffLen);
 
 private:
+    /** 解密m_curFrame索引的帧。
+    @note 要求m_frameBuff存储的是上一帧，连续调用而没有改变m_curFrame，那么很有可能出错
+    @return 是否成功
+    */
     bool DecodeFrame();
 
 private:
+    /** 当前帧的图片buff，在DecodeFrame函数内表示上一帧
+    */
     std::vector<DogGifColor> m_frameBuff;
 
-    DogGifGolInfo m_gifGolInfo;
-
+    /** 当前帧的索引
+    */
     u32 m_curFrame;
 
+    /** 全局gif信息
+    */
+    DogGifGolInfo m_gifGolInfo;
+
+    /** 加解密帧用
+    */
     StringTable* m_pStringTable;
 
+    /** 是否已经初始化了
+    */
     bool m_hasInit;
 };
 

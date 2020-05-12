@@ -2,13 +2,10 @@
 #ifndef __DOGGIF_DEF_H_
 #define __DOGGIF_DEF_H_
 
+#include <vector>
+
 namespace DogGifNSP
 {
-    /**
-    
-    
-    */
-
 using u8 = unsigned char;
 using u16 = unsigned short;
 using u32 = unsigned long;
@@ -153,6 +150,174 @@ struct ImageDescriptor
         pixel 2 1 0 - 局部颜色列表大小(Size of Local Color Table)，pixel+1就为颜色列表的位数
     */
     u8 m_localColorFlag;
+};
+
+/** 颜色表
+*/
+struct DogGifColor
+{
+    DogGifColor(u8 r, u8 g, u8 b, u8 a) :
+        m_r(r),
+        m_g(g),
+        m_b(b),
+        m_a(a)
+    {
+
+    }
+
+    DogGifColor()
+    {
+
+    }
+
+    /** blue
+    */
+    u8 m_b = 0;
+
+    /** green
+    */
+    u8 m_g = 0;
+
+    /** red
+    */
+    u8 m_r = 0;
+
+    /** a
+    */
+    u8 m_a = 0xff;
+};
+
+/** 每一帧信息
+*/
+struct DogGifFrame
+{
+    /** 0：不做任何处理。1：保留前一帧图像，在此基础上进行渲染。2：渲染前将图像置为背景色。3：将被下一帧覆盖的图像重置。
+    */
+    u8 m_disposalMethod;
+
+    /** 用户输入标记
+    */
+    u8 m_userInputFlag = 0;
+
+    /** 当该值为 1 时，后面的 m_tranColorIndex 指定的颜色将被当做透明色处理。为 0 则不做处理。
+    */
+    u8 m_tranFlag;
+
+    /** 播放时延
+    */
+    u16 m_delayTime = 0;
+
+    /** 透明色索引
+        置位表示使用透明颜色
+    */
+    u8 m_tranColorIndex = 0;
+
+    /** x方向偏移量
+    */
+    u16 m_left = 0;
+
+    /** y方向偏移量
+    */
+    u16 m_top = 0;
+
+    /** 图像宽度
+    */
+    u16 m_width = 0;
+
+    /** 图像高度
+    */
+    u16 m_height = 0;
+
+    /** 是否有局部颜色表
+    */
+    u8 m_hasLocalColorTable = 0;
+
+    /** 交织标志(Interlace Flag)，置位时图象数据使用交织方式排列，否则使用顺序排列。
+    */
+    u8 m_interlaceFlag = 0;
+
+    /** 分类标志(Sort Flag)，如果置位表示紧跟着的局部颜色列表分类排列.
+    */
+    u8 m_sortFlag = 0;
+
+    /** 局部颜色列表颜色个数
+    */
+    u16 m_LocalColorTableBit = 0;
+
+    /** 局部色表
+    */
+    std::vector<DogGifColor> m_localColorTable;
+
+    /** 编码长度
+    */
+    u8 m_codeLen = 0;
+
+    /** frame数据
+    */
+    std::vector<u8> m_frameData;
+};
+
+/** gif全局信息
+*/
+struct DogGifGolInfo
+{
+    /** gif标识
+        GIF89a 或者 GIF87a
+    */
+    std::string m_gifHeadSignaturl = "";
+
+    /** 宽度
+    */
+    u16 m_width = 0;
+
+    /** 高度度
+    */
+    u16 m_height = 0;
+
+    /** 是否有全局颜色表
+    */
+    u8 m_hasGolColorTable = 0;
+
+    /** 颜色深度
+    */
+    u8 m_colorDepth = 0;
+
+    /** 全局颜色列表是否分类排列
+    */
+    u8 m_isGolColorTableSorted = 0;
+
+    /** 全局颜色列表颜色个数
+    */
+    u16 m_golColorTableBit = 0;
+
+    /** 背景色位置
+    */
+    u8 m_bgColorIndex;
+
+    /** 象素的高宽比
+        如果该字段的值为非0，则象素的高宽比由下面的公式计算：
+        高宽比 = (象素高宽比 + 15) / 64
+        该字段的取值范围从最宽的比值4：1到最高的比值1：4，递增的步幅为1/64。取值： 0 - 没有比值，1～255 - 用于计算的值。
+    */
+    u8 m_pixelToWidthHeight = 0;
+
+    /** 全局色表
+    */
+    std::vector<DogGifColor> m_golColorTable;
+
+    /** 每一帧数据
+    */
+    std::vector<DogGifFrame*> m_frameData;
+
+    ~DogGifGolInfo()
+    {
+        for (auto it : m_frameData)
+        {
+            delete it;
+        }
+
+        m_golColorTable.clear();
+    }
 };
 
 #pragma pack(pop)
