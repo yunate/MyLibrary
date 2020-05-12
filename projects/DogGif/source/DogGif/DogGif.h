@@ -245,15 +245,15 @@ private:
     */
     DogGifFrame* ReadFrameData(u8** ppBuff, u32& buffLen);
 
-public:
-    bool DecodeFrame(u32 index);
+private:
+    bool DecodeFrame();
 
 private:
-    std::vector<DogGifColor> m_preFrameBit;
+    std::vector<DogGifColor> m_frameBuff;
 
     DogGifGolInfo m_gifGolInfo;
 
-    u32 m_nextFrame;
+    u32 m_curFrame;
 
     StringTable* m_pStringTable;
 

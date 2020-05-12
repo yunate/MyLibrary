@@ -10,7 +10,7 @@ static int g_GifInterlaceOffset[GIF_INTERLACE_PASSES] = { 0, 4, 2, 1 };
 static int g_GifInterlaceIncrement[GIF_INTERLACE_PASSES] = { 8, 8, 4, 2 };
 
 DogGif::DogGif() :
-    m_nextFrame(0),
+    m_curFrame(0xffffffff),
     m_pStringTable(nullptr)
 {
 }
@@ -75,25 +75,32 @@ bool DogGif::DogGif::Init(u8 * pBuff, u32 buffLen)
 
 bool DogGif::GetNextFrame(DogGifColor ** ppBuff, u32 & buffLen)
 {
-    buffLen = m_gifGolInfo.m_width * m_gifGolInfo.m_height;
-
-    if (!DecodeFrame(m_nextFrame))
+    int tmp = m_curFrame++;
+    if (m_curFrame >= m_gifGolInfo.m_frameData.size())
     {
+        m_curFrame = 0;
+    }
+
+    if (!DecodeFrame())
+    {
+        m_curFrame = tmp;
         return false;
     }
 
-    *ppBuff = &m_preFrameBit[0];
+    buffLen = m_gifGolInfo.m_width * m_gifGolInfo.m_height;
+    *ppBuff = &m_frameBuff[0];
     return true;
 }
 
 bool DogGif::GetCurrentFrame(DogGifColor ** ppBuff, u32 & buffLen)
 {
-    if (m_preFrameBit.size() == 0)
+    if (m_frameBuff.size() == 0 ||
+        m_curFrame >= m_gifGolInfo.m_frameData.size())
     {
         return false;
     }
 
-    *ppBuff = &m_preFrameBit[0];
+    *ppBuff = &m_frameBuff[0];
     return true;
 }
 
@@ -401,16 +408,16 @@ DogGifFrame * DogGif::ReadFrameData(u8 ** ppBuff, u32 & buffLen)
     return pFrame;
 }
 
-bool DogGif::DecodeFrame(u32 index)
+bool DogGif::DecodeFrame()
 {
     u32 buffSize = m_gifGolInfo.m_height * m_gifGolInfo.m_width;
 
-    if (index >= m_gifGolInfo.m_frameData.size())
+    if (m_curFrame >= m_gifGolInfo.m_frameData.size())
     {
         return false;
     }
 
-    DogGifFrame * pFrame = m_gifGolInfo.m_frameData[index];
+    DogGifFrame * pFrame = m_gifGolInfo.m_frameData[m_curFrame];
 
     if (pFrame->m_width + pFrame->m_left > m_gifGolInfo.m_width ||
         pFrame->m_height + pFrame->m_top > m_gifGolInfo.m_height)
@@ -452,16 +459,16 @@ bool DogGif::DecodeFrame(u32 index)
 //         colorTable[pFrame->m_tranColorIndex].m_b = 255;
 //     }
 
-    if (index == 0)
+    if (m_curFrame == 0)
     {
-        m_preFrameBit.resize(buffSize);
+        m_frameBuff.resize(buffSize);
         DogGifColor bgColor = colorTable[m_gifGolInfo.m_bgColorIndex];
         
         for (u32 i = 0; i < buffSize; ++i)
         {
-            m_preFrameBit[i].m_r = bgColor.m_r;
-            m_preFrameBit[i].m_g = bgColor.m_g;
-            m_preFrameBit[i].m_b = bgColor.m_b;
+            m_frameBuff[i].m_r = bgColor.m_r;
+            m_frameBuff[i].m_g = bgColor.m_g;
+            m_frameBuff[i].m_b = bgColor.m_b;
         }
     }
     else
@@ -483,9 +490,9 @@ bool DogGif::DecodeFrame(u32 index)
 
             for (u32 i = 0; i < buffSize; ++i)
             {
-                m_preFrameBit[i].m_r = bgColor.m_r;
-                m_preFrameBit[i].m_g = bgColor.m_g;
-                m_preFrameBit[i].m_b = bgColor.m_b;
+                m_frameBuff[i].m_r = bgColor.m_r;
+                m_frameBuff[i].m_g = bgColor.m_g;
+                m_frameBuff[i].m_b = bgColor.m_b;
             }
         }
     }
@@ -495,7 +502,7 @@ bool DogGif::DecodeFrame(u32 index)
     u8 interlacepass = 0;
     u32 frameDataIndex = 0;
     u8 decodeBuff[4096];
-    DogGifColor * scanline = &(m_preFrameBit)[m_gifGolInfo.m_width * (y + pFrame->m_top) + pFrame->m_left];
+    DogGifColor * scanline = &(m_frameBuff)[m_gifGolInfo.m_width * (y + pFrame->m_top) + pFrame->m_left];
 
     // LZW ½âÂë
     m_pStringTable->Initialize(pFrame->m_codeLen);
@@ -557,21 +564,13 @@ bool DogGif::DecodeFrame(u32 index)
                     }
 
                     x = 0;
-                    scanline = &(m_preFrameBit)[m_gifGolInfo.m_width * (y + pFrame->m_top) + pFrame->m_left];
+                    scanline = &(m_frameBuff)[m_gifGolInfo.m_width * (y + pFrame->m_top) + pFrame->m_left];
                 }
             }
 
             decodeSize = sizeof(decodeBuff);
         }
     }
-
-    ++m_nextFrame;
-
-    if (m_nextFrame == m_gifGolInfo.m_frameData.size())
-    {
-        m_nextFrame = 0;
-    }
-
     return true;
 }
 

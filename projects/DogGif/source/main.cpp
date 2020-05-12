@@ -180,6 +180,12 @@ public:
                 {
                     m_gifVec.push_back(new DogGifNSP::DogGif);
                     FileReader reader(L"test\\1.gif", NULL, 0);
+
+                    if (reader.HasError())
+                    {
+                        ::MessageBox(NULL, L"找不到test/1.gif", L"错误", MB_OK);
+                    }
+
                     size_t fileSize = reader.GetFileSize();
 
                     if (fileSize > 0)
