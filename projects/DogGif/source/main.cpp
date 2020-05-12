@@ -125,7 +125,7 @@ public:
                 int left = 0;
                 int top = 0;
 
-                for (int i = 0; i < 5; ++i)
+                for (int i = 0; i < m_gifVec.size(); ++i)
                 {
                     if (m_gifVec[i]->HasInit())
                     {
@@ -183,7 +183,7 @@ public:
 
                     if (reader.HasError())
                     {
-                        ::MessageBox(NULL, L"找不到test/1.gif", L"错误", MB_OK);
+                        continue;
                     }
 
                     size_t fileSize = reader.GetFileSize();
@@ -195,7 +195,6 @@ public:
                         m_gifVec[i]->Init(pBuff, (u32)fileSize);
                         delete[] pBuff;
                     }
-                  
                 }
                
                 m_timeDelay = m_gifVec[0]->GetTimeDelay();
