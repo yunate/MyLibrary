@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\3rd\encrypt\aes.c" />
+    <ClCompile Include="..\src\3rd\encrypt\b64.c" />
+    <ClCompile Include="..\src\3rd\encrypt\crc32.c" />
+    <ClCompile Include="..\src\3rd\encrypt\hmac.c" />
+    <ClCompile Include="..\src\3rd\encrypt\md5.c" />
+    <ClCompile Include="..\src\3rd\encrypt\p224_ec.c" />
+    <ClCompile Include="..\src\3rd\encrypt\p256.c" />
+    <ClCompile Include="..\src\3rd\encrypt\p256_ec.c" />
+    <ClCompile Include="..\src\3rd\encrypt\p256_ecdsa.c" />
+    <ClCompile Include="..\src\3rd\encrypt\p256_prng.c" />
+    <ClCompile Include="..\src\3rd\encrypt\pbkdf2.c" />
+    <ClCompile Include="..\src\3rd\encrypt\rc4.c" />
+    <ClCompile Include="..\src\3rd\encrypt\sha.c" />
+    <ClCompile Include="..\src\3rd\encrypt\sha1.c" />
+    <ClCompile Include="..\src\3rd\encrypt\sha256.c" />
+    <ClCompile Include="..\src\3rd\json\cJSON.c" />
+    <ClCompile Include="..\src\3rd\json\CJsonObject.cpp" />
+    <ClCompile Include="..\src\3rd\service\service_utils.cpp" />
+    <ClCompile Include="..\src\3rd\win_registry_key\win_registry_key.cpp" />
+    <ClCompile Include="..\src\3rd\xml\tinystr.cpp" />
+    <ClCompile Include="..\src\3rd\xml\tinyxml.cpp" />
+    <ClCompile Include="..\src\3rd\xml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\src\3rd\xml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\src\file\big_file_utils.cpp" />
+    <ClCompile Include="..\src\file\dir_utils.cpp" />
+    <ClCompile Include="..\src\file\file_reader.cpp" />
+    <ClCompile Include="..\src\file\file_writer.cpp" />
+    <ClCompile Include="..\src\file\ini_file.cpp" />
+    <ClCompile Include="..\src\misc\CiPinYinTable.cpp" />
+    <ClCompile Include="..\src\misc\CiToPinYin.cpp" />
+    <ClCompile Include="..\src\misc\cmd_line_util.cpp" />
+    <ClCompile Include="..\src\misc\random.cpp" />
+    <ClCompile Include="..\src\misc\resource_util.cpp" />
+    <ClCompile Include="..\src\shared_memory\shared_memory.cpp" />
+    <ClCompile Include="..\src\shared_memory\shared_memor_manager.cpp" />
+    <ClCompile Include="..\src\stream\file_stream.cpp" />
+    <ClCompile Include="..\src\stream\memory_stream.cpp" />
+    <ClCompile Include="..\src\str\str_utils.cpp" />
+    <ClCompile Include="..\src\thread\producer_consumer\producer_consumer.cpp" />
+    <ClCompile Include="..\src\thread\task\heartbeat_task_thread.cpp" />
+    <ClCompile Include="..\src\thread\task\simple_task_thread.cpp" />
+    <ClCompile Include="..\src\thread\thread_manager\simple_thread_manager.cpp" />
+    <ClCompile Include="..\src\timer_recorder\test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\3rd\encrypt\aes.h" />
+    <ClInclude Include="..\src\3rd\encrypt\b64.h" />
+    <ClInclude Include="..\src\3rd\encrypt\crc32.h" />
+    <ClInclude Include="..\src\3rd\encrypt\hash-internal.h" />
+    <ClInclude Include="..\src\3rd\encrypt\hmac.h" />
+    <ClInclude Include="..\src\3rd\encrypt\md5.h" />
+    <ClInclude Include="..\src\3rd\encrypt\p224.h" />
+    <ClInclude Include="..\src\3rd\encrypt\p256.h" />
+    <ClInclude Include="..\src\3rd\encrypt\p256_ecdsa.h" />
+    <ClInclude Include="..\src\3rd\encrypt\p256_prng.h" />
+    <ClInclude Include="..\src\3rd\encrypt\pbkdf2.h" />
+    <ClInclude Include="..\src\3rd\encrypt\rc4.h" />
+    <ClInclude Include="..\src\3rd\encrypt\sha.h" />
+    <ClInclude Include="..\src\3rd\encrypt\sha1.h" />
+    <ClInclude Include="..\src\3rd\encrypt\sha256.h" />
+    <ClInclude Include="..\src\3rd\encrypt\Test.h" />
+    <ClInclude Include="..\src\3rd\json\cJSON.h" />
+    <ClInclude Include="..\src\3rd\json\CJsonObject.hpp" />
+    <ClInclude Include="..\src\3rd\json\Test.h" />
+    <ClInclude Include="..\src\3rd\service\service_utils.h" />
+    <ClInclude Include="..\src\3rd\service\Test.h" />
+    <ClInclude Include="..\src\3rd\win_registry_key\Test.h" />
+    <ClInclude Include="..\src\3rd\win_registry_key\win_registry_key.h" />
+    <ClInclude Include="..\src\3rd\xml\Test.h" />
+    <ClInclude Include="..\src\3rd\xml\tinystr.h" />
+    <ClInclude Include="..\src\3rd\xml\tinyxml.h" />
+    <ClInclude Include="..\src\base\g_def.h" />
+    <ClInclude Include="..\src\base\nocopyable.hpp" />
+    <ClInclude Include="..\src\base\singleton.hpp" />
+    <ClInclude Include="..\src\console\color_print.h" />
+    <ClInclude Include="..\src\console\get_user_input.h" />
+    <ClInclude Include="..\src\file\big_file_utils.h" />
+    <ClInclude Include="..\src\file\dir_utils.h" />
+    <ClInclude Include="..\src\file\file_reader.h" />
+    <ClInclude Include="..\src\file\file_writer.h" />
+    <ClInclude Include="..\src\file\ini_file.h" />
+    <ClInclude Include="..\src\misc\CiToPinYin.h" />
+    <ClInclude Include="..\src\misc\CiToPinYintest3.h" />
+    <ClInclude Include="..\src\misc\cmd_line_util.h" />
+    <ClInclude Include="..\src\misc\cpu_thread_count.h" />
+    <ClInclude Include="..\src\misc\single_limted.h" />
+    <ClInclude Include="..\src\misc\random.h" />
+    <ClInclude Include="..\src\misc\resource_util.h" />
+    <ClInclude Include="..\src\shared_memory\shared_memory.h" />
+    <ClInclude Include="..\src\shared_memory\shared_memor_manager.h" />
+    <ClInclude Include="..\src\stream\file_stream.h" />
+    <ClInclude Include="..\src\stream\i_ddstream.h" />
+    <ClInclude Include="..\src\stream\memory_stream.h" />
+    <ClInclude Include="..\src\str\regex_example.h" />
+    <ClInclude Include="..\src\str\url_parser.h" />
+    <ClInclude Include="..\src\str\str_utils.h" />
+    <ClInclude Include="..\src\thread\lock_free\lockfree_data.h" />
+    <ClInclude Include="..\src\thread\lock_free\lockfree_queue.h" />
+    <ClInclude Include="..\src\thread\lock_free\spin_mutex.h" />
+    <ClInclude Include="..\src\thread\lock_free\TestLockFree.h" />
+    <ClInclude Include="..\src\thread\mutex\semaphore.h" />
+    <ClInclude Include="..\src\thread\mutex\simple_event.h" />
+    <ClInclude Include="..\src\thread\producer_consumer\iconsumer.h" />
+    <ClInclude Include="..\src\thread\producer_consumer\igoods.h" />
+    <ClInclude Include="..\src\thread\producer_consumer\iproducer.h" />
+    <ClInclude Include="..\src\thread\producer_consumer\producer_consumer.h" />
+    <ClInclude Include="..\src\thread\producer_consumer\test2.h" />
+    <ClInclude Include="..\src\thread\task\heartbeat_task_thread.h" />
+    <ClInclude Include="..\src\thread\task\i_heartbeat_task.h" />
+    <ClInclude Include="..\src\thread\task\i_ddtask.h" />
+    <ClInclude Include="..\src\thread\task\simple_function_task.h" />
+    <ClInclude Include="..\src\thread\task\simple_task_thread.h" />
+    <ClInclude Include="..\src\thread\thread_manager\simple_thread_manager.h" />
+    <ClInclude Include="..\src\timer_recorder\timer_recorder.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0FA12D07-3695-48F6-8438-53E86E328A3A}</ProjectGuid>
+    <RootNamespace>utils1</RootNamespace>
+    <ProjectName>ddm</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)_$(PlatForm)\</OutDir>
+    <IntDir>$(OutDir)tmp\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)..\src\;$(ProjectDir)..\vendor\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\vendor\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)_$(PlatForm)\</OutDir>
+    <IntDir>$(OutDir)tmp\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)..\src\;$(ProjectDir)..\vendor\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\vendor\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)_$(PlatForm)\</OutDir>
+    <IntDir>$(OutDir)tmp\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)..\src\;$(ProjectDir)..\vendor\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\vendor\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)_$(PlatForm)\</OutDir>
+    <IntDir>$(OutDir)tmp\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)..\src\;$(ProjectDir)..\vendor\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\vendor\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

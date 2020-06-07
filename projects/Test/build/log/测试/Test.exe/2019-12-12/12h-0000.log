@@ -1,5 +1,0 @@
-[2019-12-12 12:16:31 WARNING] [log:"警告"] [file:"d:\projects\my\mylibrary\projects\test\source\test\testlogdog.cpp" func:"LogDog" line:"17"] 
-[2019-12-12 12:16:31 ASSERT] [log:"断言"] [file:"d:\projects\my\mylibrary\projects\test\source\test\testlogdog.cpp" func:"LogDog" line:"18"] 
-[2019-12-12 12:16:31 SERIOUS_ERROR] [log:"严重错误"] [file:"d:\projects\my\mylibrary\projects\test\source\test\testlogdog.cpp" func:"LogDog" line:"19"] 
-[2019-12-12 12:16:31 VERY_SERIOUS_ERROR] [log:"非常严重错误"] [file:"d:\projects\my\mylibrary\projects\test\source\test\testlogdog.cpp" func:"LogDog" line:"20"] 
-[2019-12-12 12:16:31 CRASH] [log:"挂了"] [file:"d:\projects\my\mylibrary\projects\test\source\test\testlogdog.cpp" func:"LogDog" line:"21"] 

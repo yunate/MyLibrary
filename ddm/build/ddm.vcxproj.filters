@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{6251e67a-194e-4dd2-96a3-575fbd1990ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\timer_recorder">
+      <UniqueIdentifier>{1b601c19-bb0f-4bd0-9daa-dfea4e2a8fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\3rd">
+      <UniqueIdentifier>{7e2d92a6-0b96-4a96-9e94-23ad10ca2bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\3rd\win_registry_key">
+      <UniqueIdentifier>{a7601c05-984e-4dd8-a102-ad529c94ab1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\3rd\xml">
+      <UniqueIdentifier>{42feba54-e9c4-48d0-8962-756c65e2e3d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\3rd\service">
+      <UniqueIdentifier>{3dfa91d2-aa01-4672-8b3c-694ca74553ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\3rd\json">
+      <UniqueIdentifier>{29bcb6b6-00c4-4b3e-8d7b-9b5678bf558d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\3rd\encrypt">
+      <UniqueIdentifier>{ed94c380-7464-4bf1-80a7-93bfb4623d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\misc">
+      <UniqueIdentifier>{f8eb2136-e684-469e-853f-6a02cc2b5543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\base">
+      <UniqueIdentifier>{f41d314c-56c0-49a1-a2cd-c148e7a1074b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\console">
+      <UniqueIdentifier>{3474fe50-8e10-4466-b94d-9bcf240a708a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\file">
+      <UniqueIdentifier>{e1ac36e8-d210-467b-81b8-d2f802c7d288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\shared_memory">
+      <UniqueIdentifier>{59da021c-6b74-424d-975d-0698d1810c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\str">
+      <UniqueIdentifier>{8df2d179-b4d3-4db0-944d-e55723bb7c10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\stream">
+      <UniqueIdentifier>{5ba99f07-ce73-47d7-b74f-f3fed5f3b22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread">
+      <UniqueIdentifier>{e492135b-33df-4e63-8ba5-017043e68aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread\lock_free">
+      <UniqueIdentifier>{7db86db9-934c-4b4e-a124-bd914eaa9d29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread\mutex">
+      <UniqueIdentifier>{6e242953-2159-4872-9573-9243abda7a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread\producer_consumer">
+      <UniqueIdentifier>{f97f9aa3-56ac-4ed8-9601-49d60eaed6c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread\task">
+      <UniqueIdentifier>{14502153-06e2-4e14-a69b-ff190f723b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread\thread_manager">
+      <UniqueIdentifier>{de1faaec-e8d1-4ca4-9996-ca289d46c005}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\timer_recorder\test.cpp">
+      <Filter>src\timer_recorder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\str\str_utils.cpp">
+      <Filter>src\str</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\file\big_file_utils.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\file\dir_utils.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\file\file_writer.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\file\file_reader.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\file\ini_file.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stream\file_stream.cpp">
+      <Filter>src\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stream\memory_stream.cpp">
+      <Filter>src\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\thread\producer_consumer\producer_consumer.cpp">
+      <Filter>src\thread\producer_consumer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\thread\task\heartbeat_task_thread.cpp">
+      <Filter>src\thread\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\thread\thread_manager\simple_thread_manager.cpp">
+      <Filter>src\thread\thread_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\thread\task\simple_task_thread.cpp">
+      <Filter>src\thread\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\shared_memory\shared_memor_manager.cpp">
+      <Filter>src\shared_memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\shared_memory\shared_memory.cpp">
+      <Filter>src\shared_memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\aes.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\b64.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\crc32.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\hmac.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\md5.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\p224_ec.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\p256.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\p256_ec.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\p256_ecdsa.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\p256_prng.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\pbkdf2.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\rc4.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\sha.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\sha1.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\encrypt\sha256.c">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\json\cJSON.c">
+      <Filter>src\3rd\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\json\CJsonObject.cpp">
+      <Filter>src\3rd\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\service\service_utils.cpp">
+      <Filter>src\3rd\service</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\win_registry_key\win_registry_key.cpp">
+      <Filter>src\3rd\win_registry_key</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\xml\tinystr.cpp">
+      <Filter>src\3rd\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\xml\tinyxml.cpp">
+      <Filter>src\3rd\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\xml\tinyxmlerror.cpp">
+      <Filter>src\3rd\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\3rd\xml\tinyxmlparser.cpp">
+      <Filter>src\3rd\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\misc\CiPinYinTable.cpp">
+      <Filter>src\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\misc\CiToPinYin.cpp">
+      <Filter>src\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\misc\random.cpp">
+      <Filter>src\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\misc\resource_util.cpp">
+      <Filter>src\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\misc\cmd_line_util.cpp">
+      <Filter>src\misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\timer_recorder\timer_recorder.h">
+      <Filter>src\timer_recorder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\console\color_print.h">
+      <Filter>src\console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\base\g_def.h">
+      <Filter>src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\base\singleton.hpp">
+      <Filter>src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\str\str_utils.h">
+      <Filter>src\str</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\base\nocopyable.hpp">
+      <Filter>src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\file\big_file_utils.h">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\file\dir_utils.h">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\file\file_writer.h">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\file\file_reader.h">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\file\ini_file.h">
+      <Filter>src\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stream\i_ddstream.h">
+      <Filter>src\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stream\file_stream.h">
+      <Filter>src\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stream\memory_stream.h">
+      <Filter>src\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\lock_free\lockfree_data.h">
+      <Filter>src\thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\lock_free\lockfree_queue.h">
+      <Filter>src\thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\lock_free\spin_mutex.h">
+      <Filter>src\thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\lock_free\TestLockFree.h">
+      <Filter>src\thread\lock_free</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\producer_consumer\producer_consumer.h">
+      <Filter>src\thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\producer_consumer\test2.h">
+      <Filter>src\thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\mutex\semaphore.h">
+      <Filter>src\thread\mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\mutex\simple_event.h">
+      <Filter>src\thread\mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\producer_consumer\iconsumer.h">
+      <Filter>src\thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\producer_consumer\igoods.h">
+      <Filter>src\thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\producer_consumer\iproducer.h">
+      <Filter>src\thread\producer_consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\task\i_ddtask.h">
+      <Filter>src\thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\task\i_heartbeat_task.h">
+      <Filter>src\thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\task\heartbeat_task_thread.h">
+      <Filter>src\thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\task\simple_function_task.h">
+      <Filter>src\thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\task\simple_task_thread.h">
+      <Filter>src\thread\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread\thread_manager\simple_thread_manager.h">
+      <Filter>src\thread\thread_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\shared_memory\shared_memor_manager.h">
+      <Filter>src\shared_memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\shared_memory\shared_memory.h">
+      <Filter>src\shared_memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\str\url_parser.h">
+      <Filter>src\str</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\console\get_user_input.h">
+      <Filter>src\console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\str\regex_example.h">
+      <Filter>src\str</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\aes.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\b64.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\crc32.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\hash-internal.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\hmac.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\md5.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\p224.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\p256.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\p256_ecdsa.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\p256_prng.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\pbkdf2.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\rc4.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\sha.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\sha1.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\sha256.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\encrypt\Test.h">
+      <Filter>src\3rd\encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\json\cJSON.h">
+      <Filter>src\3rd\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\json\CJsonObject.hpp">
+      <Filter>src\3rd\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\json\Test.h">
+      <Filter>src\3rd\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\service\service_utils.h">
+      <Filter>src\3rd\service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\service\Test.h">
+      <Filter>src\3rd\service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\win_registry_key\Test.h">
+      <Filter>src\3rd\win_registry_key</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\win_registry_key\win_registry_key.h">
+      <Filter>src\3rd\win_registry_key</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\xml\Test.h">
+      <Filter>src\3rd\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\xml\tinystr.h">
+      <Filter>src\3rd\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\3rd\xml\tinyxml.h">
+      <Filter>src\3rd\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\CiToPinYintest3.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\cpu_thread_count.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\random.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\resource_util.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\CiToPinYin.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\single_limted.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\cmd_line_util.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
