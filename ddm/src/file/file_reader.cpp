@@ -95,10 +95,13 @@ u32 file_reader::get_buff(u8* buff, const u32& size)
     DD_ASSERT(buff != nullptr);
     DD_ASSERT(size != 0);
 
-    u32 pos = 0;
-    ddchara c = 0;
-    while (((c = (ddchara)::fgetc(m_pFile)) != EOF) && pos != size) {
-        buff[pos++] = (u8)c;
+    size_t pos = 0;
+    int c = ::fgetc(m_pFile);
+
+    while (c != EOF && pos != size)
+    {
+        buff[pos++] = c;
+        c = ::fgetc(m_pFile);
     }
 
     return pos;
