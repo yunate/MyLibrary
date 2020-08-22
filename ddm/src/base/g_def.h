@@ -90,4 +90,34 @@ BEG_NSP_DDM
 #define DD_ASSERT(x) ((void)0)
 #endif // _DEBUG
 END_NSP_DDM
+
+
+//////////////////////////////////assert_fmt////////////////////////////////////////
+BEG_NSP_DDM
+#ifdef _DEBUG
+#include <crtdbg.h>
+#   define DD_ASSERT_FMTW(expr, format, ...) \
+    (void) ((!!(expr)) || \
+    (1 != _CrtDbgReportW(_CRT_ASSERT, _CRT_WIDE(__FILE__), __LINE__, NULL, format, __VA_ARGS__)) || \
+    (_CrtDbgBreak(), 0))
+
+#   define DD_ASSERT_FMTA(expr, format, ...) \
+    (void) ((!!(expr)) || \
+    (1 != _CrtDbgReport(_CRT_ASSERT, __FILE__, __LINE__, NULL, format, __VA_ARGS__)) || \
+    (_CrtDbgBreak(), 0))
+#else
+#   define DD_ASSERT_FMTW(expr, format, ...) \
+    if(!(expr)) SLOGFMTW(format,__VA_ARGS__);
+
+#   define DD_ASSERT_FMTA(expr, format, ...) \
+    if(!(expr)) SLOGFMTW(format,__VA_ARGS__);
+#endif
+
+#ifdef _UNICODE 
+#   define DD_ASSERT_FMT    DD_ASSERT_FMTW
+#else
+#   define DD_ASSERT_FMT    DD_ASSERT_FMTA
+#endif//_UNICODE
+END_NSP_DDM
+
 #endif // g_def_h_
