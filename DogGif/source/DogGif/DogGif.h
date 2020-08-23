@@ -73,6 +73,16 @@ public:
     */
     bool HasInit();
 
+    /** 一共有多少帧
+    @return 帧数目
+    */
+    u32 GetFrameCount();
+
+    /** 获得当前第几帧
+    @return 第几帧
+    */
+    u32 GetCurFrameIndex();
+
 private:
     /** 读gif头
     @pram [in, out] ppBuff head的开始指针，读取过后自动向后移动响应位置

@@ -135,6 +135,16 @@ bool DogGif::HasInit()
     return m_hasInit;
 }
 
+u32 DogGif::GetFrameCount()
+{
+    return m_gifGolInfo.m_frameData.size();
+}
+
+u32 DogGif::GetCurFrameIndex()
+{
+    return m_curFrame;
+}
+
 bool DogGif::ReadHead(u8** ppBuff, u32& buffLen)
 {
     // 不要去判pBuff null 了
