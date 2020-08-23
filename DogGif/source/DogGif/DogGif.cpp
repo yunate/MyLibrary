@@ -99,6 +99,7 @@ bool DogGif::GetCurrentFrame(DogGifColor ** ppBuff, u32 & buffLen)
         return false;
     }
 
+    buffLen = m_gifGolInfo.m_width * m_gifGolInfo.m_height;
     *ppBuff = &m_frameBuff[0];
     return true;
 }
