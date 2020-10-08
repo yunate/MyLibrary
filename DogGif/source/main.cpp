@@ -176,7 +176,7 @@ public:
             }
         case WM_INITDIALOG:
             {
-                for (int i = 0; i < 5; ++i)
+                for (int i = 0; i < 1; ++i)
                 {
                     m_gifVec.push_back(new DogGifNSP::DogGif);
                     FileReader reader(L"test\\1.gif", NULL, 0);
@@ -197,12 +197,12 @@ public:
                     }
                 }
                
-                m_timeDelay = m_gifVec[0]->GetTimeDelay();
+                m_timeDelay = m_gifVec[0]->GetCurTimeDelay();
 
                 if (!timer)
                 {
                     timer = true;
-                    ::SetTimer(GetWnd(), 0xffee, m_timeDelay, NULL);
+                    ::SetTimer(GetWnd(), 0xffee, 40, NULL);
                 }
 
                 break;

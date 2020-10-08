@@ -69,6 +69,7 @@ bool DogGif::DogGif::Init(u8 * pBuff, u32 buffLen)
     }
 
     m_hasInit = true;
+    m_curFrame = m_gifGolInfo.m_frameData.size();
     return true;
 }
 
@@ -114,18 +115,28 @@ u32 DogGif::GetGolHeight()
     return m_gifGolInfo.m_height;
 }
 
-u32 DogGif::GetTimeDelay()
+u32 DogGif::GetGolTimeDelay()
+{
+    return GetTimeDelay(0);
+}
+
+u32 DogGif::GetCurTimeDelay()
+{
+    if (m_gifGolInfo.m_frameData.size() >= m_curFrame) {
+        return GetGolTimeDelay();
+    }
+    return GetTimeDelay(m_curFrame);
+}
+
+u32 DogGif::GetTimeDelay(u32 frameIdx)
 {
     u32 delayTime = 0;
 
-    if (m_gifGolInfo.m_frameData.size() > 0)
+    if (m_gifGolInfo.m_frameData.size() >= frameIdx)
     {
-        delayTime = m_gifGolInfo.m_frameData[0]->m_delayTime * 10;
-    }
-
-    if (delayTime == 0)
-    {
-        return 66;
+        delayTime = m_gifGolInfo.m_frameData[frameIdx]->m_delayTime * 10;
+    } else {
+        delayTime = 66;
     }
 
     return delayTime;
@@ -497,6 +508,8 @@ bool DogGif::DecodeFrame()
         else if (pFrame->m_disposalMethod == 1)
         {
             // 
+            int i = 0;
+            ++i;
         }
         else if (pFrame->m_disposalMethod == 2)
         {

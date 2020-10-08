@@ -66,7 +66,9 @@ public:
     /** 获得全局时间间隔，取第0帧的
     @return 全局时间间隔
     */
-    u32 GetTimeDelay();
+    u32 GetGolTimeDelay();
+    u32 GetCurTimeDelay();
+    u32 GetTimeDelay(u32 frameIdx);
 
     /** 是否初始化了
     @return 是否初始化了
@@ -140,7 +142,6 @@ private:
     */
     bool m_hasInit;
 };
-
 
 }
 #endif // __DOGGIF_H_
