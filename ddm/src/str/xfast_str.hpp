@@ -2,9 +2,16 @@
 #ifndef xfast_str_basic_h__
 #define xfast_str_basic_h__
 
-#include "base/g_def.h"
+#undef DD_ASSERT
+#ifdef _DEBUG
+#include <assert.h>
+#define DD_ASSERT(e) assert(e)
+#else
+#define DD_ASSERT(x) ((void)0)
+#endif
 
-BEG_NSP_DDM
+#include <string>
+
 template <class t>
 class xfast_str_basic {
 public:
@@ -191,7 +198,7 @@ bool xfast_str_basic<t>::end_with(const xfast_str_basic& cmp) const
 }
 
 template <class t>
-xfast_str_basic<t> xfast_str_basic<t>::sub_str(t_size l, t_size len = xnpos) const
+xfast_str_basic<t> xfast_str_basic<t>::sub_str(t_size l, t_size len/* = xnpos*/) const
 {
     DD_ASSERT(l < length());
     if (len == xnpos) {
@@ -203,7 +210,7 @@ xfast_str_basic<t> xfast_str_basic<t>::sub_str(t_size l, t_size len = xnpos) con
 }
 
 template <class t>
-void xfast_str_basic<t>::to_sub_str(t_size l, t_size len = xnpos)
+void xfast_str_basic<t>::to_sub_str(xfast_str_basic<t>::t_size l, xfast_str_basic<t>::t_size len/* = xnpos*/)
 {
     DD_ASSERT(l < length());
     m_l_pos += l;
@@ -303,5 +310,5 @@ void xfast_str_basic<t>::split(const xfast_str_basic& cmp, std::vector<xfast_str
 
 using xfast_str = xfast_str_basic<char>;
 using wxfast_str = xfast_str_basic<wchar_t>;
-END_NSP_DDM
+
 #endif
