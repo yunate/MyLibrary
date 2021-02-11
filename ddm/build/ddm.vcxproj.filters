@@ -404,5 +404,8 @@
     <ClInclude Include="..\src\misc\cmd_line_util.h">
       <Filter>src\misc</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\str\xfast_str.hpp">
+      <Filter>src\str</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

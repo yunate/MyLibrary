@@ -115,6 +115,7 @@
     <ClInclude Include="..\src\str\regex_example.h" />
     <ClInclude Include="..\src\str\url_parser.h" />
     <ClInclude Include="..\src\str\str_utils.h" />
+    <ClInclude Include="..\src\str\xfast_str.hpp" />
     <ClInclude Include="..\src\thread\lock_free\lockfree_data.h" />
     <ClInclude Include="..\src\thread\lock_free\lockfree_queue.h" />
     <ClInclude Include="..\src\thread\lock_free\spin_mutex.h" />

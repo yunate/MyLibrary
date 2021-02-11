@@ -5,7 +5,7 @@ BEG_NSP_DDM
 
 int test_main()
 {
-    TCF.insert_white_type("test_cmd_line_util");
+    TCF.insert_white_type("test_xfast_str");
     TCF.run();
     ::system("pause");
     return 0;

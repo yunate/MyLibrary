@@ -31,6 +31,7 @@
     <ClCompile Include="..\src\test_stream.cpp" />
     <ClCompile Include="..\src\test_str_utils.cpp" />
     <ClCompile Include="..\src\test_thread.cpp" />
+    <ClCompile Include="..\src\test_xfast_str.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{67F775F3-F73C-497F-B44A-3A8ABF66DB13}</ProjectGuid>
