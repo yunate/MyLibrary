@@ -22,7 +22,7 @@ TEST(test_xfast_str, xfast_str)
     xfast_str fast_str2 = fast_str.sub_str(pos);
     str = fast_str2.to_str(); // def_ghi_jkl_mn
     std::vector<xfast_str> split_out;
-    fast_str.split("__", split_out);// abc def ghi jkl mn
+    fast_str.split("_", split_out);// abc def ghi jkl mn
     xfast_str fast_str3("  abc  _def_ghi_jkl_mn  ");
     fast_str3.trim();
     str = fast_str3.to_str(); //
