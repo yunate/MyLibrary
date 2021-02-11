@@ -2,16 +2,9 @@
 #ifndef xfast_str_basic_h__
 #define xfast_str_basic_h__
 
-#undef DD_ASSERT
-#ifdef _DEBUG
-#include <assert.h>
-#define DD_ASSERT(e) assert(e)
-#else
-#define DD_ASSERT(x) ((void)0)
-#endif
+#include "base/g_def.h"
 
-#include <string>
-
+BEG_NSP_DDM
 template <class t>
 class xfast_str_basic {
 public:
@@ -29,7 +22,6 @@ public:
     inline t_size length() const;
     inline t operator[](t_size index) const;
     inline bool operator==(const xfast_str_basic& r) const;
-    inline bool operator==(const t_str& r) const;
 
 public:
     inline t_str to_str() const;
@@ -119,22 +111,6 @@ inline bool xfast_str_basic<t>::operator==(const xfast_str_basic& r) const
 }
 
 template <class t>
-inline bool xfast_str_basic<t>::operator==(const t_str& r) const
-{
-    if (length() != r.length()) {
-        return false;
-    }
-
-    for (t_size i = 0; i < length(); ++i) {
-        if ((*this)[i] != r[i]) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-template <class t>
 inline typename xfast_str_basic<t>::t_str xfast_str_basic<t>::to_str() const
 {
     return t_str(m_buff + m_l_pos, m_buff + m_r_pos);
@@ -157,8 +133,8 @@ void xfast_str_basic<t>::trim()
         ++m_l_pos;
     }
 
-    for (t_size i = m_r_pos - 1; i > m_l_pos; --i) {
-        if (m_buff[i] != ' ') {
+    for (t_size i = m_r_pos; i > m_l_pos + 1; --i) {
+        if (m_buff[i - 1] != ' ') {
             break;
         }
         --m_r_pos;
@@ -189,7 +165,7 @@ bool xfast_str_basic<t>::end_with(const xfast_str_basic& cmp) const
     }
 
     for (t_size i = 0; i < cmp.length(); ++i) {
-        if (m_buff[i + length() - cmp.length()] != cmp[i]) {
+        if ((*this)[length() - cmp.length() + i] != cmp[i]) {
             return false;
         }
     }
@@ -200,11 +176,11 @@ bool xfast_str_basic<t>::end_with(const xfast_str_basic& cmp) const
 template <class t>
 xfast_str_basic<t> xfast_str_basic<t>::sub_str(t_size l, t_size len/* = xnpos*/) const
 {
-    DD_ASSERT(l < length());
+    DD_ASSERT(l <= length());
     if (len == xnpos) {
         return xfast_str_basic(m_buff, m_l_pos + l, m_r_pos);
     } else {
-        DD_ASSERT(l + len < m_r_pos);
+        DD_ASSERT(l + len <= m_r_pos);
         return xfast_str_basic(m_buff, m_l_pos + l, m_l_pos + l + len);
     }
 }
@@ -212,10 +188,10 @@ xfast_str_basic<t> xfast_str_basic<t>::sub_str(t_size l, t_size len/* = xnpos*/)
 template <class t>
 void xfast_str_basic<t>::to_sub_str(xfast_str_basic<t>::t_size l, xfast_str_basic<t>::t_size len/* = xnpos*/)
 {
-    DD_ASSERT(l < length());
+    DD_ASSERT(l <= length());
     m_l_pos += l;
     if (len != xnpos) {
-        DD_ASSERT(l + len < m_r_pos);
+        DD_ASSERT(l + len <= m_r_pos);
         m_r_pos = m_l_pos + len;
     }
 }
@@ -311,4 +287,5 @@ void xfast_str_basic<t>::split(const xfast_str_basic& cmp, std::vector<xfast_str
 using xfast_str = xfast_str_basic<char>;
 using wxfast_str = xfast_str_basic<wchar_t>;
 
+END_NSP_DDM
 #endif
