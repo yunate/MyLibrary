@@ -100,7 +100,7 @@ u32 file_reader::get_buff(u8* buff, const u32& size)
 
     while (c != EOF && pos != size)
     {
-        buff[pos++] = c;
+        buff[pos++] = static_cast<u8>(c);
         c = ::fgetc(m_pFile);
     }
 
