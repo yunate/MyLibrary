@@ -11,13 +11,11 @@ class nocopyable
 {
 protected:
     nocopyable() {}
-
     ~nocopyable() {}
-
-private:
     nocopyable(const nocopyable&) = delete;
     nocopyable(nocopyable&&) = delete;
     nocopyable& operator= (const nocopyable&) = delete;
+    nocopyable& operator= (nocopyable&&) = delete;
 };
 
 END_NSP_DDM

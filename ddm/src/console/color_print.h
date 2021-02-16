@@ -34,7 +34,7 @@ do {\
     }\
 }while (0)
 
-#define color_printfW(foreColor, fmt, ...)\
+#define color_printfw(foreColor, fmt, ...)\
 do {\
     HANDLE handle = ::GetStdHandle(STD_OUTPUT_HANDLE);\
     CONSOLE_SCREEN_BUFFER_INFO info;\
