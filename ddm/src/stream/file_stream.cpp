@@ -58,8 +58,8 @@ s64 file_stream::resize(s64 newSize)
 
 s32 file_stream::read(u8 * const buff, s32 count)
 {
-    assert(buff != nullptr);
-    assert(count != 0);
+    DD_ASSERT(buff != nullptr);
+    DD_ASSERT(count != 0);
 
     if (m_hFile != nullptr) {
         return (s32)::fread(buff, 1, count, m_hFile);
@@ -70,8 +70,8 @@ s32 file_stream::read(u8 * const buff, s32 count)
 
 s32 file_stream::write(const u8 * const buff, s32 count)
 {
-    assert(buff != nullptr);
-    assert(count != 0);
+    DD_ASSERT(buff != nullptr);
+    DD_ASSERT(count != 0);
 
     if (m_hFile != nullptr) {
         return (s32)::fwrite(buff, 1, count, m_hFile);
