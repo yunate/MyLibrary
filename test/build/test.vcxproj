@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\test_case_xtimer.cpp" />
     <ClCompile Include="..\src\test_cmd_line_util.cpp" />
     <ClCompile Include="..\src\test_shared_memory.cpp" />
     <ClCompile Include="..\src\test_file_utils.cpp" />

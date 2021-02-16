@@ -28,7 +28,7 @@ void LogDogConfig::TryReload(bool atonce/* = false*/)
         if (m_errorCode == LogDogConfigErrorCode::LDC_NO_CONFIG_FILE)
         {
             // 文件不存在状态下每10s会尝试加载
-            if (m_timer.GetTimePass() > FAILURE_TIME_PASS)
+            if (m_timer.get_time_pass() > FAILURE_TIME_PASS)
             {
                 needReload = true;
             }
@@ -36,7 +36,7 @@ void LogDogConfig::TryReload(bool atonce/* = false*/)
         else
         {
             // 文件存在状态每3min会尝试加载
-            if (m_timer.GetTimePass() > CUCCESS_TIME_PASS)
+            if (m_timer.get_time_pass() > CUCCESS_TIME_PASS)
             {
                 needReload = true;
             }

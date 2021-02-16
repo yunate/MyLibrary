@@ -71,7 +71,7 @@ void p_c_model::Start()
         return;
     }
 
-    m_pTimerRecoder = new (std::nothrow) TimerRecorder();
+    m_pTimerRecoder = new (std::nothrow) xtimer();
 
     if (m_pTimerRecoder == nullptr)
     {
@@ -140,7 +140,7 @@ void p_c_model::productCallBack(igoods* pGoods)
     if ((int)m_consumerThreadVec.size() < tmp &&
         (m_goodsVec.size() > m_consumerThreadVec.size() || m_producerThreadVec.size() < m_maxProducerCount))
     {
-        if (!m_isproductEnd && m_pTimerRecoder->GetTimePass() > BEFORE_TIME_PASS)
+        if (!m_isproductEnd && m_pTimerRecoder->get_time_pass() > BEFORE_TIME_PASS)
         {
             AddConsumeThread();
         }
@@ -187,7 +187,7 @@ void p_c_model::ConsumeCallBack()
  
             if ((int)m_producerThreadVec.size() < tmp && !m_isproductEnd)
             {
-                if (m_pTimerRecoder->GetTimePass() > BEFORE_TIME_PASS)
+                if (m_pTimerRecoder->get_time_pass() > BEFORE_TIME_PASS)
                 {
                     AddproductThread();
                 }

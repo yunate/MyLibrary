@@ -150,12 +150,12 @@ namespace utilstest
 #include <iostream>
     static void Test_Producerconsumer()
     {
-        TimerRecorder tmi;
+        xtimer tmi;
         p_c_model* pp_c_model = new p_c_model(new Producer(), new Consume());
         pp_c_model->SetNotUseThreadCount(1);
         pp_c_model->SetMaxProducerCount(1);
         pp_c_model->Start();
         delete pp_c_model;
-        std::cout << tmi.GetTimePass() << std::endl;
+        std::cout << tmi.get_time_pass() << std::endl;
     }
 }

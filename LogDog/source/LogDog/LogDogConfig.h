@@ -102,7 +102,7 @@ private:
 
     /** ¼ÆÊ±Æ÷
     */
-    TimerRecorder m_timer;
+    xtimer m_timer;
 };
 END_NSP_DDM
 #endif

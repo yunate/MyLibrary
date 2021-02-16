@@ -13,7 +13,7 @@
 #include <thread>
 #include <mutex>
 #include <windows.h>
-#include "timer_recorder/timer_recorder.h"
+#include "misc/xtimer.h"
 
 BEG_NSP_DDM
 using goods_vec = std::vector<igoods*>;
@@ -140,7 +140,7 @@ private:
 
     /** 计时器
     */
-    TimerRecorder* m_pTimerRecoder;
+    xtimer* m_pTimerRecoder;
 
     /** 等待中的线程数量
     */

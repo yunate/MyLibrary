@@ -94,7 +94,7 @@ protected:
 
     /** 全局计时器
     */
-    TimerRecorder m_gTimer;
+    xtimer m_gTimer;
 
     /** (ms) 数据超时时间，指的是上一次数据到下一次数据之间的最长等待时间
     @note: 显然它的优先级低于m_gTimeOut

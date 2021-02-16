@@ -4,9 +4,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{6251e67a-194e-4dd2-96a3-575fbd1990ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\timer_recorder">
-      <UniqueIdentifier>{1b601c19-bb0f-4bd0-9daa-dfea4e2a8fa7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\3rd">
       <UniqueIdentifier>{7e2d92a6-0b96-4a96-9e94-23ad10ca2bf6}</UniqueIdentifier>
     </Filter>
@@ -66,9 +63,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\timer_recorder\test.cpp">
-      <Filter>src\timer_recorder</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\str\str_utils.cpp">
       <Filter>src\str</Filter>
     </ClCompile>
@@ -197,9 +191,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\timer_recorder\timer_recorder.h">
-      <Filter>src\timer_recorder</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\console\color_print.h">
       <Filter>src\console</Filter>
     </ClInclude>
@@ -406,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="..\src\str\xfast_str.hpp">
       <Filter>src\str</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\misc\xtimer.h">
+      <Filter>src\misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

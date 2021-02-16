@@ -231,21 +231,21 @@ namespace utilstest
         int taskCount = 20000;
 
         {
-            TimerRecorder timer;
+            xtimer timer;
             Test_NormalQue(tdCount, taskCount);
-            printf("Test_NormalQue:\t%lld\r\n", timer.GetTimePass());
+            printf("Test_NormalQue:\t%lld\r\n", timer.get_time_pass());
         }
 
         {
-            TimerRecorder timer;
+            xtimer timer;
             Test_LockFreeQue(tdCount, taskCount);
-            printf("Test_LockFreeQue:\t%lld\r\n", timer.GetTimePass());
+            printf("Test_LockFreeQue:\t%lld\r\n", timer.get_time_pass());
         }
   
         {
-            TimerRecorder timer;
+            xtimer timer;
             Test_NormalQue1(tdCount, taskCount);
-            printf("Test_Spin_NormalQue:\t%lld\r\n", timer.GetTimePass());
+            printf("Test_Spin_NormalQue:\t%lld\r\n", timer.get_time_pass());
         }
     }
 

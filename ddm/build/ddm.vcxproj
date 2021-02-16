@@ -61,7 +61,6 @@
     <ClCompile Include="..\src\thread\task\heartbeat_task_thread.cpp" />
     <ClCompile Include="..\src\thread\task\simple_task_thread.cpp" />
     <ClCompile Include="..\src\thread\thread_manager\simple_thread_manager.cpp" />
-    <ClCompile Include="..\src\timer_recorder\test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\3rd\encrypt\aes.h" />
@@ -107,6 +106,7 @@
     <ClInclude Include="..\src\misc\single_limted.h" />
     <ClInclude Include="..\src\misc\random.h" />
     <ClInclude Include="..\src\misc\resource_util.h" />
+    <ClInclude Include="..\src\misc\xtimer.h" />
     <ClInclude Include="..\src\shared_memory\shared_memory.h" />
     <ClInclude Include="..\src\shared_memory\shared_memor_manager.h" />
     <ClInclude Include="..\src\stream\file_stream.h" />
@@ -133,7 +133,6 @@
     <ClInclude Include="..\src\thread\task\simple_function_task.h" />
     <ClInclude Include="..\src\thread\task\simple_task_thread.h" />
     <ClInclude Include="..\src\thread\thread_manager\simple_thread_manager.h" />
-    <ClInclude Include="..\src\timer_recorder\timer_recorder.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0FA12D07-3695-48F6-8438-53E86E328A3A}</ProjectGuid>

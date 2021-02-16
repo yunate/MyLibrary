@@ -131,7 +131,7 @@ bool SocketHttpClient::RecvResponse(SPSocketClient spClient)
     bool hasGetAllResponseHead = false;
 
     // 记录上一次数据到来的时间
-    TimerRecorder dataTimer;
+    xtimer dataTimer;
 
 
     while (true)
@@ -144,7 +144,7 @@ bool SocketHttpClient::RecvResponse(SPSocketClient spClient)
 
         if (m_gTimeOut > 0)
         {
-            if (m_gTimer.GetTimePass() >= m_gTimeOut)
+            if (m_gTimer.get_time_pass() >= m_gTimeOut)
             {
                 success = false;
                 break;
@@ -153,7 +153,7 @@ bool SocketHttpClient::RecvResponse(SPSocketClient spClient)
 
         if (m_dataTimeOut > 0)
         {
-            if (dataTimer.GetTimePass() >= m_dataTimeOut)
+            if (dataTimer.get_time_pass() >= m_dataTimeOut)
             {
                 success = false;
                 break;
@@ -219,7 +219,7 @@ bool SocketHttpClient::SendBody(SPSocketClient spClient)
     SPDogStream& stream = m_spRequest->GetStream();
 
     // 记录上一次数据到来的时间
-    TimerRecorder dataTimer;
+    xtimer dataTimer;
     bool success = true;
     u64 sendSize = 0;
     u64 allSize = stream->Size();
@@ -234,7 +234,7 @@ bool SocketHttpClient::SendBody(SPSocketClient spClient)
 
         if (m_gTimeOut > 0)
         {
-            if (m_gTimer.GetTimePass() >= m_gTimeOut)
+            if (m_gTimer.get_time_pass() >= m_gTimeOut)
             {
                 success = false;
                 break;
@@ -243,7 +243,7 @@ bool SocketHttpClient::SendBody(SPSocketClient spClient)
 
         if (m_dataTimeOut > 0)
         {
-            if (dataTimer.GetTimePass() >= m_dataTimeOut)
+            if (dataTimer.get_time_pass() >= m_dataTimeOut)
             {
                 success = false;
                 break;
